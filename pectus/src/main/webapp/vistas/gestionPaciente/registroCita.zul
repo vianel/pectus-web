@@ -1,0 +1,130 @@
+<zk xmlns:n="native">
+<!--   <a label="Citas del Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/> -->
+<!--   <tabbox > -->
+<!--     <tabs> -->
+<!--       <tab style="border: 5px solid #f5f5f5;border-bottom: 0;" label="Registrar la cita"/> -->
+<!--     </tabs> -->
+<!--     <tabpanels> -->
+<!--       <tabpanel style="border: 5px solid #f5f5f5;"> -->
+<!--       	<separator height="15px"/> -->
+<!--       	<div style="width: 5em;margin-left: 25em;margin-top: 4.4em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo"> -->
+<!-- 			<button id="btnBuscarPaciente" autodisable="self" sclass="btn-success">Buscar</button> -->
+<!-- 		</div> -->
+<!-- 		<div style="width: 5em;margin-left: 25em;margin-top: 12.1em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo"> -->
+<!-- 			<button id="btnBuscarClinica" autodisable="self" sclass="btn-success">Buscar</button> -->
+<!-- 		</div>		 -->
+<!-- 		<separator height="15px"/> -->
+<!-- 		<hlayout> -->
+<!-- 			 <grid  width="500px"> -->
+<!-- 				<columns> -->
+<!-- 					<column label="Datos de la Cita" width="150px"/> -->
+<!-- 					<column label=""/> -->
+<!-- 				</columns> -->
+<!-- 				<rows> -->
+<!-- 					<row><label value="Paciente"/><textbox disabled="true"/> </row> -->
+<!-- 					<row><label value="Fecha de Solicitud" /><datebox /></row> -->
+<!-- 					<row><label value="Tipo de cita" /><combobox> -->
+<!-- 								<comboitem label="Evaluación" /> -->
+<!-- 								<comboitem label="Examenes" /> -->
+<!-- 								<comboitem label="Control" /> -->
+<!-- 								<comboitem label="Mastologica" /> -->
+<!-- 							</combobox> </row> -->
+<!-- 					<row><label value="Clinica"/><textbox disabled="true"/> </row> -->
+<!-- 					<row><label value="Hora" /> <timebox  cols="12" format="a hh:mm:ss" onCreate="self.value = new Date()" /></row> -->
+<!-- 					</rows> -->
+<!-- 			</grid> -->
+<!-- 		</hlayout>	 -->
+<!-- 		<separator height="35px"/> -->
+<!-- 		<div align="center" style="margin-left:-68em"> -->
+<!-- 			<button width="75px" height="50px" sclass="btn-success">Guardar</button> -->
+<!-- 			<button width="75px" height="50px" sclass="btn-success">Eliminar</button> -->
+<!-- 			<button width="75px" height="50px" sclass="btn-success">Cancelar</button> -->
+<!-- 		</div> -->
+
+		
+		
+		
+<!-- 		</tabpanel> -->
+    
+<!--     </tabpanels> -->
+
+<!--   </tabbox> -->
+<!-- ############################################################################################################################################ -->
+
+
+
+
+
+
+ <a label="Citas" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Citas"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vmc') @init('com.ucla.frontend.pectus.controllers.FilterViewModel')">
+			
+<!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
+		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')" >NUEVO</button>
+<!-- 	</div> -->
+	
+	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vmc.foodModelCita)">
+		<auxhead>
+            <auxheader label="CITAS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+	        <auxheader colspan="1">
+	            <textbox instant="true" width="100px" 
+	                value="@bind(vmc.citaFilter.nombrePaciente)" onChange="@command('changeFilterCita')" />
+	        </auxheader>
+			
+			<auxheader colspan="1">
+                <textbox instant="true"  width="100px"
+                    value="@bind(vmc.citaFilter.nombreClinica)" onChange="@command('changeFilterCita')"/>
+            </auxheader>
+            
+            <auxheader colspan="1">
+                <textbox instant="true" width="100px"
+                    value="@bind(vmc.citaFilter.nombreEstudio)" onChange="@command('changeFilterCita')"/>
+            </auxheader>
+            
+            <auxheader label="Detalles" colspan="3" />
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Paciente</column>
+            <column hflex="1">Clinica</column>
+            <column hflex="1">Estudio</column>
+            <column hflex="1">Fecha</column>
+            <column hflex="1">Hora</column>
+            <column hflex="1">Editar</column>
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.paciente.nombre)" />
+                <label value="@load(each.clinica.nombre)" />
+                <label value="@load(each.estudio.nombre)" />
+                <label value="@load(each.fecha)"/>
+                <label value="@load(each.hora)"/>
+               	<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')">Editar</button>
+            </row>
+        </template>
+        <foot>
+            <footer span="6"  label="asdasd" />
+        </foot>
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
+
+</zk>

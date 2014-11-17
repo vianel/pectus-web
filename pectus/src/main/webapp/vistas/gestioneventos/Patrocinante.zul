@@ -1,0 +1,60 @@
+<?page title="Eventos" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Patrocinadores" border="normal" width="470px"
+		position="center,center" closable="true">
+
+		<panel>
+			<panelchildren>
+
+
+				<grid>
+
+					<columns>
+						<column label="" width="120px" />
+						<column label="" width="340px" />
+					</columns>
+
+					<rows>
+						<row>
+							Nombre:
+							<textbox id="txtNombre"
+								value="${win$composer.inventoryItem.title}"
+								constraint="no empty" />
+						</row>
+						<row>
+							Riff:
+							<textbox id="txtRiff"
+								value="${win$composer.inventoryItem.title}"
+								constraint="no empty" />
+						</row>
+						<row>
+							Dirección:
+							<textbox id="txtDescripcion"
+								value="${win$composer.inventoryItem.title}"
+								constraint="no empty" />
+						</row>
+						
+						<row>
+							Telf Movil:
+							<textbox id="txtTlfMovil"
+								value="${win$composer.inventoryItem.title}"
+								/>
+						</row>
+						
+						<row>
+							Telf Fijo:
+							<textbox id="txtTlfFijo"
+								value="${win$composer.inventoryItem.title}"
+								 />
+						</row>
+						
+
+					</rows>
+				</grid>
+				<label pre="true" value="  "/>
+	
+
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

@@ -1,0 +1,13 @@
+
+
+
+
+<window closable="true" border="false" sclass="alert alert-success">
+  <caption >
+    Bienvenido al sistema 
+      <label value="Pectus" style="font-weight:bold;color:#69AA46" />
+      <label value="(v1.0)" style="font-weight:bold;font-size:10px;color:#69AA46"/>
+    , seleccione la opcion con la que desea trabajar en el panel izquierdo
+  </caption>
+</window>
+

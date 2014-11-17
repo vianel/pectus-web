@@ -1,0 +1,60 @@
+<zk xmlns:n="native">
+<div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+	
+	<hlayout spacing="0" height="400px">
+	
+	 <listbox vflex="true" hflex="1"
+          model="@load(vm.ayudas)" selectedItem="@bind(vm.selected)" >
+          <auxhead>
+              <auxheader colspan="3" class="topic">Ayudas solicitadas</auxheader>
+          </auxhead>
+          <listhead>
+              <listheader label="Paciente" width="80px" align="center" />
+              <listheader label="Diagnostico" align="center" />
+              <listheader label="Motivo" width="80px" align="center" />
+          </listhead>
+          <template name="model" var="ayuda">
+              <listitem>
+                  <listcell label="@load(ayuda.paciente.nombre)" />
+                  <listcell label="@load(ayuda.diagnostico.nombre)" />
+                  <listcell label="@load(ayuda.motivo)" />
+              </listitem>
+          </template>
+      </listbox>
+	
+	<window  title="Probando" hflex="1" vflex="true" border="normal">
+            <div>
+                <vlayout>
+                    <label value="@load(vm.selected.paciente)" />
+                    <hlayout>
+                        <label value="@load(vm.selected.fechaSolicitud)" />
+                    </hlayout>
+                    <label value="@load(vm.selected.aprobacion)" />
+                </vlayout>
+                <div>
+                    MOTIVO
+                    <label value="@load(vm.selected.motivo)" />
+                </div>
+            </div>
+        </window>
+	
+	</hlayout>
+		<grid>
+        <auxhead>
+            <auxheader colspan="5">Edit Data</auxheader>
+        </auxhead>
+        <columns>
+            <column label="Aprobacion" align="center" />
+            <column label="Motivo" align="center" />
+        </columns>
+        <rows>
+            <row>
+                <intbox value="@bind(vm.selected.aprobacion)" width="95px" />
+                <label value="@load(vm.selected.motivo)" />
+            </row>
+        </rows>
+    </grid>	
+</div>
+
+</zk>

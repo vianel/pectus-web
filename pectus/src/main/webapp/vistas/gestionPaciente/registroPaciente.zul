@@ -1,0 +1,91 @@
+<zk xmlns:n="native">
+  <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.FilterViewModel')">
+			
+<!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
+		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')" >NUEVO</button>
+<!-- 	</div> -->
+	
+	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente)" >
+		<auxhead>
+            <auxheader label="LISTA DE PACIENTES" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+	        <auxheader colspan="1">
+	            <textbox instant="true" width="100px" 
+	                value="@bind(vm.pacienteFilter.cedula)" onChange="@command('changeFilter')" />
+	        </auxheader>
+			
+			<auxheader colspan="1">
+                <textbox instant="true"  width="100px"
+                    value="@bind(vm.pacienteFilter.nombre)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+            <auxheader colspan="1">
+                <textbox instant="true" width="100px"
+                    value="@bind(vm.pacienteFilter.apellido)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+            <auxheader label="Detalles" colspan="3" />
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Cedula</column>
+            <column hflex="1">Nombre</column>
+            <column hflex="1">Apellido</column>
+            <column hflex="1">Celular</column>
+            <column hflex="1">Fijo</column>
+            <column hflex="1">Nacimiento</column>
+           <column hflex="1">Estado</column>
+            <column hflex="1">Ciudad</column>
+            <column hflex="1">Seguro</column>  
+            <column hflex="1">Hijos</column>
+            <column hflex="1">Ocupacion</column>
+            <column hflex="1">Egresos</column>
+            <column hflex="1">Ingresos</column>
+			<column hflex="1">Editar</column>
+            
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.cedula)" />
+                <label value="@load(each.nombre)" />
+                <label value="@load(each.apellido)" />
+                <label value="@load(each.celular)"/>
+                <label value="@load(each.fijo)"/>
+                <label value="@load(each.fechaNacimiento)"/>
+                <label value="@load(each.estado.nombre)" />
+                <label value="@load(each.ciudad.nombre)" />
+                <label value="@load(each.seguro.nombre)" /> 
+                <label value="@load(each.nroHijos)" />
+                <label value="@load(each.profesion)" />
+                <label value="@load(each.egresos)" />
+                <label value="@load(each.ingresos)" />
+               	<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')">Editar</button>
+            </row>
+        </template>
+        <foot>
+            <footer span="6"  label="@load(vm.footer)" />
+        </foot>
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
+
+</zk>

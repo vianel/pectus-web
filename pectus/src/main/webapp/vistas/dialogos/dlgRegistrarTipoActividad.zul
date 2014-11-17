@@ -1,0 +1,51 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="Tipo Actividad" border="normal" width="350px" height="25em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    
+
+ 
+
+      	<separator height="30px"/>
+
+			
+	<vlayout>	
+			 <grid  width="500px">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Nombre" /><textbox/> </row>
+					<row><label value="Descripcion" /><textbox rows="4"/> </row>
+					<row></row>
+					</rows>
+			</grid>
+		
+		 <separator height="15px"/>
+		<div align="center">
+			<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+  		</div>
+     </vlayout>
+
+		
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</window>
+</zk>

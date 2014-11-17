@@ -1,0 +1,125 @@
+
+<zk>
+
+
+		<panel>
+			<panelchildren>
+			
+		
+
+				<grid>
+
+					<columns>
+						<column label="" width="150px" />
+						<column label="" width="290px" />
+					</columns>
+
+					<rows>
+						<row>
+					Cedula: <textbox />
+					
+				</row>
+				<row>
+					Nombre: <textbox />
+					
+				</row>
+				<row>
+					Apellido: <textbox />
+					
+				</row>
+				<row>
+					Celular: <textbox />
+					
+				</row>
+				<row>
+					Telf Fijo: <textbox />
+					
+				</row>
+				<row>
+					Estado:
+					<combobox>
+						<comboitem label="Lara" />
+						<comboitem label="Aragua" />
+					</combobox>
+				</row>
+				<row>
+					Ciudad:
+					<combobox>
+						<comboitem label="Barquisimeto" />
+						<comboitem label="Cabudare" />
+					</combobox>
+				</row>
+				
+				<row>
+					Direccion: <textbox />
+					
+				</row>
+				<row>
+					Correo: <textbox />
+					
+				</row>
+				<row>
+					Fecha de Nacimiento:
+					<datebox id="txtFecha"
+							value="${win$composer.inventoryItem.createdDate}"
+							format="yyyy/MM/dd" constraint="no empty" />								
+				</row>
+				
+				
+
+				<row>
+					Profesión:
+					<textbox />
+				</row>
+				
+				<row>
+					Estado Civil:
+					<combobox>
+						<comboitem label="Soltero" />
+						<comboitem label="Casado" />
+						<comboitem label="Divorciado" />
+						<comboitem label="Viudo" />
+						<comboitem label="Concubinato" />
+					</combobox>
+				</row>
+				
+				<row>
+					Lugar de trabajo:
+					<textbox />
+				</row>
+				
+				<row>
+					Cargo:
+					<textbox />
+				</row>
+				
+				<row>
+					Dirección de trabajo:
+					<textbox />
+				</row>
+				
+				<row>
+					Telf de oficina:
+					<textbox />
+				</row>
+				
+				<row>
+					Referido por:
+					<textbox />
+				</row>
+				
+				<row>
+					Usuario:
+					<textbox />
+				</row>
+						
+
+					</rows>
+				</grid>
+
+	
+
+			</panelchildren>
+		</panel>
+
+</zk>
