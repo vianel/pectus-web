@@ -11,7 +11,7 @@ public class PacienteFilter {
 	private String nombre = "";
 	private String apellido = "";
 	private String cedula = "";
-	static List<Paciente> pacientes = ServicioPaciente.BuscarPacientes();
+	static List<Paciente> pacientes = ServicioPaciente.buscarPacientes();
 	
 	
 	public String getNombre() {

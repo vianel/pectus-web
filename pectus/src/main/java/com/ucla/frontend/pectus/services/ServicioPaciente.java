@@ -21,6 +21,9 @@ import org.jfree.util.Log;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zul.ListModelList;
 
+import us.monoid.web.JSONResource;
+import us.monoid.web.Resty;
+
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Paciente;
@@ -28,95 +31,81 @@ import com.ucla.frontend.pectus.models.Seguro;
 
 public class ServicioPaciente {
 	
-	  // static AsyncHttpClient httpclient = new AsyncHttpClient();
 
-    static String BASE_URL = "http://localhost:5000/paciente/todos";
+
+ 
     private ListModelList<Paciente> listaModelPaciente;
-    private Paciente pacienteSeleccionado;
-    
-    public Paciente getPacienteSeleccionado() {
-		return pacienteSeleccionado;
-	}
 
-	public void setPacienteSeleccionado(Paciente pacienteSeleccionado) {
-		this.pacienteSeleccionado = pacienteSeleccionado;
-	}
 
 	public ServicioPaciente (){
-    	this.BuscarPacientes();
+    	this.buscarPacientes();
 
     }
     
 	@Init
     public void init(){
-    //	this.cargarListaPersonas();
-	
-    //this.listModelPersona = new ListModelList<Persona>(this.getListaPersonas());
-    	this.setListaModelPaciente(new ListModelList<Paciente>(this.BuscarPacientes()));
+
+    	this.setListaModelPaciente(new ListModelList<Paciente>(this.buscarPacientes()));
     	
     }
 	
 
-    public static List<Paciente> BuscarPacientes()
+    public static List<Paciente> buscarPacientes()
     {
+
 
     	
         List<Paciente> listaPaciente = new ArrayList<Paciente>();
-        HttpClient httpclient = new DefaultHttpClient();
+     
         
-        // Preparar un objeto request via method Get
-        HttpGet httpget = new HttpGet("http://localhost:5000/paciente/todos");
-        HttpResponse response;
-        try {
-            // Ejecutar el request
-            response = httpclient.execute(httpget);
-            // Obtener la entidad del response
-            HttpEntity entity = response.getEntity();
-            // Si el response no esta encerrado como una entity, no hay necesidad de preocuparse, liberar la conexion
-            if (entity != null) {
-                // el JSON Response es leido
-                InputStream instream = entity.getContent();
-                String resultado = convertStreamToString(instream);
-                // Un objeto JSONObject se crea
-                try{
-                    JSONObject json = new JSONObject(resultado);
-                    JSONArray serPaciente = json.getJSONArray("paciente");
-                   
-                    for(int i=0; i < serPaciente.length(); i++){
-                        Paciente paciente = new Paciente();
-                        
-                    
-                        paciente.setNombre((String) serPaciente.getJSONObject(i).get("nombre"));
-                   //     Log.v("codigoPago",(String) serPaciente.getJSONObject(i).get("nombre"));
-                        paciente.setApellido((String) serPaciente.getJSONObject(i).get("apellido"));
-                        paciente.setCedula((String) serPaciente.getJSONObject(i).get("cedula"));
-                        paciente.setDireccion((String) serPaciente.getJSONObject(i).get("direccion"));
-                        paciente.setFechaNacimiento((String) serPaciente.getJSONObject(i).get("fecnacimiento"));
-                        paciente.setCelular((String) serPaciente.getJSONObject(i).getString("tlfcelular"));
-                        paciente.setFijo((String) serPaciente.getJSONObject(i).getString("tlffijo"));
-                        paciente.setProfesion((String) serPaciente.getJSONObject(i).getString("profesion"));
-                        paciente.setNroHijos((Integer.parseInt((String) serPaciente.getJSONObject(i).getString("nrohijos"))));
-                        paciente.setIngresos((Float.parseFloat(serPaciente.getJSONObject(i).getString("ingfamiliares"))));
-                        paciente.setEgresos((Float.parseFloat(serPaciente.getJSONObject(i).getString("egrfamiliares"))));
-                        paciente.setSeguro(obtenerSeguro(serPaciente.getJSONObject(i).getString("tiposeguro"))); 
-                        paciente.setCiudad(obtenerciudad(serPaciente.getJSONObject(i).getString("ciudad")));
 
-                        paciente.setEstado(obtenerciudad(serPaciente.getJSONObject(i).getString("ciudad")).getEstado());  
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/paciente/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("paciente").toString();
+			JSONArray serPaciente = new JSONArray(strPa);
+			  for(int i=0; i < serPaciente.length(); i++){
+                  Paciente paciente = new Paciente();
+                  JSONObject obj = serPaciente.getJSONObject(i);
+                  paciente.setNombre(obj.get("nombre").toString());
+                
+                  paciente.setApellido(obj.get("apellido").toString());
+                  paciente.setCedula(obj.get("cedula").toString());
+                  paciente.setDireccion(obj.get("direccion").toString());
+                  paciente.setFechaNacimiento(obj.get("fecnacimiento").toString());
+                  paciente.setCelular(obj.get("tlfcelular").toString());
+                  paciente.setFijo(obj.get("tlffijo").toString());
+                  paciente.setProfesion(obj.get("profesion").toString());
+                  paciente.setNroHijos(Integer.parseInt(obj.get("nrohijos").toString()) );
+                  paciente.setIngresos(Integer.parseInt(obj.get("ingfamiliares").toString()));
+                  paciente.setEgresos(Integer.parseInt(obj.get("egrfamiliares").toString())); 
+                  paciente.setSeguro(obtenerSeguro(obj.get("tiposeguro").toString())); 
+                  paciente.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
 
-                        paciente.setEstado(obtenerciudad(serPaciente.getJSONObject(i).getString("ciudad")).getEstado());
+                  paciente.setEstado(obtenerciudad(obj.get("ciudad").toString()).getEstado());  
 
-                     
-                    
-                        listaPaciente.add(paciente);
-                    }
-                }catch(JSONException  e){
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+   
+                  
+                  listaPaciente.add(paciente);
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
 
         return listaPaciente;
         
@@ -182,32 +171,7 @@ public class ServicioPaciente {
         return calendario.getTime();
     }
 
-    private static String convertStreamToString(InputStream is) {
-        /*
-         * Para convertir un InputStream a String se usa el metodo BufferedReader.readLine()
-         * Iteramos hasta que el BufferedReader retone null lo cual significa
-         * que no hay mas datos para leer. Cada linea sera agregada al StringBuilder
-         * y sera retornado como un String.
-         */
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-        } catch (IOException e) {
-            e.getMessage();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.getMessage();
-            }
-        }
-        return sb.toString();
-    }
+ 
 
 	public ListModelList<Paciente> getListaModelPaciente() {
 		return listaModelPaciente;

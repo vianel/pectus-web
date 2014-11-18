@@ -84,7 +84,7 @@ public class PersonaView {
 	    public void cargarListaPaciente(){
 	    	
 
-	        this.listaPaciente = new ArrayList<Paciente> (serviciopaciente.BuscarPacientes());
+	        this.listaPaciente = new ArrayList<Paciente> (serviciopaciente.buscarPacientes());
 	        
 	    }
 	    

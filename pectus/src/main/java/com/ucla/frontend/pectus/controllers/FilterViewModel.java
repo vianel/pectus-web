@@ -57,7 +57,7 @@ public class FilterViewModel extends SelectorComposer<Window>  {
 	private PacienteFilter pacienteFilter = new PacienteFilter();
 	//List<Paciente> currentPaciente = PacienteData.getAllPacientes();
 	// ############ AQUI HAGO LA CONEXION CON EL SERVICIO #################
-	List<Paciente> currentPaciente = ServicioPaciente.BuscarPacientes();
+	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
 	
 	
 	private CitaFilter citaFilter = new CitaFilter();

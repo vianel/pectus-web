@@ -2,23 +2,13 @@ package com.ucla.frontend.pectus.models;
 
 import org.zkoss.bind.annotation.DependsOn;
 
-public class Paciente {
+public class Paciente extends Persona{
 	
 	
 	private Integer id;
 	private Estado estado;
 	private Ciudad ciudad;
 	private Seguro seguro;
-	private String cedula;
-	private String nombre;
-	private String apellido;
-	private String celular;
-	private String fijo;
-	private String direccion;
-	private String correo;
-	private String fechaNacimiento;
-	private String profesion;
-	private char estadoCivil;
 	private Integer   nroHijos;
 	private String cedulaConyugue;
 	private String nombreConyugue;
@@ -36,15 +26,18 @@ public class Paciente {
 	private boolean estatus;
 	
 	
-	public  Paciente(){
-		
-	}
-	public Paciente(String cedula,String nombre)
-	{
-		this.cedula = cedula;
-		this.nombre = nombre;
-	}
+
 	
+	
+	
+
+	
+	
+	
+	public Paciente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Paciente(Integer id, Estado estado, Ciudad ciudad, Seguro seguro,
 			String cedula, String nombre, String apellido, String celular,
 			String fijo, String direccion, String correo,
@@ -55,21 +48,12 @@ public class Paciente {
 			Double alquiler, String lugarTrabajo, String direccionTrabajo,
 			String telefonoTrabajo, float ingresos, float egresos,
 			boolean estatus) {
-		super();
+		super(cedula, nombre, apellido, celular, fijo, direccion, correo,
+				fechaNacimiento, profesion, estadoCivil);
 		this.id = id;
 		this.estado = estado;
 		this.ciudad = ciudad;
 		this.seguro = seguro;
-		this.cedula = cedula;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.celular = celular;
-		this.fijo = fijo;
-		this.direccion = direccion;
-		this.correo = correo;
-		this.fechaNacimiento = fechaNacimiento;
-		this.profesion = profesion;
-		this.estadoCivil = estadoCivil;
 		this.nroHijos = nroHijos;
 		this.cedulaConyugue = cedulaConyugue;
 		this.nombreConyugue = nombreConyugue;
@@ -110,66 +94,7 @@ public class Paciente {
 	public void setSeguro(Seguro seguro) {
 		this.seguro = seguro;
 	}
-	public String getCedula() {
-		return cedula;
-	}
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	public String getFijo() {
-		return fijo;
-	}
-	public void setFijo(String fijo) {
-		this.fijo = fijo;
-	}
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public String getCorreo() {
-		return correo;
-	}
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-	public String getProfesion() {
-		return profesion;
-	}
-	public void setProfesion(String profesion) {
-		this.profesion = profesion;
-	}
-	public char getEstadoCivil() {
-		return estadoCivil;
-	}
-	public void setEstadoCivil(char estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
+
 	public Integer getNroHijos() {
 		return nroHijos;
 	}
