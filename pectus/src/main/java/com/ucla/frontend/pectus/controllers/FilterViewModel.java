@@ -32,40 +32,28 @@ import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.PacienteData;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 
-public class FilterViewModel extends SelectorComposer<Window>  {
+public class FilterViewModel   {
 	
-	@Wire
-	Textbox txtCedulaPaciente;
-	@Wire
-	Textbox txtNombrePacientecc;
-	@Wire
-	Textbox txtApellidoPaciente;
-	@Wire
-	Textbox txtCelularPaciente;
-	@Wire
-	Textbox txtphonePaciente;
-	@Wire
-	Datebox txtFechanacimientopaciente;
-	@Wire
-	Textbox txtnrohijospaciente;
-	@Wire
-	Textbox txtprofesionpaciente;
-	@Wire
-	Attribute mensajeexitoso;
+
+
 	
 	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PacienteFilter pacienteFilter = new PacienteFilter();
+
 	//List<Paciente> currentPaciente = PacienteData.getAllPacientes();
 	// ############ AQUI HAGO LA CONEXION CON EL SERVICIO #################
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
 	
 	
 	private CitaFilter citaFilter = new CitaFilter();
-	List<Cita> currentCita = PacienteData.getAllCitas();
+	//List<Cita> currentCita = PacienteData.getAllCitas();
 	
-	
-	
-	
+
+
+
+
+
+
 	
 
 	public CitaFilter getCitaFilter() {
@@ -90,35 +78,12 @@ public class FilterViewModel extends SelectorComposer<Window>  {
 		window.doModal();
 		
 	}
-	@Listen("onClick=#btnguardarpaciente")
-	public void mensaje(){
 
-	System.out.println(txtCedulaPaciente.getValue());
-	
-    HttpClient httpclient = new DefaultHttpClient();
-    
-    // Preparar un objeto request via method Get
-    HttpGet httpget = new HttpGet("http://localhost:5000/paciente/agregar?cedula=" + txtCedulaPaciente.getValue() +"&nombre=" + txtNombrePacientecc.getValue() + "&apellido=" + txtApellidoPaciente.getValue() + "&tlfcelular=" + txtCelularPaciente.getValue() + "&tlffijo=" + txtphonePaciente.getValue() + "&fecnacimiento=" + "2014-05-01" + "&idciudad=1" +  "&nrohijos=" + txtnrohijospaciente.getValue() + "&profesion=" + txtprofesionpaciente.getValue());
-    HttpResponse response;
-    
-    try {
-		response = httpclient.execute(httpget);
-	} catch (ClientProtocolException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    	txtCedulaPaciente.setValue(" ");
-    	txtNombrePacientecc.setValue(" ");
-
-	}
 	
 	@Command
 	public void abrirDialogoRegistrarPaciente(Event e){
 		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
-//		System.out.println("JOSA LO Q HACE ES ECHAR CARRO");
+
 		window.doModal();
 	}
 	
@@ -132,9 +97,9 @@ public class FilterViewModel extends SelectorComposer<Window>  {
         return new ListModelList<Paciente>(currentPaciente);
     }
     
-    public ListModel<Cita> getFoodModelCita() {
+    /*public ListModel<Cita> getFoodModelCita() {
         return new ListModelList<Cita>(currentCita);
-    }
+    }*/
      
     public String getFooter() {
         return String.format(footerMensaje, currentPaciente.size());
@@ -146,13 +111,13 @@ public class FilterViewModel extends SelectorComposer<Window>  {
         currentPaciente = PacienteFilter.getFilterPacientes(pacienteFilter);
     }
     
-    @Command
+    /*@Command
     @NotifyChange({"foodModelCita", "footer"})
     public void changeFilterCita() {
         currentCita = PacienteData.getFilterCitas(citaFilter);
-    }
+    }*/
     
-    
+  /*  
 //    ################ actividad ###################################3
     
     private static final String footerMensajeactividad = "Esto son todas los Actividades";
@@ -174,7 +139,11 @@ public class FilterViewModel extends SelectorComposer<Window>  {
     public void changeFilteractividad() {
         currentActividad = ActividadData.getFilteractividades(actividadFilter);
     }
-    
+
+*/
+
+
+
     
     
     

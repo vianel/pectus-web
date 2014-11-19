@@ -38,7 +38,7 @@ public class ServicioPaciente {
 
 
 	public ServicioPaciente (){
-    	this.buscarPacientes();
+    
 
     }
     
@@ -49,6 +49,27 @@ public class ServicioPaciente {
     	
     }
 	
+	public static void agregarPaciente(Paciente paciente)
+	{
+
+		Resty resty = new Resty();
+		try {
+			resty.json("http://localhost:5000/paciente/agregar?cedula=" + paciente.getCedula() +
+					"&nombre=" + paciente.getNombre() +
+					"&apellido=" + paciente.getApellido() +
+					"&tlfcelular=" + paciente.getCelular() +
+					"&tlfijo=" + paciente.getFijo() +
+					"&profesion=" + paciente.getProfesion() +
+					"&nrohijos=" + paciente.getNroHijos() 
+					//"&fecnacimiento=" + paciente.getFechaNacimiento().toString()
+	
+					
+					);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
     public static List<Paciente> buscarPacientes()
     {
@@ -81,7 +102,7 @@ public class ServicioPaciente {
                   paciente.setApellido(obj.get("apellido").toString());
                   paciente.setCedula(obj.get("cedula").toString());
                   paciente.setDireccion(obj.get("direccion").toString());
-                  paciente.setFechaNacimiento(obj.get("fecnacimiento").toString());
+                  paciente.setFechaNacimiento(convertirFecha(obj.get("fecnacimiento").toString()));
                   paciente.setCelular(obj.get("tlfcelular").toString());
                   paciente.setFijo(obj.get("tlffijo").toString());
                   paciente.setProfesion(obj.get("profesion").toString());
@@ -159,7 +180,7 @@ public class ServicioPaciente {
     	
     	return seguro;
     }
-    public Date convertirFecha(String fecha){
+    public static Date convertirFecha(String fecha){
         Calendar calendario = Calendar.getInstance();
         Calendar calendarioActual = Calendar.getInstance();
         String fechaFraccionada[] = fecha.split("-");

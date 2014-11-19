@@ -11,7 +11,7 @@ public class Persona {
 	private String fijo;
 	private String direccion;
 	private String correo;
-	private String fechaNacimiento;
+	private Date fechaNacimiento;
 	private String profesion;
 	private char estadoCivil;
 	
@@ -23,7 +23,7 @@ public class Persona {
 	}
 	public Persona(String cedula, String nombre, String apellido,
 			String celular, String fijo, String direccion, String correo,
-			String fechaNacimiento, String profesion, char estadoCivil) {
+			Date fechaNacimiento, String profesion, char estadoCivil) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -78,10 +78,10 @@ public class Persona {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getProfesion() {

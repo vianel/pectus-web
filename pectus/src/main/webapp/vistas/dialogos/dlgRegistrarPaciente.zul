@@ -1,6 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window apply="com.ucla.frontend.pectus.controllers.FilterViewModel"
+<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')"
 			 id="modalDialog" title="PACIENTE" border="normal" width="660px" height="29em"
     
     position="center,center" closable="true"
@@ -11,31 +12,28 @@
         <tab id="A" label="Datos Basicos" />
         <tab id="B" label="Datos del Conyugue" />
         <tab id="C" label="Datos Socioeconomicos" />
-<!--  //id="txtNombrePaciente"
-//id="txtCedulaPaciente" -->
+
     </tabs>
     <tabpanels>
-        <tabpanel>
-			
-				<label style="display:block" value="Cedula" /><textbox id="txtCedulaPaciente" maxlength="8"/>
-				<label style="display:block" value="Nombre" /><textbox id="txtNombrePacientecc" maxlength="15"/>
-				<label style="display:block" value="Apellido" /><textbox id="txtApellidoPaciente" maxlength="15"/>
-				<label style="display:block" value="Celular" /><textbox id="txtCelularPaciente"/>
-				<label style="display:block" value="Telefono Fijo" /><textbox id="txtphonePaciente" width='150px' />
+        <tabpanel >
+		
+				<label style="display:block" value="Cedula" /><textbox value="@bind(vm.cedulaSelected)"  maxlength="8"/>
+				<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
+				<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>
+				<label style="display:block" value="Celular" /><textbox value="@bind(vm.celularSelected)" />
+				<label style="display:block" value="Telefono Fijo" /><textbox value="@bind(vm.phoneSelected)" width='150px' />
 			
 				<label style="display:block;margin-left: 15em;margin-top: -16em;" value="Direccion" /><textbox rows="4"  style="display:block;margin-left: 16em;"/>
 				<label style="display:block;margin-left: 15em;" value="Correo" /><textbox  style="display:block;margin-left: 16em;" />
-				<label style="display:block;margin-left: 15em;" value="Fecha de Nacimiento" /><datebox  id="txtFechanacimientopaciente" style="display:block;margin-left: 15em;" />
-				<label style="display:block;margin-left: 15em;" value="Profesion" /><textbox id="txtprofesionpaciente"  style="display:block;margin-left: 16em;" />
+				<label style="display:block;margin-left: 15em;" value="Fecha de Nacimiento" /><datebox  value="@bind(vm.fechanacimientoSelected)" style="display:block;margin-left: 15em;" />
+				<label style="display:block;margin-left: 15em;" value="Profesion" /><textbox value="@bind(vm.profesionSelected)" style="display:block;margin-left: 16em;" />
 				
-				<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><textbox id="txtnrohijospaciente"  style="display:block;margin-left: 30em;"/> 
+				<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><textbox value="@bind(vm.nrohijosSelected)"  style="display:block;margin-left: 30em;"/> 
 				<label style="display:block;margin-left: 28em;" value="Estado Civil"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="Soltera"/><comboitem label="Casada"/><comboitem label="Divorsiada"/><comboitem label="Viuda"/></combobox>
 				<label style="display:block;margin-left: 28em;" value="Estado"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="Trujillo"/><comboitem label="Lara"/><comboitem label="Miranda"/><comboitem label="Carabobo"/></combobox>
 				<label style="display:block;margin-left: 28em;" value="Ciudad"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="x"/><comboitem label="y"/><comboitem label="z"/><comboitem label="c"/></combobox>
-				<button style="margin-top: 4em" sclass="btn-success" id="btnguardarpaciente" >Guardar
-				<attribute id="mensajeexitoso" name="onClick"><![CDATA[
-    			Messagebox.show("Paciente Guardado Exitosamente", "Information", Messagebox.OK, Messagebox.INFORMATION);
-				]]></attribute></button>
+				<button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarPaciente')" >Guardar</button>
+				
 		</tabpanel>
         <tabpanel>
         	<label style="display:block" value="Cedula" /><intbox />

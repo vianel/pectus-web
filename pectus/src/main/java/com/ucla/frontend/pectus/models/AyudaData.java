@@ -37,8 +37,8 @@ public class AyudaData {
 	}
 	
 	static{
-		pacientes.add(new Paciente(1, estados.get(0), ciudades.get(0), seguros.get(0), "14745213", "Maria", "Perez", "0424", "0251", "Brisas", "maria@.com", "09/78/2014", "Maestra", 'c', 10, "12587456", "Jose", "Briceno", "Nada", 'v', 8, 'v', 10.000, "Escuela", "Centro", "0251", 50000, 20000, true));
-		pacientes.add(new Paciente(2, estados.get(0), ciudades.get(1), seguros.get(1), "13252025", "Josefa", "Martinez", "0424", "0251", "Centro", "maria@.com", "09/78/2014", "Maestra", 'c', 10, "12587456", "Jose", "Briceno", "Nada", 'v', 8, 'v', 10.000, "Escuela", "Centro", "0251", 50000, 20000, true));
+	//	pacientes.add(new Paciente( estados.get(0), ciudades.get(0), seguros.get(0), "14745213", "Maria", "Perez", "0424", "0251", "Brisas", "maria@.com", "09/78/2014", "Maestra", 'c', 10, "12587456", "Jose", "Briceno", "Nada", 'v', 8, 'v', 10.000, "Escuela", "Centro", "0251", 50000, 20000, true));
+		//pacientes.add(new Paciente( estados.get(0), ciudades.get(1), seguros.get(1), "13252025", "Josefa", "Martinez", "0424", "0251", "Centro", "maria@.com", "09/78/2014", "Maestra", 'c', 10, "12587456", "Jose", "Briceno", "Nada", 'v', 8, 'v', 10.000, "Escuela", "Centro", "0251", 50000, 20000, true));
 	}
 	
 	

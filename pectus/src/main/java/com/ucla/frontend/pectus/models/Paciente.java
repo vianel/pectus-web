@@ -1,11 +1,13 @@
 package com.ucla.frontend.pectus.models;
 
+import java.util.Date;
+
 import org.zkoss.bind.annotation.DependsOn;
 
 public class Paciente extends Persona{
 	
 	
-	private Integer id;
+
 	private Estado estado;
 	private Ciudad ciudad;
 	private Seguro seguro;
@@ -38,10 +40,10 @@ public class Paciente extends Persona{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Paciente(Integer id, Estado estado, Ciudad ciudad, Seguro seguro,
+	public Paciente(Estado estado, Ciudad ciudad, Seguro seguro,
 			String cedula, String nombre, String apellido, String celular,
 			String fijo, String direccion, String correo,
-			String fechaNacimiento, String profesion, char estadoCivil,
+			Date fechaNacimiento, String profesion, char estadoCivil,
 			Integer nroHijos, String cedulaConyugue, String nombreConyugue,
 			String apellidoConyugue, String ocupacionConyugue,
 			char tipoVivienda, Integer nroHabitantes, char tendenciaVivienda,
@@ -50,7 +52,7 @@ public class Paciente extends Persona{
 			boolean estatus) {
 		super(cedula, nombre, apellido, celular, fijo, direccion, correo,
 				fechaNacimiento, profesion, estadoCivil);
-		this.id = id;
+		
 		this.estado = estado;
 		this.ciudad = ciudad;
 		this.seguro = seguro;
@@ -70,12 +72,7 @@ public class Paciente extends Persona{
 		this.egresos = egresos;
 		this.estatus = estatus;
 	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	public Estado getEstado() {
 		return estado;
 	}
