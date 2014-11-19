@@ -1,11 +1,21 @@
 package com.ucla.frontend.pectus.controllers;
 
 import java.util.Date;
+import java.util.List;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.ForwardEvent;
 import org.zkoss.zk.ui.select.impl.Attribute;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.ListModel;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Row;
+import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
@@ -25,10 +35,61 @@ public class ControladorPaciente {
 	private String nrohijosSelected;
 	private String profesionSelected;
 	
+	private static final String footerMensaje = "Esto son todos los pacientes";
+	private PacienteFilter pacienteFilter = new PacienteFilter();
+	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
+	
+	public PacienteFilter getPacienteFilter() {
+		return pacienteFilter;
+	}
 
+	public void setPacienteFilter(PacienteFilter pacienteFilter) {
+		this.pacienteFilter = pacienteFilter;
+	}
+
+	@Command
+	public void abrirDialogoRegistrarPaciente(@BindingParam("paciente") Paciente paciente){
+
+		
+		
+	    modificarPaciente(paciente);
+		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
+		
+		window.doModal();
+	}
+	
+	public void modificarPaciente(Paciente paciente)
+	{
+		String response = null;
+		response = ServicioPaciente.modificarPaciente(paciente);
+		if (response.equalsIgnoreCase("true"))
+		{
+	
+			Clients.showNotification("Paciente con cedula " + paciente.getCedula() + " Modificado Exitosamente", null, true);
+
+		}else
+		{
+			Clients.showNotification("Error al modificar", true);
+		}
+	}
+	
+    public ListModel<Paciente> getmodelpaciente() {
+        return new ListModelList<Paciente>(currentPaciente);
+    }
+    
+    public String getFooter() {
+        return String.format(footerMensaje, currentPaciente.size());
+    }
+    
+    @Command
+    @NotifyChange({"modelpaciente", "footer"})
+    public void changeFilter() {
+        currentPaciente = PacienteFilter.getFilterPacientes(pacienteFilter);
+    }
 	
 	@Command
 	public void guardarPaciente() throws Exception{
+		String response = null;
 		if (cedulaSelected!= null) {
 			pacienteselected = new Paciente();
 			pacienteselected.setCedula(cedulaSelected);
@@ -40,11 +101,20 @@ public class ControladorPaciente {
 			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
 			pacienteselected.setProfesion(profesionSelected);
 			
-			ServicioPaciente.agregarPaciente(pacienteselected);
+			response = ServicioPaciente.agregarPaciente(pacienteselected);
+			if (response.equalsIgnoreCase("true"))
+			{
+		
+				Clients.showNotification("Paciente Guardado", null, true);
+
+			}else
+			{
+				Clients.showNotification("Error al guardar", true);
+			}
 		}	else{
 			Clients.showNotification("Porfavor ingrese todos los datos validos");
 		}
-			
+
 
 
 	}

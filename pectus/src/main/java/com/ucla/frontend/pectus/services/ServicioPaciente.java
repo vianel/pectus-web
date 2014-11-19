@@ -48,13 +48,34 @@ public class ServicioPaciente {
     	this.setListaModelPaciente(new ListModelList<Paciente>(this.buscarPacientes()));
     	
     }
-	
-	public static void agregarPaciente(Paciente paciente)
+	public static String modificarPaciente(Paciente paciente)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	public static String agregarPaciente(Paciente paciente)
 	{
 
 		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	    String ok = null;
 		try {
-			resty.json("http://localhost:5000/paciente/agregar?cedula=" + paciente.getCedula() +
+			jsResource = resty.json("http://localhost:5000/paciente/agregar?cedula=" + paciente.getCedula() +
 					"&nombre=" + paciente.getNombre() +
 					"&apellido=" + paciente.getApellido() +
 					"&tlfcelular=" + paciente.getCelular() +
@@ -62,13 +83,21 @@ public class ServicioPaciente {
 					"&profesion=" + paciente.getProfesion() +
 					"&nrohijos=" + paciente.getNroHijos() 
 					//"&fecnacimiento=" + paciente.getFechaNacimiento().toString()
-	
-					
 					);
+	    
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
 	}
 
     public static List<Paciente> buscarPacientes()

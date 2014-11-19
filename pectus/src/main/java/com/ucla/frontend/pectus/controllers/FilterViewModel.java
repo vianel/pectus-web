@@ -83,7 +83,7 @@ public class FilterViewModel   {
 	@Command
 	public void abrirDialogoRegistrarPaciente(Event e){
 		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
-
+		
 		window.doModal();
 	}
 	

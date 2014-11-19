@@ -17,7 +17,7 @@
     <tabpanels>
         <tabpanel >
 		
-				<label style="display:block" value="Cedula" /><textbox value="@bind(vm.cedulaSelected)"  maxlength="8"/>
+				<label style="display:block" value="Cedula" /><textbox value="@load(vm.cedulaSelected) @bind(vm.cedulaSelected)"  maxlength="8"/>
 				<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
 				<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>
 				<label style="display:block" value="Celular" /><textbox value="@bind(vm.celularSelected)" />

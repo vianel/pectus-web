@@ -10,7 +10,7 @@
     <tabpanels>
 		<tabpanel >
 		 <div apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.FilterViewModel')">
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
 			
 <!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
 		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')" >NUEVO</button>
@@ -73,7 +73,7 @@
                 <label value="@load(each.profesion)" />
                 <label value="@load(each.egresos)" />
                 <label value="@load(each.ingresos)" />
-               	<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')">Editar</button>
+               	<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente', paciente=each)">Editar</button>
             </row>
         </template>
         <foot>
