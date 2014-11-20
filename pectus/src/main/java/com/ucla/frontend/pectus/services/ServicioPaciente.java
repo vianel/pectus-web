@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,9 +55,15 @@ public class ServicioPaciente {
 		Resty resty = new Resty();
 		JSONResource jsResource = null;
 		String ok = null;
-		
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		String fecha = df.format(paciente.getFechaNacimiento());
 		try {
-			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nombre=" + paciente.getNombre());
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + 
+					"&nombre=" + paciente.getNombre() +
+					"&apellido=" + paciente.getApellido() +
+					"&tlfcelular=" + paciente.getCelular() +
+					"&tlfijo=" + paciente.getFijo() +
+					"&fecnacimiento=" + fecha);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,6 +82,8 @@ public class ServicioPaciente {
 		Resty resty = new Resty();
 	    JSONResource jsResource = null;
 	    String ok = null;
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		String fecha = df.format(paciente.getFechaNacimiento());
 		try {
 			jsResource = resty.json("http://localhost:5000/paciente/agregar?cedula=" + paciente.getCedula() +
 					"&nombre=" + paciente.getNombre() +
@@ -81,8 +91,8 @@ public class ServicioPaciente {
 					"&tlfcelular=" + paciente.getCelular() +
 					"&tlfijo=" + paciente.getFijo() +
 					"&profesion=" + paciente.getProfesion() +
-					"&nrohijos=" + paciente.getNroHijos() 
-					//"&fecnacimiento=" + paciente.getFechaNacimiento().toString()
+					"&nrohijos=" + paciente.getNroHijos() + 
+					"&fecnacimiento=" + fecha
 					);
 	    
 		} catch (IOException e) {
@@ -140,8 +150,10 @@ public class ServicioPaciente {
                   paciente.setEgresos(Integer.parseInt(obj.get("egrfamiliares").toString())); 
                   paciente.setSeguro(obtenerSeguro(obj.get("tiposeguro").toString())); 
                   paciente.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
-
-                  paciente.setEstado(obtenerciudad(obj.get("ciudad").toString()).getEstado());  
+                  paciente.setEstado(obtenerciudad(obj.get("ciudad").toString()).getEstado());
+                  paciente.setCedulaConyugue(obj.get("cedconyugue").toString());
+                  paciente.setNombreConyugue(obj.get("nombconyugue").toString());
+                  paciente.setApellidoConyugue(obj.get("apeconyugue").toString());
 
    
                   

@@ -16,7 +16,7 @@
 		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')" >NUEVO</button>
 <!-- 	</div> -->
 	
-	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
+	<grid height="400px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
 	@template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')" >
 		<auxhead>
             <auxheader label="LISTA DE PACIENTES" colspan="6" />
@@ -38,8 +38,9 @@
                     value="@bind(vm.pacienteFilter.apellido)" onChange="@command('changeFilter')"/>
             </auxheader>
             
-            <auxheader label="Detalles" colspan="3" />
-        
+            <auxheader label="Datos Basicos" colspan="8" />
+        	<auxheader label="Datos Conyugue" colspan="3" />
+        	<auxheader label="Datos SocioEconomicos" colspan="2" />
         </auxhead>
 	
 	<columns>
@@ -54,8 +55,12 @@
             <column hflex="1">Seguro</column>  
             <column hflex="1">Hijos</column>
             <column hflex="1">Ocupacion</column>
+            <column hflex="1">Conyugue</column>
+            <column hflex="1">Nombre</column>
+            <column hflex="1">Apellido</column>
             <column hflex="1">Egresos</column>
             <column hflex="1">Ingresos</column>
+          
 			<column hflex="1">Editar</column>
             
         </columns>
@@ -72,6 +77,9 @@
                 <label value="@load(each.paciente.seguro.nombre)" /> 
                 <label value="@load(each.paciente.nroHijos)" />
                 <label value="@load(each.paciente.profesion)" />
+                <label value="@load(each.paciente.cedulaConyugue)" />
+                <label value="@load(each.paciente.nombreConyugue)" />
+                <label value="@load(each.paciente.apellidoConyugue)" />
                 <label value="@load(each.paciente.egresos)" />
                 <label value="@load(each.paciente.ingresos)" />
              
@@ -84,15 +92,18 @@
                 <row>
                   <label value="@load(each.paciente.cedula)"/>
                   <textbox value="@load(each.paciente.nombre) @save(each.paciente.nombre, before='modificarPaciente')" />
-	              <textbox value="@load(each.paciente.apellido)" />
-	              <textbox value="@load(each.paciente.celular)"/>
-	              <textbox value="@load(each.paciente.fijo)"/>
-	              <textbox value="@load(each.paciente.fechaNacimiento) @converter('formatedDate',format='dd/MM/yyyy')"/>
+	              <textbox value="@load(each.paciente.apellido) @save(each.paciente.apellido, before='modificarPaciente')" />
+	              <textbox value="@load(each.paciente.celular) @save(each.paciente.celular, before='modificarPaciente')"/>
+	              <textbox value="@load(each.paciente.fijo) @save(each.paciente.fijo, before='modificarPaciente')"/>
+	              <textbox value="@load(each.paciente.fechaNacimiento) @save(each.paciente.fechaNacimiento, before='modificarPaciente') @converter('formatedDate',format='dd/MM/yyyy')"/>
 	              <textbox value="@load(each.paciente.estado.nombre)" />
 	              <textbox value="@load(each.paciente.ciudad.nombre)" />
 	              <textbox value="@load(each.paciente.seguro.nombre)" /> 
 	              <textbox value="@load(each.paciente.nroHijos)" />
 	              <textbox value="@load(each.paciente.profesion)" />
+	              <textbox value="@load(each.paciente.cedulaConyugue)" />
+                  <textbox value="@load(each.paciente.nombreConyugue)" />
+                  <textbox value="@load(each.paciente.apellidoConyugue)" />
 	              <textbox value="@load(each.paciente.egresos)" />
 	              <textbox value="@load(each.paciente.ingresos)" />
                   <!--   <textbox

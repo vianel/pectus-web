@@ -1,5 +1,6 @@
 package com.ucla.frontend.pectus.controllers;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,27 +10,19 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.ForwardEvent;
-import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zk.ui.select.impl.Attribute;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.Datebox;
-import org.zkoss.zul.ListModel;
-import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Row;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Seguro;
+import com.ucla.frontend.pectus.services.ServicioCiudad;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
+
 
 public class ControladorPaciente {
 	private Paciente pacienteselected;
-	
 	private String cedulaSelected;
 	private String nombreSelected;
 	private String apellidoSelected;
@@ -38,7 +31,30 @@ public class ControladorPaciente {
 	private Date fechanacimientoSelected;
 	private String nrohijosSelected;
 	private String profesionSelected;
-	private String cedulass;
+	private String direccionSelected;
+	private Estado estadoSelected;
+	private Ciudad ciudadSelected;
+	private String correoSelected;
+	private String edocivilSelected;
+	private String cedulaconyugueSelected;
+	private String nombreconyugueSelected;
+	private String apellidoconyugueSelected;
+	private Date fechanacimientoconyigueSelected;
+	private String profesionconyugueSelected;
+	private String viviendaSelected;
+	private String condicionviviendaSelected;
+	private String nrohabitantesSelected;
+	private String precioalquilerSelected;
+	private String lugartrabajoSelected;
+	private String direcciontrabajoSelected;
+	private String tlftrabajoSelected;
+	private String ingfamiliaresSelected;
+	private String egrfamiliaresSelected;
+	
+	
+	private List<Ciudad> listaciudad;
+
+	private List<Estado> listaestado;
 
 	private Window ventanaregistronuevopaciente;
 	
@@ -47,12 +63,48 @@ public class ControladorPaciente {
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
 	private List<PacienteStatus> pacientestatues = generateStatusList(currentPaciente);
 	private boolean displayEdit = true;
-	     
+	List<String> listaedocivil = new ArrayList<String>();
+
+			
+	
+	@Command
+	@NotifyChange({"listaciudad","listaestado"})
+	public void inicializarAtributos() throws Exception{
+		 listaedocivil.add("Soltera");
+		 listaedocivil.add("Casada");
+		 listaedocivil.add("Divorciada");
+		 listaedocivil.add("Viuda");
+		
+		
+		listaestado = ServicioCiudad.buscarEstados();
+		
+	}
+	    
 	    public boolean isDisplayEdit() {
 	        return displayEdit;
 	    }
 	
 	    
+		@Command
+		@NotifyChange({"listaciudad"})
+		public void cambioEstado() throws Exception{
+			listaciudad = ServicioCiudad.buscarCiudades();
+	
+
+		}
+		
+		
+	public List<Ciudad> getListaciudad() {
+			return listaciudad;
+		}
+
+
+		public void setListaciudad(List<Ciudad> listaciudad) {
+			this.listaciudad = listaciudad;
+		}
+
+
+
 
 
 	public PacienteFilter getPacienteFilter() {
@@ -74,8 +126,8 @@ public class ControladorPaciente {
 	@Command
 	public void modificarPaciente(@BindingParam("pacienteStatus") PacienteStatus pctes)
 	{
+	
 		
-
 		String response = null;
 		response = ServicioPaciente.modificarPaciente(pctes.getPaciente());
 		if (response.equalsIgnoreCase("true"))
@@ -119,10 +171,19 @@ public class ControladorPaciente {
         pacientestatues = generateStatusList(currentPaciente);
     }
 
+
 	@Command
 	public void guardarPaciente(@BindingParam("cmp") Window x) throws Exception{
 		String response = null;
 		if (cedulaSelected!= null) {
+		/*	pacienteselected = new Paciente(estadoSelected, ciudadSelected, null, cedulaSelected, 
+					nombreSelected, apellidoSelected, celularSelected, phoneSelected, direccionSelected, correoSelected, fechanacimientoSelected,
+					profesionSelected, conversorestadocivil(edocivilSelected), Integer.parseInt(nrohijosSelected), cedulaconyugueSelected, nombreconyugueSelected, apellidoconyugueSelected, profesionconyugueSelected, 
+					conversortipovivienda(viviendaSelected), Integer.parseInt(nrohabitantesSelected), conversortendenciavivienda(condicionviviendaSelected), 
+					Double.parseDouble(precioalquilerSelected), lugartrabajoSelected, direcciontrabajoSelected, 
+					tlftrabajoSelected, Float.parseFloat(ingfamiliaresSelected), Float.parseFloat(egrfamiliaresSelected), true);
+
+			*/
 			pacienteselected = new Paciente();
 			pacienteselected.setCedula(cedulaSelected);
 			pacienteselected.setNombre(nombreSelected);
@@ -145,19 +206,63 @@ public class ControladorPaciente {
 				Clients.showNotification("Error al guardar", true);
 			}
 		}	else{
+			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
 			Clients.showNotification("Porfavor ingrese todos los datos validos");
 		}
 
 
 
 	}
-	private void ControladorPaciente() {
-		// TODO Auto-generated method stub
-		this.currentPaciente = ServicioPaciente.buscarPacientes();
-		this.pacientestatues = pacientestatues;
-	}
+    public char conversorestadocivil(String s)
+    {
+    	if (s.equalsIgnoreCase("Soltera"))
+    	{
+    		return 'S';
+    	}
+    	else if (s.equalsIgnoreCase("Casada"))
+    	{
+    		return 'C';
+    	}
+    	else if (s.equalsIgnoreCase("Divorciada"))
+    	{
+    		return 'D';
+    	}
+    	else if(s.equalsIgnoreCase("Viudad"))
+    	{
+    		return 'V';
+    	}
+    	return 'N';
+    }
+    public char conversortipovivienda(String s)
+    {
+    	if (s.equalsIgnoreCase("Casa"))
+    	{
+    		return 'C';
+    	}
+    	else if (s.equalsIgnoreCase("Apartamento"))
+    	{
+    		return 'A';
+    	}
+    	else if (s.equalsIgnoreCase("Rancho"))
+    	{
+    		return 'R';
+    	}
 
+    	return 'N';
+    }
+    public char conversortendenciavivienda(String s)
+    {
+    	if (s.equalsIgnoreCase("Alquilada"))
+    	{
+    		return 'A';
+    	}
+    	else if (s.equalsIgnoreCase("Propia"))
+    	{
+    		return 'P';
+    	}
 
+    	return 'N';
+    }
 
 	public static  List<PacienteStatus> generateStatusList(List<Paciente> pctes)
 	{
@@ -273,12 +378,191 @@ public class ControladorPaciente {
 		this.cedulaSelected = cedulaSelected;
 	}
 
-	public String getCedulass() {
-		return cedulass;
+
+
+	public List<Estado> getListaestado() {
+		return listaestado;
 	}
 
-	public void setCedulass(String cedulass) {
-		this.cedulass = cedulass;
+	public void setListaestado(List<Estado> listaestado) {
+		this.listaestado = listaestado;
+	}
+
+	public Estado getEstadoSelected() {
+		return estadoSelected;
+	}
+
+	public void setEstadoSelected(Estado estadoSelected) {
+		this.estadoSelected = estadoSelected;
+	}
+	public Ciudad getCiudadSelected() {
+		return ciudadSelected;
+	}
+
+
+	public void setCiudadSelected(Ciudad ciudadSelected) {
+		this.ciudadSelected = ciudadSelected;
+	}
+
+	public String getDireccionSelected() {
+		return direccionSelected;
+	}
+
+	public void setDireccionSelected(String direccionSelected) {
+		this.direccionSelected = direccionSelected;
+	}
+
+	public String getCorreoSelected() {
+		return correoSelected;
+	}
+
+	public void setCorreoSelected(String correoSelected) {
+		this.correoSelected = correoSelected;
+	}
+
+	public String getEdocivilSelected() {
+		return edocivilSelected;
+	}
+
+	public void setEdocivilSelected(String edocivilSelected) {
+		this.edocivilSelected = edocivilSelected;
+	}
+
+	public String getCedulaconyugueSelected() {
+		return cedulaconyugueSelected;
+	}
+
+	public void setCedulaconyugueSelected(String cedulaconyugueSelected) {
+		this.cedulaconyugueSelected = cedulaconyugueSelected;
+	}
+
+	public String getNombreconyugueSelected() {
+		return nombreconyugueSelected;
+	}
+
+	public void setNombreconyugueSelected(String nombreconyugueSelected) {
+		this.nombreconyugueSelected = nombreconyugueSelected;
+	}
+
+	public String getApellidoconyugueSelected() {
+		return apellidoconyugueSelected;
+	}
+
+	public void setApellidoconyugueSelected(String apellidoconyugueSelected) {
+		this.apellidoconyugueSelected = apellidoconyugueSelected;
+	}
+
+	public Date getFechanacimientoconyigueSelected() {
+		return fechanacimientoconyigueSelected;
+	}
+
+	public void setFechanacimientoconyigueSelected(
+			Date fechanacimientoconyigueSelected) {
+		this.fechanacimientoconyigueSelected = fechanacimientoconyigueSelected;
+	}
+
+	public String getProfesionconyugueSelected() {
+		return profesionconyugueSelected;
+	}
+
+	public void setProfesionconyugueSelected(String profesionconyugueSelected) {
+		this.profesionconyugueSelected = profesionconyugueSelected;
+	}
+
+	public String getViviendaSelected() {
+		return viviendaSelected;
+	}
+
+	public void setViviendaSelected(String viviendaSelected) {
+		this.viviendaSelected = viviendaSelected;
+	}
+
+	public String getCondicionviviendaSelected() {
+		return condicionviviendaSelected;
+	}
+
+	public void setCondicionviviendaSelected(String condicionviviendaSelected) {
+		this.condicionviviendaSelected = condicionviviendaSelected;
+	}
+
+	public String getNrohabitantesSelected() {
+		return nrohabitantesSelected;
+	}
+
+	public void setNrohabitantesSelected(String nrohabitantesSelected) {
+		this.nrohabitantesSelected = nrohabitantesSelected;
+	}
+
+	public String getPrecioalquilerSelected() {
+		return precioalquilerSelected;
+	}
+
+	public void setPrecioalquilerSelected(String precioalquilerSelected) {
+		this.precioalquilerSelected = precioalquilerSelected;
+	}
+
+	public String getLugartrabajoSelected() {
+		return lugartrabajoSelected;
+	}
+
+	public void setLugartrabajoSelected(String lugartrabajoSelected) {
+		this.lugartrabajoSelected = lugartrabajoSelected;
+	}
+
+	public String getDirecciontrabajoSelected() {
+		return direcciontrabajoSelected;
+	}
+
+	public void setDirecciontrabajoSelected(String direcciontrabajoSelected) {
+		this.direcciontrabajoSelected = direcciontrabajoSelected;
+	}
+
+	public String getTlftrabajoSelected() {
+		return tlftrabajoSelected;
+	}
+
+	public void setTlftrabajoSelected(String tlftrabajoSelected) {
+		this.tlftrabajoSelected = tlftrabajoSelected;
+	}
+
+	public String getIngfamiliaresSelected() {
+		return ingfamiliaresSelected;
+	}
+
+	public void setIngfamiliaresSelected(String ingfamiliaresSelected) {
+		this.ingfamiliaresSelected = ingfamiliaresSelected;
+	}
+
+	public String getEgrfamiliaresSelected() {
+		return egrfamiliaresSelected;
+	}
+
+	public void setEgrfamiliaresSelected(String egrfamiliaresSelected) {
+		this.egrfamiliaresSelected = egrfamiliaresSelected;
+	}
+
+	public Window getVentanaregistronuevopaciente() {
+		return ventanaregistronuevopaciente;
+	}
+
+	public void setVentanaregistronuevopaciente(Window ventanaregistronuevopaciente) {
+		this.ventanaregistronuevopaciente = ventanaregistronuevopaciente;
+	}
+
+	public List<PacienteStatus> getPacientestatues() {
+		return pacientestatues;
+	}
+
+	public void setPacientestatues(List<PacienteStatus> pacientestatues) {
+		this.pacientestatues = pacientestatues;
+	}
+
+	public List<String> getListaedocivil() {
+		return listaedocivil;
+	}
+
+	public void setListaedocivil(List<String> listaedocivil) {
+		this.listaedocivil = listaedocivil;
 	}
 
 
