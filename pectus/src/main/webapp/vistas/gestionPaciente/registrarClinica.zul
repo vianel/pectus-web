@@ -1,7 +1,7 @@
 <zk xmlns:n="native">
 <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-	
+	<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >NUEVO</button>
 	<hlayout spacing="0" height="400px">
 	
 	 <listbox vflex="true" hflex="1"
@@ -12,13 +12,13 @@
           <listhead>
               <listheader label="Paciente" width="80px" align="center" />
               <listheader label="Diagnostico" align="center" />
-              <listheader label="Motivo" width="80px" align="center" />
+              <listheader label="Observacion" width="80px" align="center" />
           </listhead>
           <template name="model" var="ayuda">
               <listitem>
-                  <listcell label="@load(ayuda.paciente.nombre)" />
+                  <listcell label="@load(ayuda.paciente.apellido)" />
                   <listcell label="@load(ayuda.diagnostico.nombre)" />
-                  <listcell label="@load(ayuda.motivo)" />
+                  <listcell label="@load(ayuda.diagnostico.observacion)" />
               </listitem>
           </template>
       </listbox>
@@ -30,7 +30,7 @@
                     <hlayout>
                         <label value="@load(vm.selected.fechaSolicitud)" />
                     </hlayout>
-                    <label value="@load(vm.selected.aprobacion)" />
+<!--                     <label value="@load(vm.selected.aprobacion)" /> -->
                 </vlayout>
                 <div>
                     MOTIVO
@@ -45,12 +45,12 @@
             <auxheader colspan="5">Edit Data</auxheader>
         </auxhead>
         <columns>
-            <column label="Aprobacion" align="center" />
+<!--             <column label="Aprobacion" align="center" /> -->
             <column label="Motivo" align="center" />
         </columns>
         <rows>
             <row>
-                <intbox value="@bind(vm.selected.aprobacion)" width="95px" />
+<!--                 <intbox value="@bind(vm.selected.aprobacion)" width="95px" /> -->
                 <label value="@load(vm.selected.motivo)" />
             </row>
         </rows>

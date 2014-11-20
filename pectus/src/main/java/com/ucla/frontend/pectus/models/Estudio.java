@@ -8,21 +8,19 @@ public class Estudio {
 	private Integer id;
 	private String nombre;
 	private String descripcion;
-	private List<EstudioClinica> listaEstudioClinica;
-	private boolean estatus;
+//	private List<EstudioClinica> listaEstudioClinica;
+//	private boolean estatus;
 	
 	public Estudio(){
 		
 	}
 
-	public Estudio(Integer id, String nombre, String descripcion,
-			List<EstudioClinica> listaEstudioClinica, boolean estatus) {
+	public Estudio(Integer id, String nombre, String descripcion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.listaEstudioClinica = listaEstudioClinica;
-		this.estatus = estatus;
+
 	}
 
 	public Integer getId() {
@@ -49,24 +47,7 @@ public class Estudio {
 		this.descripcion = descripcion;
 	}
 
-	public List<EstudioClinica> getListaEstudioClinica() {
-		if(listaEstudioClinica == null){
-			listaEstudioClinica = new ArrayList<EstudioClinica>();
-		}
-		return listaEstudioClinica;
-	}
 
-	public void setListaEstudioClinica(List<EstudioClinica> listaEstudioClinica) {
-		this.listaEstudioClinica = listaEstudioClinica;
-	}
-
-	public boolean isEstatus() {
-		return estatus;
-	}
-
-	public void setEstatus(boolean estatus) {
-		this.estatus = estatus;
-	}
 	
 	
 

@@ -55,17 +55,17 @@ public class PacienteData {
 */
 	}
 	
-	
-	static{
-		clinicas.add(new Clinica(1, "Policlina", "2011ac2", "Centro", "0251", null, true));
-		clinicas.add(new Clinica(2, "Canaval", "asdasdasd223", "Cabudare", "0252", null, true));
-		clinicas.add(new Clinica(3, "Mamas", "F.asdasd", "Av. Vargas", "0251", null, true));
-	}
-	
-	static{
-		estudios.add(new Estudio(1, "Resonancion magnetica de mamas", "Para ayudar a identificar mejor la tumoraci�n mamaria o evaluar un cambio anormal en una mamograf�a.", null, true));
-		estudios.add(new Estudio(2, "Ecograf�a de las mamas", "para mostrar si la tumoraci�n es s�lida o est� llena de l�quido.Biopsia de mama: usando m�todos como biopsia aspirativa, guiada por ecograf�a, estereot�ctica o abierta." , null, true));
-	}
+//	
+//	static{
+//		clinicas.add(new Clinica(1, "Policlina", "2011ac2", "Centro", "0251", null, true));
+//		clinicas.add(new Clinica(2, "Canaval", "asdasdasd223", "Cabudare", "0252", null, true));
+//		clinicas.add(new Clinica(3, "Mamas", "F.asdasd", "Av. Vargas", "0251", null, true));
+//	}
+//	
+//	static{
+//		estudios.add(new Estudio(1, "Resonancion magnetica de mamas", "Para ayudar a identificar mejor la tumoraci�n mamaria o evaluar un cambio anormal en una mamograf�a.", null, true));
+//		estudios.add(new Estudio(2, "Ecograf�a de las mamas", "para mostrar si la tumoraci�n es s�lida o est� llena de l�quido.Biopsia de mama: usando m�todos como biopsia aspirativa, guiada por ecograf�a, estereot�ctica o abierta." , null, true));
+//	}
 	
 	
 	static{

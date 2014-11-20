@@ -8,42 +8,20 @@ public class Ayuda {
 	private Paciente paciente;
 	private Diagnostico diagnostico;
 	private String motivo;
-	private Date fechaAprobacion;
+//	private Date fechaAprobacion;
 	private Date fechaSolicitud;
-	private Double aprobacion;
-	private List<EstudioSolicitud> listaEstudiosSolictud;
+//	private Double aprobacion;
+//	private List<EstudioSolicitud> listaEstudiosSolictud;
 	
 	
 	public Ayuda(Paciente paciente, Diagnostico diagnostico, String motivo,
-			Date fechaAprobacion, Date fechaSolicitud, Double aprobacion,
-			List<EstudioSolicitud> listaEstudiosSolictud) {
+				Date fechaSolicitud) {
 		super();
 		this.paciente = paciente;
 		this.diagnostico = diagnostico;
 		this.motivo = motivo;
-		this.fechaAprobacion = fechaAprobacion;
 		this.fechaSolicitud = fechaSolicitud;
-		this.aprobacion = aprobacion;
-		this.listaEstudiosSolictud = listaEstudiosSolictud;
-	}
 
-
-
-
-
-
-	public List<EstudioSolicitud> getListaEstudiosSolictud() {
-		return listaEstudiosSolictud;
-	}
-
-
-
-
-
-
-	public void setListaEstudiosSolictud(
-			List<EstudioSolicitud> listaEstudiosSolictud) {
-		this.listaEstudiosSolictud = listaEstudiosSolictud;
 	}
 
 
@@ -53,21 +31,6 @@ public class Ayuda {
 
 	public Ayuda(){
 		
-	}
-
-	
-
-
-
-
-	public Double getAprobacion() {
-		return aprobacion;
-	}
-
-
-
-	public void setAprobacion(Double aprobacion) {
-		this.aprobacion = aprobacion;
 	}
 
 
@@ -94,14 +57,6 @@ public class Ayuda {
 
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
-	}
-
-	public Date getFechaAprobacion() {
-		return fechaAprobacion;
-	}
-
-	public void setFechaAprobacion(Date fechaAprobacion) {
-		this.fechaAprobacion = fechaAprobacion;
 	}
 
 	public Date getFechaSolicitud() {

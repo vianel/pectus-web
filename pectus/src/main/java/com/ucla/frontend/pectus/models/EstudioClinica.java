@@ -1,6 +1,6 @@
 package com.ucla.frontend.pectus.models;
 
-import java.util.List;
+
 
 public class EstudioClinica {
 	
@@ -8,8 +8,8 @@ public class EstudioClinica {
 	private Clinica clinica;
 	private Estudio estudio;
 	private Double monto;
-	private boolean estatus;
-	private List<EstudioSolicitud> listaEstudiosSolicitud;
+//	private boolean estatus;
+//	private List<EstudioSolicitud> listaEstudiosSolicitud;
 	
 	public EstudioClinica(){
 		
@@ -20,36 +20,13 @@ public class EstudioClinica {
 	
 
 	public EstudioClinica(Integer id, Clinica clinica, Estudio estudio,
-			Double monto, boolean estatus,
-			List<EstudioSolicitud> listaEstudiosSolicitud) {
+			Double monto) {
 		super();
 		this.id = id;
 		this.clinica = clinica;
 		this.estudio = estudio;
 		this.monto = monto;
-		this.estatus = estatus;
-		this.listaEstudiosSolicitud = listaEstudiosSolicitud;
 	}
-
-
-
-
-
-	public List<EstudioSolicitud> getListaEstudiosSolicitud() {
-		return listaEstudiosSolicitud;
-	}
-
-
-
-
-
-	public void setListaEstudiosSolicitud(
-			List<EstudioSolicitud> listaEstudiosSolicitud) {
-		this.listaEstudiosSolicitud = listaEstudiosSolicitud;
-	}
-
-
-
 
 
 	public Integer getId() {
@@ -84,14 +61,6 @@ public class EstudioClinica {
 		this.monto = monto;
 	}
 
-	public boolean isEstatus() {
-		return estatus;
-	}
-
-	public void setEstatus(boolean estatus) {
-		this.estatus = estatus;
-	}
-	
 	
 
 }

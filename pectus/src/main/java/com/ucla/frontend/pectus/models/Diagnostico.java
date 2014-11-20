@@ -8,8 +8,7 @@ public class Diagnostico {
 	private Integer id;
 	private String nombre;
 	private String observacion;
-	private List<Ayuda> listaAyudas;
-	private boolean estatus;
+//	private List<Ayuda> listaAyudas;
 	
 	public Diagnostico(){
 		
@@ -17,31 +16,12 @@ public class Diagnostico {
 
 	
 
-	public Diagnostico(Integer id, String nombre, String observacion,
-			List<Ayuda> listaAyudas, boolean estatus) {
+	public Diagnostico(Integer id, String nombre, String observacion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.observacion = observacion;
-		this.listaAyudas = listaAyudas;
-		this.estatus = estatus;
 	}
-
-
-
-	public List<Ayuda> getListaAyudas() {
-		if(listaAyudas == null){
-			listaAyudas = new ArrayList<Ayuda>();
-		}
-		return listaAyudas;
-	}
-
-
-
-	public void setListaAyudas(List<Ayuda> listaAyudas) {
-		this.listaAyudas = listaAyudas;
-	}
-
 
 
 	public Integer getId() {
@@ -68,13 +48,6 @@ public class Diagnostico {
 		this.observacion = observacion;
 	}
 
-	public boolean isEstatus() {
-		return estatus;
-	}
-
-	public void setEstatus(boolean estatus) {
-		this.estatus = estatus;
-	}
 	
 	
 	
