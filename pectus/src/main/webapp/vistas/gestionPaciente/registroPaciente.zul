@@ -16,7 +16,8 @@
 		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')" >NUEVO</button>
 <!-- 	</div> -->
 	
-	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente)" >
+	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
+	@template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')" >
 		<auxhead>
             <auxheader label="LISTA DE PACIENTES" colspan="6" />
         </auxhead>
@@ -48,7 +49,7 @@
             <column hflex="1">Celular</column>
             <column hflex="1">Fijo</column>
             <column hflex="1">Nacimiento</column>
-           <column hflex="1">Estado</column>
+            <column hflex="1">Estado</column>
             <column hflex="1">Ciudad</column>
             <column hflex="1">Seguro</column>  
             <column hflex="1">Hijos</column>
@@ -58,24 +59,51 @@
 			<column hflex="1">Editar</column>
             
         </columns>
-        <template name="model">
+        <template name="noneditable">
             <row>
-                <label value="@load(each.cedula)" />
-                <label value="@load(each.nombre)" />
-                <label value="@load(each.apellido)" />
-                <label value="@load(each.celular)"/>
-                <label value="@load(each.fijo)"/>
-                <label value="@load(each.fechaNacimiento)"/>
-                <label value="@load(each.estado.nombre)" />
-                <label value="@load(each.ciudad.nombre)" />
-                <label value="@load(each.seguro.nombre)" /> 
-                <label value="@load(each.nroHijos)" />
-                <label value="@load(each.profesion)" />
-                <label value="@load(each.egresos)" />
-                <label value="@load(each.ingresos)" />
-               	<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente', paciente=each)">Editar</button>
+                <label value="@load(each.paciente.cedula)"/>
+                <label value="@load(each.paciente.nombre) " />
+                <label value="@load(each.paciente.apellido)" />
+                <label value="@load(each.paciente.celular)"/>
+                <label value="@load(each.paciente.fijo)"/>
+                <label value="@load(each.paciente.fechaNacimiento) @converter('formatedDate',format='dd/MM/yy')"/>
+                <label value="@load(each.paciente.estado.nombre)" />
+                <label value="@load(each.paciente.ciudad.nombre)" />
+                <label value="@load(each.paciente.seguro.nombre)" /> 
+                <label value="@load(each.paciente.nroHijos)" />
+                <label value="@load(each.paciente.profesion)" />
+                <label value="@load(each.paciente.egresos)" />
+                <label value="@load(each.paciente.ingresos)" />
+             
+               	<button id="" sclass="btn-success" onClick="@command('cambiarestatusedicion', pacienteStatus=each)">Editar</button>
+        
             </row>
         </template>
+        
+               <template name="editable">
+                <row>
+                  <label value="@load(each.paciente.cedula)"/>
+                  <textbox value="@load(each.paciente.nombre) @save(each.paciente.nombre, before='modificarPaciente')" />
+	              <textbox value="@load(each.paciente.apellido)" />
+	              <textbox value="@load(each.paciente.celular)"/>
+	              <textbox value="@load(each.paciente.fijo)"/>
+	              <textbox value="@load(each.paciente.fechaNacimiento) @converter('formatedDate',format='dd/MM/yyyy')"/>
+	              <textbox value="@load(each.paciente.estado.nombre)" />
+	              <textbox value="@load(each.paciente.ciudad.nombre)" />
+	              <textbox value="@load(each.paciente.seguro.nombre)" /> 
+	              <textbox value="@load(each.paciente.nroHijos)" />
+	              <textbox value="@load(each.paciente.profesion)" />
+	              <textbox value="@load(each.paciente.egresos)" />
+	              <textbox value="@load(each.paciente.ingresos)" />
+                  <!--   <textbox
+                        value="@load(each.languageContribution.name) @save(each.languageContribution.name, before='confirm')" />  -->
+         
+                    <div>
+                        <button sclass="btn-success" onClick="@command('modificarPaciente', pacienteStatus=each)">SI</button>
+                        <button sclass="btn-danger" onClick="@command('cambiarestatusedicion', pacienteStatus=each)" >NO</button>
+                    </div>
+                </row>
+            </template>
         <foot>
             <footer span="6"  label="@load(vm.footer)" />
         </foot>

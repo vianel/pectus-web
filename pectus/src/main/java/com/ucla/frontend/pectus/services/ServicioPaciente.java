@@ -55,7 +55,7 @@ public class ServicioPaciente {
 		String ok = null;
 		
 		try {
-			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula());
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nombre=" + paciente.getNombre());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

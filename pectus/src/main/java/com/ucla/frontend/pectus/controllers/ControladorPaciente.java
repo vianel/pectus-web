@@ -1,20 +1,24 @@
 package com.ucla.frontend.pectus.controllers;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.ForwardEvent;
+import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.impl.Attribute;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Row;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ciudad;
@@ -34,11 +38,23 @@ public class ControladorPaciente {
 	private Date fechanacimientoSelected;
 	private String nrohijosSelected;
 	private String profesionSelected;
+	private String cedulass;
+
+	private Window ventanaregistronuevopaciente;
 	
 	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PacienteFilter pacienteFilter = new PacienteFilter();
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
+	private List<PacienteStatus> pacientestatues = generateStatusList(currentPaciente);
+	private boolean displayEdit = true;
+	     
+	    public boolean isDisplayEdit() {
+	        return displayEdit;
+	    }
 	
+	    
+
+
 	public PacienteFilter getPacienteFilter() {
 		return pacienteFilter;
 	}
@@ -48,47 +64,63 @@ public class ControladorPaciente {
 	}
 
 	@Command
-	public void abrirDialogoRegistrarPaciente(@BindingParam("paciente") Paciente paciente){
+	public void abrirDialogoRegistrarPaciente(){
 
+	   
+		ventanaregistronuevopaciente = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
 		
-		
-	    modificarPaciente(paciente);
-		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
-		
-		window.doModal();
+		ventanaregistronuevopaciente.doModal();
 	}
-	
-	public void modificarPaciente(Paciente paciente)
+	@Command
+	public void modificarPaciente(@BindingParam("pacienteStatus") PacienteStatus pctes)
 	{
+		
+
 		String response = null;
-		response = ServicioPaciente.modificarPaciente(paciente);
+		response = ServicioPaciente.modificarPaciente(pctes.getPaciente());
 		if (response.equalsIgnoreCase("true"))
 		{
-	
-			Clients.showNotification("Paciente con cedula " + paciente.getCedula() + " Modificado Exitosamente", null, true);
+			cambiarestatusedicion(pctes);
+			Clients.showNotification("Paciente con cedula " + pctes.getPaciente().getCedula() + " Modificado Exitosamente", null, true);
 
 		}else
 		{
 			Clients.showNotification("Error al modificar", true);
-		}
+		} 
 	}
 	
-    public ListModel<Paciente> getmodelpaciente() {
-        return new ListModelList<Paciente>(currentPaciente);
+	 @Command
+	 public void cambiarestatusedicion(@BindingParam("pacienteStatus") PacienteStatus pctes) {
+	        pctes.setEditingStatus(!pctes.getEditingStatus());
+	        refreshRowTemplate(pctes);
+	    }
+	public void refreshRowTemplate(PacienteStatus lcs) {
+	        /*
+	         * This code is special and notifies ZK that the bean's value
+	         * has changed as it is used in the template mechanism.
+	         * This stops the entire Grid's data from being refreshed
+	         */
+	        BindUtils.postNotifyChange(null, null, lcs, "editingStatus");
+	      
+	    }
+    public List<PacienteStatus> getmodelpaciente() {
+       // return new ListModelList<Paciente>(currentPaciente);
+    	return pacientestatues;
     }
     
     public String getFooter() {
-        return String.format(footerMensaje, currentPaciente.size());
+        return String.format(footerMensaje, pacientestatues.size());
     }
     
     @Command
     @NotifyChange({"modelpaciente", "footer"})
     public void changeFilter() {
         currentPaciente = PacienteFilter.getFilterPacientes(pacienteFilter);
+        pacientestatues = generateStatusList(currentPaciente);
     }
-	
+
 	@Command
-	public void guardarPaciente() throws Exception{
+	public void guardarPaciente(@BindingParam("cmp") Window x) throws Exception{
 		String response = null;
 		if (cedulaSelected!= null) {
 			pacienteselected = new Paciente();
@@ -106,6 +138,7 @@ public class ControladorPaciente {
 			{
 		
 				Clients.showNotification("Paciente Guardado", null, true);
+				x.detach();
 
 			}else
 			{
@@ -117,6 +150,22 @@ public class ControladorPaciente {
 
 
 
+	}
+	private void ControladorPaciente() {
+		// TODO Auto-generated method stub
+		this.currentPaciente = ServicioPaciente.buscarPacientes();
+		this.pacientestatues = pacientestatues;
+	}
+
+
+
+	public static  List<PacienteStatus> generateStatusList(List<Paciente> pctes)
+	{
+        List<PacienteStatus> pacientes = new ArrayList<PacienteStatus>();
+        for(Paciente pc : pctes) {
+            pacientes.add(new PacienteStatus(pc, false));
+        }
+		return pacientes;
 	}
 	public Paciente getPacienteselected() {
 		return pacienteselected;
@@ -223,6 +272,16 @@ public class ControladorPaciente {
 	public void setCedulaSelected(String cedulaSelected) {
 		this.cedulaSelected = cedulaSelected;
 	}
+
+	public String getCedulass() {
+		return cedulass;
+	}
+
+	public void setCedulass(String cedulass) {
+		this.cedulass = cedulass;
+	}
+
+
 
 
 

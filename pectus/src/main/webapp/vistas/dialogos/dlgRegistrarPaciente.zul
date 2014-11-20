@@ -2,8 +2,8 @@
 <zk>
 <window apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')"
-			 id="modalDialog" title="PACIENTE" border="normal" width="660px" height="29em"
-    
+			 id="modalDialogpaciente" title="PACIENTE" border="normal" width="660px" height="29em"
+  
     position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
     <vlayout>
@@ -17,7 +17,7 @@
     <tabpanels>
         <tabpanel >
 		
-				<label style="display:block" value="Cedula" /><textbox value="@load(vm.cedulaSelected) @bind(vm.cedulaSelected)"  maxlength="8"/>
+				<label style="display:block" value="Cedula" /><textbox id="txtcedulapaciente" value="@load(vm.cedulass) @bind(vm.cedulaSelected)"  maxlength="8"/>
 				<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
 				<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>
 				<label style="display:block" value="Celular" /><textbox value="@bind(vm.celularSelected)" />
@@ -32,7 +32,8 @@
 				<label style="display:block;margin-left: 28em;" value="Estado Civil"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="Soltera"/><comboitem label="Casada"/><comboitem label="Divorsiada"/><comboitem label="Viuda"/></combobox>
 				<label style="display:block;margin-left: 28em;" value="Estado"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="Trujillo"/><comboitem label="Lara"/><comboitem label="Miranda"/><comboitem label="Carabobo"/></combobox>
 				<label style="display:block;margin-left: 28em;" value="Ciudad"/> <combobox  style="display:block;margin-left: 28em;"><comboitem label="x"/><comboitem label="y"/><comboitem label="z"/><comboitem label="c"/></combobox>
-				<button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarPaciente')" >Guardar</button>
+			    <button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarPaciente', cmp=modalDialogpaciente)" >Guardar</button>
+			
 				
 		</tabpanel>
         <tabpanel>
