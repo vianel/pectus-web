@@ -16,7 +16,7 @@
 		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarPaciente')" >NUEVO</button>
 <!-- 	</div> -->
 	
-	<grid height="400px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
+	<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
 	@template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')" >
 		<auxhead>
             <auxheader label="LISTA DE PACIENTES" colspan="6" />
@@ -98,6 +98,7 @@
 	              <textbox value="@load(each.paciente.fechaNacimiento) @save(each.paciente.fechaNacimiento, before='modificarPaciente') @converter('formatedDate',format='dd/MM/yyyy')"/>
 	              <textbox value="@load(each.paciente.estado.nombre)" />
 	              <textbox value="@load(each.paciente.ciudad.nombre)" />
+	              
 	              <textbox value="@load(each.paciente.seguro.nombre)" /> 
 	              <textbox value="@load(each.paciente.nroHijos)" />
 	              <textbox value="@load(each.paciente.profesion)" />

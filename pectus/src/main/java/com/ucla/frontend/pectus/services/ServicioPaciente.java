@@ -92,7 +92,8 @@ public class ServicioPaciente {
 					"&tlfijo=" + paciente.getFijo() +
 					"&profesion=" + paciente.getProfesion() +
 					"&nrohijos=" + paciente.getNroHijos() + 
-					"&fecnacimiento=" + fecha
+					"&fecnacimiento=" + fecha +
+					"&idciudad=" + paciente.getCiudad().getId()
 					);
 	    
 		} catch (IOException e) {

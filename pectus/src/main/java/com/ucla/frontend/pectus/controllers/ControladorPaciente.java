@@ -28,7 +28,7 @@ public class ControladorPaciente {
 	private String nombreSelected;
 	private String apellidoSelected;
 	private String celularSelected;
-	private String phoneSelected;
+	private String fijoSelected;
 	private Date fechanacimientoSelected;
 	private String nrohijosSelected;
 	private String profesionSelected;
@@ -189,14 +189,15 @@ public class ControladorPaciente {
 			pacienteselected.setNombre(nombreSelected);
 			pacienteselected.setApellido(apellidoSelected);
 			pacienteselected.setCelular(celularSelected);
-			pacienteselected.setFijo(phoneSelected);
+			pacienteselected.setFijo(fijoSelected);
 			pacienteselected.setFechaNacimiento(fechanacimientoSelected);
 			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
 			pacienteselected.setProfesion(profesionSelected);
 			
 			
 			pacienteselected.setCedula(cedulaSelected);
-			pacienteselected.setCiudad(new Ciudad(1,"Barquisimeto",new Estado(1,"Lara",true),true)); //chequear
+			pacienteselected.setCiudad(ciudadSelected);
+			
 
 		/*	
 			pacienteselected.setNombre(nombreSelected);
@@ -359,14 +360,14 @@ public class ControladorPaciente {
 
 
 
-	public String getPhoneSelected() {
-		return phoneSelected;
+	public String getFijoSelected() {
+		return fijoSelected;
 	}
 
 
 
-	public void setPhoneSelected(String phoneSelected) {
-		this.phoneSelected = phoneSelected;
+	public void setFijoSelected(String fijoSelected) {
+		this.fijoSelected = fijoSelected;
 	}
 
 
