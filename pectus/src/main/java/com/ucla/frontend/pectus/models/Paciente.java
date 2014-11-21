@@ -26,14 +26,9 @@ public class Paciente extends Persona{
 	private float ingresos;
 	private float egresos;
 	private boolean estatus;
-	
-	
-
-	
-	
-	
-
-	
+	// agregados
+	private Date fechaNacConyugue;
+	private String login;
 	
 	
 	public Paciente() {
@@ -182,7 +177,22 @@ public class Paciente extends Persona{
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
+	
+	// agregados
+	public Date getFechaNacConyugue() {
+		return fechaNacConyugue;
+	}
+	public void setFechaNacConyugue(Date fechaNacConyugue) {
+		this.fechaNacConyugue = fechaNacConyugue;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
+	
 	
 	
 

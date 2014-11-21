@@ -11,6 +11,7 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ciudad;
@@ -88,7 +89,7 @@ public class ControladorPaciente {
 		@Command
 		@NotifyChange({"listaciudad"})
 		public void cambioEstado() throws Exception{
-			listaciudad = ServicioCiudad.buscarCiudades();
+			listaciudad = ServicioCiudad.buscarCiudades(estadoSelected);
 	
 
 		}
@@ -116,6 +117,7 @@ public class ControladorPaciente {
 	}
 
 	@Command
+	@NotifyChange({"modelpaciente", "footer"})
 	public void abrirDialogoRegistrarPaciente(){
 
 	   
@@ -124,6 +126,7 @@ public class ControladorPaciente {
 		ventanaregistronuevopaciente.doModal();
 	}
 	@Command
+	@NotifyChange({"modelpaciente", "footer"})
 	public void modificarPaciente(@BindingParam("pacienteStatus") PacienteStatus pctes)
 	{
 	
@@ -142,6 +145,7 @@ public class ControladorPaciente {
 	}
 	
 	 @Command
+	 
 	 public void cambiarestatusedicion(@BindingParam("pacienteStatus") PacienteStatus pctes) {
 	        pctes.setEditingStatus(!pctes.getEditingStatus());
 	        refreshRowTemplate(pctes);
@@ -173,18 +177,14 @@ public class ControladorPaciente {
 
 
 	@Command
+	@NotifyChange({ "modelpaciente", "footer" })
 	public void guardarPaciente(@BindingParam("cmp") Window x) throws Exception{
 		String response = null;
 		if (cedulaSelected!= null) {
-		/*	pacienteselected = new Paciente(estadoSelected, ciudadSelected, null, cedulaSelected, 
-					nombreSelected, apellidoSelected, celularSelected, phoneSelected, direccionSelected, correoSelected, fechanacimientoSelected,
-					profesionSelected, conversorestadocivil(edocivilSelected), Integer.parseInt(nrohijosSelected), cedulaconyugueSelected, nombreconyugueSelected, apellidoconyugueSelected, profesionconyugueSelected, 
-					conversortipovivienda(viviendaSelected), Integer.parseInt(nrohabitantesSelected), conversortendenciavivienda(condicionviviendaSelected), 
-					Double.parseDouble(precioalquilerSelected), lugartrabajoSelected, direcciontrabajoSelected, 
-					tlftrabajoSelected, Float.parseFloat(ingfamiliaresSelected), Float.parseFloat(egrfamiliaresSelected), true);
-
-			*/
+	
 			pacienteselected = new Paciente();
+			
+			
 			pacienteselected.setCedula(cedulaSelected);
 			pacienteselected.setNombre(nombreSelected);
 			pacienteselected.setApellido(apellidoSelected);
@@ -194,10 +194,49 @@ public class ControladorPaciente {
 			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
 			pacienteselected.setProfesion(profesionSelected);
 			
+			
+			pacienteselected.setCedula(cedulaSelected);
+			pacienteselected.setCiudad(new Ciudad(1,"Barquisimeto",new Estado(1,"Lara",true),true)); //chequear
+
+		/*	
+			pacienteselected.setNombre(nombreSelected);
+			pacienteselected.setApellido(apellidoSelected);
+			pacienteselected.setCelular(celularSelected);
+			pacienteselected.setFijo(phoneSelected);
+			pacienteselected.setDireccion(direccionSelected);
+			pacienteselected.setCorreo(correoSelected);
+			pacienteselected.setFechaNacimiento(fechanacimientoSelected);
+			pacienteselected.setProfesion(profesionSelected);
+			pacienteselected.setEstadoCivil(edocivilSelected.charAt(0));
+			//pacienteselected.setSeguro(seguro); chequear
+			pacienteselected.setLogin(cedulaSelected);
+			// pacienteselected.setSeguro(seguro); chequear
+			// seguro particular
+			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
+			pacienteselected.setCedulaConyugue(cedulaconyugueSelected);
+			pacienteselected.setNombreConyugue(nombreconyugueSelected);
+			pacienteselected.setApellidoConyugue(apellidoconyugueSelected);
+						
+			pacienteselected.setFechaNacConyugue(fechanacimientoconyigueSelected);
+			pacienteselected.setOcupacionConyugue(profesionconyugueSelected);
+			pacienteselected.setTipoVivienda(viviendaSelected.charAt(0));
+			pacienteselected.setNroHabitantes(Integer.parseInt(nrohabitantesSelected));
+			pacienteselected.setTendenciaVivienda(viviendaSelected.charAt(0));
+			pacienteselected.setAlquiler(Double.parseDouble(precioalquilerSelected));
+			pacienteselected.setLugarTrabajo(lugartrabajoSelected);
+			pacienteselected.setDireccionTrabajo(direcciontrabajoSelected);
+			pacienteselected.setTelefonoTrabajo(tlftrabajoSelected);
+			pacienteselected.setIngresos(Float.parseFloat(ingfamiliaresSelected));
+			pacienteselected.setEgresos(Float.parseFloat(egrfamiliaresSelected));
+			
+			*/
 			response = ServicioPaciente.agregarPaciente(pacienteselected);
 			if (response.equalsIgnoreCase("true"))
 			{
-		
+				//currentPaciente.add(pacienteselected);
+				currentPaciente = ServicioPaciente.buscarPacientes();
+				pacientestatues = generateStatusList(currentPaciente);
+				
 				Clients.showNotification("Paciente Guardado", null, true);
 				x.detach();
 

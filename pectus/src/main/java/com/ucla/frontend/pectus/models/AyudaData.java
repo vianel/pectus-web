@@ -70,7 +70,7 @@ public class AyudaData {
 	}
 	
 	static{
-		ayudas.add(new Ayuda(pacientes.get(0), diagnosticos.get(0), "NECESIDAD", new Date()));
+		//ayudas.add(new Ayuda(pacientes.get(0), diagnosticos.get(0), "NECESIDAD", new Date()));
 //		ayudas.add(new Ayuda(pacientes.get(1), diagnosticos.get(0), "Falta de plata", new Date(), estudiosSolicitud));
 	}
 	public static List<Ayuda> getAllAyudas(){

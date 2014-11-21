@@ -17,7 +17,7 @@ import com.ucla.frontend.pectus.models.Estado;
 
 public class ServicioCiudad {
 	
-    public static List<Ciudad> buscarCiudades()
+    public static List<Ciudad> buscarCiudades(Estado estado)
     {
 
 
@@ -29,7 +29,7 @@ public class ServicioCiudad {
         Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {
-			jsResource = resty.json("http://127.0.0.1:5000/ciudad/todos");
+			jsResource = resty.json("http://localhost:5000/ciudad/buscar?idestado=" + estado.getId());
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

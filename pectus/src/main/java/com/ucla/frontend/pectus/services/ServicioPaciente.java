@@ -110,12 +110,12 @@ public class ServicioPaciente {
 		
 	}
 
-    public static List<Paciente> buscarPacientes()
+    public static ListModelList<Paciente> buscarPacientes()
     {
 
 
     	
-        List<Paciente> listaPaciente = new ArrayList<Paciente>();
+    	ListModelList<Paciente> listaPaciente = new ListModelList<Paciente>();
      
         
 
