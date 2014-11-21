@@ -22,7 +22,7 @@
 					<bandbox id="bd" mold="rounded" autodrop="true">  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
-					                onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(vm.pacientes)">
+					               selectedItem="@bind(vm.pacienteSelected)" onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(vm.pacientes)">
 				                <listhead>
 				                    <listheader label="PACIENTES" />
 				                </listhead>
@@ -43,7 +43,7 @@
 					
 					<bandbox id="bd1" mold="rounded" autodrop="true">  
 				        <bandpopup >
-				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+				            <listbox selectedItem="@bind(vm.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
 					                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.diagnosticos)">
 				                <listhead>
 				                    <listheader label="PATOLOGIAS" />

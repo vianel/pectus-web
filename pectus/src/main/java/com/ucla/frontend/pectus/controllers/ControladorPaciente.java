@@ -51,6 +51,9 @@ public class ControladorPaciente {
 	private String tlftrabajoSelected;
 	private String ingfamiliaresSelected;
 	private String egrfamiliaresSelected;
+	private String phoneSelected;
+	
+	
 	
 	
 	private List<Ciudad> listaciudad;
@@ -603,6 +606,14 @@ public class ControladorPaciente {
 
 	public void setListaedocivil(List<String> listaedocivil) {
 		this.listaedocivil = listaedocivil;
+	}
+
+	public String getPhoneSelected() {
+		return phoneSelected;
+	}
+
+	public void setPhoneSelected(String phoneSelected) {
+		this.phoneSelected = phoneSelected;
 	}
 
 

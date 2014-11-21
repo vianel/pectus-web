@@ -1,32 +1,46 @@
 package com.ucla.frontend.pectus.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.zkoss.bind.annotation.DependsOn;
 
 public class Evento {
 
-	
+	private int id;
 	private String nombre;
 	private Date fecha;
 	private String descripcion;
-	private String lugar;
-	private String solicitudEvento;
-	
-	
-	
+	private Lugar lugar;
+	private List<Voluntario> voluntarios;
+	private List<Patrocinador> patrocinadores;
+
 	public Evento() {
 		super();
+		this.voluntarios = new ArrayList<Voluntario>();
+		this.patrocinadores = new ArrayList<Patrocinador>();
 	}
 
-	public Evento(String nombre, Date fecha, String descripcion, String lugar,
-			String solicitudEvento) {
+	public Evento(int id,String nombre, Date fecha, String descripcion, Lugar lugar,
+			List<Voluntario> voluntarios, List<Patrocinador> patrocinadores) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
-		this.solicitudEvento = solicitudEvento;
+		this.voluntarios = voluntarios;
+		this.patrocinadores = patrocinadores;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -53,23 +67,28 @@ public class Evento {
 		this.descripcion = descripcion;
 	}
 
-	public String getLugar() {
+	public Lugar getLugar() {
 		return lugar;
 	}
 
-	public void setLugar(String lugar) {
+	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
 
-	public String getSolicitudEvento() {
-		return solicitudEvento;
+	public List<Voluntario> getVoluntarios() {
+		return voluntarios;
 	}
 
-	public void setSolicitudEvento(String solicitudEvento) {
-		this.solicitudEvento = solicitudEvento;
+	public void setVoluntarios(List<Voluntario> voluntarios) {
+		this.voluntarios = voluntarios;
 	}
-	
 
-	
-	
+	public List<Patrocinador> getPatrocinadores() {
+		return patrocinadores;
+	}
+
+	public void setPatrocinadores(List<Patrocinador> patrocinadores) {
+		this.patrocinadores = patrocinadores;
+	}
+
 }

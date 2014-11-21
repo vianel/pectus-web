@@ -13,10 +13,10 @@ public class EventoData {
 	private static List<Evento> eventos = new ArrayList<Evento>();
 	
 	static{
-		eventos.add(new Evento("Barquisimeto ejercita",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
-		eventos.add(new Evento("Pro-Fondos lara",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
-		eventos.add(new Evento("Cantamos todos",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
-		eventos.add(new Evento("Orientando hogares",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
+		//eventos.add(new Evento("Barquisimeto ejercita",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
+		//eventos.add(new Evento("Pro-Fondos lara",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
+		//eventos.add(new Evento("Cantamos todos",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
+		//eventos.add(new Evento("Orientando hogares",new Date("2014/01/01"),"Caminata, festival, musical","Barquisimeto","Barquisimeto"));
 		
 	}
 	

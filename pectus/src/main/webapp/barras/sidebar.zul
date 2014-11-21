@@ -43,10 +43,8 @@
 		</nav>
 		<nav id="calitem" label="Eventos" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
 				<navitem label="Registrar Evento" iconSclass="z-icon-edit" href="../gestioneventos/index_gestioneventos.zul"/>
-				<navitem label="Ver Eventos" iconSclass="z-icon-edit"/>
-				<navitem label="Historial Eventos" iconSclass="z-icon-edit"/>
-				<navitem label="Asignar Voluntarios" iconSclass="z-icon-edit"/>	
-				<navitem label="Resultado Evento" iconSclass="z-icon-angle-double-right"/>		
+			
+				<navitem label="Ver Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-edit"/>
 		</nav>
 
 

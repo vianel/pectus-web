@@ -56,7 +56,8 @@ public class ServicioSolicitudAyuda {
 	    String ok = null;
 		try {
 			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/agregar?cedula=" + ayuda.getPaciente().getCedula() +
-					"&motivosolicitud=" + ayuda.getMotivo() + 
+					"&motivosolicitud=" + ayuda.getMotivo() +
+					"&idpatologia=" + ayuda.getDiagnostico().getId() +
 					"&estudios=1,2,3"
 					);
 	    
