@@ -149,7 +149,7 @@ public class AyudaView {
 	@Command
 	public void guardarAyuda() throws Exception{
 		String response = null;
-		if (pacienteSelected!= null) {
+		if (motivoSelected!= null) {
 	
 			ayudaSelected = new Ayuda();
 			
@@ -157,14 +157,14 @@ public class AyudaView {
 			ayudaSelected.setPaciente(pacienteSelected);
 			ayudaSelected.setMotivo(motivoSelected);
 			
-//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected);
+			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected);
 			if (response.equalsIgnoreCase("true"))
 			{
 //				//currentPaciente.add(pacienteselected);
 //				currentPaciente = ServicioPaciente.buscarPacientes();
 //				pacientestatues = generateStatusList(currentPaciente);
 //				
-				Clients.showNotification("Paciente Guardado", null, true);
+				Clients.showNotification("Ayuda registrada", null, true);
 //				x.detach();
 
 			}else

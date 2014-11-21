@@ -130,10 +130,10 @@
           </template>
       </listbox>
 	
-	<window  title="Probando" hflex="1" vflex="true" border="normal">
+	<window hflex="1" vflex="true" border="normal">
             <div>
                 <vlayout>
-                    <label value="@load(vm.selected.paciente)" />
+                    <label value="@load(vm.selected.paciente.nombre)" />
                     <hlayout>
                         <label value="@load(vm.selected.fechaSolicitud)" />
                     </hlayout>
@@ -141,7 +141,7 @@
                 </vlayout>
                 <div>
                     MOTIVO
-                    <label  value="@load(vm.selected.motivo)" />
+                    <label style="margin-left: 13em;font-size: 17px;font-weight: bold;"   value="@load(vm.selected.motivo)" />
                 </div>
             </div>
         </window>
@@ -153,12 +153,12 @@
         </auxhead>
         <columns>
             <column label="Aprobacion" align="center" />
-            <column label="Motivo" align="center" />
+<!--             <column label="Motivo" align="center" /> -->
         </columns>
         <rows>
             <row>
                 <label value="@bind(vm.selected.aprobacion)" style="margin-left: -30em;" />
-                <label style="margin-left: 16em;font-size: 17px;font-weight: bold;" value="@load(vm.selected.motivo)" />
+<!--                 <label style="margin-left: 16em;font-size: 17px;font-weight: bold;" value="@load(vm.selected.motivo)" /> -->
             </row>
         </rows>
     </grid>	
