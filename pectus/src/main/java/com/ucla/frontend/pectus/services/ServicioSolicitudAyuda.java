@@ -1,6 +1,8 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,6 +45,43 @@ public class ServicioSolicitudAyuda {
 	public void setListaModelAyudas(ListModelList<Ayuda> listaModelAyudas) {
 		this.listaModelAyudas = listaModelAyudas;
 	}
+	
+	
+	
+//	public static String agregarAyuda(Ayuda ayuda)
+//	{
+//
+//		Resty resty = new Resty();
+//	    JSONResource jsResource = null;
+//	    String ok = null;
+//		try {
+//			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/agregar?cedula=" + paciente.getCedula() +
+//					"&nombre=" + paciente.getNombre() +
+//					"&apellido=" + paciente.getApellido() +
+//					"&tlfcelular=" + paciente.getCelular() +
+//					"&tlfijo=" + paciente.getFijo() +
+//					"&profesion=" + paciente.getProfesion() +
+//					"&nrohijos=" + paciente.getNroHijos() + 
+//					"&fecnacimiento=" + fecha
+//					);
+//	    
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		try {
+//			 ok = jsResource.get("ok").toString();
+//		
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return ok;
+//		
+//	}
+	
+	
+	
 	
 	public static List<Ayuda> buscarAyudas()
     {

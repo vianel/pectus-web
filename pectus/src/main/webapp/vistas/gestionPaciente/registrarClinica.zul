@@ -60,39 +60,45 @@
 				    </row>
 					
 					
-					<row><label value="Motivo" /><textbox rows="4"/></row>
+					<row><label value="Motivo" /><textbox value="@bind(vm.motivoSelected)" rows="4"/></row>
 					
 					</rows>
 					
 			</grid>
-			<vlayout>
-        EXAMENES A REALIZAR ?
-        <checkbox id="l1" label="Border" onCheck="doChecked()" />
-        <checkbox id="l2" label="Box" onCheck="doChecked()" />
-        <checkbox id="l3" label="Table" onCheck="doChecked()" />
-        <checkbox id="l4" label="Portal" onCheck="doChecked()" />
-        <checkbox id="l5" label="Column" onCheck="doChecked()" />
-        <separator />
-        <hlayout>
-            You have selected :
-            <label id="layout" />
-        </hlayout>
-        <zscript><![CDATA[
-            void doChecked() {
-                layout.value = (l1.isChecked() ? l1.label+' ' : "") 
-                    + (l2.isChecked() ? l2.label+' ' : "")
-                    + (l3.isChecked() ? l3.label+' ' : "")
-                    + (l4.isChecked() ? l4.label+' ' : "")
-                    + (l5.isChecked() ? l5.label+' ' : "");
-            }
-        ]]></zscript>
-    </vlayout>
+			
+			
+			
+			<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="true" model="@load(vm.estudiosClinica)">
+		        <listhead>
+		            <listheader label="Clinica" />
+		            <listheader label="Estudio" />
+		            <listheader label="Monto" />
+		        </listhead>
+		        <template name="model" var="estudiosClinica">
+		        <listitem>
+		            <listcell  label="@load(estudiosClinica.clinica.nombre)" />
+		            <listcell  label="@load(estudiosClinica.estudio.nombre)" />
+		            <listcell  label="@load(estudiosClinica.monto)" />
+		        </listitem>
+		  		</template>
+		    </listbox>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		</hlayout>	
 		
     
 		<separator height="35px"/>
 		<div align="center" >
-			<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarAyuda')">Guardar</button>
 			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
 			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
 		</div>
@@ -161,8 +167,6 @@
 <tabpanel>
 </tabpanel>
 
-
-<!-- http://forum.zkoss.org/question/85658/bandbox-click/ -->
 </tabpanels>
 </tabbox>
 </zk>

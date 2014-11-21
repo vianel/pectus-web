@@ -3,10 +3,13 @@ package com.ucla.frontend.pectus.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
@@ -14,19 +17,64 @@ import org.zkoss.zul.Window;
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.AyudaData;
 import com.ucla.frontend.pectus.models.Diagnostico;
+import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPatologia;
 import com.ucla.frontend.pectus.services.ServicioSolicitudAyuda;
 
 public class AyudaView {
 
+	
+	
+	public Diagnostico getDiagnosticoSelected() {
+		return diagnosticoSelected;
+	}
+
+
+
+	public void setDiagnosticoSelected(Diagnostico diagnosticoSelected) {
+		this.diagnosticoSelected = diagnosticoSelected;
+	}
+
+
+
+	public Paciente getPacienteSelected() {
+		return pacienteSelected;
+	}
+
+
+
+	public void setPacienteSelected(Paciente pacienteSelected) {
+		this.pacienteSelected = pacienteSelected;
+	}
+
+
+
+	public String getMotivoSelected() {
+		return motivoSelected;
+	}
+
+
+
+	public void setMotivoSelected(String motivoSelected) {
+		this.motivoSelected = motivoSelected;
+	}
+
+	private Diagnostico diagnosticoSelected;
+	private Paciente pacienteSelected;
+	private String motivoSelected;
+	private Ayuda ayudaSelected;
+	
+	
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
 	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
+	private List<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
 	
 	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
 	
@@ -38,6 +86,18 @@ public class AyudaView {
 	}
 	
 	
+
+	public List<EstudioClinica> getEstudiosClinica() {
+		return estudiosClinica;
+	}
+
+
+
+	public void setEstudiosClinica(List<EstudioClinica> estudiosClinica) {
+		this.estudiosClinica = estudiosClinica;
+	}
+
+
 
 	public List<Diagnostico> getDiagnosticos() {
 		return diagnosticos;
@@ -85,6 +145,40 @@ public class AyudaView {
 		this.pacientes = pacientes;
 	}
 	
+	
+	@Command
+	public void guardarAyuda() throws Exception{
+		String response = null;
+		if (pacienteSelected!= null) {
+	
+			ayudaSelected = new Ayuda();
+			
+			ayudaSelected.setDiagnostico(diagnosticoSelected);
+			ayudaSelected.setPaciente(pacienteSelected);
+			ayudaSelected.setMotivo(motivoSelected);
+			
+//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected);
+			if (response.equalsIgnoreCase("true"))
+			{
+//				//currentPaciente.add(pacienteselected);
+//				currentPaciente = ServicioPaciente.buscarPacientes();
+//				pacientestatues = generateStatusList(currentPaciente);
+//				
+				Clients.showNotification("Paciente Guardado", null, true);
+//				x.detach();
+
+			}else
+			{
+				Clients.showNotification("Error al guardar", true);
+			}
+		}	else{
+//			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
+			Clients.showNotification("Porfavor ingrese todos los datos validos");
+		}
+
+
+
+	}
 		
 }
 
