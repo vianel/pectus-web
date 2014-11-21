@@ -75,6 +75,7 @@ public class ServicioSolicitudAyuda {
                   ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
                   ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
                   ayuda.setMotivo(obj.get("motivosolicitud").toString());
+                  ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
                   
                   listaAyudas.add(ayuda);
                   
@@ -100,7 +101,7 @@ public class ServicioSolicitudAyuda {
 		try {
 			JSONObject objjson = new JSONObject(s);
 			paciente.setCedula( objjson.getString("cedula"));
-			paciente.setNombre(objjson.getString("apellido"));
+			paciente.setApellido(objjson.getString("apellido"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

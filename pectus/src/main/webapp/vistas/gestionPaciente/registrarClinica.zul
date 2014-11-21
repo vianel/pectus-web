@@ -1,7 +1,107 @@
 <zk xmlns:n="native">
+<tabbox >
+<tabs>
+      	<tab label="Registro de la Ayuda al paciente"/>
+		<tab label="Evaluacion"/>
+    </tabs>
+    <tabpanels>
+    
+    <tabpanel>
+    <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+    <hlayout>
+	
+			 <grid  width="500px">
+				<columns>
+					<column label="Datos de la Ayuda" width="150px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Pacientes"/>
+					
+					<bandbox id="bd" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(vm.pacientes)">
+				                <listhead>
+				                    <listheader label="PACIENTES" />
+				                </listhead>
+				                 <template name="model" var="paciente">
+				                <listitem>
+				                  <listcell  label="@load(paciente.cedula)" />
+				                  <listcell  label="@load(paciente.nombre)" />
+				                  <listcell  label="@load(paciente.apellido)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+				    </row>
+					
+					
+					<row><label value="Patologia"/>
+					
+					<bandbox id="bd1" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.diagnosticos)">
+				                <listhead>
+				                    <listheader label="PATOLOGIAS" />
+				                </listhead>
+				                 <template name="model" var="patologia">
+				                <listitem>
+				                  <listcell  label="@load(patologia.nombre)" />
+				                  <listcell  label="@load(patologia.observacion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+				    </row>
+					
+					
+					<row><label value="Motivo" /><textbox rows="4"/></row>
+					
+					</rows>
+					
+			</grid>
+			<vlayout>
+        EXAMENES A REALIZAR ?
+        <checkbox id="l1" label="Border" onCheck="doChecked()" />
+        <checkbox id="l2" label="Box" onCheck="doChecked()" />
+        <checkbox id="l3" label="Table" onCheck="doChecked()" />
+        <checkbox id="l4" label="Portal" onCheck="doChecked()" />
+        <checkbox id="l5" label="Column" onCheck="doChecked()" />
+        <separator />
+        <hlayout>
+            You have selected :
+            <label id="layout" />
+        </hlayout>
+        <zscript><![CDATA[
+            void doChecked() {
+                layout.value = (l1.isChecked() ? l1.label+' ' : "") 
+                    + (l2.isChecked() ? l2.label+' ' : "")
+                    + (l3.isChecked() ? l3.label+' ' : "")
+                    + (l4.isChecked() ? l4.label+' ' : "")
+                    + (l5.isChecked() ? l5.label+' ' : "");
+            }
+        ]]></zscript>
+    </vlayout>
+		</hlayout>	
+		
+    
+		<separator height="35px"/>
+		<div align="center" >
+			<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>
+		</div>
+</tabpanel>
+    <tabpanel>
 <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-	<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >NUEVO</button>
+<!-- 	<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >NUEVO</button> -->
 	<hlayout spacing="0" height="400px">
 	
 	 <listbox vflex="true" hflex="1"
@@ -11,14 +111,15 @@
           </auxhead>
           <listhead>
               <listheader label="Paciente" width="80px" align="center" />
-              <listheader label="Diagnostico" align="center" />
-              <listheader label="Observacion" width="80px" align="center" />
+              <listheader label="Observacion" align="center" />
+              <listheader label="Diagnostico" width="130px" align="center" />
           </listhead>
           <template name="model" var="ayuda">
               <listitem>
-                  <listcell label="@load(ayuda.paciente.apellido)" />
-                  <listcell label="@load(ayuda.diagnostico.nombre)" />
-                  <listcell label="@load(ayuda.diagnostico.observacion)" />
+                  <listcell style="border: 4px solid #808184" label="@load(ayuda.paciente.apellido)" />
+                  <listcell style="border: 4px solid #808184" label="@load(ayuda.diagnostico.observacion)" />
+                  <listcell style="border: 4px solid #808184" label="@load(ayuda.diagnostico.nombre)" />
+                  
               </listitem>
           </template>
       </listbox>
@@ -34,7 +135,7 @@
                 </vlayout>
                 <div>
                     MOTIVO
-                    <label value="@load(vm.selected.motivo)" />
+                    <label  value="@load(vm.selected.motivo)" />
                 </div>
             </div>
         </window>
@@ -45,16 +146,23 @@
             <auxheader colspan="5">Edit Data</auxheader>
         </auxhead>
         <columns>
-<!--             <column label="Aprobacion" align="center" /> -->
+            <column label="Aprobacion" align="center" />
             <column label="Motivo" align="center" />
         </columns>
         <rows>
             <row>
-<!--                 <intbox value="@bind(vm.selected.aprobacion)" width="95px" /> -->
-                <label value="@load(vm.selected.motivo)" />
+                <label value="@bind(vm.selected.aprobacion)" style="margin-left: -30em;" />
+                <label style="margin-left: 16em;font-size: 17px;font-weight: bold;" value="@load(vm.selected.motivo)" />
             </row>
         </rows>
     </grid>	
 </div>
+</tabpanel>
+<tabpanel>
+</tabpanel>
 
+
+<!-- http://forum.zkoss.org/question/85658/bandbox-click/ -->
+</tabpanels>
+</tabbox>
 </zk>

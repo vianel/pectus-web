@@ -13,15 +13,19 @@ import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.AyudaData;
+import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
+import com.ucla.frontend.pectus.services.ServicioPatologia;
 import com.ucla.frontend.pectus.services.ServicioSolicitudAyuda;
 
 public class AyudaView {
 
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
+	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
+	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
 	
 	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
@@ -32,6 +36,20 @@ public class AyudaView {
 		getmodelpaciente();
 		
 	}
+	
+	
+
+	public List<Diagnostico> getDiagnosticos() {
+		return diagnosticos;
+	}
+
+
+
+	public void setDiagnosticos(List<Diagnostico> diagnosticos) {
+		this.diagnosticos = diagnosticos;
+	}
+
+
 
 	public ListModel<Paciente> getmodelpaciente() {
         return new ListModelList<Paciente>(listaPacientes);
@@ -57,6 +75,14 @@ public class AyudaView {
 	public void abrirDialogoRegistrarAyuda(Event e){
 		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarAyuda.zul", null, null);
 		window.doModal();
+	}
+
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
 	}
 	
 		

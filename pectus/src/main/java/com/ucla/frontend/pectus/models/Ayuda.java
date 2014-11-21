@@ -8,21 +8,13 @@ public class Ayuda {
 	private Paciente paciente;
 	private Diagnostico diagnostico;
 	private String motivo;
-//	private Date fechaAprobacion;
+	private Date fechaAprobacion;
 	private Date fechaSolicitud;
-//	private Double aprobacion;
+	private Double aprobacion;
 //	private List<EstudioSolicitud> listaEstudiosSolictud;
 	
 	
-	public Ayuda(Paciente paciente, Diagnostico diagnostico, String motivo,
-				Date fechaSolicitud) {
-		super();
-		this.paciente = paciente;
-		this.diagnostico = diagnostico;
-		this.motivo = motivo;
-		this.fechaSolicitud = fechaSolicitud;
 
-	}
 
 
 
@@ -31,6 +23,43 @@ public class Ayuda {
 
 	public Ayuda(){
 		
+	}
+
+
+
+	public Ayuda(Paciente paciente, Diagnostico diagnostico, String motivo,
+		Date fechaAprobacion, Date fechaSolicitud, Double aprobacion) {
+	super();
+	this.paciente = paciente;
+	this.diagnostico = diagnostico;
+	this.motivo = motivo;
+	this.fechaAprobacion = fechaAprobacion;
+	this.fechaSolicitud = fechaSolicitud;
+	this.aprobacion = aprobacion;
+}
+
+
+
+	public Date getFechaAprobacion() {
+		return fechaAprobacion;
+	}
+
+
+
+	public void setFechaAprobacion(Date fechaAprobacion) {
+		this.fechaAprobacion = fechaAprobacion;
+	}
+
+
+
+	public Double getAprobacion() {
+		return aprobacion;
+	}
+
+
+
+	public void setAprobacion(Double aprobacion) {
+		this.aprobacion = aprobacion;
 	}
 
 
