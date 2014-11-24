@@ -1,206 +1,225 @@
-
-@font-face{font-family:'FontAwesome';src:url('font/fontawesome-webfont.eot?v=4.0.1');src:url('font/fontawesome-webfont.eot?#iefix&v=4.0.1') format('embedded-opentype'),url('font/fontawesome-webfont.woff?v=4.0.1') format('woff'),url('font/fontawesome-webfont.ttf?v=4.0.1') format('truetype'),url('font/fontawesome-webfont.svg?v=4.0.1#fontawesomeregular') format('svg');font-weight:normal;font-style:normal}
+/*
+	ZeroFour by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
 
 /*********************************************************************************/
-/* Desktop (>= 480px)                                                            */
+/* Basic                                                                         */
 /*********************************************************************************/
 
-/* Basic */
-
-	body {
-		min-width: 1200px;
+	body,input,select,textarea
+	{
+		font-size: 11pt;
+		line-height: 1.85em;
 	}
 
-	section, article {
-		margin: 0 0 60px 0;
+/*********************************************************************************/
+/* Sidebar                                                                       */
+/*********************************************************************************/
+
+	#sidebar h2
+	{
+		font-size: 1.5em;
 	}
 
-	section:last-child, article:last-child {
-		margin-bottom: 0;
+/*********************************************************************************/
+/* Wrappers                                                                      */
+/*********************************************************************************/
+
+	#header-wrapper
+	{
+		padding: 3em 0;
+	}
+	
+	#banner-wrapper
+	{
+	}
+	
+	#main-wrapper
+	{
 	}
 
-	section.left-content {
-		padding-right: 30px;
+	#footer-wrapper
+	{
+		padding: 7em 0 7em 0;
 	}
 
-	section.right-content {
-		padding-left: 30px;
+	.wrapper
+	{
+		padding: 10em  10em ;
 	}
 
-	section.middle-content {
-		padding: 0 30px 0 30px;
-	}
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
 
-	ul.small-image-list img {
-		width: 78px;
-	}
-
-	ul.big-image-list img {
-		width: 178px;
-	}
-
-/* Reusable */
-
-	.blog-post-image {
-		width: 588px;
-	}
-
-/* Header */
-
-	#header-wrapper {
-		background-color: #FDE4FB;
-		background-image: -moz-linear-gradient(top, #FFAEF8, #FFFFFF);
-		background-image: -webkit-linear-gradient(top, #FFAEF8, #FDE4FB);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FDE4FB), to(#FFFFFF));
-		background-image: -ms-linear-gradient(top, #FFAEF8, #FFFFFF);
-		background-image: -o-linear-gradient(top, #FFAEF8, #FFFFFF);
-		background-image: linear-gradient(top, #FFAEF8, #FFFFFF);
-	}
-
-	#header {
+	#header
+	{
 		position: relative;
-		margin: 2.5% 0 2.5% 0;
-		padding: 0 40px 0 40px;
 		border-radius: 10px;
-		border: solid 1px #FFFFFF;
-		box-shadow: inset 0px 0px 0px 1px #FFFFFF, 0px 1px 4px 0px rgba(10,0,0,0.0);
-		background-color: #F7AFF3;
-		background-image: -moz-linear-gradient(top, #F7AFF3, #F7AFF3);
-		background-image: -webkit-linear-gradient(top, #F7AFF3, #F7AFF3);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#F7AFF3), to(#F7AFF3));
-		background-image: -ms-linear-gradient(top, #F7AFF3, #F7AFF3);
-		background-image: -o-linear-gradient(top, #F7AFF3, #F7AFF3);
-		background-image: linear-gradient(top, #F7AFF3, #F7AFF3);
-		height: 86px;
+		
+		padding: 0.75em;
 	}
 
-		#header h1 {
+		#header .inner
+		{
+			position: relative;
+			height: 5.5em;
+			background-color: #BCF7DE;
+			background-color: #BCF7DE;
+			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.35)), url('images/bg02.png');
+			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.35)), url('images/bg02.png');
+			background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.35)), url('images/bg02.png');
+			background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.35)), url('images/bg02.png');
+			background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.35)), url('images/bg02.png');
+			border-radius: 8px;
+			box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.45), inset 0px 2px 1px 0px rgba(255,255,255,0.15);
+			text-shadow: -1px -1px 0 rgba(0,0,0,0.5);
+		}
+	
+		#header h1
+		{
 			position: absolute;
-			left: 40px;
-			top: 0;
+			left: 1.75em;
+			top: 50%;
+			margin-top: -0.65em;
+			font-size: 1.5em;
 			color: #fff;
-			font-size: 2.4em;
-			letter-spacing: -2px;
-			line-height: 86px;
 		}
 
-		#header h1 a {
-			color: #fff;
-			text-decoration: none;
+/*********************************************************************************/
+/* Nav                                                                           */
+/*********************************************************************************/
+
+	#nav
+	{
+		position: absolute;
+		right: 2em;
+		top: 0;
+		line-height: 5.5em;
+	}
+	
+		#nav > ul > li
+		{
+			float: left;
+			padding: 0 0.8em 0 0.8em;
 		}
 		
-		#header nav {
-			position: absolute;
-			right: 40px;
-			top: 1px;
-			line-height: 84px;
-			text-transform: lowercase;
-			font-size: 1.3em;
-			letter-spacing: -1px;
-		}
-		
-			#header nav a {
-				display: inline-block;
-				text-decoration: none;
+			#nav > ul > li > a,
+			#nav > ul > li > span
+			{
 				color: #fff;
-				padding: 0 25px 0 25px;
+				text-decoration: none;
+				text-transform: uppercase;
+				font-weight: 800;
+				font-size: 0.95em;
+				letter-spacing: 0.075em;
+				padding: 0.5em 0.8em 0.5em 0.8em;
+				border-radius: 6px;
 				outline: 0;
 			}
-			
-			#header nav a.current-page-item {
-				background-color: #8AFCCB;
-				background-image: -moz-linear-gradient(top, #8AFCCB, #8AFCCB);
-				background-image: -webkit-linear-gradient(top, #8AFCCB, #8AFCCB);
-				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8AFCCB), to(#8AFCCB));
-				background-image: -ms-linear-gradient(top, #8AFCCB, #8AFCCB);
-				background-image: -o-linear-gradient(top, #8AFCCB, #8AFCCB);
-				background-image: linear-gradient(top, #8AFCCB, #8AFCCB);
-				box-shadow: inset 0px 1px 5px 1px rgba(0,0,0,0.1), 0px 0px 5px 1px rgba(255,255,255,0.1);
+
+				#nav > ul > li.active > a,
+				#nav > ul > li.current_page_item > a,
+				#nav > ul > li.active > span,
+				#nav > ul > li.current_page_item > span
+				{
+					background: rgba(0,0,0,0.15);
+					box-shadow: inset 1px 1px 0px 0px rgba(0,0,0,0.025), 1px 1px 0px 0px rgba(255,255,255,0.025);
+				}
+
+			#nav > ul > li:last-child
+			{
+				padding-right: 0;
 			}
 
-			#header nav a:hover {
-				background-color: #CCF6E4;
-				background-image: -moz-linear-gradient(top, #CCF6E4, #CCF6E4);
-				background-image: -webkit-linear-gradient(top, #CCF6E4, #CCF6E4);
-				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCF6E4), to(#CCF6E4));
-				background-image: -ms-linear-gradient(top, #CCF6E4, #CCF6E4);
-				background-image: -o-linear-gradient(top, #CCF6E4, #CCF6E4);
-				background-image: linear-gradient(top, #CCF6E4, #CCF6E4);
-				box-shadow: inset 0px 1px 5px 1px rgba(0,0,0,0.05), 0px 0px 5px 1px rgba(255,255,255,0.05);
-			}
+		#nav > ul > li > ul
+		{
+			display: none;
+		}
 
-/* Banner */
-
-	#banner-wrapper {
-		background: #BCF7DE;
-	}
-
-	#banner {
+	.dropotron
+	{
 		position: relative;
-		width: 1160px;
-		height: 265px;
-		margin: 2% 0 2% 0;
-		box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.10);
-		border-radius: 10px;
-		padding: 20px;
-		background: #46D7C4 no-repeat 20px 20px;
-		background-size: 1160px 265px;
+		background-color: #3B3E45;
+		background-color: rgba(59,62,69,0.9);
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.35), rgba(0,0,0,0)), url('images/bg02.png');
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.35), rgba(0,0,0,0)), url('images/bg02.png');
+		background-image: -o-linear-gradient(top, rgba(0,0,0,0.35), rgba(0,0,0,0)), url('images/bg02.png');
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.35), rgba(0,0,0,0)), url('images/bg02.png');
+		background-image: linear-gradient(top, rgba(0,0,0,0.35), rgba(0,0,0,0)), url('images/bg02.png');
+		border-radius: 8px;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.5), inset 0px 0px 0px 2px rgba(255,255,255,0.075), inset 0px 2px 1px 0px rgba(255,255,255,0.2), 0px 2px 14px 0px rgba(0,0,0,0.4);
+		text-shadow: -1px -1px 0 rgba(0,0,0,0.5);
+		padding: 1.5em;
+		line-height: 2.5em;
+		min-width: 15em;
 	}
 
-		#banner h2 {
-			position: absolute;
-			z-index: 1;
-			width: 100%;
-			top: 100px;
-			left: 0;
-			font-size: 3.3em;
-			color: #fff;
-			text-align: center;
-			letter-spacing: -2px;
+		.dropotron.level-0
+		{
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+			margin-top: -2px;
+			box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.5), inset 0px 0px 0px 2px rgba(255,255,255,0.075), 0px 2px 14px 0px rgba(0,0,0,0.4);
 		}
 		
-		#banner span {
-			display: block;
-			position: absolute;
-			z-index: 1;
-			width: 100%;
-			bottom: 105px;
-			left: 0;
-			font-size: 1.6em;
+		.dropotron a,
+		.dropotron span
+		{
+			color: #aaa;
+			text-decoration: none;
+			text-transform: uppercase;
+			font-weight: 800;
+			font-size: 0.8em;
+			letter-spacing: 0.075em;
+			outline: 0;
+		}
+		
+		.dropotron li:hover > a,
+		.dropotron li:hover > span
+		{
 			color: #fff;
-			text-align: center;
-			letter-spacing: -1px;
-			text-transform: lowercase;
-			opacity: 0.8;
 		}
 
-/* Main */
+/*********************************************************************************/
+/* Banner                                                                        */
+/*********************************************************************************/
 
-	#main {
-		background: #fff url(images/Cancerdemama.png);
-		padding: 2% 0 2% 0;
+	#banner
+	{
+		width: 940px;
+		margin: 0 auto;
+		overflow: hidden;
+		padding: 9em 0 6em 0;
 	}
-
-		#main .controls {
+	
+		#banner h2
+		{
+		}
+		
+		#banner p
+		{
+			float: left;
+			text-align: right;
+			width: 60%;
+			line-height: 1.5em;
+			margin: 0;
 		}
 
-/* Footer */
+/*********************************************************************************/
+/* Footer                                                                        */
+/*********************************************************************************/
 
-	#footer-wrapper {
-		padding: 3% 0 3% 0;
+	#footer
+	{
 	}
 
-/* Copyright */
+/*********************************************************************************/
+/* Main                                                                          */
+/*********************************************************************************/
 
-	#copyright {
-		text-align: center;
-		color: #A6A88F;
-		border-top: solid 1px #ced0b7;
-		padding: 3em 0 0 0;
-		margin: 1% 0 0 0;
+	#main
+	{
 	}
-
-		#copyright a {
-			color: #A6A88F;
-		}
-
