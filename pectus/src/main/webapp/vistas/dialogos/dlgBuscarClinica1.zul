@@ -14,39 +14,7 @@
                 <column hflex="1" label="" align="center" />
                  <column hflex="2" label="Telefono" />
             </columns>
-            <rows>
-                <row>
-                  
-                    <label value="Evan" />
-                    <label value="Perez" />
-                    <label value="1233446" />
-                    <radio id="ra11"  radiogroup="sv1" />
-                </row>
-                <row>
-                
-                    <label value="Billy" />
-                    <label value="Latte" />
-                    <label value="12234" />
-                    <radio id="ra2"  radiogroup="sv1" />
-                </row>
-                <row>
-                	
-                    <label value="Roger" />
-                    <label value="Americano" />
-                    <label value="12392" />
-                    <radio id="ra3"  radiogroup="sv1" />
-                </row>
-                <row>
-                	
-                    <label value="Andrea" />
-                    <label value="Indigo" />
-                    <label value="11112" />
-                   <radio id="ra4"  radiogroup="sv1" />
-                </row>
-                
-                
-                
-            </rows>
+            
             
         </grid>
        <separator height="35px"/>

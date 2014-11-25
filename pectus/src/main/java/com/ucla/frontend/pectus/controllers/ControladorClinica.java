@@ -87,7 +87,7 @@ private Clinica clinicaselected;
 
 	    
 	@Command
-	public void guardarClinica(@BindingParam("cmp") Window x) throws Exception{
+	public void guardarClinica() throws Exception{
 		String response = null;
 		if (rifSelected!= null) {
 			clinicaselected = new Clinica();
@@ -97,12 +97,12 @@ private Clinica clinicaselected;
 			clinicaselected.setTelefono(telefonoSelected);
 			
 			
-			response = ServicioClinica.agregarCLinica(clinicaselected);
+			response = ServicioClinica.agregarClinica(clinicaselected);
 			if (response.equalsIgnoreCase("true"))
 			{
 		
 				Clients.showNotification("Clinica Guardada", null, true);
-				x.detach();
+//				x.detach();
 
 			}else
 			{
@@ -116,6 +116,11 @@ private Clinica clinicaselected;
 
 	}
 	    
+	private void ControladorClinica() {
+		// TODO Auto-generated method stub
+		this.currentClinica = ServicioClinica.buscarClinica();
+	    this.clinicastatues = clinicastatues;
+	}
 	    
 	    public static  List<ClinicaStatus> generateStatusList(List<Clinica> pctes)
 		{

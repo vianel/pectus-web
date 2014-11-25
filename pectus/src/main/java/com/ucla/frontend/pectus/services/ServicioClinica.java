@@ -88,7 +88,7 @@ public class ServicioClinica {
         
     }
     
-    public static String agregarCLinica(Clinica clinica)
+    public static String agregarClinica(Clinica clinica)
 	{
 
 		Resty resty = new Resty();
@@ -96,8 +96,8 @@ public class ServicioClinica {
 	    String ok = null;
 		try {
 			jsResource = resty.json("http://localhost:5000/clinica/agregar?rif=" + clinica.getRif() +
-					"&nombre=" + clinica.getNombre() +
-					"&direccion=" + clinica.getDireccion() +
+					"&nombre=" + clinica.getNombre().replaceAll(" ", "%20") +
+					"&direccion=" + clinica.getDireccion().replaceAll(" ", "%20") +
 					"&tlffijo=" + clinica.getTelefono() 
 					
 					);
