@@ -1,31 +1,65 @@
 package com.ucla.frontend.pectus.controllers;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.ucla.frontend.pectus.models.Cita;
+import com.ucla.frontend.pectus.services.ServicioCita;
+
+
 public class CitaFilter {
 	
-	private String nombrePaciente = "";
-	private String nombreClinica = "";
-	private String nombreEstudio = "";
+	private String paciente = "";
+	private String clinica = "";
+	private String tipoestudio = "";
+	static List<Cita> citas = ServicioCita.buscarCita();
 	
-	
-	public String getNombrePaciente() {
-		return nombrePaciente;
+
+	public String getPaciente() {
+		return paciente;
 	}
-	public void setNombrePaciente(String nombrePaciente) {
-		this.nombrePaciente = nombrePaciente;
+	public void setPaciente(String paciente) {
+		this.paciente = paciente;
 	}
-	public String getNombreClinica() {
-		return nombreClinica;
+	public String getClinica() {
+		return clinica;
 	}
-	public void setNombreClinica(String nombreClinica) {
-		this.nombreClinica = nombreClinica;
-	}
-	public String getNombreEstudio() {
-		return nombreEstudio;
-	}
-	public void setNombreEstudio(String nombreEstudio) {
-		this.nombreEstudio = nombreEstudio;
+	public void setClinica(String clinica) {
+		this.clinica = clinica;
 	}
 
 	
-	
+	public String getTipoestudio() {
+		return tipoestudio;
+	}
+	public void setTipoestudio(String tipoestudio) {
+		this.tipoestudio = tipoestudio;
+	}
+	public static List<Cita> getCitas() {
+		return citas;
+	}
+	public static void setCitas(List<Cita> citas) {
+		CitaFilter.citas = citas;
+	}
+	public static List<Cita> getFilterCita(CitaFilter citaFilter){
+		List<Cita> someCita = new ArrayList<Cita>();
+		String paciente = citaFilter.getPaciente().toLowerCase();
+		String clinica = citaFilter.getClinica().toLowerCase();
+		String tipoestudio = citaFilter.getTipoestudio().toLowerCase(); 
+		
+		for(Iterator<Cita> i = citas.iterator(); i.hasNext();){
+			Cita tmp = i.next();
+			if(tmp.getPaciente().getCedula().toLowerCase().contains(paciente) &&
+			   tmp.getClinica().getRif().toLowerCase().contains(clinica)&&
+			   tmp.getTipoEstudio().getNombre().toLowerCase().contains(tipoestudio)){
+			
+				someCita.add(tmp);
+			}
+				
+		}
+		return someCita;
+	}
+
+
 }

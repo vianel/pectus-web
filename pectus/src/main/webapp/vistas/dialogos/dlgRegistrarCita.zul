@@ -1,0 +1,109 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorCita')"
+			 id="modalDialog" title="CITA" border="normal" width="400px" height="29em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+       <tabbox id="tb" height="630px" >
+    <tabs id="tabs">
+        <tab id="A" label="Datos de la Cita" />
+     
+    </tabs>
+    <tabpanels>
+     
+        <tabpanel>
+        
+        <!-- Datos de la cita con el combobox -->
+        
+        <label style="display:block" value="Paciente" />
+        <bandbox id="bdPaciente" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm.pacienteSelected)" onSelect="bdPaciente.value=self.selectedItem.label; bdPaciente.close();" model="@load(vm.listapaciente)">
+				                <listhead>
+				                    <listheader label="CEDULA" />
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="APELLIDO" />
+				                </listhead>
+				                 <template name="model" var="paciente">
+				                <listitem>
+				                  <listcell  label="@load(paciente.cedula)" />
+				                  <listcell  label="@load(paciente.nombre)" />
+				                  <listcell  label="@load(paciente.apellido)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+
+         <label style="display:block" value="Tipo Estudio" />
+              <bandbox id="bdtipoestudio" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox selectedItem="@bind(vm.tipoesselected)" height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bdtipoestudio.value=self.selectedItem.label; bdtipoestudio.close();" model="@load(vm.listatipoestudio)">
+				                <listhead>
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="DESCRIPCION" />
+				                </listhead>
+				                 <template name="model" var="tipoestudio">
+				                <listitem>
+				                  <listcell  label="@load(tipoestudio.nombre)" />
+				                  <listcell  label="@load(tipoestudio.descripcion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				  </bandbox>
+        				
+        				
+         <label style="display:block" value="Clinica" />
+        <bandbox id="bdClinica" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm.clinicaSelected)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm.listaclinica)">
+				                <listhead>
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="RIF" />
+				                </listhead>
+				                 <template name="model" var="clinica">
+				                <listitem>
+				                  <listcell  label="@load(clinica.nombre)" />
+				                  <listcell  label="@load(clinica.rif)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>     
+				    
+        <!-- Datos de la cita con el combobox finish -->
+        
+       <!-- Datos de la cita-->
+       <label style="display:block" value="Fecha de Cita" /><datebox  value="@bind(vm.fechaSelected)" />
+      <!--    <label style="display:block" value="Fecha Cita" /><datebox /> -->
+       <label  style="display:block" value="Hora" /><textbox value="@bind(vm.horaSelected)"/>
+      
+       <separator height="20px"/>
+		<div align="center" style="margin-left:-1em">
+			<button width="75px" sclass="btn-success" onClick="@command('guardarCita')">Guardar</button>
+			<button width="75px" sclass="btn-success">Eliminar</button>
+			<button width="75px" sclass="btn-success">Cancelar</button>
+		</div>
+	
+	<!-- Datos de la cita-->
+			
+	
+
+        </tabpanel>
+        
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+</window>
+</zk>

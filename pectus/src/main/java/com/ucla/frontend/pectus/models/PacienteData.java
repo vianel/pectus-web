@@ -68,16 +68,16 @@ public class PacienteData {
 //	}
 	
 	
-	static{
-		citas.add(new Cita(1, new Date(), "2:30", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
-		citas.add(new Cita(2, new Date(), "6:30", pacientes.get(1), clinicas.get(2), estudios.get(1), true));
-		citas.add(new Cita(3, new Date(), "2:00", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
-		citas.add(new Cita(4, new Date(), "3:30", pacientes.get(1), clinicas.get(1), estudios.get(1), true));
-		citas.add(new Cita(5, new Date(), "8:15", pacientes.get(0), clinicas.get(2), estudios.get(1), true));
-		citas.add(new Cita(6, new Date(), "3:30", pacientes.get(1), clinicas.get(1), estudios.get(1), true));
-		citas.add(new Cita(7, new Date(), "1:30", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
-		citas.add(new Cita(8, new Date(), "0:30", pacientes.get(1), clinicas.get(2), estudios.get(1), true));
-	}
+//	static{
+//		citas.add(new Cita(1, new Date(), "2:30", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
+//		citas.add(new Cita(2, new Date(), "6:30", pacientes.get(1), clinicas.get(2), estudios.get(1), true));
+//		citas.add(new Cita(3, new Date(), "2:00", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
+//		citas.add(new Cita(4, new Date(), "3:30", pacientes.get(1), clinicas.get(1), estudios.get(1), true));
+//		citas.add(new Cita(5, new Date(), "8:15", pacientes.get(0), clinicas.get(2), estudios.get(1), true));
+//		citas.add(new Cita(6, new Date(), "3:30", pacientes.get(1), clinicas.get(1), estudios.get(1), true));
+//		citas.add(new Cita(7, new Date(), "1:30", pacientes.get(0), clinicas.get(0), estudios.get(0), true));
+//		citas.add(new Cita(8, new Date(), "0:30", pacientes.get(1), clinicas.get(2), estudios.get(1), true));
+//	}
 	
 
 	public static List<Paciente> getAllPacientes(){
@@ -112,24 +112,24 @@ public class PacienteData {
 	}
 	
 	
-	public static List<Cita> getFilterCitas(CitaFilter citaFilter){
-		List<Cita> someCitas = new ArrayList<Cita>();		
-		String nombrePaciente = citaFilter.getNombrePaciente().toLowerCase();
-		String nombreClinica = citaFilter.getNombreClinica().toLowerCase();
-		String nombreEstudio = citaFilter.getNombreEstudio().toLowerCase();
-						
-		
-		for(Iterator<Cita> i = citas.iterator(); i.hasNext();){
-			Cita cta = i.next();
-			if(cta.getPaciente().getNombre().toLowerCase().contains(nombrePaciente) &&
-			   cta.getClinica().getNombre().toLowerCase().contains(nombreClinica) &&
-			   cta.getEstudio().getNombre().toLowerCase().contains(nombreEstudio)){
-				someCitas.add(cta);
-			}
-		}
-		return someCitas;
-	}
-	
+//	public static List<Cita> getFilterCitas(CitaFilter citaFilter){
+//		List<Cita> someCitas = new ArrayList<Cita>();		
+//		String nombrePaciente = citaFilter.getNombrePaciente().toLowerCase();
+//		String nombreClinica = citaFilter.getNombreClinica().toLowerCase();
+//		String nombreEstudio = citaFilter.getNombreEstudio().toLowerCase();
+//						
+//		
+//		for(Iterator<Cita> i = citas.iterator(); i.hasNext();){
+//			Cita cta = i.next();
+//			if(cta.getPaciente().getNombre().toLowerCase().contains(nombrePaciente) &&
+//			   cta.getClinica().getNombre().toLowerCase().contains(nombreClinica) &&
+//			   cta.getEstudio().getNombre().toLowerCase().contains(nombreEstudio)){
+//				someCitas.add(cta);
+//			}
+//		}
+//		return someCitas;
+//	}
+//	
 	
 	
 	
