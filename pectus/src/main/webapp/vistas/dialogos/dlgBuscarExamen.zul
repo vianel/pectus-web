@@ -1,0 +1,58 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="ESTUDIOS A REALIZAR	" border="normal" width="460px"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+        <grid>
+        
+            <columns>
+                <column hflex="1" label="Nombre" />
+                <column hflex="2" label="Clinica" align="center" />
+                 <column hflex="1" label="Monto" />
+                <column hflex="2" label="" align="center" />
+            </columns>
+            <rows>
+                <row>
+                    <label value="Eco" />
+                    <label value="Clinica Mamas" />
+                    <label value="000" />
+                    <checkbox></checkbox>
+                </row>
+                <row>
+                    <label value="Mamografia" />
+                    <label value="Policlinia" />
+                    <label value="200" />
+                    <checkbox></checkbox>
+                </row>
+                <row>
+                    <label value="Eco" />
+                    <label value="Policlinia" />
+                    <label value="400" />
+                    <checkbox></checkbox>
+                </row>
+                <row>
+                    <label value="Mamografia" />
+                    <label value="Clinica Mamas" />
+                    <label value="000" />
+                   <checkbox></checkbox>
+                </row>
+                <row>
+                    <label value="Muestreo de tejido" />
+                    <label value="Clinica Mamas" />
+                    <label value="000" />
+                    <checkbox></checkbox>
+                </row>
+                
+            </rows>
+            
+        </grid>
+       <separator height="35px"/>
+		<div align="center">
+		<button width="70px" height="30px" sclass="btn-success">Aceptar</button>
+		
+		</div>
+    </vlayout>
+</window>
+</zk>

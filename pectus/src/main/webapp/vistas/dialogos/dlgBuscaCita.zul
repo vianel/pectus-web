@@ -1,0 +1,55 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="PACIENTE" border="normal" width="660px" height="29em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    
+    
+      <tabbox >
+    <tabs>
+      <tab style="border: 5px solid #f5f5f5;border-bottom: 0;" label="Registrar la cita"/>
+    </tabs>
+    <tabpanels>
+      <tabpanel style="border: 5px solid #f5f5f5;">
+      	<separator height="15px"/>
+      	<div style="width: 5em;margin-left: 25em;margin-top: 4.4em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
+			<button id="btnBuscarPaciente" autodisable="self" sclass="btn-success">Buscar</button>
+		</div>
+		<div style="width: 5em;margin-left: 25em;margin-top: 12.1em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
+			<button id="btnBuscarClinica" autodisable="self" sclass="btn-success">Buscar</button>
+		</div>		
+		<separator height="15px"/>
+		<hlayout>
+			 <grid  width="500px">
+				<columns>
+					<column label="Datos de la Cita" width="150px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Paciente"/><textbox disabled="true"/> </row>
+					<row><label value="Clinica"/><textbox disabled="true"/> </row>
+					<row><label value="Estudio"/><textbox disabled="true"/> </row>
+					<row><label value="Fecha de Solicitud" /><datebox /></row>
+					<row><label value="Hora" /> <timebox  cols="12" format="a hh:mm:ss" onCreate="self.value = new Date()" /></row>
+					</rows>
+			</grid>
+		</hlayout>	
+		<separator height="35px"/>
+		<div align="center" style="margin-left:-68em">
+			<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>
+
+		
+		
+		
+		</tabpanel>
+    
+    </tabpanels>
+
+  </tabbox>
+    
+    </window>
+    </zk>

@@ -1,0 +1,52 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  id="modalDialog" title="Clinica" border="normal" width="660px" height="30em"
+    apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorClinica')"
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    
+
+<!--  apply="org.zkoss.bind.BindComposer" -->
+<!-- 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')" -->
+<!-- 			 id="modalDialogpaciente" title="PACIENTE" border="normal" width="660px" height="29em" -->
+  
+<!--     position="center,center" closable="true" -->
+<!--     action="show: slideDown;hide: slideUp" -->
+       
+      	<separator height="15px"/>
+			<separator height="15px"/>
+		<hlayout>
+			 <grid  width="500px">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+				    <row><label value="Rif" /><textbox value="@bind(vm.rifSelected)" rows="1"/> </row>
+					<row><label value="Nombre"/><textbox value="@bind(vm.nombreSelected)" rows="3"/> </row>
+					<row><label value="Dirección" /><textbox value="@bind(vm.direccionSelected)" rows="4"/> </row>
+					<row><label value="Telefono" /><textbox value="@bind(vm.telefonoSelected)" rows="1"/> </row>
+					</rows>
+			</grid>
+		
+		</hlayout>	
+	
+		<separator height="35px"/>
+
+
+        
+         	<separator height="15px"/>
+    		<div align="center">
+		 <button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarClinica')">Guardar</button> 
+		 
+		<!--  <button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarClinica', cmp=modalDialogclinica)" >Guardar</button>-->
+		
+		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+		</div>
+    
+    
+    
+    
+    
+</window>
+</zk>

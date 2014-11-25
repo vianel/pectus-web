@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Fundamama</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="homepage">
+
+		<!-- Header -->
+			<div id="header-wrapper">
+				<div class="container">
+
+					<!-- Header -->
+						<header id="header">
+							<div class="inner">
+							
+								<!-- Logo -->
+									<h1><a href="index.html" id="logo">Fundamama</a></h1>
+								
+								<!-- Nav -->
+									<nav id="nav">
+										<ul>
+											<li class="current_page_item"><a href="index.html">Home</a></li>
+											<li>
+												<a href="">Fundamama</a>
+												<ul>
+													<li><a href="misionvision.html">Mision y Vision</a></li>
+													<li><a href="actividades.html">Actividades</a></li>
+													<li><a href="cancerdemama.html">La Enfermedad</a></li>
+													<li>
+														<a href="">Nuestro Aporte</a>
+														<ul>
+															<li><a href="personasayudadas.html">Personas Ayudadas</a></li>
+															<li><a href="dinerootorgado.html">Dinero Otorgado</a></li>
+															<li><a href="tiposdecancer.html">Tipo de Canceres Atendidos</a></li>
+															<li><a href="porcentajedeedad.html">Porcentaje de edad de las personas atendidas</a></li>
+
+													
+														</ul>
+													</li>
+													
+												</ul>
+											</li>
+											<li><a href="donaciones.html">Donaciones</a></li>
+											<li><a href="eventos.html">Eventos</a></li>
+											<li><a href="#">Pectus</a></li>
+										</ul>
+									</nav>
+							
+							</div>
+						</header>
+
+					<!-- Banner -->
+						<div id="banner">
+							<h2><strong>Fundamama</strong>
+							<br />
+							es una fundación sin fines de lucro cuyo lema es:
+							" Una esperanza de vida "
+						</div>
+
+				</div>
+			</div>
+		
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+
+				<div class="wrapper style2">
+					<div class="inner">
+				
+						<!-- Feature 2 -->
+							<section class="container box feature2">
+								
+								<h2 class="icon fa-camera">Nuestros Eventos</h2>
+			
+
+
+    <script type="text/javascript" src="../portalfundamama/js/jssor.js"></script>
+    <script type="text/javascript" src="../portalfundamama/js/jssor.slider.js"></script>
+    <script>
+        jssor_sliderb_starter = function (containerId) {
+            //Reference http://www.jssor.com/development/slider-with-slideshow-no-jquery.html
+            //Reference http://www.jssor.com/development/tool-slideshow-transition-viewer.html
+
+            var _SlideshowTransitions = [
+            //Fade in R
+            {$Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
+            //Fade out L
+            , { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
+            ];
+
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+
+                $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+                    $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+                    $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+                    $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+                    $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+                },
+
+                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                    $SpacingX: 10,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 10                                    //[Optional] Vertical space between each item in pixel, default value is 0
+                },
+
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                                //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                },
+
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $ActionMode: 0,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+                    $DisableDrag: true                              //[Optional] Disable drag or not, default value is false
+                }
+            };
+
+            var jssor_sliderb = new $JssorSlider$(containerId, options);
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var parentWidth = jssor_sliderb.$Elmt.parentNode.clientWidth;
+                if (parentWidth)
+                    jssor_sliderb.$ScaleWidth(Math.min(parentWidth, 600));
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+
+
+            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            }
+
+            //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
+            //    $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            //}
+            //responsive code end
+        };
+    </script>
+    <!-- Jssor Slider Begin -->
+    <!-- You can move inline styles to css file or css block. -->
+    <div id="sliderb_container" style="position: relative; left: 300px; width: 600px; height: 300px; overflow: hidden; ">
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 400px;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 600px; height: 300px;
+            overflow: hidden;">
+            <div>
+                <img u=image src="../portalfundamama/images/9.jpg" />
+                <div u="thumb">5ta Carrera</div>
+            </div>
+            <div>
+                <img u=image src="../portalfundamama/images/11.jpg" />
+                <div u="thumb">"Una esperanza de vida"</div>
+            </div>
+            <div>
+                <img u=image src="../portalfundamama/images/sergio.jpg" />
+                <div u="thumb">5ta Caminata</div>
+            </div>
+            <div>
+                <img u=image src="../portalfundamama/images/6.jpg" />
+                <div u="thumb">Fundamama</div>
+            </div>
+        </div>
+        
+        <!-- ThumbnailNavigator Skin Begin -->
+        <div u="thumbnavigator" class="sliderb-T" style="position: absolute; bottom: 0px; left: 0px; height:45px; width:600px;">
+            <div style="filter: alpha(opacity=40); opacity:0.4; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px; width: 100%; height: 100%;">
+            </div>
+            <!-- Thumbnail Item Skin Begin -->
+            <div u="slides">
+                <div u="prototype" style="position: absolute; width: 600px; height: 45px; top: 0; left: 0;">
+                    <thumbnailtemplate style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; font-family: verdana; font-weight: normal; color:#fff; line-height: 45px; font-size:20px; padding-left:10px;"></thumbnailtemplate>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!-- ThumbnailNavigator Skin End -->
+        
+        <!-- Bullet Navigator Skin Begin -->
+        <!-- jssor slider bullet navigator skin 01 -->
+        <style>
+            /*
+            .jssorb01 div           (normal)
+            .jssorb01 div:hover     (normal mouseover)
+            .jssorb01 .av           (active)
+            .jssorb01 .av:hover     (active mouseover)
+            .jssorb01 .dn           (mousedown)
+            */
+            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av
+            {
+                filter: alpha(opacity=70);
+                opacity: .7;
+                overflow:hidden;
+                cursor: pointer;
+                border: #000 1px solid;
+            }
+            .jssorb01 div { background-color: gray; }
+            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
+            .jssorb01 .av { background-color: #fff; }
+            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
+        </style>
+        <!-- bullet navigator container -->
+        <div u="navigator" class="jssorb01" style="position: absolute; bottom: 16px; right: 10px;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="POSITION: absolute; WIDTH: 12px; HEIGHT: 12px;"></div>
+        </div>
+        <!-- Bullet Navigator Skin End -->
+        
+        <!-- Arrow Navigator Skin Begin -->
+        <style>
+            /* jssor slider arrow navigator skin 05 css */
+            /*
+            .jssora05l              (normal)
+            .jssora05r              (normal)
+            .jssora05l:hover        (normal mouseover)
+            .jssora05r:hover        (normal mouseover)
+            .jssora05ldn            (mousedown)
+            .jssora05rdn            (mousedown)
+            */
+            .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn
+            {
+            	position: absolute;
+            	cursor: pointer;
+            	display: block;
+                background: url(../img/a17.png) no-repeat;
+                overflow:hidden;
+            }
+            .jssora05l { background-position: -10px -40px; }
+            .jssora05r { background-position: -70px -40px; }
+            .jssora05l:hover { background-position: -130px -40px; }
+            .jssora05r:hover { background-position: -190px -40px; }
+            .jssora05ldn { background-position: -250px -40px; }
+            .jssora05rdn { background-position: -310px -40px; }
+        </style>
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 123px; left: 8px;">
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 123px; right: 8px">
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        <a style="display: none" href="http://www.jssor.com">javascript</a>
+        <!-- Trigger -->
+        <script>
+            jssor_sliderb_starter('sliderb_container');
+        </script>
+    </div>
+    <!-- Jssor Slider End -->
+
+
+
+
+
+
+
+
+
+
+							</section>
+
+						</div>
+				</div>
+				<div class="wrapper style3">
+					<div class="inner">
+						<div class="container">
+							<div class="row">
+								<div class="8u">
+
+									<!-- Article list -->
+										<section class="box article-list">
+											<h2 class="icon fa-heart">La Fundacion</h2>
+											
+											<!-- Excerpt -->
+												<article class="box excerpt">
+													<a href="#" class="image left"><img src="images/mitalogo.png" alt="" /></a>
+													<div>
+														<header>
+														<h3><a href="misionvision.html">Fundamama es</a></h3>
+														</header>
+														<p>Una organización sin fines de lucro, cuya sede es la ciudad de Barquisimeto y desde el año 2002 trabaja para ofrecer asistencia integral a las pacientes con cáncer de mama y a sus familiares, con el firme propósito de ofrecerles una mejor calidad de vida..</p>
+													</div>
+												</article>
+
+											<!-- Excerpt -->
+												<article class="box excerpt">
+													<a href="#" class="image left"><img width="130px" height="150px" src="images/cancerdemama.png" alt="" /></a>
+													<div>
+														<header>
+															
+															<h3><a href="cancerdemama.html">La Enfermedad</a></h3>
+														</header>
+														<p>El cáncer de mama es una proliferación maligna de las células epiteliales que revisten los conductos o lobulillos de la mama. Es una enfermedad clonal; donde una célula individual producto de una serie de mutaciones somáticas o de línea germinal adquiere la capacidad de dividirse sin control ni orden, haciendo que se reproduzca hasta formar un tumor. El tumor resultante, que comienza como anomalía leve, pasa a ser grave, invade tejidos vecinos y, finalmente, se propaga a otras partes del cuerpo..</p>
+													</div>
+												</article>
+
+											<!-- Excerpt -->
+												<article class="box excerpt">
+													<a href="#" class="image left"><img width="150px" heigh="130px" src="images/Pectus-Logo1-01.png" alt="" /></a>
+													<div>
+														<header>
+														
+															<h3><a href="#">Pectus</a></h3>
+														</header>
+														<p>Pectus es el nombre del sistema utilizado por la fundacion para la administracion de informacion gracias a el fundamama cuenta con una informacion precica, relevante y al instante tanto via web como en movil.</p>
+													</div>
+												</article>
+
+										</section>
+								</div>
+								<div class="4u">
+								
+									<!-- Spotlight -->
+										<section class="box spotlight">
+											<h2 class="icon fa-money">Patrocinantes</h2>
+											<article>
+												        <script type="text/javascript">
+								                        var image1 = new Image()
+								                        image1.src = "images/arichuna.jpg"
+								                        var image2 = new Image()
+								                        image2.src = "images/biotel.jpg"
+								                        var image3 = new Image()
+								                        image3.src = "images/lab.jpg"
+								                        var image4 = new Image()
+								                        image4.src = "images/imderi.jpg"
+								                        </script>
+								            <p><img src="images/imderi.jpg" width="350" height="150" name="slide" /></p>
+                        <script type="text/javascript">
+                                var step=1;
+                                function slideit()
+                                {
+                                    document.images.slide.src = eval("image"+step+".src");
+                                    if(step<4)
+                                        step++;
+                                    else
+                                        step=1;
+                                    setTimeout("slideit()",2500);
+                                }
+                                slideit();
+                        </script>
+												<header>
+													<h3><a href="#">Entre nuestros principales</a></h3>
+													<p>Patrocinantes Tenemos.</p>
+												</header>
+												<p>La boratorios Mascia,Imder,Hotel Trinitarias Suites, Biotel, Mcdonalds,.</p>
+												<p>Gracias al apoyo dado por nuestros patrocinantes hemos podido llegar hasta donde estamos ayudando cada vez a mas personas a afrontar la enfermedad.</p>
+									
+											</article>
+										</section>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<footer id="footer" class="container">
+					<div class="row">
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2>Links informativos</h2>
+									<ul class="divided">
+										<li><a href="#">http://www.senosayuda.org.ve/ </a></li>
+										<li><a href="#">https://www.aecc.es/</a></li>
+										<li><a href="#">http://www.breastcancer.org/es/sintomas</a></li>
+										<li><a href="#">http://fancalara.org/cw_site/1/link_2.php</a></li>
+										<li><a href="#">http://www.badanlara.org.ve/</a></li>
+										<li><a href="#">http://www.acelin.com.ve/</a></li>
+										<li><a href="#">http://www.cancer.net/</a></li>
+
+
+
+
+
+									</ul>
+								</section>
+						
+						</div>
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2></h2>
+									<ul class="divided">
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										
+									</ul>
+								</section>
+						
+							<!-- Links -->
+								<section>
+									<h2></h2>
+									<ul class="divided">
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+									</ul>
+								</section>
+						
+						</div>
+						<div class="6u">
+						
+							<!-- About -->
+								<section>
+									<h2> SIEMPRE HAY  UNA FORMA DE PARTICIPAR</h2>
+									<p>Si deseas realizar donaciones para ayudar a cubrir costos de consultas, exámenes, tratamientos de quimioterapia y radioterapias a pacientes de bajos recursos de diversos municipios del estado Lara y  estados vecinos.</p>
+									<a href="donaciones.html" class="button alt icon fa-arrow-circle-right">Haz click aqui</a>
+								</section>
+						
+							<!-- Contact -->
+								<section>
+									<h2>Redes Sociales</h2>
+									<div>
+										<div class="row">
+											<div class="6u">
+												<dl class="contact">
+													<dt>Twitter</dt>
+													<dd><a href="https://twitter.com/Fundamama">https://twitter.com/Fundamama</a></dd>
+													<dt>Facebook</dt>
+													<dd><a href="https://www.facebook.com/pages/FUNDAMAMA/65668945845">fundamama</a></dd>
+
+													<dt>Email</dt>
+													<dd><a href="#">fundamamalara@gmail.com</a></dd>
+												</dl>
+											</div>
+											<div class="6u">
+												<dl class="contact">
+													<dt>Direccion</dt>
+													<dd>
+														Av. Concordia entre calles 5 y 6. Urb, Del Este.
+														detrás del Sambil.
+													</dd>
+													<dt>Telefono</dt>
+													<dd>0251-8086575</dd>
+												</dl>
+											</div>
+										</div>
+									</div>
+								</section>
+						
+						</div>
+					</div>
+					<div class="row">
+						<div class="12u">
+							<div id="copyright">
+								<ul class="menu">
+									<li>&copy; Todos los derechos Reservados</li><li>Diseño: ChronoShift</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<zk>
+
+<window id="ventanaresultadoactividad" title="." border="normal"  width="870px"
+		position="center,center"  sclass="window-popup" closable="true">
+				
+		<panel>	
+		 <panelchildren>
+
+				 <grid  >
+					<columns>
+						<column label="" width="150px"/>
+						<column label=""/>
+						<column label="" width="150px"/>
+						<column label=""/>
+					</columns>
+					<rows>
+					 	<row><label value="Fecha" /><datebox /><label value="Total Asistentes" /><intbox /></row>
+						<row><label value="Hora" /> <timebox  cols="12" format="a hh:mm:ss" onCreate="self.value = new Date()" /><label value="Descripcion" /><textbox rows="4"/></row>
+						<row><label value="Recursos Utilizados" /><textbox rows="4"/><label value="Obeservaciones" /><textbox rows="4"/> </row>
+						<row><label value="Monto(BsF)" /><intbox /> <label value="Duracion(Horas)" /><intbox />  </row>
+						
+
+			    	</rows>
+				</grid>
+				
+
+				<separator height="25px"/>
+				<div align="center">
+					<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+					<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+					<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+				</div>
+		 </panelchildren>
+		</panel>
+</window>
+</zk>

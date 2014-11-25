@@ -1,0 +1,37 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="PACIENTES" border="normal" width="460px"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+    <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.FilterViewModel')">
+    <radiogroup id="sv1" />
+        <grid model="@load(vm.foodModel)">
+        
+            <columns>
+                <column hflex="1" label="Cedula" />
+                <column hflex="2" label="Nombre" align="center" />
+                <column hflex="1" label="Apellido" />
+                <column hflex="1" label="" align="center" />
+            </columns>
+            <template name="model">
+            <row>
+                <label value="@load(each.cedula)" />
+                <label value="@load(each.nombre)" />
+                <label value="@load(each.apellido)" />
+                <radio id="@load(each.id)" radiogroup="sv1" />
+            </row>
+        </template>
+            
+        </grid>
+       <separator height="35px"/>
+		<div align="center">
+		<button width="70px" height="30px" sclass="btn-success">Aceptar</button>
+
+		</div>
+		</div>
+    </vlayout>
+</window>
+</zk>

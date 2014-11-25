@@ -1,0 +1,41 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoEstudioVM')"
+			 id="modalDialog" title="TIPO ESTUDIO" border="normal" width="320px" height="26em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Estudios"/>
+      
+
+    </tabs>
+    <tabpanels>
+        <tabpanel>
+        
+        
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.nombreSelected)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em" value="Descripcion"/><textbox value="@bind(vm.descripcionSelected)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>
+				
+			
+				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarTipoEstudio')">Guardar</button>
+				
+				
+		</tabpanel>
+        <tabpanel>
+        	<label style="display:block" value="Nombre" /><intbox />
+			<label style="display:block" value="Descripcion" /><textbox />
+			
+        </tabpanel>
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+</window>
+</zk>

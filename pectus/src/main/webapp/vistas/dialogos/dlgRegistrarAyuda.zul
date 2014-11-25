@@ -1,0 +1,104 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="AYUDA" border="normal" width="1060px" height="29em"    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp" apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('am') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+
+
+	   <hlayout>
+	
+			 <grid  width="500px">
+				<columns>
+					<column label="Datos de la Ayuda" width="150px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Pacientes"/>
+					
+					<bandbox id="bd" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm.pacienteSelected)" onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(vm.pacientes)">
+				                <listhead>
+				                    <listheader label="PACIENTES" />
+				                </listhead>
+				                 <template name="model" var="paciente">
+				                <listitem>
+				                  <listcell  label="@load(paciente.cedula)" />
+				                  <listcell  label="@load(paciente.nombre)" />
+				                  <listcell  label="@load(paciente.apellido)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+				    </row>
+					
+					
+					<row><label value="Patologia"/>
+					
+					<bandbox id="bd1" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox selectedItem="@bind(vm.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.diagnosticos)">
+				                <listhead>
+				                    <listheader label="PATOLOGIAS" />
+				                </listhead>
+				                 <template name="model" var="patologia">
+				                <listitem>
+				                  <listcell  label="@load(patologia.nombre)" />
+				                  <listcell  label="@load(patologia.observacion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+				    </row>
+					
+					
+					<row><label value="Motivo" /><textbox value="@bind(vm.motivoSelected)" rows="4"/></row>
+					
+					</rows>
+					
+			</grid>
+			
+			
+			
+			<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="true" model="@load(vm.estudiosClinica)">
+		        <listhead>
+		            <listheader label="Clinica" />
+		            <listheader label="Estudio" />
+		            <listheader label="Monto" />
+		        </listhead>
+		        <template name="model" var="estudiosClinica">
+		        <listitem>
+		            <listcell  label="@load(estudiosClinica.clinica.nombre)" />
+		            <listcell  label="@load(estudiosClinica.estudio.nombre)" />
+		            <listcell  label="@load(estudiosClinica.monto)" />
+		        </listitem>
+		  		</template>
+		    </listbox>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</hlayout>	
+		
+    
+		<separator height="35px"/>
+		<div align="center" >
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarAyuda')">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>
+    
+    </window>
+    </zk>

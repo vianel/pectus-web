@@ -1,0 +1,77 @@
+<div id="sidebar" sclass="sidebar" apply="vistas.SidebarComposer">
+	<!-- Shortcuts Button-->
+	<div class="shortcuts">
+		<!-- Display when expanded -->
+		<div class="shortcuts-expanded">
+			<button type="button" style="background-color:#F7AFF3;" iconSclass="z-icon-pencil" tooltiptext="Redactar Mensaje"/>
+			<button type="button" style="background-color:#6FD7BB;" iconSclass="z-icon-list-alt" tooltiptext="Eventos"/>
+			<button type="button" style="background-color:#F7AFF3;" iconSclass="z-icon-user" tooltiptext="Pacientes"/>
+		</div>
+		<!-- Display when collapsed -->
+		<div class="shortcuts-collapsed">
+			<button type="button" class="btn-success"/>
+			<button type="button" class="btn-info"/>
+			<button type="button" class="btn-warning"/>
+			<button type="button" class="btn-danger"/>
+		</div>
+	</div>
+	<!-- Navigation List -->
+	<navbar id="navbar" sclass="nav-list" orient="vertical">
+		<navitem label="Inicio" iconSclass="z-icon-dashboard" href="../home/index.zul"/>
+		<nav label="Paciente" iconSclass="z-icon-file-o">
+			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Paciente" href="../gestionPaciente/index_getionPaciente.zul" iconSclass="z-icon-pencil"/>
+								
+				<navitem label="Clinica" iconSclass="z-icon-pencil" href="../gestionClinica/index_gestionClinica1.zul" />
+				<navitem label="Cita" iconSclass="z-icon-pencil" href="../gestionPaciente/index_gestionCita.zul"/>
+			</nav>
+			<navitem label="Solicitudes de Ayuda" href="../gestionPaciente/index_gestionClinica.zul" iconSclass="z-icon-angle-double-right"/>
+			<navitem label="Historiales" iconSclass="z-icon-angle-double-right"/>
+
+		</nav>
+		<nav label="Voluntarios" iconSclass="z-icon-edit">
+			<navitem label="Registrar datos personales" iconSclass="z-icon-angle-double-right" href="../gestionvoluntarios/index_gestionvoluntario.zul"/>
+			<navitem label="Asignar Comisiones" iconSclass="z-icon-angle-double-right"/>
+			<navitem label="Consultar" iconSclass="z-icon-angle-double-right"/>
+		</nav>
+		<navitem label="Actividades" iconSclass="z-icon-flag" href="../gestionactividades/index_gestionactividades.zul"  sclass="grey" />
+	
+		
+		<nav label="Patrocinadores" iconSclass="z-icon-list">
+			<navitem label="Registrar Patrocinador" iconSclass="z-icon-angle-double-right" href="../gestionpatrocinantes/index_gestionpatrocinante.zul"/>
+			<navitem label="Registrar Donaciones" iconSclass="z-icon-angle-double-right"/>
+		</nav>
+		<nav id="calitem" label="Eventos" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
+				<navitem label="Registrar Evento" iconSclass="z-icon-edit" href="../gestioneventos/index_gestioneventos.zul"/>
+			
+				<navitem label="Ver Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-edit"/>
+		</nav>
+
+
+		
+
+		<nav label="Usuario" iconSclass="z-icon-user">
+			<navitem label="Registrar Usuario" iconSclass="z-icon-angle-double-right"/>
+			<navitem label="Ver Usuarios" iconSclass="z-icon-angle-double-right"/>
+		</nav>
+
+
+			
+	</navbar>
+	<navseparator />
+	<div sclass="page-header" align="center"><label value="Calendario de Eventos" /></div>
+	<separator/>
+	<calendar />
+	 
+
+	
+	<!-- Toggler 
+	<div sclass="sidebar-collapse">
+		<a id="toggler" iconSclass="z-icon-angle-double-left"/>
+	</div> -->
+	<!-- Tooptip for Calender Navitem -->
+	<popup id="calpp" zclass="tooltip" sclass="right tooltip-error cal">
+		<span zclass="tooltip-arrow"/>
+		<label zclass="tooltip-inner" value="2 Eventos"/>
+	</popup>
+</div>

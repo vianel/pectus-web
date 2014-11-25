@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Fundamama</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+<script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartpoblacionayudada",
+    {
+ 
+       data: [
+      {
+         type: "pie",
+       showInLegend: true,
+       dataPoints: [
+       {  y: 25, legendText:"Quimioterapias", indexLabel: "Pacientes que se realizan quimioterapias" },
+       {  y: 35, legendText:"Prevenciones", indexLabel: "Pacientes que se examenes Preventivos" },
+       {  y: 30, legendText:"Cirugia", indexLabel: "Pacientes que se realizaron la cirugía con conservación del seno" },
+       {  y: 15, legendText:"Sin Beneficio", indexLabel: "Pacientes sin poder obtener beneficio" }
+       ]
+     }
+     ]
+   });
+
+    chart.render();
+  }
+  </script>
+  <script type="text/javascript" src="js/canvasjs/canvasjs.min.js"></script>
+
+	</head>
+	<body class="right-sidebar">
+
+		<!-- Header Wrapper -->
+			<div id="header-wrapper">
+				<div class="container">
+
+					<!-- Header -->
+										<header id="header">
+							<div class="inner">
+							
+								<!-- Logo -->
+									<h1><a href="index.html" id="logo">Fundamama</a></h1>
+								
+								<!-- Nav -->
+									<nav id="nav">
+										<ul>
+											<li ><a href="index.html">Home</a></li>
+											<li class="current_page_item">
+												<a href="">Fundamama</a>
+												<ul>
+													<li><a href="misionvision.html">Mision y Vision</a></li>
+													<li><a href="actividades.html">Actividades</a></li>
+													<li><a href="cancerdemama.html">La Enfermedad</a></li>
+													<li>
+														<a href="">Nuestro Aporte</a>
+														<ul>
+															<li><a href="personasayudadas.html">Personas Ayudadas</a></li>
+															<li><a href="dinerootorgado.html">Dinero Otorgado</a></li>
+															<li><a href="tiposdecancer.html">Tipo de Canceres Atendidos</a></li>
+															<li><a href="porcentajedeedad.html">Porcentaje de edad de las personas atendidas</a></li>
+
+													
+														</ul>
+													</li>
+													
+												</ul>
+											</li>
+											<li><a href="donaciones.html">Donaciones</a></li>
+											<li><a href="eventos.html">Eventos</a></li>
+											<li><a href="#">Pectus</a></li>
+										</ul>
+									</nav>
+							
+							</div>
+						</header>
+
+				</div>
+			</div>
+		
+		<!-- Main Wrapper -->
+			<div id="main-wrapper">
+				<div class="wrapper style2">
+					<div class="inner">
+						<div class="container">
+							<div class="row">
+								<div class="8u">
+									<div id="content">
+
+										<!-- Content -->
+									
+											<article>
+												<header class="major">
+													<h2>Poblacion Beneficiada</h2>
+													<p>por fundamama en la region del estado Lara</p>
+												</header>
+												
+												<div id="chartpoblacionayudada" style="height: 300px; width: 100%;">
+  																												</div>
+												
+												<p>En el grafico se muestran los porcentajes de como fundamama ha ayudado a la poblacion de personas en la region del estado Lara que poseen cancer de mama.</p>
+												
+												<h3>Poblacion de Estudio</h3>
+												<p>Para encontrar los resultados del estudio mostrado anteriormente se utilizaron los datos que el sistema <strong>Pectus</strong> arroja donde se tomo la poblacion que acudio a dicha fundacion por cancer de mama, la misma fue dividida en funcion de los principales grupos en que fundamama organiza a sus pacientes, de tal manera de mostrar los beneficios y el aporte que la fundacion hacia la poblacion que padece de esta enfermedad.</p>
+
+												<p><strong>La quimioterapia</strong> (quimio) es un tratamiento con medicamentos contra el cáncer que se pueden administrar por vía intravenosa (inyectados en la vena) o por vía oral. Los medicamentos pasan a través del torrente sanguíneo para llegar a las células cancerosas en la mayoría de las partes del cuerpo. La quimioterapia se administra en ciclos, de manera que cada período de tratamiento va seguido de un período de recuperación. Por lo general, el tratamiento dura varios meses.</p>
+											</article>
+								
+									</div>
+								</div>
+								<div class="4u">
+									<div id="sidebar">
+
+										<!-- Sidebar -->
+									
+											<section>
+												<header class="major">
+													<h2>Cirugía con conservación del seno</h2>
+												</header>
+												<p>Los cánceres en etapa I pueden tratarse con cirugía con conservación del seno (BCS; a veces llamada tumorectomía o mastectomía parcial) o mastectomía. Los ganglios linfáticos también necesitan ser evaluados ya sea con una biopsia de ganglio centinela o con una disección de ganglio linfático axilar. La reconstrucción del seno puede hacerse al mismo tiempo que la cirugía o posteriormente...</p>
+												<footer>
+													<a href="cancerdemama.html" class="button icon fa-info-circle">Sepa mas</a>
+												</footer>
+											</section>
+
+											<section>
+												<header class="major">
+													<h2>Pectus</h2>
+												</header>
+													<p>El sistema pectus utilizado por fundamama para la gestion de toda la informacion que se maneja dentro de la fundacion, es capaz de realizar esta grafica basandose en toda la informacion que dicha fundacion utiliza para atender a todas las personas que acuden a la misma.</p>												<footer>
+													<a href="#" class="button icon fa-arrow-circle-o-right">Mas sobre pectus</a>
+												</footer>
+											</section>
+								
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		<!-- Footer Wrapper -->
+			<div id="footer-wrapper">
+				<footer id="footer" class="container">
+					<div class="row">
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2>Links informativos</h2>
+									<ul class="divided">
+										<li><a href="#">http://www.senosayuda.org.ve/ </a></li>
+										<li><a href="#">https://www.aecc.es/</a></li>
+										<li><a href="#">http://www.breastcancer.org/es/sintomas</a></li>
+										<li><a href="#">http://fancalara.org/cw_site/1/link_2.php</a></li>
+										<li><a href="#">http://www.badanlara.org.ve/</a></li>
+										<li><a href="#">http://www.acelin.com.ve/</a></li>
+										<li><a href="#">http://www.cancer.net/</a></li>
+
+
+
+
+
+									</ul>
+								</section>
+						
+						</div>
+						<div class="3u">
+						
+							<!-- Links -->
+								<section>
+									<h2></h2>
+									<ul class="divided">
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										
+									</ul>
+								</section>
+						
+							<!-- Links -->
+								<section>
+									<h2></h2>
+									<ul class="divided">
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+									</ul>
+								</section>
+						
+						</div>
+						<div class="6u">
+						
+							<!-- About -->
+								<section>
+									<h2> SIEMPRE HAY  UNA FORMA DE PARTICIPAR</h2>
+									<p>Si deseas realizar donaciones para ayudar a cubrir costos de consultas, exámenes, tratamientos de quimioterapia y radioterapias a pacientes de bajos recursos de diversos municipios del estado Lara y  estados vecinos.</p>
+									<a href="donaciones.html" class="button alt icon fa-arrow-circle-right">Haz click aqui</a>
+								</section>
+						
+							<!-- Contact -->
+								<section>
+									<h2>Redes Sociales</h2>
+									<div>
+										<div class="row">
+											<div class="6u">
+												<dl class="contact">
+													<dt>Twitter</dt>
+													<dd><a href="https://twitter.com/Fundamama">https://twitter.com/Fundamama</a></dd>
+													<dt>Facebook</dt>
+													<dd><a href="https://www.facebook.com/pages/FUNDAMAMA/65668945845">fundamama</a></dd>
+
+													<dt>Email</dt>
+													<dd><a href="#">fundamamalara@gmail.com</a></dd>
+												</dl>
+											</div>
+											<div class="6u">
+												<dl class="contact">
+													<dt>Direccion</dt>
+													<dd>
+														Av. Concordia entre calles 5 y 6. Urb, Del Este.
+														detrás del Sambil.
+													</dd>
+													<dt>Telefono</dt>
+													<dd>0251-8086575</dd>
+												</dl>
+											</div>
+										</div>
+									</div>
+								</section>
+						
+						</div>
+					</div>
+					<div class="row">
+						<div class="12u">
+							<div id="copyright">
+								<ul class="menu">
+									<li>&copy; Todos los derechos Reservados</li><li>Diseño: ChronoShift</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+
+	</body>
+</html>

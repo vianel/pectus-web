@@ -1,0 +1,63 @@
+
+
+<zk xmlns:n="native">
+  <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoEstudio"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoEstudioVM')">
+			
+
+		<button id="btnNuevoTipoEstudio" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoEstudio')" >NUEVO</button>
+
+	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modeltipoestudio)"  selectedItem="@bind(vm.selectedItem)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  width="100px">
+          <textbox instant="true" width="100px" value="@bind(vm.tipoEstudioFilter.nombre)"  onChange="@command('changeFilter')" />
+           </listheader>       
+          
+          <listheader hflex="1" label="Descripcion" width="50%" sort="auto(descripcion)">
+          <textbox instant="true" width="100px" value="@bind(vm.tipoEstudioFilter.descripcion)" onChange="@command('changeFilter')" />  
+		   </listheader> 	
+		
+		<listheader hflex="1" label="Editar">
+               
+				   </listheader> 
+				  </listhead>         
+               
+           <template name="model" var="item">
+           <listitem>
+                  <listcell label="@load(item.tipoEstudio.nombre) @save(each.tipoestudio.nombre, before='modificarTipoEstudio')" />
+                  <listcell label="@load(item.tipoEstudio.descripcion)  @save(each.tipoestudio.descripcion, before='modificarTipoEstudio')" />
+                
+                  <listcell>
+                  <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success"  onClick="@command('abrirDialogoEditarTipoEstudio'">Editar</button>
+					
+                     </hbox></div>
+                   </listcell>
+               </listitem>
+           </template>
+</listbox>
+	
+		
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+     </tabbox>
+ 
+
+</zk>

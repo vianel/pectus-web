@@ -1,0 +1,145 @@
+
+<zk>
+		<panel>
+			<panelchildren>
+			<separator height="15px"/>
+		<div style="width: 5em;margin-left: 25em;margin-top: 7.9em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
+			<button autodisable="self" sclass="btn-success">+</button>
+		</div>
+		<div style="width: 5em;margin-left: 25em;margin-top:11.5em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
+			<button  autodisable="self" sclass="btn-success">+</button>
+		</div>	
+
+				<grid>
+
+					<columns>
+						<column label="" width="120px" />
+						<column label="" width="340px" />
+					</columns>
+
+					<rows>
+						<row>
+							Nombre:
+							<textbox id="txtNombre"
+								value="${win$composer.inventoryItem.title}"
+								constraint="no empty" />
+						</row>
+						<row>
+							Fecha:
+							<datebox id="txtFecha"
+								value="${win$composer.inventoryItem.createdDate}"
+								format="yyyy/MM/dd" constraint="no empty" />
+						</row>
+						<row>
+							Descripcion:
+							<textbox id="txtDescripcion"
+								value="${win$composer.inventoryItem.title}"
+								constraint="no empty" />
+						</row>
+						<row>
+							Lugar:
+							<combobox>
+								<comboitem label="Escuela de Lara" />
+								<comboitem label="Gobernacion de Aragua" />
+							</combobox>
+							
+						</row>
+						
+						<row>
+							Solicitud de Evento:
+							<combobox>
+								<comboitem label="Caminata 10k" />
+								<comboitem label="Bingo" />
+							</combobox>
+						</row>
+						
+
+					</rows>
+					
+				</grid>
+				<separator height="35px"/>
+		<div style="margin-left: -79em;" align="center">
+		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+		<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>
+<label pre="true" value="  "/>
+
+				<tabbox>
+					<tabs>
+						<tab label="Patrocinadores" />
+						<tab label="Voluntario" />
+						
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+						<div >
+							
+						</div>
+							<listbox>
+								<listhead>
+									<listheader label="Responsable"
+										sort="auto" width="100px"/>
+									<listheader label="Patrocinador"
+										sort="auto" width="100px"/>
+									<listheader label="Correo del Responsable"
+										sort="auto" width="200px"/>
+									<listheader label="Ayuda"
+										sort="auto" width="150px"/>
+								</listhead>
+								<listitem>
+									<listcell label="Jose Andrade" />
+									<listcell label="Kraft" />
+									<listcell label="josekraft@gmail.com" />
+									<listcell label="1000 franelas" />
+								</listitem>
+								<listitem>
+									<listcell label="Pepita Perez" />
+									<listcell label="Empresas Polar" />
+									<listcell label="polar@gmail.com" />
+									<listcell label="10 cajas de agua" />
+								</listitem>
+							</listbox>
+
+
+						</tabpanel>
+
+						<tabpanel>
+						<div >
+							
+						</div>
+							<listbox>
+								<listhead>
+									<listheader label="Comision"
+										sort="auto" width="100px"/>
+									<listheader label="Voluntario"
+										sort="auto" />
+								</listhead>
+								<listitem>
+									<listcell label="Educacion" />
+									<listcell label="Juanita Gómez" />
+								</listitem>
+								<listitem>
+									<listcell label="Finanzas" />
+									<listcell label="Pedro Perez" />
+								</listitem>
+								<listitem>
+									<listcell label="Apoyo" />
+									<listcell label="Andrea Perez" />
+								</listitem>
+								<listitem>
+									<listcell label="Educacion" />
+									<listcell label="Jose Perez" />
+								</listitem>
+							</listbox>
+
+						</tabpanel>
+												
+					</tabpanels>
+				</tabbox>
+	
+
+			</panelchildren>
+		</panel>
+
+</zk>

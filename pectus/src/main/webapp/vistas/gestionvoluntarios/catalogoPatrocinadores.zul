@@ -1,0 +1,49 @@
+<?page title="Catalogo de Patrocinadores" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Catálogo de Patrocinadores" border="normal" width="500px"
+		position="center,center" closable="true">
+<grid>
+		<columns>
+			<column label="" width="100px" />
+			<column label="" width="400px" />
+		</columns>
+		<rows>
+			<row>	
+				
+			</row>
+			<row>	
+				
+
+			</row>
+		</rows>
+	</grid>
+	<hlayout>
+	Buscar:<textbox /> 
+				<button label="Buscar" image="Img/find24.png" />
+	</hlayout>
+	
+				
+	<listbox >
+					<listhead>
+						<listheader label="Rif" sort="auto" />
+						<listheader label="Nombre" sort="auto" />
+						<listheader label="Direccion" sort="auto" />						
+					</listhead>
+					<listitem>
+						<listcell label="111" />
+						<listcell label="Coca-Cola" />
+						<listcell label="Barquisimeto" />
+					</listitem>
+					<listitem>
+						<listcell label="222" />
+						<listcell label="Empresas Polar" />
+						<listcell label="Barquisimeto Centro" />
+					</listitem>
+					<listitem>
+						<listcell label="333" />
+						<listcell label="InterNet" />
+						<listcell label="Caracas" />
+					</listitem>
+				</listbox>
+</window>
+</zk>

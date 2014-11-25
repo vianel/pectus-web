@@ -1,0 +1,37 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('pm')@init('com.ucla.frontend.pectus.services.Testunirest')">
+
+		<listbox model="@bind(pm.listaModelPaciente)"
+			selectedItem="@bind(pm.pacienteSeleccionado)"
+			vflex="1">
+			<listhead>
+				<listheader label="ID" width="30px" />
+				<listheader label="Cédula" hflex="min" />
+				<listheader label="Nombre" hflex="min" />
+				<listheader label="Apellido" hflex="min" />
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell>
+						<label value="@bind(each.nombre)" />
+					</listcell>
+					<listcell>
+						<label value="@bind(each.apellido)" />
+					</listcell>
+					<listcell>
+						<label value="@bind(each.cedula)" />
+					</listcell>
+					<listcell>
+						<label value="@bind(each.direccion)" />
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+
+		
+
+
+	</window>
+</zk>

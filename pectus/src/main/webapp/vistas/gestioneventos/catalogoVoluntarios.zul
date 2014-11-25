@@ -1,0 +1,49 @@
+<?page title="Catálogo de Voluntarios" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Catálogo de Voluntarios" border="normal" width="500px"
+		position="center,center" closable="true">
+<grid>
+		<columns>
+			<column label="" width="100px" />
+			<column label="" width="400px" />
+		</columns>
+		<rows>
+			<row>	
+				
+			</row>
+			<row>	
+				
+
+			</row>
+		</rows>
+	</grid>
+	<hlayout>
+	Buscar:<textbox /> 
+				<button label="Buscar" image="Img/find24.png" />
+	</hlayout>
+	
+				
+	<listbox >
+					<listhead>
+						<listheader label="Cedula" sort="auto" />
+						<listheader label="Nombre" sort="auto" />
+						<listheader label="Ciudad" sort="auto" />						
+					</listhead>
+					<listitem>
+						<listcell label="111" />
+						<listcell label="Pedro Pérez" />
+						<listcell label="Barquisimeto" />
+					</listitem>
+					<listitem>
+						<listcell label="222" />
+						<listcell label="Maria Juana" />
+						<listcell label="Cabudare" />
+					</listitem>
+					<listitem>
+						<listcell label="333" />
+						<listcell label="Frank Gomez" />
+						<listcell label="Quibor" />
+					</listitem>
+				</listbox>
+</window>
+</zk>

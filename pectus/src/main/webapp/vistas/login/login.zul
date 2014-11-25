@@ -1,0 +1,41 @@
+<?page title="Acceso" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css"	href="/bootstrap/v3/bootstrap/css/bootstrap.css" ?>
+<zk xmlns:w="client" xmlns:n="native">
+<div align="center" height="300px" >
+<vbox align="center">
+
+<a href="http://127.0.0.1:52611/portalfundamama/index.html"><image src="../../assets/pectuslogo1.png" ></image></a>
+<div class="page-header">
+	<html>
+		<![CDATA[<h1>Acceda al sistema Pectus</h1>]]>
+	</html>
+</div>
+<window id="loginWin"  draggable="false" title="" border="false" width="500px" height="300px" visible="true"
+>
+	<div align="center">
+	
+	
+			<grid>
+			<rows>
+				<row>Usuario: <textbox id="login" value="" maxlength="20"/></row>
+				<row>Contraseña: <textbox id="password" value="" type="password" maxlength="16"/></row>
+			</rows>
+			</grid>
+
+			<div class="btn-group btn-group-lg" align="center">
+			<space></space>
+				<button class="btn-default btn-lg" label="Entrar" id="btnInicioSesion" width="100px" height="50px" href="http://localhost:8080/ui-examples/vistas/home/index.zul"/>
+				<button sclass="btn-primary" class="btn-default btn-lg" label="Registrar" width="100px" height="50px" id="btnRegistrarUsuario" />
+		
+			</div>
+			
+
+	
+	
+
+	</div>
+			<a href="#">¿Olvidaste tu contraseña?</a>
+</window>
+</vbox>
+</div>
+</zk>
