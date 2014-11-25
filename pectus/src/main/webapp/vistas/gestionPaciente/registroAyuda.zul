@@ -1,175 +1,73 @@
 <zk xmlns:n="native">
   <!-- Use anchor as Tabbox's header-->
-  <a label="Ficha del Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
-  <!-- Tabbox -->
+<!--   <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/> -->
+
   <tabbox >
     <tabs>
-      <tab label="Informacion de la Ayuda"/>
-   		<tab label="Evaluacion"/>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Ayudas"/>
+    
     </tabs>
     <tabpanels>
-  	  <!-- Tab Registro de Datos -->
-      <tabpanel>
-      	<separator height="15px"/>
-      	<div style="width: 5em;margin-left: 25em;margin-top: 4.4em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
-			<button id="btnBuscarPaciente" autodisable="self" sclass="btn-success">Buscar</button>
-		</div>
-		<div style="width: 5em;margin-left: 25em;margin-top: 6.9em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
-			<button id="btnBuscarDiagnostico" autodisable="self" sclass="btn-success">Buscar</button>
-		</div>
-		<div style="width: 5em;margin-left: 12em;margin-top:9.5em;position: absolute;z-index: 1;" apply="com.ucla.frontend.pectus.controllers.Dialogo">
-			<button id="btnExamenes" autodisable="self" sclass="btn-success">+</button>
-		</div>	
-			<separator height="15px"/>
-		<hlayout>
-			 <grid  width="500px">
-				<columns>
-					<column label="Datos de la ayuda" width="150px"/>
-					<column label=""/>
-				</columns>
-				<rows>
-					<row><label value="Paciente"/><textbox disabled="true"/> </row>
-					<row><label value="Diagnostico"/><textbox disabled="true"/> </row>
-					<row><label value="Asignar Examanes"/></row>
-					<row><label value="Motivo de Solicitud" /><textbox rows="4"/> </row>
-					<row><label value="Porcentaje de Aprobacion" /><intbox /> </row>
-					<row><label value="Fecha de Solicitud" /><datebox /></row>
-					<row><label value="Fecha de Aceptacion" /><datebox /></row>
-					<row><label value="Observaciones" /><textbox rows="4"/> </row>
-					</rows>
-			</grid>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
 			
-			      
-		
-			
-		</hlayout>	
-		<separator height="35px"/>
-		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
-		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
-		<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
-		</div>
+	
+		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >NUEVO</button>
 
-		
-		
-		
-		</tabpanel>
-		<tabpanel>
-			<hlayout spacing="0" height="400px">
-			<listbox sclass="employee-list" vflex="true" hflex="1">
-	            <auxhead>
-	                <auxheader colspan="3" class="topic">Lista de Pacientes a ayudar</auxheader>
-	            </auxhead>
-	            <listhead>
-	                <listheader label="Ficha" width="80px" align="center" />
-	                <listheader label="Nombre y apellido" align="center" />
-	                <listheader label="Diagnostico" width="80px" align="center" />
-	                <listheader label="Motivo" align="center" />
-	                <listheader label="Observaciones" align="center" />
-	            </listhead>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="asdasd" />
-	                     <listcell label="asdasd" />
-	                </listitem>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="asdasd" />
-	                     <listcell label="asdasd" />
-	                </listitem>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="100" />
-	                </listitem>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="asdasd" />
-	                     <listcell label="asdasd" />
-	                </listitem>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="asdasd" />
-	                     <listcell label="asdasd" />
-	                </listitem>
-	                <listitem>
-	                    <listcell label="001" />
-	                    <listcell label="Pepita Perez" />
-	                    <listcell label="Cancer" />
-	                     <listcell label="asdasd" />
-	                     <listcell label="asdasd" />
-	                </listitem>
-	        </listbox>
-	        <window sclass="card-pre" title="Examenes a Realizar" hflex="1" vflex="true" border="normal">
-	        
-                <listbox id="box" width="100%" >
-			        <listhead >
-			            <listheader label="Nombre" sort="auto" />
-			            <listheader label="Descripcion" sort="auto" />
-			            <listheader label="Clinica" sort="auto" />
-			            <listheader label="Monto" sort="auto" />
-			        </listhead>
-			        <listitem>
-			            <listcell label="Resonancia magnética de las mamas" />
-			            <listcell label="Para ayudar a identificar mejor la tumoración mamaria o evaluar un cambio anormal en una mamografía." />
-			            <listcell label="Policlínica Barquisimeto" />
-			            <listcell label="100" />
-			        </listitem>
-			        <listitem>
-			            <listcell label="Ecografía de las mamas" />
-			            <listcell label="para mostrar si la tumoración es sólida o está llena de líquido.
-Biopsia de mama: usando métodos como biopsia aspirativa, guiada por ecografía, estereotáctica o abierta." />
-			            <listcell label="Policlínica Barquisimeto" />
-			            <listcell label="200" />
-			        </listitem>
-		
-			      
-   			 </listbox>
-            </window>
-   		 </hlayout>
-   		 
-   		 <grid>
-        <auxhead>
-            <auxheader colspan="5" class="topic">Porcentaje de Ayuda</auxheader>
+	
+	<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelayuda) " >
+		<auxhead>
+            <auxheader label="LISTA DE PACIENTES" colspan="6" />
         </auxhead>
-        <columns>
-            <column label="Tipo de Ayuda" align="center" />
+        
+        <auxhead sclass="category-center">
+	        <auxheader colspan="1">
+	            <textbox instant="true" width="100px" 
+	                value="@bind(vm.ayudaFilter.cedula)" onChange="@command('changeFilter')" />
+	        </auxheader>
+			
+			<auxheader colspan="1">
+                <textbox instant="true"  width="100px"
+                    value="@bind(vm.ayudaFilter.patologia)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+            
+     
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Paciente</column>
+            <column hflex="1">Patologia</column>
+            <column hflex="1">Aprobacion</column>
+            <column hflex="1">Motivo</column>
+            <column hflex="1">Fecha Solicitud</column>
+            <column hflex="1">Fecha Aceptacion</column>
+          
+			<column hflex="1">Editar</column>
             
         </columns>
-        <rows>
+        <template name="model">
             <row>
-            <combobox><comboitem label="100%"/><comboitem label="50%"/></combobox>
-            
+                <label value="@load(each.paciente.cedula)"/>
+                <label value="@load(each.diagnostico.nombre) " />
+                <label value="@load(each.aprobacion)" />
+            	<label value="@load(each.motivo)" />
+             <label value="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')" />
+             <label value="@load(each.fechaAprobacion)" />
+               	<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">Editar</button>
+        
             </row>
-        </rows>
-    </grid>
-    <separator height="35px"/>
-		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
-		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
-		<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
-		</div>
+        </template>
+        
+        
+	</grid>			
+</div>
+		
 		</tabpanel>
-<tabpanel>
-
- 
-
-
-</tabpanel>
-
-
-    
+		
     </tabpanels>
-
   </tabbox>
 
 </zk>

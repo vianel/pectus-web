@@ -29,6 +29,55 @@ public class AyudaView {
 
 	
 	
+
+
+	private Diagnostico diagnosticoSelected;
+	private Paciente pacienteSelected;
+	private String motivoSelected;
+	private Ayuda ayudaSelected;
+	
+	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
+	private AyudaFilter ayudaFilter = new AyudaFilter();
+	private Ayuda selected;
+	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
+	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
+	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
+	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
+	private List<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
+	
+	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
+	
+	@Init
+	public void init(){
+		selected = ayudas.get(0);
+		getmodelpaciente();
+		getmodelayuda();
+	}
+	
+
+	
+	public ListModel<Ayuda> getmodelayuda() {
+        return new ListModelList<Ayuda>(ayudas);
+    }
+	
+	@Command
+    @NotifyChange({"modelayuda", "footer"})
+    public void changeFilter() {
+		currentAyuda = AyudaFilter.getFilterAyudas(ayudaFilter);
+    }
+	
+	public AyudaFilter getAyudaFilter() {
+		return ayudaFilter;
+	}
+
+
+
+	public void setAyudaFilter(AyudaFilter ayudaFilter) {
+		this.ayudaFilter = ayudaFilter;
+	}
+
+
+
 	public Diagnostico getDiagnosticoSelected() {
 		return diagnosticoSelected;
 	}
@@ -62,30 +111,6 @@ public class AyudaView {
 	public void setMotivoSelected(String motivoSelected) {
 		this.motivoSelected = motivoSelected;
 	}
-
-	private Diagnostico diagnosticoSelected;
-	private Paciente pacienteSelected;
-	private String motivoSelected;
-	private Ayuda ayudaSelected;
-	
-	
-	private Ayuda selected;
-	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
-	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
-	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
-	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
-	private List<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
-	
-	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
-	
-	@Init
-	public void init(){
-		selected = ayudas.get(0);
-		getmodelpaciente();
-		
-	}
-	
-	
 
 	public List<EstudioClinica> getEstudiosClinica() {
 		return estudiosClinica;

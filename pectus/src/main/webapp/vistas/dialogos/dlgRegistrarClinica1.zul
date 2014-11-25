@@ -1,0 +1,44 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="Clinica" border="normal" width="660px" height="30em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    
+
+ 
+       
+      	<separator height="15px"/>
+			<separator height="15px"/>
+		<hlayout>
+			 <grid  width="500px">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+				    <row><label value="Rif" /><textbox rows="1"/> </row>
+					<row><label value="Nombre"/> <combobox><comboitem label="Clinica ONG"/><comboitem label="Clinica Canabal"/><comboitem label="Clinica Los Leones"/></combobox><button tooltiptext="Agregar una nueva Clinica" sclass="btn-success" label="+"/></row>
+					<row><label value="Dirección" /><textbox rows="4"/> </row>
+					<row><label value="Telefono" /><textbox rows="2"/> </row>
+					</rows>
+			</grid>
+		
+		</hlayout>	
+	
+		<separator height="35px"/>
+
+
+        
+         	<separator height="15px"/>
+    		<div align="center">
+		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
+		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+		</div>
+    
+    
+    
+    
+    
+</window>
+</zk>
