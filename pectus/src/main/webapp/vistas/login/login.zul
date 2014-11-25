@@ -1,41 +1,64 @@
 <?page title="Acceso" contentType="text/html;charset=UTF-8"?>
-<?link rel="stylesheet" type="text/css"	href="/bootstrap/v3/bootstrap/css/bootstrap.css" ?>
-<zk xmlns:w="client" xmlns:n="native">
-<div align="center" height="300px" >
-<vbox align="center">
 
-<a href="http://127.0.0.1:52611/portalfundamama/index.html"><image src="../../assets/pectuslogo1.png" ></image></a>
-<div class="page-header">
-	<html>
-		<![CDATA[<h1>Acceda al sistema Pectus</h1>]]>
-	</html>
-</div>
-<window id="loginWin"  draggable="false" title="" border="false" width="500px" height="300px" visible="true"
->
-	<div align="center">
-	
-	
-			<grid>
-			<rows>
-				<row>Usuario: <textbox id="login" value="" maxlength="20"/></row>
-				<row>Contraseña: <textbox id="password" value="" type="password" maxlength="16"/></row>
-			</rows>
-			</grid>
 
-			<div class="btn-group btn-group-lg" align="center">
+
+
+
+
+
+
+<zk xmlns:w="client" xmlns:n="native" >
+<div align="left" height="500px" style="background-image: url(../../assets/fondo.jpg);" >
+<hlayout>
+
+
+<a href="http://127.0.0.1:52611/portalfundamama/index.html"><image width="300px" height="200px" src="../../assets/Pectus-Logo1-011.png" ></image></a>
+
+
+	
+				<separator width="250px" height="150px"/>
+			<div style="padding-top: 70px; ">
+			<hlayout>
+				Usuario: <textbox  id="login" value="" maxlength="20"/>
+				Contraseña: <textbox id="password" value="" type="password" maxlength="16"/>
+			</hlayout>
+			</div>		
+				
+
+
 			<space></space>
-				<button class="btn-default btn-lg" label="Entrar" id="btnInicioSesion" width="100px" height="50px" href="http://localhost:8080/ui-examples/vistas/home/index.zul"/>
+				<vlayout>
+				<div style="padding-top: 60px; ">
+				<button sclass="btn-success" class="btn-default btn-lg" label="Entrar" id="btnInicioSesion" width="100px" height="50px" href="http://localhost:8080/ui-examples/vistas/home/index.zul"/>
 				<button sclass="btn-primary" class="btn-default btn-lg" label="Registrar" width="100px" height="50px" id="btnRegistrarUsuario" />
-		
-			</div>
+				</div>
+				<separator width="100px" /><a  href="#">¿Olvidaste tu contraseña?</a>
+				</vlayout>
+
+	
+	
+
 			
 
-	
-	
 
-	</div>
-			<a href="#">¿Olvidaste tu contraseña?</a>
-</window>
-</vbox>
+</hlayout>
+<hlayout>
+<separator width="320px" />
+<vlayout>
+<separator height="75px" />
+<div style="font-size:20px;  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; " width="600px" align="justify">
+
+<html><![CDATA[ <strong>Pectus</strong> es un sistema de información que permite registrar,
+                organizar, evaluar y controlar el historial de ayudas y beneficios recibidos de los 
+                pacientes por la fundación; generar información estratégica, confiable, 
+                estandarizada, oportuna, rápida y segura para ser analizada por los directivos de 
+                la fundación para la toma de decisiones. Además, promover y organizar los 
+                eventos y actividades de recolección de fondos, gestionar sus patrocinios, 
+                voluntarios, proveer salida comunicacional a la prevención, tratamiento y apoyo 
+                para la comunidad en general y, en especial, a la población diagnosticada con 
+                cáncer de mama. ]]></html></div>
+</vlayout>
+
+</hlayout>
 </div>
 </zk>
