@@ -1,6 +1,6 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id="modalDialog" title="AYUDA" border="normal" width="1060px" height="29em"    
+<window id="modalDialog" title="AYUDA" border="normal" width="1160px" height="29em"    
     position="center,center" closable="true"
     action="show: slideDown;hide: slideUp" apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('am') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
@@ -19,7 +19,7 @@
 					<bandbox id="bd" mold="rounded" autodrop="true">  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
-					               selectedItem="@bind(vm.pacienteSelected)" onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(vm.pacientes)">
+					               selectedItem="@bind(am.pacienteSelected)" onSelect="bd.value=self.selectedItem.label; bd.close();" model="@load(am.pacientes)">
 				                <listhead>
 				                    <listheader label="PACIENTES" />
 				                </listhead>
@@ -40,8 +40,8 @@
 					
 					<bandbox id="bd1" mold="rounded" autodrop="true">  
 				        <bandpopup >
-				            <listbox selectedItem="@bind(vm.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
-					                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.diagnosticos)">
+				            <listbox selectedItem="@bind(am.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(am.diagnosticos)">
 				                <listhead>
 				                    <listheader label="PATOLOGIAS" />
 				                </listhead>
@@ -57,7 +57,7 @@
 				    </row>
 					
 					
-					<row><label value="Motivo" /><textbox value="@bind(vm.motivoSelected)" rows="4"/></row>
+					<row><label value="Motivo" /><textbox value="@bind(am.motivoSelected)" rows="4"/></row>
 					
 					</rows>
 					
@@ -65,7 +65,7 @@
 			
 			
 			
-			<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="true" model="@load(vm.estudiosClinica)">
+			<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="true" model="@load(am.estudiosClinica)">
 		        <listhead>
 		            <listheader label="Clinica" />
 		            <listheader label="Estudio" />
