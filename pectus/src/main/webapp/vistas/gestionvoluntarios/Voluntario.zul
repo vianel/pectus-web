@@ -1,125 +1,70 @@
+<zk xmlns:n="native">
+  <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
 
-<zk>
+  <tabbox >
+    <tabs>
 
-
-		<panel>
-			<panelchildren>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.VoluntarioView')">
 			
-		
-
-				<grid>
-
-					<columns>
-						<column label="" width="150px" />
-						<column label="" width="290px" />
-					</columns>
-
-					<rows>
-						<row>
-					Cedula: <textbox />
-					
-				</row>
-				<row>
-					Nombre: <textbox />
-					
-				</row>
-				<row>
-					Apellido: <textbox />
-					
-				</row>
-				<row>
-					Celular: <textbox />
-					
-				</row>
-				<row>
-					Telf Fijo: <textbox />
-					
-				</row>
-				<row>
-					Estado:
-					<combobox>
-						<comboitem label="Lara" />
-						<comboitem label="Aragua" />
-					</combobox>
-				</row>
-				<row>
-					Ciudad:
-					<combobox>
-						<comboitem label="Barquisimeto" />
-						<comboitem label="Cabudare" />
-					</combobox>
-				</row>
-				
-				<row>
-					Direccion: <textbox />
-					
-				</row>
-				<row>
-					Correo: <textbox />
-					
-				</row>
-				<row>
-					Fecha de Nacimiento:
-					<datebox id="txtFecha"
-							value="${win$composer.inventoryItem.createdDate}"
-							format="yyyy/MM/dd" constraint="no empty" />								
-				</row>
-				
-				
-
-				<row>
-					Profesión:
-					<textbox />
-				</row>
-				
-				<row>
-					Estado Civil:
-					<combobox>
-						<comboitem label="Soltero" />
-						<comboitem label="Casado" />
-						<comboitem label="Divorciado" />
-						<comboitem label="Viudo" />
-						<comboitem label="Concubinato" />
-					</combobox>
-				</row>
-				
-				<row>
-					Lugar de trabajo:
-					<textbox />
-				</row>
-				
-				<row>
-					Cargo:
-					<textbox />
-				</row>
-				
-				<row>
-					Dirección de trabajo:
-					<textbox />
-				</row>
-				
-				<row>
-					Telf de oficina:
-					<textbox />
-				</row>
-				
-				<row>
-					Referido por:
-					<textbox />
-				</row>
-				
-				<row>
-					Usuario:
-					<textbox />
-				</row>
-						
-
-					</rows>
-				</grid>
-
+<!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
+		<button  sclass="btn-success" >NUEVO</button>
+<!-- 	</div> -->
 	
-
-			</panelchildren>
-		</panel>
+	<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelvoluntario)" >
+		<auxhead>
+            <auxheader label="LISTA DE PACIENTES" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+	        <auxheader colspan="1">
+	            <textbox instant="true" width="100px" 
+	                value="@bind(vm.voluntarioFilter.cedula)" onChange="@command('changeFilter')" />
+	        </auxheader>
+			
+			<auxheader colspan="1">
+                <textbox instant="true"  width="100px"
+                    value="@bind(vm.voluntarioFilter.nombre)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+            <auxheader colspan="1">
+                <textbox instant="true" width="100px"
+                    value="@bind(vm.voluntarioFilter.referido)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+          
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Cedula</column>
+            <column hflex="1">Nombre</column>
+            <column hflex="1">Direccion</column>
+     
+          
+			<column hflex="1">Editar</column>
+            
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.cedula)"/>
+                <label value="@load(each.nombre) " />
+                <label value="@load(each.direccion)" />
+        <button id="" sclass="btn-success" >Editar</button>
+            </row>
+        </template>
+        
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
 
 </zk>
