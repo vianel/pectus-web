@@ -12,7 +12,7 @@
 		 <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorEvento')">
 		
-
+<button id="btnEditarCita" sclass="btn-success" >NUEVO</button>
 	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.currentEvento)" >
 		<auxhead>
             <auxheader label="LISTA DE EVENTOS" colspan="6" />
@@ -25,19 +25,20 @@
         </auxhead>
 	
 	<columns>
-			<column hflex="1">Id</column>
+<!-- 			<column hflex="1">Id</column> -->
             <column hflex="3">Nombre</column>
             <column hflex="5">Descripcion</column>
             <column hflex="2">Fecha</column>
+             <column hflex="2">Editar</column>
                         
         </columns>
         <template name="model">
             <row>
-                <label value="@load(each.id)"/> 
+<!--                 <label value="@load(each.id)"/>  -->
                 <label value="@load(each.nombre) " />
                 <label value="@load(each.descripcion)" />
                 <label value="@load(each.fecha)  @converter('formatedDate',format='dd/MM/yyyy')"/>
-                        
+                        <button id="" sclass="btn-success" >Editar</button>
             </row>
         </template>
         
