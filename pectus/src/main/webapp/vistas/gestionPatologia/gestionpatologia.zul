@@ -7,7 +7,7 @@
   </div>
  
  	<hlayout spacing="24px">
-	     <include src="/vistas/gestionpatologia/registropatologia.zul" hflex="7" style="position: relative;"/>
+	     <include src="/vistas/gestionPatologia/registropatologia.zul" hflex="7" style="position: relative;"/>
 	 	 
  	 </hlayout>
  	 <separator height="24px"/>
