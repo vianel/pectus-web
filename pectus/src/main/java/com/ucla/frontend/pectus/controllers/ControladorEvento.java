@@ -56,6 +56,12 @@ public class ControladorEvento {
 		return currentEvento;
 	}
 	
+	@Command
+	public void abrirDialogoRegistrarEvento(Event e){
+		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarEvento.zul", null, null);
+		window.doModal();
+	}
+	
 	
 	
 	

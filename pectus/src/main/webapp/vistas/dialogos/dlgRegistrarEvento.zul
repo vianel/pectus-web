@@ -1,0 +1,67 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalDialog" title="EVENTO" border="normal" width="560px" height="45em"    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp" apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('am') @init('com.ucla.frontend.pectus.controllers.ControladorEvento')">
+
+
+	   <hlayout>
+	
+			 <grid  width="500px">
+				<columns>
+					<column label="Datos del Evento" width="150px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Lugar"/>
+					
+					<bandbox id="bd" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true">
+				                <listhead>
+				                    <listheader label="LUGAR" />
+				                </listhead>
+				                 <template name="model" var="paciente">
+				                <listitem>
+				                  <listcell  label="@load(paciente.cedula)" />
+				                  <listcell  label="@load(paciente.nombre)" />
+				                  <listcell  label="@load(paciente.apellido)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+				    </row>
+					
+					<row><label value="Nombre" /><textbox value="" rows="2"/></row>
+					<row><label value="Descripcion" /><textbox value="" rows="4"/></row>
+					<row> <label style="display:block" value="Fecha" /><datebox /></row>
+					<row><label value="Hora" /><textbox value="" rows="1"/></row>
+					<row><label value="Cantidad de entradas" /><textbox value="" rows="1"/></row>
+					<row><label value="Costo de la entrada" /><textbox value="" rows="1"/></row>
+					<row><label value="Monto Recaudado" /><textbox value="" rows="1"/></row>
+					<row><label value="Observaciones" /><textbox value="" rows="4"/></row>
+					
+					
+					</rows>
+					
+			</grid>
+			
+			
+			
+			
+			
+			
+		</hlayout>	
+		
+    
+		<separator height="35px"/>
+		<div align="center" >
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarAyuda')">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>
+    
+    </window>
+    </zk>
