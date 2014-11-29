@@ -4,7 +4,7 @@ public class Colaboracion {
 
 	private int id;
 	private Evento evento;
-	private Patrocinador patrocinado;
+	private Patrocinador patrocinador;
 	private TipoColaboracion tipoColaboracion;
 	private Double cantidad;
 	
@@ -17,7 +17,7 @@ public class Colaboracion {
 		super();
 		this.id = id;
 		this.evento = evento;
-		this.patrocinado = patrocinado;
+		this.patrocinador = patrocinado;
 		this.tipoColaboracion = tipoColaboracion;
 		this.cantidad = cantidad;
 	}
@@ -39,11 +39,11 @@ public class Colaboracion {
 	}
 
 	public Patrocinador getPatrocinado() {
-		return patrocinado;
+		return patrocinador;
 	}
 
 	public void setPatrocinado(Patrocinador patrocinado) {
-		this.patrocinado = patrocinado;
+		this.patrocinador = patrocinado;
 	}
 
 	public TipoColaboracion getTipoColaboracion() {

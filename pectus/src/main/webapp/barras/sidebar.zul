@@ -50,13 +50,11 @@
 		<nav label="Patrocinador" iconSclass="z-icon-list">
 			<navitem label="Registrar Patrocinador" iconSclass="z-icon-angle-double-right" />
 		</nav>
-		<nav label="Colaboracion" iconSclass="z-icon-list">
-			<navitem label="Registrar Colaboracion" iconSclass="z-icon-angle-double-right"/>
-		</nav>
+
 		
 		<nav id="calitem" label="Eventos" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
 <!-- 				<navitem label="Registrar Evento" iconSclass="z-icon-edit" href="../gestioneventos/index_gestioneventos.zul"/> -->
-			
+			<navitem label="Registrar Colaboracion" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
 				<navitem label="Ver Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-edit"/>
 		</nav>
 
