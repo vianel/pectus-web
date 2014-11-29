@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Left Sidebar - ZeroFour by HTML5 UP</title>
+		<title>fundamama</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -24,7 +24,7 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 	</head>
-	<body class="left-sidebar">
+	<body class="no-sidebar">
 
 		<!-- Header Wrapper -->
 			<div id="header-wrapper">
@@ -35,13 +35,15 @@
 							<div class="inner">
 							
 								<!-- Logo -->
-									<h1><a href="index.html" id="logo">Fundamama</a></h1>
+									<h1><a href="index.html" id="logo">Fundamama</a></h1><br>
+                                    <span style="position: relative; top: 20px; left: 40px; color: #FFFFFF; font-size=1px;">Una Esperanza de vida</span>
+                                    
 								
 								<!-- Nav -->
 									<nav id="nav">
 										<ul>
 											<li ><a href="index.html">Home</a></li>
-											<li class="current_page_item">
+											<li>
 												<a href="">Fundamama</a>
 												<ul>
 													<li><a href="misionvision.html">Mision y Vision</a></li>
@@ -63,7 +65,7 @@
 											</li>
 											<li><a href="donaciones.html">Donaciones</a></li>
 											<li><a href="eventos.html">Eventos</a></li>
-											<li><a href="#">Pectus</a></li>
+											<li><a href="http://localhost:8080/ui-examples/vistas/login/login.zul">Pectus</a></li>
 										</ul>
 									</nav>
 							
@@ -77,42 +79,76 @@
 			<div id="main-wrapper">
 				<div class="wrapper style2">
 					<div class="inner">
-						<div >
-							<div class="row">
-			
-								<div class="8u important(collapse)">
-									<div id="content">
+						<div class="container">
+							<div id="content">
 
-										<!-- Content -->
-									
-											<article>
-												<header class="major">
-													<h2>Actividades</h2>
-													<p>Nuestras principales actividades son</p>
-												</header>
-												
-												<span class="image featured"><img src="images/actividades-2.jpg" alt="" /></span>
-												
-												
-												
-												<h3>Programa de Actividades Pro-fondo con la finalidad de</h3>
-												<p>Recaudar fondos necesarios para el mantenimiento de la institución y cubrir gastos de los tratamientos a pacientes de escasos recursos económicos, los cuales son donados por la  fundación, a través de:</p>
-												<ul>
-													<li>Venta de Material Souvenir (Gorras, pines, chapas, entre otros)</li>
-													<li>Recolección a través de alcancías. </li>
-													<li>Realización de actividades pro-fondos como Bingos, Tardes de Juegos, Festivales, Cenas, carrera y caminatas, torneos de deportes (golf, tenis) entre otros.</li>
-													<li>Aportes de las voluntarias activas.</li>
-													<li>Donativos de las voluntarias.</li>
-													<li>Donativos de empresas privadas.</li>
+								<!-- Content -->
+							
+									<article>
+										<header class="major">
+											<h2>Patrocinador</h2>
+											<p>Si deseas apoyarnos siendo un patrocinador deja tus datos en el siguiente formulario</p><br>
+										</header>
+																					
+									<section>
+											<div class="separator"> 
+												<div class="line"></div>
 											
-												</ul>
-											
-
-								
-											</article>
-								
+												<div class="line"></div>
+											</div>
+											<div class="clear"></div>
+							<div style=" background-color: #ecf5eb; padding: 20px; padding-top: 20px;"class="content">
+							
+								<form>
+									<div class="row 50%">
+										<div class="6u 12u(3)">
+											<input type="text" name="rif" placeholder="Rif:" />
+										</div>
+										<div class="6u 12u(3)">
+											<input type="text" name="name" placeholder="Nombre:" />
+										</div>
 									</div>
-								</div>
+									<div class="row 50%">
+										<div class="6u 12u(3)">
+											<input type="text" name="name" placeholder="Nombre representante:" />
+										</div>
+										<div class="6u 12u(3)">
+											<input type="text" name="email" placeholder="Correo representante:" />
+										</div>
+									</div>
+									<div class="row 50%">
+										<div class="6u 12u(3)">
+											<input type="text" name="fijo" placeholder="Tlf Fijo:" />
+										</div>
+										<div class="6u 12u(3)">
+											<input type="text" name="celular" placeholder="Celular:" />
+										</div>
+									</div>
+
+									<div class="row 50%">
+										<div class="12u">
+											<textarea name="direccion" placeholder="Direccion:" rows="7"></textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="12u">
+											<ul class="buttons">
+												<li><input type="submit" class="special" value="Enviar Solicitud." /></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</div>
+											</div>
+											
+											
+											<div class="bottom-shadow"></div>
+											<div class="no-shadow hidden"></div>
+											<div class="clear"></div>
+											
+										</section>
+									</article>
+						
 							</div>
 						</div>
 					</div>
@@ -120,7 +156,7 @@
 
 			</div>
 
-	<!-- Footer Wrapper -->
+		<!-- Footer Wrapper -->
 			<div id="footer-wrapper">
 				<footer id="footer" class="container">
 					<div class="row">
