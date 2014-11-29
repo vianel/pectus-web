@@ -49,7 +49,7 @@
 			text-decoration: none;
 		}
 	
-	h1, h2, h3, h4, h5, h6
+	h1, h2, h4, h5, h6
 	{
 		text-transform: uppercase;
 		font-weight: 800;
@@ -87,6 +87,7 @@
 
 	h3
 	{
+		text-transform: none;
 		font-size: 1.35em;
 		margin-top: 2em;
 	}
@@ -429,6 +430,58 @@
 				}
 
 	/* Button */
+	button 
+	{
+		width: 18em;
+		height: 3em;
+		-webkit-appearance: none;
+		position: relative;
+		display: inline-block;
+
+		background-color: #ed008c;
+		background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
+		background-image: -webkit-linear-gradient(top, rgba(237,0,140,0), rgba(0,0,0,0.2)), url('images/bg02.png');
+		background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
+		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
+		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
+		border-radius: 8px;
+		box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.35), inset 0px 2px 1px 0px rgba(255,255,255,0.35);
+		text-shadow: -1px -1px 0 rgba(0,0,0,0.5);
+		color: #fff !important;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 800;
+		font-size: 0.95em;
+		letter-spacing: 0.075em;
+		padding: 1em 2em;
+		margin-bottom: 5px;
+		outline: 0;
+		border: 0;
+		white-space: nowrap;
+		cursor: pointer;
+		background-color: #ed008c; 
+	}
+button:hover span {display:none}
+#btn1:hover:before 
+	{
+	vertical-align:bottom;	
+	content:"Solicitar cita";
+	}
+#btn2:hover:before 
+	{
+	vertical-align:bottom;	
+	content:"Patrocinadores";
+	}
+#btn3:hover:before 
+	{
+	vertical-align:bottom;	
+	content:"Se Voluntario";
+	}
+#btn4:hover:before 
+	{
+	vertical-align:bottom;	
+	content:"Solicitar charla";
+	}
 
 		input[type="button"],
 		input[type="submit"],
@@ -438,6 +491,7 @@
 			-webkit-appearance: none;
 			position: relative;
 			display: inline-block;
+
 			background-color: #4091bf;
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
@@ -465,6 +519,7 @@
 			-ms-transition: background-color 0.2s ease-in-out;
 			transition: background-color 0.2s ease-in-out;
 		}
+
 		
 			input[type="button"]:hover,
 			input[type="submit"]:hover,
@@ -832,7 +887,7 @@
 	
 	#main-wrapper
 	{
-		background: #fff;
+		background: #FFF;
 	}
 
 	#footer-wrapper
