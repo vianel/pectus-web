@@ -1,0 +1,105 @@
+<zk xmlns:n="native">
+  <a label="Prueba" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Prueba"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.VoluntarioView')">
+			
+
+		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('crearNuevaPersona')" >NUEVO</button>
+
+	
+	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.voluntarios)"
+	selectedItem="@bind(vm.voluntarioSeleccionado)" emptyMessage="No hay registros de personas en la bd" form="@id('itmpersgrid')">
+		
+		<listhead>
+				<listheader label="Nombre" />
+				<listheader label="Apellido" align="center" width="80px" />
+				<listheader label="Editar" align="center" width="80px" />
+				
+		</listhead>
+		<template name="model" var="item">
+				<listitem >
+					<listcell label="@load(item.nombre)"/>				
+					<listcell label="@load(item.apellido) "/>
+					<listcell>
+					 
+					<button label="Editar" sclass="btn-success">
+					    <attribute name="onClick">						
+						    modalPaciente.doModal();						  	
+					   </attribute>
+					   
+					</button>
+					
+					</listcell>
+					
+				</listitem>
+			</template>
+      
+	
+	</listbox>	
+	
+	<!-- Desde aqui la definicion de la ventana modal para editar un paciente, persona etc
+		es importante verificar si se está trabajando con ventanas modales definidas en otro archivo .zul
+		que el mismo no cree otra instancia del viewModel para poder trabajar con el itemSeleccionado del grid o lista
+		Esta fue la manera como pude enlazar los datos del objeto seleccionado del grid con la ventana modal
+		si hay otra manera de enlazar el objeto usando la modal definida en otro archivo zul no la he visto todavia 
+		o he encontrado la manera de enlazarla
+	 -->
+	<window closable="false"  
+        visible = "false" id="modalPaciente" 
+        title="Persona" border="normal" width="400px" height="29em"    
+    	action="show: slideDown;hide: slideUp">
+     
+     <vlayout>	
+			 <grid  width="400px">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Nombre" /> <textbox id="txtnombre" value="@bind(vm.voluntarioSeleccionado.nombre)"/> </row>
+					<row><label value="Apellido" /> <textbox id="txtapellido" value="@bind(vm.voluntarioSeleccionado.apellido)"/> </row>
+					<row></row>
+					</rows>
+			</grid>
+		
+		 <separator height="15px"/>
+		<div align="center">
+			
+<button label="Guardar" sclass="btn-success" onClick="@command('guardar', cmp=modalPaciente)">
+		<!-- Ocultamos la ventana al darle guardar.. y se ejecuta el metodo del @command en el viewModel -->
+	    <attribute name="onClick">						
+		    modalPaciente.setVisible(false);						  	
+		</attribute>					  
+	</button>
+	
+	<button label="Cancelar" sclass="btn-success">
+	    <!-- Ocultamos la ventana -->
+	    <attribute name="onClick">						
+		    modalPaciente.setVisible(false);						  	
+		</attribute>					  
+	</button>
+	
+			
+  		</div>
+     </vlayout>
+     	
+    </window>
+    
+<!-- hasta aqui el div del bindcomposer -->			
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
+    
+</zk>

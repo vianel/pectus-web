@@ -1,6 +1,8 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ import us.monoid.web.Resty;
 
 
 
+
+import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Colaboracion;
 import com.ucla.frontend.pectus.models.Evento;
 import com.ucla.frontend.pectus.models.Patrocinador;
@@ -28,9 +32,40 @@ public class ServicioColaboracion {
 
 	private ListModelList<Colaboracion> listaModelColaboracion;
 	
+	private ListModelList<Patrocinador> listaModelPatrocinador;
+	private ListModelList<TipoColaboracion> listaModelTipoColaboracion;
+	
 	public ServicioColaboracion(){
 		
 	}
+	
+	
+
+	public ListModelList<Patrocinador> getListaModelPatrocinador() {
+		return listaModelPatrocinador;
+	}
+
+
+
+	public void setListaModelPatrocinador(
+			ListModelList<Patrocinador> listaModelPatrocinador) {
+		this.listaModelPatrocinador = listaModelPatrocinador;
+	}
+
+
+
+	public ListModelList<TipoColaboracion> getListaModelTipoColaboracion() {
+		return listaModelTipoColaboracion;
+	}
+
+
+
+	public void setListaModelTipoColaboracion(
+			ListModelList<TipoColaboracion> listaModelTipoColaboracion) {
+		this.listaModelTipoColaboracion = listaModelTipoColaboracion;
+	}
+
+
 
 	public ListModelList<Colaboracion> getListaModelColaboracion() {
 		return listaModelColaboracion;
@@ -43,7 +78,39 @@ public class ServicioColaboracion {
 	@Init
 	public void init(){
 		this.setListaModelColaboracion(new ListModelList<Colaboracion>(this.buscarColaboraciones()));
+		this.setListaModelPatrocinador(new ListModelList<Patrocinador>(this.buscarPatrocinadores()));
+//		this.setListaModelTipoColaboracion(new ListModelList<TipoColaboracion>(this.buscarTipoColaboracion()));
 	}
+	
+	
+	public static String agregarColaboracion(Colaboracion colaboracion){
+
+		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	    String ok = null;
+	    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		
+	   try {
+		    jsResource = resty.json("http://127.0.0.1:5000/colaboracion/agregar?idevento=" + colaboracion.getEvento().getId()
+	   + "&rif=" + colaboracion.getPatrocinado().getRif() + "&cantidad=" + colaboracion.getCantidad() );
+		   
+	    
+	   } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
+	}
+	
+	
 	
 	public static List<Colaboracion> buscarColaboraciones(){
 
@@ -90,6 +157,50 @@ public class ServicioColaboracion {
  
 
         return listaColaboraciones;
+        
+    }
+	public static List<Patrocinador> buscarPatrocinadores(){
+
+        List<Patrocinador> listaPatrocinadores = new ArrayList<Patrocinador>();
+     
+        
+
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/patrocinador/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPatr = jsResource.get("patrocinadores").toString();
+			JSONArray serPatrocinador = new JSONArray(strPatr);
+			  for(int i=0; i < serPatrocinador.length(); i++){
+                  Patrocinador patrocinador = new Patrocinador();
+                  JSONObject obj = serPatrocinador.getJSONObject(i);
+                  
+                  patrocinador.setRif(obj.get("rif").toString());
+                  patrocinador.setNombre(obj.get("nombre").toString());
+                  patrocinador.setDireccion(obj.get("direccion").toString());                  
+                  listaPatrocinadores.add(patrocinador);
+                  
+       
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+
+        return listaPatrocinadores;
         
     }
 	
