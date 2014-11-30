@@ -13,7 +13,7 @@
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ColaboracionView')">
 			
 <!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
-		<button  sclass="btn-success" >NUEVO</button>
+		<button  sclass="btn-success" onClick="@command('abrirDialogoRegistrarColaboracion')" >NUEVO</button>
 <!-- 	</div> -->
 	
 	<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelcolaboracion)" >
