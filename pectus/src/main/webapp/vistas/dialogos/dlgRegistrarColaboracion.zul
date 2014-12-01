@@ -61,24 +61,22 @@
 				  </bandbox>
         				
         				
-<!--          <label style="display:block" value="Clinica" /> -->
-<!--         <bandbox id="bdClinica" mold="rounded" autodrop="true">   -->
-<!-- 				        <bandpopup > -->
-<!-- 				            <listbox height="250px" width="450px" mold="paging" autopaging="true" -->
-<!-- 					               selectedItem="@bind(vm.clinicaSelected)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm.listaclinica)"> -->
-<!-- 				                <listhead> -->
-<!-- 				                    <listheader label="NOMBRE" /> -->
-<!-- 				                    <listheader label="RIF" /> -->
-<!-- 				                </listhead> -->
-<!-- 				                 <template name="model" var="clinica"> -->
-<!-- 				                <listitem> -->
-<!-- 				                  <listcell  label="@load(clinica.nombre)" /> -->
-<!-- 				                  <listcell  label="@load(clinica.rif)" /> -->
-<!-- 				              </listitem> -->
-<!-- 				              </template> -->
-<!-- 				            </listbox> -->
-<!-- 				        </bandpopup> -->
-<!-- 				    </bandbox>      -->
+         <label style="display:block" value="Tipo Colaboracion" />
+        <bandbox id="bdClinica" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm.tipoColaboracionSelected)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm.listaTipoColaboraciones)">
+				                <listhead>
+				                    <listheader label="NOMBRE" />
+				                </listhead>
+				                 <template name="model" var="tipo">
+				                <listitem>
+				                  <listcell  label="@load(tipo.nombre)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>     
 				    
         <!-- Datos de la cita con el combobox finish -->
         

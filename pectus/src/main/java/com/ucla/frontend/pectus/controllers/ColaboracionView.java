@@ -33,8 +33,18 @@ public class ColaboracionView {
 	List<Colaboracion> listaColaboraciones = ServicioColaboracion.buscarColaboraciones();
 	List<Evento> listaEventos = ServicioEvento.buscarEventos();
 	List<Patrocinador> listaPatrocinadores = ServicioColaboracion.buscarPatrocinadores();
+	List<TipoColaboracion> listaTipoColaboraciones = ServicioColaboracion.buscarTipoColaboracion();
 	
 	
+	public List<TipoColaboracion> getListaTipoColaboraciones() {
+		return listaTipoColaboraciones;
+	}
+
+	public void setListaTipoColaboraciones(
+			List<TipoColaboracion> listaTipoColaboraciones) {
+		this.listaTipoColaboraciones = listaTipoColaboraciones;
+	}
+
 	public List<Colaboracion> getmodelcolaboracion() {
         return new ListModelList<Colaboracion>(listaColaboraciones);
   
@@ -139,6 +149,7 @@ public class ColaboracionView {
 			colaboracionSelected.setCantidad(cantidadSelected);
 			colaboracionSelected.setEvento(eventoSelected);
 			colaboracionSelected.setPatrocinado(patrocinadorSelected);
+			colaboracionSelected.setTipoColaboracion(tipoColaboracionSelected);
 			
 		
 			response = ServicioColaboracion.agregarColaboracion(colaboracionSelected);

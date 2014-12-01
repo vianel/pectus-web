@@ -79,7 +79,7 @@ public class ServicioColaboracion {
 	public void init(){
 		this.setListaModelColaboracion(new ListModelList<Colaboracion>(this.buscarColaboraciones()));
 		this.setListaModelPatrocinador(new ListModelList<Patrocinador>(this.buscarPatrocinadores()));
-//		this.setListaModelTipoColaboracion(new ListModelList<TipoColaboracion>(this.buscarTipoColaboracion()));
+		this.setListaModelTipoColaboracion(new ListModelList<TipoColaboracion>(this.buscarTipoColaboracion()));
 	}
 	
 	
@@ -92,7 +92,7 @@ public class ServicioColaboracion {
 		
 	   try {
 		    jsResource = resty.json("http://127.0.0.1:5000/colaboracion/agregar?idevento=" + colaboracion.getEvento().getId()
-	   + "&rif=" + colaboracion.getPatrocinado().getRif() + "&cantidad=" + colaboracion.getCantidad() );
+	   + "&rif=" + colaboracion.getPatrocinado().getRif() + "&cantidad=" + colaboracion.getCantidad() + "&idtipocolaboracion="+colaboracion.getTipoColaboracion().getId() );
 		   
 	    
 	   } catch (IOException e) {
@@ -157,6 +157,49 @@ public class ServicioColaboracion {
  
 
         return listaColaboraciones;
+        
+    }
+	public static List<TipoColaboracion> buscarTipoColaboracion(){
+
+        List<TipoColaboracion> listaTipoColaboraciones = new ArrayList<TipoColaboracion>();
+     
+        
+
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/tipo-colaboracion/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strCol = jsResource.get("tipocolaboracion").toString();
+			JSONArray serColaboracion = new JSONArray(strCol);
+			  for(int i=0; i < serColaboracion.length(); i++){
+                  TipoColaboracion tipoColaboracion = new TipoColaboracion();
+                  JSONObject obj = serColaboracion.getJSONObject(i);
+                  
+                  tipoColaboracion.setId(Integer.parseInt(obj.get("id").toString()));
+                  tipoColaboracion.setNombre(obj.get("nombre").toString());
+                  listaTipoColaboraciones.add(tipoColaboracion);
+                  
+       
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+
+        return listaTipoColaboraciones;
         
     }
 	public static List<Patrocinador> buscarPatrocinadores(){
