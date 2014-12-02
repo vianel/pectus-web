@@ -2,8 +2,11 @@ package com.ucla.frontend.pectus.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import org.zkoss.bind.annotation.BindingParam;
+
+
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -15,7 +18,6 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Ayuda;
-import com.ucla.frontend.pectus.models.AyudaData;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
@@ -35,30 +37,42 @@ public class AyudaView {
 	private Paciente pacienteSelected;
 	private String motivoSelected;
 	private Ayuda ayudaSelected;
+	private Set <EstudioClinica> miselected;
 	
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
-	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
+	//private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
 	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
 	private List<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
+	private static final String footer = "Estas son todas los Ayudas Solicitadas";
 	
 	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
 	
 	@Init
 	public void init(){
-		selected = ayudas.get(0);
+		//selected = ayudas.get(0);
 		getmodelpaciente();
 		getmodelayuda();
 	}
 	
-
-	
+	@Command
+	public void clinicaSeleccionada()
+	{
+		List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(miselected);
+        for(EstudioClinica i : estudiosclinicas) {
+            System.out.println(i.getId());
+        }
+	}
 	public ListModel<Ayuda> getmodelayuda() {
-        return new ListModelList<Ayuda>(ayudas);
+        return new ListModelList<Ayuda>(currentAyuda);
     }
+	
+	public String getfooter(){
+		return String.format(footer, currentAyuda.size());
+	}
 	
 	@Command
     @NotifyChange({"modelayuda", "footer"})
@@ -143,18 +157,6 @@ public class AyudaView {
 		return selected;
 	}
 
-	public void setSelected(Ayuda selected) {
-		this.selected = selected;
-	}
-
-	public List<Ayuda> getAyudas() {
-		
-		return ayudas;
-	}
-
-	public void setAyudas(List<Ayuda> ayudas) {
-		this.ayudas = ayudas;
-	}
 	
 	@Command
 	public void abrirDialogoRegistrarAyuda(Event e){
@@ -204,6 +206,24 @@ public class AyudaView {
 
 
 	}
+
+
+
+	public Set<EstudioClinica> getMiselected() {
+		System.out.println("Entra en getSelected");
+
+		return miselected;
+	}
+
+
+
+	public void setMiselected(Set<EstudioClinica> miselected) {
+		System.out.println("Entra en setSelected");
+		this.miselected = miselected;
+	}
+	
+	
+	
 		
 }
 
