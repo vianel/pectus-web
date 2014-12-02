@@ -25,8 +25,8 @@ public class ActividadData {
 	}
 	
 	static{
-		lugares.add(new Lugar(1,1,ciudades.get(0),"Hotel Tiffany","Urb del este","04204 29493", true));
-		lugares.add(new Lugar(2,2,ciudades.get(1),"Clinica Canabal","Urb del este","53454 29493", true));
+	//	lugares.add(new Lugar(1,1,ciudades.get(0),"Hotel Tiffany","Urb del este","04204 29493", true));
+	//	lugares.add(new Lugar(2,2,ciudades.get(1),"Clinica Canabal","Urb del este","53454 29493", true));
 
 		
 	}
