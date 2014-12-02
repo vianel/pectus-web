@@ -37,7 +37,7 @@ public class AyudaView {
 	private Paciente pacienteSelected;
 	private String motivoSelected;
 	private Ayuda ayudaSelected;
-	private Set <EstudioClinica> miselected;
+	private Set <EstudioClinica> estudioclinicaSelected;
 	
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
@@ -58,14 +58,7 @@ public class AyudaView {
 		getmodelayuda();
 	}
 	
-	@Command
-	public void clinicaSeleccionada()
-	{
-		List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(miselected);
-        for(EstudioClinica i : estudiosclinicas) {
-            System.out.println(i.getId());
-        }
-	}
+
 	public ListModel<Ayuda> getmodelayuda() {
         return new ListModelList<Ayuda>(currentAyuda);
     }
@@ -176,6 +169,11 @@ public class AyudaView {
 	@Command
 	public void guardarAyuda() throws Exception{
 		String response = null;
+
+		
+	
+	
+
 		if (motivoSelected!= null) {
 	
 			ayudaSelected = new Ayuda();
@@ -183,14 +181,15 @@ public class AyudaView {
 			ayudaSelected.setDiagnostico(diagnosticoSelected);
 			ayudaSelected.setPaciente(pacienteSelected);
 			ayudaSelected.setMotivo(motivoSelected);
-			
-			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected);
+
+			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
+			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
 			if (response.equalsIgnoreCase("true"))
 			{
 //				//currentPaciente.add(pacienteselected);
 //				currentPaciente = ServicioPaciente.buscarPacientes();
 //				pacientestatues = generateStatusList(currentPaciente);
-//				
+//				s
 				Clients.showNotification("Ayuda registrada", null, true);
 //				x.detach();
 
@@ -209,17 +208,17 @@ public class AyudaView {
 
 
 
-	public Set<EstudioClinica> getMiselected() {
+	public Set<EstudioClinica> getestudioclinicaSelected() {
 		System.out.println("Entra en getSelected");
 
-		return miselected;
+		return estudioclinicaSelected;
 	}
 
 
 
-	public void setMiselected(Set<EstudioClinica> miselected) {
+	public void setestudioclinicaSelected(Set<EstudioClinica> estudioclinicaSelected) {
 		System.out.println("Entra en setSelected");
-		this.miselected = miselected;
+		this.estudioclinicaSelected = estudioclinicaSelected;
 	}
 	
 	
