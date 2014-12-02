@@ -13,7 +13,7 @@ public class Evento {
 	private String nombre;
 	private Date fecha;
 	private Time hora;
-	private int cantEntradas;
+	private Integer cantEntradas;
 	private Double costoEntrada;
 	private Double montoRecaudado;
 	private String observacion;
