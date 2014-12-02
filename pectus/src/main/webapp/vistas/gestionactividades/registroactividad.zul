@@ -1,25 +1,19 @@
-<zk xmlns:n="native" apply="vistas.SidebarComposer">
- <tabbox>
-	<tabs>
-		<tab label="Actividades" />
-		<tab label="Registrar Nueva Actividad" />
-	</tabs>
-	<tabpanels>
-	<!-- PESTAÑA DE ACTIVIDADES -->
-	<tabpanel>
+<zk xmlns:n="native" >
+
+
 	
-	  <div apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.FilterViewModel')">		
+	 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ActividadVM')" >		
 
 	      	<separator height="15px"/>
-			<div align="center" apply="com.ucla.frontend.pectus.controllers.controladoractividad">
+			<div align="center"  >
 			
 				<separator height="15px"/>
 				<div align="left" apply="com.ucla.frontend.pectus.controllers.Dialogo">		
 					<button id="btnRegistrarActividad" sclass="btn-success">NUEVO</button>
 				</div>
 				<radiogroup id="seleccionactividad" onCheck="lblseleccion.value = self.selectedItem.label">
-				<grid mold="paging" pageSize="7" model="@load(vm.modelactividad)" >
+				<grid mold="paging" pageSize="7" model="@load(vm.modelactividad)"  >
 					<auxhead>
            					 <auxheader label="LISTA DE ACTIVIDADES" colspan="6" />
         			</auxhead>
@@ -31,17 +25,20 @@
         			</auxhead>
         			
 					<columns >
-						<column hflex="2" label="Descripcion" />
+						<column hflex="3" label="Descripcion" />
 						<column hflex="1" label="Fecha"  />
 						<column hflex="1" label="Lugar" />
 						<column hflex="2" label="Observaciones"/>
+						<column hflex="1" />
 					</columns>
 					<template name="model">
 					<row>
 						<radio radiogroup="seleccionactividad" label=" @load(each.descripcion)"/>
 						<label value="@load(each.fecha)" />
-						<label value="@load(each.lugar.nombre)" />
+						<label value="@load(each.lugar.id)" />
 						<label value="@load(each.observaciones)" />
+							<button id="" sclass="btn-success" >Editar</button>
+        
 
 					</row>
 					</template>
@@ -52,115 +49,59 @@
 				 </grid>
 				</radiogroup>
 				<div align="left">
-					<label value="Ha seleccionado " /><label id="lblseleccion" value="ninguno"/>
+					<label value="Ha seleccionado " /><label id="lblseleccion"  value="@bind(actividadSelected.descripcion)"/>
 				</div>
 
 
 			<separator height="35px"/>
 
-			<button width="145px" height="50px" id="btnmostrarregistroresultadoactividad" sclass="btn-success">Registrar Resultados</button>
-			<button width="145px" height="50px" id="btnmostraresultadoactividad" sclass="btn-success">Ver Resultados</button>
+			<button width="145px" height="50px" onClick="@command('showRegistroresultado')" sclass="btn-success">Registrar Resultados</button>
+			<button width="145px" height="50px" sclass="btn-success">
+				<attribute name="onClick">						
+							    modalResultadoActividad.doModal();						  	
+				</attribute>Ver Resultados
+			</button>
 			</div>
         
 		
-</div>
+
 	
-	</tabpanel>
-	<!-- PESTAÑA REGISTRO DE ACTIVIDAD -->
-	<tabpanel>
-	<div apply="com.ucla.frontend.pectus.controllers.controladoractividad">
-	  	<separator height="15px"/>
-			<separator height="15px"/>
-		<hlayout>
-			 <grid  width="500px" apply="com.ucla.frontend.pectus.controllers.controladoractividad">
-				<columns>
-					<column label="" width="130px"/>
-					<column label=""/>
-				</columns>
-				<rows>
-				
-					<row><label value="Tipo Actividad"/> <combobox><comboitem label="Charla"/><comboitem label="Apoyo al paciente"/><comboitem label="Visitas al paciente"/></combobox><button tooltiptext="Agregar una nueva actividad" sclass="btn-success" label="+" id="btnmostrardialogoregistrotipoactividad"/></row>
-					<row><label value="Lugar"/> <combobox><comboitem label="Hotel Tiffany"/><comboitem label=" CC Sambil"/></combobox> <button tooltiptext="Agregar una nueva ubicacion" sclass="btn-success" label="+"/></row>
-					<row><label value="Descripcion" /><textbox rows="4"/> </row>
-					<row><label value="Fecha" /><datebox /></row>
-					<row><label value="Tlf Solicitante" /> <textbox /></row>
-					<row><label value="Nombre solicitante" /><textbox /></row>
-					<row><label value="Comision" /> <combobox></combobox></row>
-					</rows>
-			</grid>
+
+	
+	<window closable="false"  
+        visible = "false" id="modalResultadoActividad" 
+        title="Resultados Actividad" border="normal" width="800px" height="45em"    
+    	action="show: slideDown;hide: slideUp">
+     
+     <vlayout>	
+			<label value="Observacion de la actividad" />
 		
-		</hlayout>	
+		 <separator height="15px"/>
+		<div align="center">
+			    <chart id="mychart" title="Recursos Utilizados por la Actividad"
+			        width="550" height="400" paneColor="#ffffff" fgAlpha="192"
+			        type="pie" threeD="@bind(vm.threeD)"
+			        model="@bind(vm.model)" engine="@bind(vm.engine)"
+			        onClick="@command('showMessage',msg=event.areaComponent.tooltiptext)"/>
+			   <hlayout  visible="@bind(not empty vm.message)">
+			        Grafica de Muestra
+			   </hlayout>
+
 	
-		<separator height="35px"/>
-
-
-		 <a label="Voluntarios" iconSclass="z-icon-group" sclass="subtitle"/>
-        <grid>
-        
-            <columns>
-           		<column />
-                <column hflex="1" label="Nombre" />
-                <column hflex="1" label="Apellido"/>
-                
-   
-            </columns>
-            <rows>
-                <row>
-                	<checkbox />
-                    <label value="Pedro" />
-                    <label value="Perez" />
-               
-                    
-             
-                </row>
-                <row>
-                	<checkbox />
-                    <label value="Andrea" />
-                    <label value="Briceño" />
-                    
-       
-        
-                </row>
-                <row>
-                	<checkbox />
-                    <label value="Jose" />
-                    <label value="Andrade" />
-                    
-
-                </row>
-                <row>
-                	<checkbox />
-                    <label value="Josefina" />
-                    <label value="Valderrama" />
-                    
-
-                </row>
-                <row>
-                	<checkbox />
-                    <label value="Jose" />
-                    <label value="Torres" />
-
-                </row>
-                
-            </rows>
-            
-        </grid>
-        
-         	<separator height="15px"/>
-    		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
-		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
-		</div>
+	<button label="Cancelar" sclass="btn-success">
+	    <!-- Ocultamos la ventana -->
+	    <attribute name="onClick">						
+		    modalResultadoActividad.setVisible(false);						  	
+		</attribute>					  
+	</button>
 	
-	
-	</div>
-	</tabpanel>
-	</tabpanels>
-</tabbox>
-
-
+			
+  		</div>
+     </vlayout>
+     	
+    </window>
     
-
+</div>
 
 
 

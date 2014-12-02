@@ -107,8 +107,7 @@
                   <textbox value="@load(each.paciente.apellidoConyugue)" />
 	              <textbox value="@load(each.paciente.egresos)" />
 	              <textbox value="@load(each.paciente.ingresos)" />
-                  <!--   <textbox
-                        value="@load(each.languageContribution.name) @save(each.languageContribution.name, before='confirm')" />  -->
+  
          
                     <div>
                         <button sclass="btn-success" onClick="@command('modificarPaciente', pacienteStatus=each)">SI</button>
