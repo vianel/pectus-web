@@ -1480,19 +1480,19 @@ a:focus {
    ${ t:boxShadow('none') };
    ${ t:borderRadius('0') };
   color: #555;
-  background-color: #FFF;
+  
   margin: -1px 0 0 -1px;
   padding: 8px 3px 6px 9px;
   border: 1px dotted;
   border-color: #D8D8D8 !important;
   vertical-align: middle;
-  text-align: left;
+  text-align: center;
   position: relative;
 }
 .infobox > .infobox-icon {
   display: inline-block;
   vertical-align: top;
-  width: 44px;
+  width: 424px;
 }
 .infobox > .infobox-icon > [class*="z-icon-"] {
   display: inline-block;
@@ -1580,7 +1580,7 @@ a:focus {
   border-color: #6fb3e0;
 }
 .infobox-blue > .infobox-icon > [class*="z-icon-"] {
-  background-color: #6fb3e0;
+  background-color: #6fd7bb;
 }
 .infobox-blue.infobox-dark {
   background-color: #6fb3e0;
@@ -1598,11 +1598,11 @@ a:focus {
   border-color: #3983c2;
 }
 .infobox-red {
-  color: #d53f40;
+  color: #ed008c;
   border-color: #d53f40;
 }
 .infobox-red > .infobox-icon > [class*="z-icon-"] {
-  background-color: #d53f40;
+  background-color: #FE6CFA;
 }
 .infobox-red.infobox-dark {
   background-color: #d53f40;

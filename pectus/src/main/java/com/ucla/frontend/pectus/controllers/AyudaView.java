@@ -42,7 +42,7 @@ public class AyudaView {
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
-	//private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
+	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
 	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
@@ -53,7 +53,7 @@ public class AyudaView {
 	
 	@Init
 	public void init(){
-		//selected = ayudas.get(0);
+		selected = ayudas.get(0);
 		getmodelpaciente();
 		getmodelayuda();
 	}
@@ -219,6 +219,16 @@ public class AyudaView {
 	public void setestudioclinicaSelected(Set<EstudioClinica> estudioclinicaSelected) {
 		System.out.println("Entra en setSelected");
 		this.estudioclinicaSelected = estudioclinicaSelected;
+	}
+
+
+	public Ayuda getAyudaSelected() {
+		return ayudaSelected;
+	}
+
+
+	public void setAyudaSelected(Ayuda ayudaSelected) {
+		this.ayudaSelected = ayudaSelected;
 	}
 	
 	
