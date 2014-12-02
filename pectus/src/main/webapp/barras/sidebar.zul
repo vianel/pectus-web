@@ -24,38 +24,58 @@
 				<navitem label="Paciente" href="../gestionPaciente/index_getionPaciente.zul" iconSclass="z-icon-pencil"/>		
 				<navitem label="Clinica" iconSclass="z-icon-pencil" href="../gestionClinica/index_gestionclinica1.zul" />
 				<navitem label="Cita" iconSclass="z-icon-pencil" href="../gestionCita/index_gestionCita.zul"/>
-				<navitem label="Patologia" iconSclass="z-icon-pencil" href="../gestionPatologia/index_gestionpatologia.zul"/>
 				<navitem label="Tipo de estudios" iconSclass="z-icon-pencil" href="../gestiontipoestudio/index_gestiontipoestudio.zul"/>
 			</nav>
-			<navitem label="Solicitudes de Ayuda" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
-			<navitem label="Historiales" iconSclass="z-icon-angle-double-right"/>
+			<nav label="Ayudas" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Solicitudes de Ayuda" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Estudios de clinicas" iconSclass="z-icon-angle-double-right"/>
+			</nav>
 		</nav>
-		
-		
-		<nav label="Comisiones" iconSclass="z-icon-file-o">
-				<navitem label="Registrar Comision" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Asignar Comision" iconSclass="z-icon-angle-double-right"/>
-		</nav>
-		
-		
 		
 		<nav label="Voluntarios" iconSclass="z-icon-edit">
-			<navitem label="Registrar Voluntario" iconSclass="z-icon-angle-double-right" href="../gestionvoluntarios/index_gestionvoluntario.zul"/>
+			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Voluntario" iconSclass="z-icon-angle-double-right" href="../gestionvoluntarios/index_gestionvoluntario.zul"/>
+				<navitem label="Comision" iconSclass="z-icon-angle-double-right"/>
+			</nav>
+			<nav label="Asignaciones" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Asignar voluntario a comisiones" iconSclass="z-icon-angle-double-right"/>
+			</nav>
 		</nav>
+		
+		<nav label="Patrocinadores" iconSclass="z-icon-list">
+		<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Patrocinador" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Tipo de colaboraciones" iconSclass="z-icon-angle-double-right"/>
+		</nav>
+			
+		</nav>
+	
 		
 		<nav label="Actividades" iconSclass="z-icon-file-o">
-			<navitem label="Registrar Actividad" iconSclass="z-icon-flag" href="../gestionactividades/index_gestionactividades.zul"  sclass="grey" />
+			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Tipo de actividad" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Solicitud de actividad" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Lugar de la actividad" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Actividad" href="../gestionactividades/index_gestionactividades.zul" iconSclass="z-icon-angle-double-right" />
+			</nav>
+			<nav label="Asignacion" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Asignar voluntarios" iconSclass="z-icon-angle-double-right"/>
+			</nav>			
 		</nav>
 		
-		<nav label="Patrocinador" iconSclass="z-icon-list">
-			<navitem label="Registrar Patrocinador" iconSclass="z-icon-angle-double-right" />
-		</nav>
+		
 
 		
 		<nav id="calitem" label="Eventos" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
 <!-- 				<navitem label="Registrar Evento" iconSclass="z-icon-edit" href="../gestioneventos/index_gestioneventos.zul"/> -->
-			<navitem label="Registrar Colaboracion" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
-				<navitem label="Ver Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-edit"/>
+			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Colaboraciones" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
+				<navitem label="Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Lugar del evento" iconSclass="z-icon-angle-double-right"/>
+			</nav>
+			<nav label="Asignacion" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Asignar voluntarios" iconSclass="z-icon-angle-double-right"/>
+			</nav>		
 		</nav>
 
 
@@ -63,10 +83,18 @@
 
 		<nav label="Usuario" iconSclass="z-icon-user">
 			<navitem label="Registrar Usuario" iconSclass="z-icon-angle-double-right"/>
-			<navitem label="Ver Usuarios" iconSclass="z-icon-angle-double-right"/>
 		</nav>
 
-
+		<nav label="Configuraciones" iconSclass="z-icon-user">
+			<nav label="Paciente" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Patologias" iconSclass="z-icon-pencil" href="../gestionPatologia/index_gestionpatologia.zul"/>
+				<navitem label="Polizas de seguros" iconSclass="z-icon-angle-double-right"/>
+			</nav>
+			<nav label="Ayudas y Eventos" iconSclass="z-icon-angle-double-right" sclass="grey">
+				<navitem label="Tipo de Lugares" iconSclass="z-icon-angle-double-right"/>
+			</nav>
+			<navitem label="Publicaciones" iconSclass="z-icon-angle-double-right"/>
+		</nav>
 			
 	</navbar>
 	<navseparator />

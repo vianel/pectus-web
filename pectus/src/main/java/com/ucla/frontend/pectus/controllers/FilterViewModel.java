@@ -26,7 +26,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Actividad;
-import com.ucla.frontend.pectus.models.ActividadData;
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.PacienteData;

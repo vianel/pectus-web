@@ -14,34 +14,36 @@
 					<column label=""/>
 				</columns>
 				<rows>
-					<row><label value="Lugar"/>
-					
-					<bandbox id="bd" mold="rounded" autodrop="true">  
+					<row><label style="display:block" value="Lugar" />
+              <bandbox id="bdLugar" mold="rounded" autodrop="true">  
 				        <bandpopup >
-				            <listbox height="250px" width="450px" mold="paging" autopaging="true">
+				            <listbox selectedItem="@bind(am.lugarSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bdLugar.value=self.selectedItem.label; bdLugar.close();" model="@load(am.lugares)">
 				                <listhead>
-				                    <listheader label="LUGAR" />
+				                	<listheader label="Ciudad" />
+				                    <listheader label="Nombre" />
+				                    <listheader label="Direccion" />
 				                </listhead>
-				                 <template name="model" var="paciente">
+				                 <template name="model" var="lugar">
 				                <listitem>
-				                  <listcell  label="@load(paciente.cedula)" />
-				                  <listcell  label="@load(paciente.nombre)" />
-				                  <listcell  label="@load(paciente.apellido)" />
+				                  <listcell  label="@load(lugar.ciudad.nombre)" />
+				                  <listcell  label="@load(lugar.nombre)" />
+				                  <listcell  label="@load(lugar.direccion)" />
 				              </listitem>
 				              </template>
 				            </listbox>
 				        </bandpopup>
-				    </bandbox>
+				  </bandbox>
 				    </row>
 					
-					<row><label value="Nombre" /><textbox value="" rows="2"/></row>
-					<row><label value="Descripcion" /><textbox value="" rows="4"/></row>
+					<row><label value="Nombre" /><textbox value="@bind(am.nombreSelected)" rows="2"/></row>
+					<row><label value="Descripcion" /><textbox value="@bind(am.descripcionSelected)" rows="4"/></row>
 					<row> <label style="display:block" value="Fecha" /><datebox /></row>
 					<row><label value="Hora" /><textbox value="" rows="1"/></row>
-					<row><label value="Cantidad de entradas" /><textbox value="" rows="1"/></row>
-					<row><label value="Costo de la entrada" /><textbox value="" rows="1"/></row>
-					<row><label value="Monto Recaudado" /><textbox value="" rows="1"/></row>
-					<row><label value="Observaciones" /><textbox value="" rows="4"/></row>
+					<row><label value="Cantidad de entradas" /><textbox value="@bind(am.cantidadEntradasSelected)" rows="1"/></row>
+					<row><label value="Costo de la entrada" /><textbox value="@bind(am.costoEntradasSelected)" rows="1"/></row>
+					<row><label value="Monto Recaudado" /><textbox value="@bind(am.montoRecaudadoSelected)" rows="1"/></row>
+					<row><label value="Observaciones" /><textbox value="@bind(am.observacionesSelected)" rows="4"/></row>
 					
 					
 					</rows>
@@ -58,7 +60,7 @@
     
 		<separator height="35px"/>
 		<div align="center" >
-			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarAyuda')">Guardar</button>
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarEvento')">Guardar</button>
 			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
 			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
 		</div>

@@ -25,20 +25,24 @@
         </auxhead>
 	
 	<columns>
-<!-- 			<column hflex="1">Id</column> -->
             <column hflex="3">Nombre</column>
-            <column hflex="5">Descripcion</column>
-            <column hflex="2">Fecha</column>
+            <column hflex="3">Descripcion</column>
+            <column hflex="1">Fecha</column>
+            <column hflex="2">Ciudad</column>
+            <column hflex="2">Lugar</column>
+            <column hflex="2">Direccion</column>
              <column hflex="2">Editar</column>
                         
         </columns>
         <template name="model">
             <row>
-<!--                 <label value="@load(each.id)"/>  -->
                 <label value="@load(each.nombre) " />
                 <label value="@load(each.descripcion)" />
                 <label value="@load(each.fecha)  @converter('formatedDate',format='dd/MM/yyyy')"/>
-                        <button id="" sclass="btn-success" >Editar</button>
+                <label value="@load(each.lugar.ciudad.nombre) " />
+                <label value="@load(each.lugar.nombre) " />
+                <label value="@load(each.lugar.direccion) " />
+                <button id="" sclass="btn-success" >Editar</button>
             </row>
         </template>
         
