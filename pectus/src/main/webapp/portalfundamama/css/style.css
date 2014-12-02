@@ -432,7 +432,7 @@
 	/* Button */
 	button 
 	{
-		width: 18em;
+		width: 19em;
 		height: 3em;
 		-webkit-appearance: none;
 		position: relative;
@@ -492,7 +492,7 @@ button:hover span {display:none}
 			position: relative;
 			display: inline-block;
 
-			background-color: #4091bf;
+			background-color: #00B38C;
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
 			background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.2)), url('images/bg02.png');
@@ -526,7 +526,7 @@ button:hover span {display:none}
 			input[type="reset"]:hover,
 			.button:hover
 			{
-				background-color: #50a1cf;
+				background-color: #00865F;
 			}
 		
 			input[type="button"]:active,
