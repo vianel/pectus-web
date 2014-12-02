@@ -41,7 +41,7 @@ public class ServicioLugar {
 		                  Lugar lugar = new Lugar();
 		                  JSONObject obj = serLugar.getJSONObject(i);
 		                  
-		      			lugar.setIdCiudad(obtenerciudad(obj.getString("ciudad").toString()));
+		//      			lugar.setIdCiudad(obtenerciudad(obj.getString("ciudad").toString()));
 		    			lugar.setDireccion(obj.getString("direccion").toString().toString());
 		    			lugar.setId(Integer.parseInt(obj.getString("id").toString()));
 		    			lugar.setNombre(obj.getString("nombre").toString());

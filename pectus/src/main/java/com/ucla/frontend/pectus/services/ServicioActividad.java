@@ -72,7 +72,7 @@ public class ServicioActividad {
     	Lugar lugar = new Lugar();
     	try {
 			JSONObject objjson = new JSONObject(jsonlugar);
-			lugar.setIdCiudad(obtenerciudad(objjson.getString("ciudad").toString()));
+		//	lugar.setIdCiudad(obtenerciudad(objjson.getString("ciudad").toString()));
 			lugar.setDireccion(objjson.getString("direccion").toString().toString());
 			lugar.setId(Integer.parseInt(objjson.getString("id").toString()));
 			lugar.setNombre(objjson.getString("nombre").toString());
