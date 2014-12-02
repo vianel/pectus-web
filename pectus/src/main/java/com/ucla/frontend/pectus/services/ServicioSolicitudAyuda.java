@@ -64,6 +64,8 @@ public class ServicioSolicitudAyuda {
         		estudios+= "," + estudioclinica.get(i).getId().toString();
         	}
         }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date fechadehoy = new Date();
   
 		System.out.println(estudios);
 		Resty resty = new Resty();
@@ -73,7 +75,10 @@ public class ServicioSolicitudAyuda {
 			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/agregar?cedula=" + ayuda.getPaciente().getCedula() +
 					"&motivosolicitud=" + ayuda.getMotivo() +
 					"&idpatologia=" + ayuda.getDiagnostico().getId() +
-					"&estudios=" + estudios
+					"&estudios=" + estudios +
+					"&fecsolicitud=" + dateFormat.format(fechadehoy) +
+					"&porcaprobacion=" + "0.0" +
+					"&estatus=" + "P"
 					);
 	    
 		} catch (IOException e) {
