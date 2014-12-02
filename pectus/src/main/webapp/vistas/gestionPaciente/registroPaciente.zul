@@ -83,7 +83,7 @@
                 <label value="@load(each.paciente.egresos)" />
                 <label value="@load(each.paciente.ingresos)" />
              
-               	<button id="" sclass="btn-success" onClick="@command('cambiarestatusedicion', pacienteStatus=each)">Editar</button>
+               	<button id="" sclass="btn-success" >Editar</button>
         
             </row>
         </template>
