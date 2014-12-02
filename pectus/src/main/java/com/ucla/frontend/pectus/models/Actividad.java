@@ -20,6 +20,12 @@ public class Actividad {
 	
 	
 	
+	public Actividad() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public Actividad(int id, Lugar lugar, int idSolicitudActividad, String fecha, String hora, String recursosUtilizados, 
 			Float monto, String duracion, int nroAsistentes, String descripcion, String observaciones, boolean estatus) {
 		super();

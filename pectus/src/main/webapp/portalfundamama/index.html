@@ -16,13 +16,47 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
+             <link href="css/glDatePicker.default.css" rel="stylesheet" type="text/css">
 		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+
+<!-- Esto es lo que agregue para el calendario ALEXI-->
+    <link href="css\datapicker\jquery-ui.css" rel="stylesheet">
+
+<script src="js/jquery-ui.js"></script>
+<script src="js/jquery.datePicker.js"></script>
+<script>
+$(function () {
+    $.datepicker.regional['es'] = {
+         closeText: 'Cerrar',
+         prevText: '<Ant',
+         nextText: 'Sig>',
+         currentText: 'Hoy',
+         monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+         monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+         dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+         dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+         dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+         weekHeader: 'Sm',
+         dateFormat: 'dd/mm/yy',
+         firstDay: 1,
+         isRTL: false,
+         showMonthAfterYear: false,
+         yearSuffix: ''
+    };
+    $.datepicker.setDefaults($.datepicker.regional['es']);
+    $("#datepicker").datepicker({
+        firstDay: 1
+    });
+});
+</script>
+
 	</head>
 	<body class="homepage">
 
@@ -169,7 +203,10 @@
         <a href="patrocinador.html"><button id="btn2"><span>¿Quieres Apoyarnos?</span></button><br></a>
         <a href="voluntarios.html"><button id="btn3"><span>Postulate</span></button><br></a>
         <a href="charlas.html"><button id="btn4"><span>Charlas Preventivas</span></button><br></a>
-           <img src="../portalfundamama/images/calendario.jpg">
+           <!--img src="../portalfundamama/images/calendario.jpg"-->
+
+            
+            <div id="datepicker"></div>
     </div>
     <div id="sliderb_container" style="position: relative; left: 150px; top: 5px; width: 800px; height: 600px; overflow: hidden; ">
 

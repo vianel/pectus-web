@@ -47,21 +47,7 @@ public class ActividadData {
 		return actividades.toArray(new Actividad[actividades.size()]);
 	}
 	
-	public static List<Actividad> getFilteractividades(ActividadFilter actividadFilter){
-		List<Actividad> someactividades = new ArrayList<Actividad>();
-		String fecha = actividadFilter.getFecha().toLowerCase();
-		
-		
-		for(Iterator<Actividad> i = actividades.iterator(); i.hasNext();){
-			Actividad tmp = i.next();
-			if(tmp.getFecha().toLowerCase().contains(fecha) ){
-			
-				someactividades.add(tmp);
-			}
-				
-		}
-		return someactividades;
-	}
+
 	
 	public static List<Actividad> getactividadesByFecha(String fecha){
 		List<Actividad> someactividades = new ArrayList<Actividad>();
