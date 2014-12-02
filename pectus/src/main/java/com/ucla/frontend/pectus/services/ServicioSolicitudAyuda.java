@@ -20,6 +20,7 @@ import us.monoid.web.Resty;
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Estado;
+import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.Paciente;
 
 
@@ -31,6 +32,8 @@ public class ServicioSolicitudAyuda {
 	public ServicioSolicitudAyuda(){
 		
 	}
+	
+
 	
 	@Init
 	public void init(){
@@ -48,9 +51,21 @@ public class ServicioSolicitudAyuda {
 	
 	
 	
-	public static String agregarAyuda(Ayuda ayuda)
+	public static String agregarAyuda(Ayuda ayuda, List<EstudioClinica> estudioclinica)
 	{
-
+		String estudios = " ";
+        for (int i = 0; i<estudioclinica.size(); i++)
+        {
+        	if (i==0)
+        	{
+        		estudios = estudioclinica.get(i).getId().toString();
+        	}else
+        	{
+        		estudios+= "," + estudioclinica.get(i).getId().toString();
+        	}
+        }
+  
+		System.out.println(estudios);
 		Resty resty = new Resty();
 	    JSONResource jsResource = null;
 	    String ok = null;
@@ -58,7 +73,7 @@ public class ServicioSolicitudAyuda {
 			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/agregar?cedula=" + ayuda.getPaciente().getCedula() +
 					"&motivosolicitud=" + ayuda.getMotivo() +
 					"&idpatologia=" + ayuda.getDiagnostico().getId() +
-					"&estudios=1,2,3"
+					"&estudios=" + estudios
 					);
 	    
 		} catch (IOException e) {
