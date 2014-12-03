@@ -51,8 +51,10 @@ public class CitaFilter {
 		for(Iterator<Cita> i = citas.iterator(); i.hasNext();){
 			Cita tmp = i.next();
 			if(tmp.getPaciente().getCedula().toLowerCase().contains(paciente) &&
-			   tmp.getClinica().getRif().toLowerCase().contains(clinica)&&
-			   tmp.getTipoEstudio().getNombre().toLowerCase().contains(tipoestudio)){
+			   tmp.getEstudioClinica().getClinica().getNombre().toLowerCase().contains(clinica) &&
+			   tmp.getEstudioClinica().getEstudio().getNombre().toLowerCase().contains(tipoestudio)
+			   )
+					{
 			
 				someCita.add(tmp);
 			}

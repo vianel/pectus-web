@@ -2,7 +2,7 @@
 <zk>
 
 <window apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorCita')"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.CitaView')"
 			 id="modalDialog" title="CITA" border="normal" width="400px" height="29em"
     
     position="center,center" closable="true"
@@ -40,7 +40,7 @@
 				        </bandpopup>
 				    </bandbox>
 
-         <label style="display:block" value="Tipo Estudio" />
+      <!--   <label style="display:block" value="Tipo Estudio" />
               <bandbox id="bdtipoestudio" mold="rounded" autodrop="true">  
 				        <bandpopup >
 				            <listbox selectedItem="@bind(vm.tipoesselected)" height="250px" width="450px" mold="paging" autopaging="true"
@@ -77,14 +77,34 @@
 				              </template>
 				            </listbox>
 				        </bandpopup>
+				    </bandbox>     -->
+				    
+				             <label style="display:block" value="Clinica-Estudio" />
+        <bandbox id="bdEstudio" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm.estudioselected)" onSelect="bdEstudio.value=self.selectedItem.label; bdEstudio.close();" model="@load(vm.listaestudioclinica)">
+				                <listhead>
+				                    <listheader label="Clinica" />
+				                    <listheader label="Estudio" />
+				                </listhead>
+				                 <template name="model" var="estudioclinica">
+				                <listitem>
+				                  <listcell  label="@load(estudioclinica.clinica.nombre)" />
+				                  <listcell  label="@load(estudioclinica.estudio.nombre)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
 				    </bandbox>     
+				    
 				    
         <!-- Datos de la cita con el combobox finish -->
         
        <!-- Datos de la cita-->
        <label style="display:block" value="Fecha de Cita" /><datebox  value="@bind(vm.fechaSelected)" />
       <!--    <label style="display:block" value="Fecha Cita" /><datebox /> -->
-       <label  style="display:block" value="Hora" /><textbox value="@bind(vm.horaSelected)"/>
+       <label  style="display:block" value="Hora" /><timebox format="short" value="@bind(vm.horaSelected)"/>
       
        <separator height="20px"/>
 		<div align="center" style="margin-left:-1em">

@@ -17,12 +17,10 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Actividad;
-import com.ucla.frontend.pectus.models.ActividadData;
 import com.ucla.frontend.pectus.models.Lugar;
 import com.ucla.frontend.pectus.services.ServicioActividad;
 import com.ucla.frontend.pectus.services.ServicioCiudad;
-import com.ucla.frontend.pectus.services.ServicioLugar;
-
+import com.ucla.frontend.pectus.services.ServicioEvento;
 public class ActividadVM {
 	
 	private List<Lugar> listalugar;
@@ -39,7 +37,7 @@ public class ActividadVM {
 
 		
 		
-		listalugar = ServicioLugar.buscarlugares();
+		listalugar = ServicioEvento.buscarLugares();
 		
 	}
 

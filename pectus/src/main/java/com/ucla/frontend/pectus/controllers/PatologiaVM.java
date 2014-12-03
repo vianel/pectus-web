@@ -2,6 +2,7 @@ package com.ucla.frontend.pectus.controllers;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.zkoss.bind.BindUtils;
@@ -10,7 +11,6 @@ import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
@@ -26,7 +26,7 @@ public class PatologiaVM {
 	private String nombreSelected;
 	private String observacionSelected;
 	
-	private boolean displayEdit1 = true;
+	
 	
 	private ListModelList<Patologia> patolo = new ListModelList<Patologia>();
 	private Patologia selectedItem;
@@ -38,11 +38,9 @@ public class PatologiaVM {
 			return patolo;
 		}
 	   
-	   public boolean isDisplayEdit1() {
-	        return displayEdit1;
-	    }
+	   
 
-		@NotifyChange("Patologia")
+		@NotifyChange("patologia")
 		public void setPatologia(ListModelList<Patologia> patolo) {
 			this.patolo = patolo;
 		}
@@ -60,28 +58,23 @@ public class PatologiaVM {
 		
 	   
 
-	private Window ventanaregistronuevopatologia;
-	private Window ventanaeditarpatologia;
+	private Window ventanaregistronuevopatologia;	
 	
-	private static final String footerMensaje = "Esta son todas las papatologias";
-	
+	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PatologiaFilter patologiaFilter = new PatologiaFilter();
-	
-	List<Patologia> currentPatologia= ServicioPatologia.buscarPatologia();
-	
+	List<Patologia> currentPatologia = ServicioPatologia.buscarPatologia();
 	private List<PatologiaStatus> patologiastatues = generateStatusList(currentPatologia);
-	
 	private boolean displayEdit = true;
 
 
 	    public boolean isDisplayEdit() {
-	        return displayEdit1;
+	        return displayEdit;
 	    }
 	    
 	    
 	
 	 
-	public PatologiaFilter getPatologiaFilter1() {
+	public PatologiaFilter getPatologiaFilter() {
 		return patologiaFilter;
 	}
 
@@ -106,37 +99,37 @@ public class PatologiaVM {
 	public void abrirDialogoEditarPatologia(){
 
 	   
-		ventanaeditarpatologia = (Window)Executions.createComponents("/vistas/dialogos/dlgEditarPatologia.zul", null, null);
+		ventanaregistronuevopatologia = (Window)Executions.createComponents("/vistas/dialogos/dlgEditarPatologia.zul", null, null);
 		
-		ventanaeditarpatologia.doModal();
+		ventanaregistronuevopatologia.doModal();
 	}
 	
 	
 	@Command
 	@NotifyChange({"modelppatologia", "footer"})
-	public void modificarPatologia(@BindingParam("patologiaStatus") PatologiaStatus patologia)
+	public void modificarPatologia(@BindingParam("patologiaStatus") PatologiaStatus patolo)
 	{
 	
 		
 		String response = null;
-		//response = ServicioPatologia.modificarPatologia(patologia.getPatologia());
+		response = ServicioPatologia.modificarPatologia(patolo.getPatologia());
 		if (response.equalsIgnoreCase("true"))
 		{
-			cambiarestatusedicion(patologia);
-			Clients.showNotification("Estudio con Nombre " + patologia.getPatologia().getNombre() + " Modificado Exitosamente", null, true);
+			cambiarestatusedicion(patolo);
+			Clients.showNotification("Patologia con Nombre " + patolo.getPatologia().getNombre() + " Modificado Exitosamente", null, true);
 
 		}else
 		{
 			Clients.showNotification("Error al modificar", true);
 		} 
-		List<Patologia> patolo = ServicioPatologia.buscarPatologia();
+		List<Patologia> patologia = ServicioPatologia.buscarPatologia();
 	}
-///////////////////////////////CAMBIAR ESTATUS//////////////////////////////	
+	
 	 @Command
 	 
-	 public void cambiarestatusedicion(@BindingParam("patologiaStatus") PatologiaStatus patologia) {
-		 patologia.setEditingStatus(!patologia.getEditingStatus());
-	        refreshRowTemplate(patologia);
+	 public void cambiarestatusedicion(@BindingParam("patologiaStatus") PatologiaStatus patolo) {
+	        patolo.setEditingStatus(!patolo.getEditingStatus());
+	        refreshRowTemplate(patolo);
 	    }
 	public void refreshRowTemplate(PatologiaStatus lcs) {
 	        /*
@@ -147,10 +140,10 @@ public class PatologiaVM {
 	        BindUtils.postNotifyChange(null, null, lcs, "editingStatus");
 	      
 	    }
-    public List<PatologiaStatus> getmodeltipoestudio() {
-        // return new ListModelList<Paciente>(currentPaciente);
-     	return patologiastatues;
-     }
+    public List<PatologiaStatus> getmodelpatologia() {
+       // return new ListModelList<Paciente>(currentPaciente);
+    	return patologiastatues;
+    }
     
     public String getFooter() {
         return String.format(footerMensaje, patologiastatues.size());
@@ -162,14 +155,8 @@ public class PatologiaVM {
         currentPatologia = PatologiaFilter.getFilterPatologia(patologiaFilter);
         patologiastatues = generateStatusList(currentPatologia);
     }
-    public ListModel<Patologia> getmodelpatologia() {
-        return new ListModelList<Patologia>(currentPatologia);
-    }
-    public PatologiaFilter getPatologiaFilter() {
-        return patologiaFilter;
-    }
 
-///////////////////////////////guardar//////////////////////////////////////////////
+
 	@Command
 	@NotifyChange({ "modelpatologia", "footer" })
 	public void guardarPatologia() throws Exception{
@@ -180,7 +167,7 @@ public class PatologiaVM {
 			
 			patologiaselected.setId(idSelected);
 			patologiaselected.setNombre(nombreSelected);
-			patologiaselected.setobservacion(observacionSelected);
+			patologiaselected.setObservacion(observacionSelected);
 			
 			
 
@@ -189,7 +176,7 @@ public class PatologiaVM {
 			{
 				
 				currentPatologia = ServicioPatologia.buscarPatologia();
-				//patologiastatues = generateStatusList(currentPatologia);
+				patologiastatues = generateStatusList(currentPatologia);
 				
 				Clients.showNotification("Patologia Guardado", null, true);
 				//x.detach();
@@ -202,7 +189,7 @@ public class PatologiaVM {
 			
 			Clients.showNotification("Porfavor ingrese todos los datos validos");
 		}
-		List<Patologia> patologia = ServicioPatologia.buscarPatologia();
+		List<Patologia> tipoestudio = ServicioPatologia.buscarPatologia();
 
 
 	}
@@ -210,8 +197,8 @@ public class PatologiaVM {
 	public static  List<PatologiaStatus> generateStatusList(List<Patologia> patolo)
 	{
         List<PatologiaStatus> patologia = new ArrayList<PatologiaStatus>();
-        for(Patologia p : patolo) {
-            patologia.add(new PatologiaStatus(p, false));
+        for(Patologia patolog : patolo) {
+            patologia.add(new PatologiaStatus(patolog, false));
         }
 		return patologia;
 	}
@@ -256,8 +243,8 @@ public class PatologiaVM {
 
 
 
-	public void setObservacionSelected(String ObservacionSelected) {
-		this.observacionSelected = ObservacionSelected;
+	public void setObservacionSelected(String observacionSelected) {
+		this.observacionSelected = observacionSelected;
 	}
 
 
@@ -271,16 +258,6 @@ public class PatologiaVM {
 		this.ventanaregistronuevopatologia = ventanaregistronuevopatologia;
 	}
 
-	
-	public Window getVentanaeditarpaciente() {
-		return ventanaeditarpatologia;
-	}
-	
-	public void setVentanaeditarpatologia(Window ventanaeditarpatologia) {
-		this.ventanaeditarpatologia = ventanaeditarpatologia;
-	}
-	
-	
 	public List<PatologiaStatus> getPatologiastatues() {
 		return patologiastatues;
 	}
@@ -289,17 +266,7 @@ public class PatologiaVM {
 		this.patologiastatues = patologiastatues;
 	}
 
-
-/////////////////////////prueba///////////////////
 	
 
-
-	public List<Patologia> getCurrentPatologia() {
-		return currentPatologia;
-	}
-
-	public void setCurrentPatologia(List<Patologia> currentPatologia) {
-		this.currentPatologia = currentPatologia;
-	}
 }
 

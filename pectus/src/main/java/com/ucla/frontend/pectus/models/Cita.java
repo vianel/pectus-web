@@ -6,21 +6,23 @@ public class Cita {
 	
 	private Integer id;
 	private Date fecha;
-	private String hora;
+	private Date hora;
 	private Paciente paciente;
-	private Clinica clinica;
-	private TipoEstudio tipoestudio;
+	//private Clinica clinica;
+	//private TipoEstudio tipoestudio;
+	private EstudioClinica estudio;
 	private boolean estatus;
 	
-	public Cita(Integer id, Date fecha, String hora, Paciente paciente,
-			Clinica clinica, TipoEstudio tipoestudio, boolean estatus) {
+	public Cita(Integer id, Date fecha, Date hora, Paciente paciente,
+			EstudioClinica estudio, boolean estatus) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.paciente = paciente;
-		this.clinica = clinica;
-		this.tipoestudio = tipoestudio;
+		this.estudio = estudio;
+		//this.clinica = clinica;
+		//this.tipoestudio = tipoestudio;
 		this.estatus = estatus;
 	}
 	
@@ -44,11 +46,11 @@ public class Cita {
 		this.fecha = fecha;
 	}
 
-	public String getHora() {
+	public Date getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(Date hora) {
 		this.hora = hora;
 	}
 
@@ -60,7 +62,7 @@ public class Cita {
 		this.paciente = paciente;
 	}
 
-	public Clinica getClinica() {
+/*	public Clinica getClinica() {
 		return clinica;
 	}
 
@@ -75,7 +77,7 @@ public class Cita {
 	public void setTipoEstudio(TipoEstudio tipoestudio) {
 		this.tipoestudio = tipoestudio;
 	}
-
+*/
 	public boolean isEstatus() {
 		return estatus;
 	}
@@ -84,7 +86,13 @@ public class Cita {
 		this.estatus = estatus;
 	}
 	
-	
+	public EstudioClinica getEstudioClinica() {
+		return estudio;
+	}
+
+	public void setEstudioClinica(EstudioClinica estudio) {
+		this.estudio = estudio;
+	}
 	
 	
 

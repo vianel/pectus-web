@@ -1,19 +1,19 @@
 package com.ucla.frontend.pectus.controllers;
 
 
-import com.ucla.frontend.pectus.models.Patologia;
+import com.ucla.frontend.pectus.models.Comision;
 
-public class PatologiaStatus {
-	private Patologia patolo;
+public class ComisionStatus {
+	private Comision comi;
     private boolean editingStatus;
      
-    public PatologiaStatus(Patologia patolo, boolean editingStatus) {
-        this.patolo = patolo;
+    public ComisionStatus(Comision comi, boolean editingStatus) {
+        this.comi = comi;
         this.editingStatus = editingStatus;
     }
      
-    public Patologia getPatologia() {
-        return patolo;
+    public Comision getComision() {
+        return comi;
     }
      
     public boolean getEditingStatus() {

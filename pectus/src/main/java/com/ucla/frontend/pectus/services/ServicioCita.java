@@ -30,8 +30,8 @@ import us.monoid.web.Resty;
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Cita;
-import com.ucla.frontend.pectus.models.TipoEstudio;
-
+import com.ucla.frontend.pectus.models.Estudio;
+import com.ucla.frontend.pectus.models.EstudioClinica;
 
 public class ServicioCita {
 
@@ -54,10 +54,17 @@ public class ServicioCita {
 		    String ok = null;
 		    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 			String fecha = df.format(cita.getFecha());
+			DateFormat hr = new SimpleDateFormat("HH:mm");
+			String hora = hr.format(cita.getHora());
+	
 			
 		   try {
-			    jsResource = resty.json("http://127.0.0.1:5000/cita/agregar?idtipoestudio=" + cita.getTipoEstudio().getId()
-		   + "&cedula=" + cita.getPaciente().getCedula() + "&rif=" + cita.getClinica().getRif()+ "&fecha=" + fecha );
+			    jsResource = resty.json("http://127.0.0.1:5000/cita/agregar?idestudio=" 
+		   + cita.getEstudioClinica().getId() 
+		   + "&cedula=" + cita.getPaciente().getCedula() 
+		  // + "&rif=" + cita.getClinica().getRif()
+		   + "&fecha=" + fecha
+		   + "&hora=" + hora);
 			   
 		    
 		   } catch (IOException e) {
@@ -101,10 +108,8 @@ public class ServicioCita {
 					  Cita cita = new Cita();
 	                  JSONObject obj = serCita.getJSONObject(i);
 	                  cita.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
-	                  cita.setClinica(obtenerClinica(obj.get("clinica").toString()));
-	                  cita.setTipoEstudio(obtenerTipoEstudio(obj.get("tipoestudio").toString()));
+	                  cita.setEstudioClinica(obtenerEstudioClinica(obj.get("estudio").toString()));
 	                  cita.setFecha(convertirFecha(obj.get("fecha").toString()));
-	                 // cita.setHora(obj.get("hora").toString());
 	               
 	               listaCita.add(cita);
 				  
@@ -138,37 +143,59 @@ public class ServicioCita {
 			}
 	    	return paciente;
 	    }
-	    // OBTENER CLINICA 
+	    // OBTENER ESTUDIO-CLINICA 
 	    	
-	    	public static Clinica obtenerClinica (String s)
+	    	public static EstudioClinica obtenerEstudioClinica(String s)
 	 	    {
-	 	    	Clinica clinica = new Clinica();
+	    		EstudioClinica estudio = new EstudioClinica();
+	 	    	
 	 	    	try {
 	 				JSONObject objjson = new JSONObject(s);
-	 				clinica.setRif(objjson.getString("rif"));
-	 				clinica.setNombre(objjson.getString("nombre"));
+	                estudio.setId(Integer.parseInt(objjson.getString("id")));
+	                estudio.setClinica(obtenerClinica(objjson.getString("clinica")));
+	                estudio.setEstudio(obtenerTipoEstudio(objjson.getString("tipoestudio")));
 	 			} catch (JSONException e) {
 	 				// TODO Auto-generated catch block
 	 				e.printStackTrace();
 	 			}
-	 	    	return clinica;
+	 	    	return estudio;
 	 	    }
-        // OBTENER ESTUDIO 
 	    	
-	    	public static TipoEstudio obtenerTipoEstudio (String s)
-	 	    {
-	    		TipoEstudio tipoestudio= new TipoEstudio();
-	 	    	try {
-	 				JSONObject objjson = new JSONObject(s);
-	 				tipoestudio.setId(Integer.parseInt(objjson.getString("id")));
-	 				tipoestudio.setNombre(objjson.getString("nombre"));	
-	 			} catch (JSONException e) {
-	 				// TODO Auto-generated catch block
-	 				e.printStackTrace();
-	 			}
-	 	    	return tipoestudio;
-	 	    }
-	    
+	    	// OBTENER LA CLINICA
+		    
+		    public static Clinica obtenerClinica(String s)
+		    {
+		    	Clinica clinica = new Clinica();
+		    	try {
+					JSONObject objjson = new JSONObject(s);
+					clinica.setRif(objjson.getString("rif"));
+					clinica.setNombre(objjson.getString("nombre"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	return clinica;
+		    }
+	    	
+		    // OBTENER TIPO ESTUDIO	
+		    
+		    public static Estudio obtenerTipoEstudio(String s)
+		    {
+		    	  Estudio tipoestudio = new Estudio();
+		    	try {
+					JSONObject objjson = new JSONObject(s);
+					tipoestudio.setId(Integer.parseInt(objjson.getString("id")));
+					tipoestudio.setNombre(objjson.getString("nombre"));;
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	return tipoestudio;
+		    }
+	    	
+	    	
+	    	
+	    	
 	    	
 	    	//CONVERTIR FECHA
 	    public static Date convertirFecha(String fecha){
@@ -190,41 +217,6 @@ public class ServicioCita {
 			this.listaModelCita = listaModelCita;
 		} 
 	    
-	    
-		/*public static String modificarTipoEstudio(TipoEstudio tip)
-		{
-			Resty resty = new Resty();
-			JSONResource jsResource = null;
-			String ok = null;
-			
-			try {
-				jsResource = resty.json("http://127.0.0.1:5000/tipo-estudio/editar?nombre=" + tip.getNombre() + 
-						"&descricpion=" + tip.getDescripcion());
-						
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			 try {
-				ok = jsResource.get("ok").toString();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return ok;
-		}
-	 
-
-		public ListModelList<TipoEstudio> getListaModelTipoEstudio() {
-			return listaModelTipoEstudio;
-		}
-
-		public void setListaModelTipoEstudio(ListModelList<TipoEstudio> listaModelTipoEstudio) {
-			this.listaModelTipoEstudio = listaModelTipoEstudio;
-		}*/
-		
-		
-
 
 	}
 

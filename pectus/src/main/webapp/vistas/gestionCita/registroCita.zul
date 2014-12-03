@@ -10,7 +10,7 @@
     <tabpanels>
 		<tabpanel >
 		 <div apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorCita')">
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.CitaView')">
 			
 <!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
 		<button id="btnEditarCita" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')" >NUEVO</button>
@@ -36,7 +36,7 @@
             <auxheader colspan="1">
                 <textbox instant="true" width="100px"
                     value="@bind(vm.citaFilter.tipoestudio)" onChange="@command('changeFilter')"/>
-            </auxheader>
+            </auxheader>  
             
             <auxheader label="Detalles" colspan="3" />
         
@@ -47,17 +47,16 @@
             <column hflex="1">Clinica</column>
             <column hflex="1">Estudio</column>
             <column hflex="1">Fecha</column>
-            
-            <!--  <column hflex="1">Hora</column> -->
             <column hflex="1">Editar</column>
+            
         </columns>
         <template name="noneditable">
             <row>
                 <label value="@load(each.cita.paciente.cedula)" />
-                <label value="@load(each.cita.clinica.nombre)" />
-                <label value="@load(each.cita.tipoEstudio.nombre)" />
+                <label value="@load(each.cita.estudioClinica.clinica.nombre)" />
+                <label value="@load(each.cita.estudioClinica.estudio.nombre)" />
                 <label value="@load(each.cita.fecha) @converter('formatedDate',format='dd/MM/yy')"/>
-               <!-- <label value="@load(each.cita.hora)"/> -->
+             <!--    <label value="@load(each.cita.hora) @converter('formatedDate',format='HH:mm:ss')"/>  -->
                 <button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')">Editar</button>
              
             </row>

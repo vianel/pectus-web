@@ -38,11 +38,11 @@ public class Patologia {
 		this.nombre = nombre;
 	}
 
-	public String getobservacion() {
+	public String getObservacion() {
 		return observacion;
 	}
 
-	public void setobservacion(String observacion) {
+	public void setObservacion(String observacion) {
 		this.observacion = observacion;
 	}
 	

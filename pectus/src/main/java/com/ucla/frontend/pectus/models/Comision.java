@@ -9,6 +9,9 @@ public class Comision {
 	private String descripcion;
 	private List<Voluntario> voluntarios[];
 	
+	public Comision(){
+		
+	}
 	
 	
 	
