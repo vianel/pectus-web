@@ -1,0 +1,61 @@
+<zk xmlns:n="native">
+  <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Comision"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ComisionVM')">
+			
+
+		<button id="btnComision" sclass="btn-success" onClick="@command('abrirDialogoRegistrarComision')" >NUEVO</button>
+
+	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelcomision)"  selectedItem="@bind(vm.selectedItem)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  width="100px">
+          <textbox instant="true" width="100px" value="@bind(vm.comisionFilter.nombre)"  onChange="@command('changeFilter')" />
+           </listheader>       
+          
+          <listheader hflex="1" label="Descripcion" width="50%" sort="auto(descripcion)">
+          <textbox instant="true" width="100px" value="@bind(vm.comisionFilter.descripcion)" onChange="@command('changeFilter')" />  
+		   </listheader> 	
+		
+		<listheader hflex="1" label="Editar">
+               
+				   </listheader> 
+				  </listhead>         
+               
+           <template name="model" var="item">
+           <listitem>
+                  <listcell label="@load(item.comision.nombre) @save(each.comision.nombre, before='modificarcomision')" />
+                  <listcell label="@load(item.comision.descripcion)  @save(each.comision.descripcion, before='modificarcomision')" />
+                
+                  <listcell>
+                  <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success"  onClick="@command('abrirDialogoEditarComision')" >Editar</button>
+					
+                     </hbox></div>
+                   </listcell>
+               </listitem>
+           </template>
+</listbox>
+	
+		
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+     </tabbox>
+ 
+
+</zk>

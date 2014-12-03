@@ -28,7 +28,7 @@
 			</nav>
 			<nav label="Ayudas" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Solicitudes de Ayuda" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Estudios de clinicas" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Estudios de clinicas" href="../gestionestudioclinica/index_gestionEstudioClinica.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 		</nav>
 		
@@ -44,7 +44,7 @@
 		
 		<nav label="Patrocinadores" iconSclass="z-icon-list">
 		<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
-				<navitem label="Patrocinador" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Patrocinador" href="../gestionpatrocinador/index_gestionpatrocinador.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Tipo de colaboraciones" iconSclass="z-icon-angle-double-right"/>
 		</nav>
 			
@@ -55,7 +55,7 @@
 			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Tipo de actividad" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Solicitud de actividad" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Lugar de la actividad" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Lugar de la actividad" href="../gestionLugar/index_gestionLugar.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Actividad" href="../gestionactividades/index_gestionactividades.zul" iconSclass="z-icon-angle-double-right" />
 			</nav>
 			<nav label="Asignacion" iconSclass="z-icon-angle-double-right" sclass="grey">
@@ -71,7 +71,7 @@
 			<nav label="Registro" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Colaboraciones" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
 				<navitem label="Eventos" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Lugar del evento" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Lugar del evento" href="../gestionLugar/index_gestionLugar.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			<nav label="Asignacion" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Asignar voluntarios" iconSclass="z-icon-angle-double-right"/>
@@ -91,7 +91,7 @@
 				<navitem label="Polizas de seguros" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			<nav label="Ayudas y Eventos" iconSclass="z-icon-angle-double-right" sclass="grey">
-				<navitem label="Tipo de Lugares" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Tipo de Lugares" href="../gestionTipoLugar/index_gestiontipolugar.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			<navitem label="Publicaciones" iconSclass="z-icon-angle-double-right"/>
 		</nav>

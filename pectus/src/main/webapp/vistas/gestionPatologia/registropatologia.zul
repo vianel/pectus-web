@@ -1,5 +1,3 @@
-
-
 <zk xmlns:n="native">
   <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
 
@@ -37,13 +35,13 @@
                
            <template name="model" var="item">
            <listitem>
-                    <listcell label="@load(item.nombre) @save(each.patologia.nombre, before='modificarPatologia')" />  
-                  <listcell label="@load(item.observacion)  @save(each.patologia.observacion, before='modificarPatologia')" />
+                  <listcell label="@load(item.patologia.nombre) @save(each.patologia.nombre, before='modificarPatologia')" />
+                  <listcell label="@load(item.patologia.observacion)  @save(each.patologia.observacion, before='modificarPatologia')" />
                 
                   <listcell>
                   <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
-          		 <button id="" sclass="btn-success"  onClick="@command('abrirDialogoEditarPatologia'">Editar</button>
+          		 <button id="" sclass="btn-success"  onClick="@command('abrirDialogoEditarPatologia')" >Editar</button>
           		 
 					
                      </hbox></div>

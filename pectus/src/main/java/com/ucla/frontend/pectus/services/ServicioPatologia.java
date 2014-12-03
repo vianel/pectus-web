@@ -15,6 +15,7 @@ import us.monoid.web.Resty;
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Patologia;
+import com.ucla.frontend.pectus.models.TipoEstudio;
 
 public class ServicioPatologia {
 	
@@ -101,7 +102,7 @@ private ListModelList<Diagnostico> listaModelDiagnosticos;
 		
 		try {
 			jsResource = resty.json("http://127.0.0.1:5000/patologia/agregar?nombre=" + p.getNombre().replaceAll(" ", "%20")
-					+"&observacion=" + p.getobservacion().replaceAll(" ", "%20"));
+					+"&observacion=" + p.getObservacion().replaceAll(" ", "%20"));
 			
 
 		}
@@ -150,7 +151,7 @@ private ListModelList<Diagnostico> listaModelDiagnosticos;
                   JSONObject obj = serPatologia.getJSONObject(i);
                   patologia.setId(Integer.parseInt(obj.get("id").toString()));
                   patologia.setNombre(obj.get("nombre").toString());                
-                  patologia.setobservacion((obj.get("observacion").toString()));
+                  patologia.setObservacion((obj.get("observacion").toString()));
                                    
                   listaPatologia.add(patologia);
 			  
@@ -167,5 +168,41 @@ private ListModelList<Diagnostico> listaModelDiagnosticos;
         return listaPatologia;
         
     }
+    
+    /////////////////////////////MODIFICAR//////////////
+    public static String modificarPatologia(Patologia patolo)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/patologia/editar?id=" +patolo.getId()
+					+ "&nombre=" + patolo.getNombre() + 
+					"&observacion=" + patolo.getObservacion());
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

@@ -1,0 +1,75 @@
+<zk xmlns:n="native">
+
+ <a label="Lugar" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Lugares"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.LugarView')">
+			
+<!-- 	<div apply="com.ucla.frontend.pectus.controllers.Dialogo">		 -->
+		<button id="btnNuevoLugar" sclass="btn-success" onClick="@command('abrirDialogoRegistrarLugar')" >NUEVO</button>
+<!-- 	</div> -->
+	
+	<grid height="430px"  pagingPosition="bottom" mold="paging" pageSize="5" model="@load(vm.modellugar)
+	@template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')">
+	<auxhead>
+            <auxheader label="LISTA DE LUGARES" colspan="7" />
+        </auxhead>
+        
+         <auxhead sclass="category-center">
+	        <auxheader colspan="1">
+	            <textbox instant="true" width="83px" 
+	                value="@bind(vm.lugarFilter.tipolugar)" onChange="@command('changeFilter')" />
+	        </auxheader>
+			
+			<auxheader colspan="6">
+                <textbox instant="true"  width="100px"
+                    value="@bind(vm.lugarFilter.nombre)" onChange="@command('changeFilter')"/>
+            </auxheader>
+            
+        
+        </auxhead> 
+	
+	<columns>
+            <column hflex="1">Tipo</column>
+            <column hflex="2">Nombre</column>
+            <column hflex="2">Direccion</column>
+            <column hflex="1">Estado</column>
+            <column hflex="1">Ciudad</column>
+            <column hflex="1">Teléfono Fijo</column>
+            
+            
+
+            <column hflex="-1">Editar</column>
+        </columns>
+         <template name="noneditable">
+            <row>
+                <label value="@load(each.lugar.tipoLugar.nombre)" />
+                <label value="@load(each.lugar.nombre)" />
+                <label value="@load(each.lugar.direccion)" />
+                <label value="@load(each.lugar.ciudad.estado.nombre)"/> 
+                <label value="@load(each.lugar.ciudad.nombre)"/> 
+                <label value="@load(each.lugar.tlffijo)" />
+                <button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarLugar')">Editar</button>
+             
+            </row>
+        </template> 
+        <foot>
+            <footer span="6"  label="" />
+        </foot>
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
+
+</zk>

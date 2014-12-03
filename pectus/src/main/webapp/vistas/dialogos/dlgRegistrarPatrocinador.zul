@@ -1,0 +1,99 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.PatrocinadorViewModel')"
+			 id="modalDialog" title="Registrar Patrocinador" border="normal" width="640px" height="30em"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+       <tabbox id="tb" height="24em" width="600px" >
+    <tabs id="tabs">
+        <tab id="A" label="Datos del Patrocinador" />
+     
+    </tabs>
+    <tabpanels>
+     
+        <tabpanel>
+
+
+				<grid>
+
+					<columns>
+						<column label="" width="100px" />
+						<column   />
+					</columns>
+
+					<rows>
+						<row>
+							<label>Nombre:</label>
+							
+							<textbox id="txtNombrePatrocinador"
+								value="@bind(vm.txtNombrePatrocinador)"
+								constraint="no empty" />
+						
+							<label style="margin-left:10px;">Rif:</label>
+							<textbox id="txtRifPatrocinador"
+								value="@bind(vm.txtRifPatrocinador)"
+								constraint="no empty" />
+						</row>
+						<row>
+							<label>Dirección:</label>
+							<textbox id="txtDireccionPatrocinador"
+								value="@bind(vm.txtDireccionPatrocinador)"
+								constraint="no empty" />
+						
+						
+						
+						
+							<label style="margin-left:10px;">Telf Movil:</label>			
+							<textbox id="txtTlfMovilPatrocinador"
+								value="@bind(vm.txtTlfMovilPatrocinador)"
+								/>
+						</row>
+						
+						<row>
+							<label>Telf Fijo:</label>
+							<textbox id="txtTlfFijoPatrocinador"
+								value="@bind(vm.txtTlfFijoPatrocinador)"
+								 />
+						
+						
+							<label style="margin-left:10px;">Representante:</label>			
+							
+							<textbox value="@bind(vm.txtRepresentantePatrocinador)" id="txtRepresentantePatrocinador" />
+						</row>
+						<row>
+							<label>Telf del Representante:</label>
+							<textbox value="@bind(vm.txtTelfRepresentantePatrocinador)" id="txtTelfRepresentantePatrocinador" />
+						
+							
+							
+							<label style="margin-left:10px;">Correo del Representante:</label>			
+						
+							<textbox value="@bind(vm.txtCorreoRepresentantePatrocinador)" id="txtCorreoRepresentantePatrocinador" />
+						</row>
+						
+
+					</rows>
+				</grid>
+				<label pre="true" value="  "/>
+	
+	<separator height="35px"/>
+		<div style="margin-left: 15px;" align="left">
+		<button style="margin-left: 5px;" width="75px" height="50px" onClick="@command('guardarPatrocinador1')" sclass="btn-success">Guardar</button>
+		<button style="margin-left: 5px;" width="75px" height="50px" sclass="btn-success">Eliminar</button>
+		<button style="margin-left: 5px;" width="75px" height="50px" sclass="btn-success">Cancelar</button>
+		</div>	
+
+        </tabpanel>
+        
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+</window>
+</zk>

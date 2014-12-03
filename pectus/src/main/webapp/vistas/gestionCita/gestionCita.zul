@@ -4,6 +4,6 @@
     <a label="REGISTRO DE CITAS PARA EL PACIENTE" iconSclass="z-icon-angle-double-right" sclass="subtitle"/>
   </div>
  	<hlayout spacing="24px">
-	     <include src="/vistas/gestionPaciente/registroCita.zul" hflex="7" style="position: relative;"/>
+	     <include src="/vistas/gestionCita/registroCita.zul" hflex="7" style="position: relative;"/>
  	 </hlayout>
 </vlayout>

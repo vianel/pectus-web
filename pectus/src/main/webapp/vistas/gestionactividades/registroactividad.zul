@@ -78,14 +78,14 @@
 		
 		 <separator height="15px"/>
 		<div align="center">
-			    <chart id="mychart" title="Recursos Utilizados por la Actividad"
-			        width="550" height="400" paneColor="#ffffff" fgAlpha="192"
-			        type="pie" threeD="@bind(vm.threeD)"
-			        model="@bind(vm.model)" engine="@bind(vm.engine)"
-			        onClick="@command('showMessage',msg=event.areaComponent.tooltiptext)"/>
-			   <hlayout  visible="@bind(not empty vm.message)">
-			        Grafica de Muestra
-			   </hlayout>
+<!-- 			    <chart id="mychart" title="Recursos Utilizados por la Actividad" -->
+<!-- 			        width="550" height="400" paneColor="#ffffff" fgAlpha="192" -->
+<!-- 			        type="pie" threeD="@bind(vm.threeD)" -->
+<!-- 			        model="@bind(vm.model)" engine="@bind(vm.engine)" -->
+<!-- 			        onClick="@command('showMessage',msg=event.areaComponent.tooltiptext)"/> -->
+<!-- 			   <hlayout  visible="@bind(not empty vm.message)"> -->
+<!-- 			        Grafica de Muestra -->
+<!-- 			   </hlayout> -->
 
 	
 	<button label="Cancelar" sclass="btn-success">

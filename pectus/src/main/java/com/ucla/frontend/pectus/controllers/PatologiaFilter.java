@@ -46,7 +46,7 @@ public class PatologiaFilter {
 	
 	
 	public static List<Patologia> getFilterPatologia(PatologiaFilter patologiaFilter){
-		List<Patologia> patologia = new ArrayList<Patologia>();
+		List<Patologia> patolo = new ArrayList<Patologia>();
 	
 		String nombre = patologiaFilter.getNombre().toLowerCase();
 		String observacion = patologiaFilter.getObservacion().toLowerCase();
@@ -54,15 +54,15 @@ public class PatologiaFilter {
 		for(Iterator<Patologia> i = patologia.iterator(); i.hasNext();){
 			Patologia tmp = i.next();
 			if(tmp.getNombre().toLowerCase().contains(nombre) &&
-			   tmp.getobservacion().toLowerCase().contains(observacion))
+			   tmp.getObservacion().toLowerCase().contains(observacion))
 			  
 			{
 			
-				patologia.add(tmp);
+				patolo.add(tmp);
 			}
 				
 		}
-		return patologia;
+		return patolo;
 	}
 
 	

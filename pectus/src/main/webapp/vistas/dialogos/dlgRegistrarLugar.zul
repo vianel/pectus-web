@@ -1,35 +1,82 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id="modalDialog" title="Lugar" border="normal" width="960px" height="50em"
+
+<window apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.LugarView')"
+			 id="modalDialog" title="LUGAR" border="normal" width="415px" height="40em"
     
     position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
-    
-
- 
+    <vlayout>
+       <tabbox id="tb" height="630px" >
+    <tabs id="tabs">
+        <tab id="A" label="Datos del Lugar" />
+     
+    </tabs>
+    <tabpanels>
+     
+        <tabpanel onCreate="@command('inicializarAtributos')">
+        
+        <!--  Datos del tipo lugar con el combobox -->
+        
+        <label style="display:block;margin-left: 1em" value="Tipo" />
+        <bandbox style="display:block;margin-left: 1em" id="bdTipoLugar" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					                selectedItem="@bind(vm.tipoluselected)" onSelect="bdTipoLugar.value=self.selectedItem.label; bdTipoLugar.close();" model="@load(vm.listatipolugar)">
+				                <listhead>
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="DESCRIPCION" />
+				                </listhead>
+				                 <template name="model" var="tipolugar">
+				                <listitem>
+				                  <listcell  label="@load(tipolugar.nombre)" />
+				                  <listcell  label="@load(tipolugar.descripcion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+       <!-- Datos del tipo lugar con el combobox finish -->
+        
+       <!-- Datos de la cita-->
        
-      	<separator height="15px"/>
-			<separator height="15px"/>
-		<hlayout>
-			 <grid  width="500px">
-				<columns>
-					<column label="" width="130px"/>
-					<column label=""/>
-				</columns>
-				<rows>
-					<row><label value="Nombre" /><textbox/> </row>
-					<row><label value="Direccion" /><textbox rows="4"/> </row>
-					<row><label value="Tlf Fijo" /><textbox/> </row>
-					<row><label value="Tipo" /> <combobox><comboitem label="1"/><comboitem label="2"/><comboitem label="3"/></combobox> </row>
-					<row><label value="Ciudad" /><combobox></combobox> </row>
-					</rows>
-			</grid>
-		
-		</hlayout>	
-  
-         	<separator height="15px"/>
-    		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success">Guardar</button>
-		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+       <label style="display:block;margin-left: 1em" value="Nombre" /><textbox style="display:block;margin-left: 1em" value="@bind(vm.nombreselected)"/>
+              <label style="display:block;margin-left: 1em" value="Dirección"  /><textbox  style="display:block;margin-left: 1em" width="200px" value="@bind(vm.direccionselected)" rows="3"/>
+       <label style="display:block;margin-left: 1em" value="Telefono Fijo" /><textbox style="display:block;margin-left: 1em" value="@bind(vm.tlffijoselected)" />
+
+         <label style="display:block;margin-left: 1em;" value="Estado"/>
+         <combobox style="display:block;margin-left: 1em;" id="cmbEstado" model="@load(vm.listaestado)" selectedItem="@bind(vm.estadoselected)" onChange="@command('cambioEstado')">
+				<template name="model">
+				  <comboitem label="@load(each.nombre)" />
+			    </template>
+	    </combobox>
+		<label style="display:block;margin-left: 1em;" value="Ciudad"/>
+        <combobox style="display:block;margin-left: 1em;" id="cmbCiudad" model="@load(vm.listaciudad)" selectedItem="@bind(vm.ciudadselected)">
+			    <template name="model">
+				  <comboitem label="@load(each.nombre)" />
+			   </template>
+		</combobox>
+					
+					
+       <separator height="50px"/>
+		<div align="center" style="margin-left:-1em">
+			<button width="75px" sclass="btn-success" onClick="@command('guardarLugar')">Guardar</button>
+			<button width="75px" sclass="btn-success">Eliminar</button>
+			<button width="75px" sclass="btn-success">Cancelar</button>
 		</div>
-    
+	
+	<!-- Datos de la cita-->
+			
+	
+
+        </tabpanel>
+        
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+</window>
+</zk>

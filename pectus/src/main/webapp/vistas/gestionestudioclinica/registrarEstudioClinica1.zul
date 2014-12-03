@@ -1,0 +1,85 @@
+<zk xmlns:n="native" apply="vistas.SidebarComposer">
+ 			<panel>
+			<panelchildren>
+	
+	  <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorEstudioClinica')">		
+
+	      	<separator height="15px"/>
+			
+				<separator height="15px"/>
+				<div align="left" apply="com.ucla.frontend.pectus.controllers.ControladorEstudioClinica">		
+					<button id="btnRegistrarEstudioClinica" sclass="btn-success">NUEVO</button>
+				</div>
+
+			
+		          <grid mold="paging" pageSize="7" model="@load(vm.modelestudioclinica)" >
+				
+					<auxhead>
+           					 <auxheader label="LISTA DE Estudio" colspan="6" />
+        			</auxhead>
+        					<auxhead sclass="category-center">
+	        				
+							<auxheader label="Buscar por RIF" colspan="1">
+				                <textbox  instant="true"  width="100px" value="@bind(vm.modelclinica)" onChange="@command('changeFilter')"/>
+				            </auxheader>
+				            
+							<auxheader label="Buscar por Nombre" colspan="1">
+				                <textbox  instant="true"  width="100px" value="@bind(vm.clinicaFilter.nombre)" onChange="@command('changeFilter')"/>
+				            </auxheader>
+				            <auxheader label="Buscar por Estudio" colspan="1">
+				                <textbox  instant="true"  width="100px" value="@bind(vm.clinicaFilter.nombre)" onChange="@command('changeFilter')"/>
+				            </auxheader>
+				            
+	        			</auxhead>
+	        	
+        			
+					<columns >
+						<column hflex="1" label="Rif Clinica" />
+						<column hflex="1" label="Nombre Clinica"  />
+						<column hflex="1" label="Id Tipo Estudio" />
+						<column hflex="1" label="Nombre Tipo EStudio"/>
+						<column hflex="1" label="Monto"/>
+						<column hflex="1" label="Editar" />
+						
+					</columns>
+				 	<template name="model">
+					<row>
+						<label value="@load(each.clinica.rif)" />
+						<label value="@load(each.clinica.nombre)" />
+						<label value="@load(each.estudio.id)" />
+						<label value="@load(each.estudio.nombre)" />
+                        <label value="@load(each.monto)" />
+                        <button id="" sclass="btn-success" onClick="@command('cambiarestatusedicion', clinicaStatus=each)">Editar</button>
+					</row> 
+					</template>
+					   <foot>
+				          <footer span="6"  label="@load(vm.footerEstudio)" />
+				       </foot>
+				
+				 </grid>
+				
+				
+				<div align="left">
+					 <label value="Ha seleccionado " /><label id="lblseleccion" value="ninguno"/> 
+				</div> 
+
+
+			<separator height="35px"/>
+
+			
+			
+        
+		
+</div>
+	
+</panelchildren>
+</panel>
+
+
+    
+
+
+
+
+</zk>
