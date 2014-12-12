@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -139,9 +140,10 @@ public class ServicioTipoEstudio {
 		String ok = null;
 		
 		try {
-			jsResource = resty.json("http://127.0.0.1:5000/tipo-estudio/editar?id=" +tip.getId()
-					+ "&nombre=" + tip.getNombre() + 
-					"&descricpion=" + tip.getDescripcion());
+		
+			jsResource = resty.json("http://127.0.0.1:5000/tipo-estudio/editar?id=" + tip.getId().toString()
+					+ "&nombre=" + tip.getNombre().toString() + 
+					"&descricpion=" + URLEncoder.encode(tip.getDescripcion()));
 					
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
