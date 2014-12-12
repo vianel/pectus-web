@@ -2048,7 +2048,7 @@ a:focus {
 }
 .z-listitem.z-listitem-selected > .z-listcell,
 .z-listitem.z-listitem-selected:hover > .z-listcell {
-  background-color: transparent;
+  background-color: #45F78F;
   background-image: none;
 }
 .z-grid .z-row > .z-row-inner,

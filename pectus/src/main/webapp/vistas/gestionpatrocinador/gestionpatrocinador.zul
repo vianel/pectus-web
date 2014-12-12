@@ -5,7 +5,7 @@
   </div>
  
  	<hlayout spacing="24px">
-	    <include src="/vistas/gestionPatrocinador/registrarPatrocinador.zul" hflex="7" style="position: relative;"/>
+	    <include src="/vistas/gestionpatrocinador/registrarPatrocinador.zul" hflex="7" style="position: relative;"/>
 	 		 
  	 </hlayout>
 

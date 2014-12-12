@@ -1,11 +1,10 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoEstudioVM')"
-			 id="modalDialog" title="TIPO ESTUDIO" border="normal" width="320px" height="26em"
-    
-    position="center,center" closable="true"
+<window id="modaltipoestudior" title="TIPO ESTUDIO" border="normal" width="320px" height="26em" position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
+ <panel apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoEstudioVM')"> 
+<panelchildren>
     <vlayout>
        <tabbox id="tb" height="630px">
     <tabs id="tabs">
@@ -21,7 +20,11 @@
 				<label style="display:block; margin-top: 1em" value="Descripcion"/><textbox value="@bind(vm.descripcionSelected)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>
 				
 			
-				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarTipoEstudio')">Guardar</button>
+				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarTipoEstudio')">
+					<attribute name="onClick">						
+						    modaltipoestudior.setVisible(false);						  	
+						</attribute>
+				Guardar</button>
 				
 				
 		</tabpanel>
@@ -37,5 +40,7 @@
        <separator height="35px"/>
 		
     </vlayout>
+   </panelchildren>
+   </panel>
 </window>
 </zk>
