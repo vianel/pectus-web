@@ -201,6 +201,17 @@
 		<!-- ZK 5 breeze theme <dependency> <groupId>org.zkoss.theme</groupId> 
 			<artifactId>breeze</artifactId> <version>${zk.version}</version> <optional>true</optional> 
 			</dependency> -->
+<dependency>
+<groupId>postgresql</groupId>
+<artifactId>postgresql</artifactId>
+<version>9.1-901-1.jdbc4</version>
+</dependency>
+
+<dependency>
+	<groupId>net.sf.jasperreports</groupId>
+	<artifactId>jasperreports</artifactId>
+	<version>5.0.1</version>
+</dependency>
 
 	</dependencies>
 	<build>
