@@ -1,12 +1,10 @@
 package com.ucla.frontend.pectus.controllers;
 
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -17,6 +15,7 @@ import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.TipoEstudio;
 import com.ucla.frontend.pectus.controllers.TipoEstudioFilter;
+import com.ucla.frontend.pectus.reports.TipoestudioReportes;
 import com.ucla.frontend.pectus.services.ServicioTipoEstudio;
 
 
@@ -35,11 +34,12 @@ public class TipoEstudioVM {
 	private static final String footerMensaje = "Esto son todos los Estudios";
 	private TipoEstudioFilter tipoestudioFilter = new TipoEstudioFilter();
 	private List<TipoEstudio> currentTipoEstudio;
-
+	private TipoestudioReportes tpr;
 	   
 	@Init
 	public void init(){
 		this.currentTipoEstudio = ServicioTipoEstudio.buscarTipoEstudio();
+		tpr = new TipoestudioReportes();
 	}
 	
 	   public ListModelList<TipoEstudio>getTipoEstudios(){
@@ -197,8 +197,20 @@ public class TipoEstudioVM {
 	public void setResp(String resp) {
 		this.resp = resp;
 	}
+	
+	@Command
+	public  void buildreporte()
+	{
 
+		try {
+			tpr.generarreporteprueba();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 
+	}
 
 
 

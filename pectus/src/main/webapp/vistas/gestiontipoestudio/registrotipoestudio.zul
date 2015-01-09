@@ -16,7 +16,17 @@
 			
 
 		<button id="btnNuevoTipoEstudio" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoEstudio')">NUEVO</button>
-
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success" >
+          		 		    <attribute name="onClick">						
+						    modaltipoestudio.doModal();						  	
+			</attribute>
+			EDITAR</button>
+			<button  sclass="btn-success" onClick="@command('buildreporte')">Imprimir</button>
+  
+					
+                     </hbox></div>
 	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
           sclass="mylist" 	model="@load(vm.modeltipoestudio)"  selectedItem="@bind(vm.tipoestudioselected)">
 			
@@ -30,9 +40,7 @@
           <textbox instant="true" width="100px" value="@bind(vm.tipoEstudioFilter.descripcion)" onChange="@command('changeFilter')" />  
 		   </listheader> 	
 		
-		<listheader hflex="1" label="Editar">
-               
-				   </listheader> 
+	
 				  </listhead>         
                
            <template name="model">
@@ -40,17 +48,6 @@
                   <listcell label="@load(each.nombre)" />
                   <listcell label="@load(each.descripcion) " />
                 
-                  <listcell>
-                  <div class="btn-group btn-group-sm">
-                        <hbox spacing="20px">
-          		 <button id="" sclass="btn-success" >
-          		 		    <attribute name="onClick">						
-						    modaltipoestudio.doModal();						  	
-			</attribute>
-			Editar</button>
-					
-                     </hbox></div>
-                   </listcell>
                </listitem>
            </template>
 </listbox>
