@@ -1,6 +1,10 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jettison.json.JSONArray;
@@ -16,6 +20,9 @@ import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Lugar;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Seguro;
+import com.ucla.frontend.pectus.models.SolicitudActividad;
+import com.ucla.frontend.pectus.models.TipoActividad;
 
 public class ServicioActividad {
 
@@ -42,10 +49,11 @@ public class ServicioActividad {
 					 {
 		                  Actividad actividad = new Actividad();
 		                  JSONObject obj = serActividad.getJSONObject(i);
-
-		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
-		                  actividad.setFecha(obj.getString("fecha").toString());
-		                  actividad.setLugar(obtenerlugar(obj.getString("solicitudactividad").toString()));
+		                  actividad.setId(Integer.parseInt(obj.getString("id")));
+		                  actividad.setDescripcion(obj.getString("descripcion").toString());
+		                  actividad.setFechainicio(convertirFecha(obj.getString("fechainicio").toString()));
+		                  actividad.setFechafin(convertirFecha(obj.getString("fechafin").toString()));
+		                  actividad.setLugar(obtenerlugar(obj.getString("lugar").toString()));
 		                  actividad.setObservaciones(obj.getString("observaciones").toString());
 		                  
 		                  listaActividad.add(actividad);
@@ -61,18 +69,11 @@ public class ServicioActividad {
 	
     public static Lugar obtenerlugar(String s) {
 		// TODO Auto-generated method stub
-    	String jsonlugar = null;
-    	try {
-			JSONObject mijsonjbj = new JSONObject(s);
-			jsonlugar = mijsonjbj.getString("lugar").toString();
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
     	Lugar lugar = new Lugar();
     	try {
-			JSONObject objjson = new JSONObject(jsonlugar);
-		//	lugar.setIdCiudad(obtenerciudad(objjson.getString("ciudad").toString()));
+			JSONObject objjson = new JSONObject(s);
+    	//	lugar.setIdCiudad(obtenerciudad(objjson.getString("ciudad").toString()));
 			lugar.setDireccion(objjson.getString("direccion").toString().toString());
 			lugar.setId(Integer.parseInt(objjson.getString("id").toString()));
 			lugar.setNombre(objjson.getString("nombre").toString());
@@ -114,4 +115,178 @@ public class ServicioActividad {
 		return estado;
 	}
 
+	public static List<TipoActividad> buscartipoactividades() {
+		// TODO Auto-generated method stub
+		ListModelList<TipoActividad> listaTipoActividad = new ListModelList<TipoActividad>();
+		
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		
+			try {
+				jsResource = resty.json("http://localhost:5000/tipo-actividad/todos");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				String ok = jsResource.get("ok").toString();
+				if (ok.equalsIgnoreCase("true"))
+				{
+					String strAct = jsResource.get("tipoactividades").toString();
+					JSONArray serActividad = new JSONArray(strAct);
+					 for(int i=0; i < serActividad.length(); i++)
+					 {
+		                  TipoActividad actividad = new TipoActividad();
+		                  JSONObject obj = serActividad.getJSONObject(i);
+
+		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
+		                  actividad.setNombre(obj.getString("nombre").toString());
+		                  actividad.setId(Integer.parseInt(obj.getString("id").toString()));
+		                  
+		                  listaTipoActividad.add(actividad);
+
+					 }
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return listaTipoActividad;
+	}
+	
+	public static String agregarsolicitudactividad(SolicitudActividad SA)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+			try {
+				jsResource = resty.json("http://localhost:5000/solicitud-actividad/agregar?idTipoActividad=" + SA.getIdTipoActividad().getId()
+						+"&descripcion " + SA.getDescripcion()
+						+"&fecSolicitud" + SA.getFecha() 
+						+"&nomSolicitante"+ SA.getNomsolicitante() 
+						+"&telfSolicitante"+ SA.getTlfsolicitante());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+				
+				try {
+					ok = jsResource.get("ok").toString();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			return ok;
+	}
+
+	public static List<SolicitudActividad> buscarsolicitudactividades() {
+		// TODO Auto-generated method stub
+		ListModelList<SolicitudActividad> listasolactividad = new ListModelList<SolicitudActividad>();
+		
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		
+			try {
+				jsResource = resty.json("http://localhost:5000/solicitud-actividad/todos");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				String ok = jsResource.get("ok").toString();
+				if (ok.equalsIgnoreCase("true"))
+				{
+					String strAct = jsResource.get("solicitudactividad").toString();
+					JSONArray serActividad = new JSONArray(strAct);
+					 for(int i=0; i < serActividad.length(); i++)
+					 {
+						 SolicitudActividad actividad = new SolicitudActividad();
+		                  JSONObject obj = serActividad.getJSONObject(i);
+		                  
+		                  actividad.setId(Integer.parseInt(obj.getString("id")));
+		                  actividad.setFecha(convertirFecha(obj.getString("fecsolicitud")));
+		                  actividad.setNomsolicitante(obj.getString("nombsolicitante"));
+		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
+		                  actividad.setIdTipoActividad(obtenertipoactividad(obj.get("tipoactividad").toString()));
+		                  listasolactividad.add(actividad);
+
+					 }
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return listasolactividad;
+	}
+
+    public static Date convertirFecha(String fecha){
+        Calendar calendario = Calendar.getInstance();
+        Calendar calendarioActual = Calendar.getInstance();
+        String fechaFraccionada[] = fecha.split("-");
+        calendario.add(Calendar.YEAR, Integer.valueOf(fechaFraccionada[0]) - calendarioActual.get(Calendar.YEAR));
+        calendario.add(Calendar.MONTH, Integer.valueOf(fechaFraccionada[1])-2);
+        calendario.add(Calendar.DAY_OF_MONTH, Integer.valueOf(fechaFraccionada[2]) - calendarioActual.get(Calendar.DAY_OF_MONTH));
+
+
+        return calendario.getTime();
+    }
+	private static TipoActividad obtenertipoactividad(String s) {
+		// TODO Auto-generated method stub
+		TipoActividad tipoactividad = new TipoActividad();
+    	try {
+			JSONObject objjson = new JSONObject(s);
+			tipoactividad.setId(Integer.parseInt(objjson.getString("id")));
+			tipoactividad.setNombre(objjson.getString("nombre"));
+			tipoactividad.setDescripcion(objjson.getString("descripcion"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return tipoactividad;
+	}
+
+	public static String agregaractividad(Actividad act) {
+		String ok = null;
+		Resty resty = new Resty();
+		
+	    JSONResource jsResource = null;
+	 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/actividad/agregar?idsolicitudactividad=" + act.getIdSolicitudActividad().getId()
+					+"&fechainicio=" + dateFormat.format(act.getFechainicio())
+					+"&fechafin=" + dateFormat.format(act.getFechafin())
+					//+"&hora=" + act.getHora()
+					+"&recursosutilizados=" + act.getRecursosUtilizados()
+					+"&montoesperado=" + act.getMontoesperado()
+					+"&nroasistentesesperados=" + act.getNroasistentesesperados()
+				//	+"&duracion=" + act.getDuracion()
+					+"&idlugar=" + act.getLugar().getId().toString() 
+					+"&descripcion=" + act.getDescripcion().replaceAll(" ", "%20"));
+			
+
+		}
+			
+			catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;	
+
+		
+	}
+
+
+
+	
 }

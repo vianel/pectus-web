@@ -24,31 +24,49 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 
-		  <script type="text/javascript">
-  window.onload = function () {
-    var chart = new CanvasJS.Chart("chartayudafinanciera", {
-      data: [
-      {
-        type: "column",
-        dataPoints: [
-        { x: 2009, y: 1050 },
-        { x: 2010, y: 1250},
-        { x: 2011, y: 2500 },
-        { x: 2012, y: 2000 },
-        { x: 2013, y: 3000 }
-        ]
-      }
-      ]
-    });
+		<script type="text/javascript">
+			  window.onload = function () {
+			    var chart = new CanvasJS.Chart("chartayudafinanciera", {
+			      data: [
+			      {
+			        type: "column",
+			        dataPoints: [
+			        { x: 2009, y: 1050 },
+			        { x: 2010, y: 1250},
+			        { x: 2011, y: 2500 },
+			        { x: 2012, y: 2000 },
+			        { x: 2013, y: 3000 }
+			        ]
+			      }
+			      ]
+			    });
 
-    chart.render();
-  }
-  </script>
+			    chart.render();
+			  }
+  		</script>
   <script type="text/javascript" src="js/canvasjs/canvasjs.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script> <!-- Leer JSON -->
+
+  
+  function insertReply(content) {
+	    document.getElementById('output').innerHTML = content;
+	}
+
+	// create script element
+	var script = document.createElement('script');
+	// assing src with callback name
+	script.src ='http://localhost:5000/paciente/todos';
+	// insert script to document and load content
+	document.body.appendChild(script);
+
+
+  </script>
 	</head>
 	<body class="left-sidebar">
-
+<button id="output">Send an HTTP GET request to a page and get the result back</button>
 		<!-- Header Wrapper -->
+	
 			<div id="header-wrapper">
 				<div class="container">
 

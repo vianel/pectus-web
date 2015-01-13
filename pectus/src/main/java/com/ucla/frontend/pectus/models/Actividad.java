@@ -1,13 +1,16 @@
 package com.ucla.frontend.pectus.models;
 
+import java.util.Date;
+
 
 
 public class Actividad {
 	
 	private Integer id;
 	private Lugar lugar;
-	private Integer idSolicitudActividad;
-	private String fecha;
+	private SolicitudActividad idSolicitudActividad;
+	private Date fechainicio;
+	private Date fechafin;
 	private String hora;
 	private String recursosUtilizados;
 	private Float monto;
@@ -16,6 +19,8 @@ public class Actividad {
 	private String descripcion;
 	private String observaciones;
 	private boolean estatus;
+	private int montoesperado;
+	private int nroasistentesesperados;
 	
 	
 	
@@ -26,14 +31,20 @@ public class Actividad {
 	}
 
 
-	public Actividad(int id, Lugar lugar, int idSolicitudActividad, String fecha, String hora, String recursosUtilizados, 
-			Float monto, String duracion, int nroAsistentes, String descripcion, String observaciones, boolean estatus) {
+	
+	
+	public Actividad(Integer id, Lugar lugar,
+			SolicitudActividad idSolicitudActividad, Date fechainicio,
+			Date fechafin, String hora, String recursosUtilizados,
+			Float monto, String duracion, Integer nroAsistentes,
+			String descripcion, String observaciones, boolean estatus,
+			int montoesperado, int nroasistentesesperados) {
 		super();
-		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.lugar = lugar;
 		this.idSolicitudActividad = idSolicitudActividad;
-		this.fecha = fecha;
+		this.fechainicio = fechainicio;
+		this.fechafin = fechafin;
 		this.hora = hora;
 		this.recursosUtilizados = recursosUtilizados;
 		this.monto = monto;
@@ -42,10 +53,13 @@ public class Actividad {
 		this.descripcion = descripcion;
 		this.observaciones = observaciones;
 		this.estatus = estatus;
-		
+		this.montoesperado = montoesperado;
+		this.nroasistentesesperados = nroasistentesesperados;
 	}
-	
-	
+
+
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -58,21 +72,21 @@ public class Actividad {
 
 
 	public void setLugar(Lugar lugar) {
-		lugar = lugar;
+		this.lugar = lugar;
 	}
 
 
-	public Integer getIdSolicitudActividad() {
+	public SolicitudActividad getIdSolicitudActividad() {
 		return idSolicitudActividad;
 	}
-	public void setIdSolicitudActividad(Integer idSolicitudActividad) {
+	public void setIdSolicitudActividad(SolicitudActividad idSolicitudActividad) {
 		this.idSolicitudActividad = idSolicitudActividad;
 	}
-	public String getFecha() {
-		return fecha;
+	public Date getFechainicio() {
+		return fechainicio;
 	}
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public void setFechainicio(Date fechainicio) {
+		this.fechainicio = fechainicio;
 	}
 	public String getHora() {
 		return hora;
@@ -121,6 +135,36 @@ public class Actividad {
 	}
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
+	}
+
+
+	public Date getFechafin() {
+		return fechafin;
+	}
+
+
+	public void setFechafin(Date fechafin) {
+		this.fechafin = fechafin;
+	}
+
+
+	public int getMontoesperado() {
+		return montoesperado;
+	}
+
+
+	public void setMontoesperado(int montoesperado) {
+		this.montoesperado = montoesperado;
+	}
+
+
+	public int getNroasistentesesperados() {
+		return nroasistentesesperados;
+	}
+
+
+	public void setNroasistentesesperados(int nroasistentesesperados) {
+		this.nroasistentesesperados = nroasistentesesperados;
 	}
 
 	

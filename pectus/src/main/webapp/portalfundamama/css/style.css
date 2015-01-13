@@ -465,7 +465,7 @@ button:hover span {display:none}
 #btn1:hover:before 
 	{
 	vertical-align:bottom;	
-	content:"Solicitar cita";
+	content:"Solicita tu cita";
 	}
 #btn2:hover:before 
 	{
@@ -475,7 +475,7 @@ button:hover span {display:none}
 #btn3:hover:before 
 	{
 	vertical-align:bottom;	
-	content:"Se Voluntario";
+	content:"Postulate";
 	}
 #btn4:hover:before 
 	{

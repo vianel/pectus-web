@@ -1,0 +1,54 @@
+<?page title="Pectus" contentType="text/html;charset=UTF-8"?>
+<zk>
+     
+       <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ActividadVM')" >
+      	<separator height="15px"/>
+			<separator height="15px"/>
+	
+		<button id="btnNuevoSolactividad" sclass="btn-success" onClick="@command('abrirDialogoRegistrarSolicitudActividad')">NUEVO</button>
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success" >
+          		 		    <attribute name="onClick">						
+						    modaltipoestudio.doModal();						  	
+			</attribute>
+			EDITAR</button>
+  
+					
+           </hbox></div>
+	<listbox    sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelsolactividad)"  selectedItem="@bind(vm.solicitudactividadSelected)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  >
+          <textbox instant="true" width="100px" value="@bind(vm.solicitudActividadFilter.nomsolicitante)"  onChange="@command('changeFilter')" />
+           </listheader>       
+          
+          <listheader hflex="2" label="Descripcion"  sort="auto(descripcion)">
+          <textbox instant="true" width="100px" value="@bind(vm.solicitudActividadFilter.descripcion)" onChange="@command('changeFilter')" />  
+		   </listheader> 	
+		  <listheader hflex="1" label="Fecha"  ></listheader> 	
+		
+	
+				  </listhead>         
+               
+           <template name="model">
+           <listitem>
+                  <listcell label="@load(each.nomsolicitante)" />
+                  <listcell label="@load(each.descripcion) " />
+                  <listcell label="@load(each.fecha)" />
+                
+               </listitem>
+           </template>
+</listbox>
+		
+		
+	
+		<separator height="35px"/>
+
+</div>
+    		
+      
+</zk>

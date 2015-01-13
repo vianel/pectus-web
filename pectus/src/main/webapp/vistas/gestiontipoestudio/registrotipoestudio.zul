@@ -44,11 +44,10 @@
 				  </listhead>         
                
            <template name="model">
-           <listitem>
-                  <listcell label="@load(each.nombre)" />
-                  <listcell label="@load(each.descripcion) " />
-                
-               </listitem>
+	           <listitem>
+	                  <listcell label="@load(each.nombre)" />
+	                  <listcell label="@load(each.descripcion) " />
+	           </listitem>
            </template>
 </listbox>
 	

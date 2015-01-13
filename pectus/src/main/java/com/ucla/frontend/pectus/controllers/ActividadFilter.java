@@ -29,7 +29,7 @@ public class ActividadFilter {
 		
 		for(Iterator<Actividad> i = actividades.iterator(); i.hasNext();){
 			Actividad tmp = i.next();
-			if(tmp.getFecha().toLowerCase().contains(fecha) ){
+			if(tmp.getDescripcion().toLowerCase().contains(fecha) ){
 			
 				someactividades.add(tmp);
 			}
