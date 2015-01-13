@@ -1,69 +1,162 @@
 <zk xmlns:n="native" >
 
-
-	
 	 <div  apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ActividadVM')" >		
 
 	      	<separator height="15px"/>
-			<div align="center"  >
-			
-				<separator height="15px"/>
-				<div align="left" apply="com.ucla.frontend.pectus.controllers.Dialogo">		
-					<button id="btnRegistrarActividad" sclass="btn-success">NUEVO</button>
-				</div>
-				<radiogroup id="seleccionactividad" onCheck="lblseleccion.value = self.selectedItem.label">
-				<grid mold="paging" pageSize="7" model="@load(vm.modelactividad)"  >
-					<auxhead>
-           					 <auxheader label="LISTA DE ACTIVIDADES" colspan="6" />
-        			</auxhead>
-        			<auxhead sclass="category-center">
-        				
-						<auxheader label="Buscar por fecha" colspan="3">
-			                <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
-			            </auxheader>
-        			</auxhead>
+<tabbox>
+	<tabs>
+		<tab label="Actividades Pendientes" />
+		<tab label="Actividades Aprobadas" />
+	</tabs>
+	<tabpanels>
+		<tabpanel>
+				Actividades Solicitadas
+				<separator height="15px"/>	
+					<button id="btnRegistrarActividad" sclass="btn-success">
+					        <attribute name="onClick">						
+						     modalregistraractividad.doModal();						  	
+							</attribute>
+							Aprobar</button>
+					<button sclass="btn-success">Rechazar</button>
+
+				
+				<listbox  sclass="mylist"  mold="paging" pageSize="7"  model="@load(vm.modelsolactividad)" selectedItem="@bind(vm.solactividadSelected)"  >
+	
+        			<listhead >
+        				<listheader label="Descripcion" ></listheader>
+						<listheader label="Fecha"></listheader>
+			            <listheader label="Solicitante" >
+			                 <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
+			          
+			            </listheader>
+			        </listhead>
         			
-					<columns >
-						<column hflex="3" label="Descripcion" />
-						<column hflex="1" label="Fecha"  />
-						<column hflex="1" label="Lugar" />
-						<column hflex="2" label="Observaciones"/>
-						<column hflex="1" />
-					</columns>
 					<template name="model">
-					<row>
-						<radio radiogroup="seleccionactividad" label=" @load(each.descripcion)"/>
-						<label value="@load(each.fecha)" />
-						<label value="@load(each.lugar.id)" />
-						<label value="@load(each.observaciones)" />
-							<button id="" sclass="btn-success" >Editar</button>
+					<listitem >
+						<listcell label="@load(each.descripcion)"/>
+						<listcell label="@load(each.fecha) @converter('formatedDate',format='dd/MM/yyyy')" />
+						<listcell label="@load(each.nomsolicitante)" />
+					
+						
         
 
-					</row>
+					</listitem>
 					</template>
-					   <foot>
-				          <footer span="6"  label="@load(vm.footer)" />
-				       </foot>
+	
 				
-				 </grid>
-				</radiogroup>
-				<div align="left">
-					<label value="Ha seleccionado " /><label id="lblseleccion"  value="@bind(actividadSelected.descripcion)"/>
-				</div>
-
+				 </listbox>
 
 			<separator height="35px"/>
-
-			<button width="145px" height="50px" onClick="@command('showRegistroresultado')" sclass="btn-success">Registrar Resultados</button>
-			<button width="145px" height="50px" sclass="btn-success">
-				<attribute name="onClick">						
-							    modalResultadoActividad.doModal();						  	
-				</attribute>Ver Resultados
-			</button>
-			</div>
-        
 		
+		
+		
+		
+		
+		</tabpanel>
+		<tabpanel> <!-- ACTIVIDADES APROBADAS -->
+		
+		
+		Lista de Actividades
+				<separator height="15px"/>	
+				
+
+				<button sclass="btn-success">Registrar Resultados</button>
+				<listbox    mold="paging" pageSize="5"  model="@load(vm.modelactividad)" selectedItem="@bind(vm.actividadSelected)"  >
+	
+        			<listhead >
+        				<listheader label="Descripcion" ></listheader>
+						<listheader label="Inicio">
+			                <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
+			            </listheader>
+			            <listheader label="Fin" ></listheader>
+			            <listheader label="Lugar" ></listheader>
+			            <listheader label="Observaciones" ></listheader>
+        			</listhead>
+        			
+					<template name="model">
+					<listitem >
+						<listcell label="@load(each.descripcion)"/>
+						<listcell label="@load(each.fechainicio) @converter('formatedDate',format='dd/MM/yyyy') " />
+						<listcell label="@load(each.fechafin) @converter('formatedDate',format='dd/MM/yyyy')"/>
+						<listcell label="@load(each.lugar.nombre)" />
+						<listcell label="@load(each.observaciones)" />
+						
+        
+
+					</listitem>
+					</template>
+	
+				
+				 </listbox>
+
+			<separator height="35px"/>
+		
+		
+		
+		</tabpanel>
+	</tabpanels>
+</tabbox>
+			
+		
+        
+<window id="modalregistraractividad" title="Datos De la actividad" border="normal" width="660px" height="35em"
+    
+    position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" visible="false">
+    
+
+		Ha Seleccionado la Actvidad <label value="@bind(vm.solactividadSelected.id)"></label>
+      	<separator height="15px"/>
+			<separator height="15px"/>
+		<hlayout>
+			 <grid  width="650px"  onCreate="@command('inicializarAtributos')">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				    <column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+					<row><label value="Tipo Actividad"/> 
+					<combobox model="@load(vm.listatipoactividad)" selectedItem="@bind(vm.tipoactividadSelected)">
+						<template name="model">
+							<comboitem label="@load(each.nombre)" />
+						</template>
+					
+					</combobox> <label value="Recursos Utilizados" /><textbox value="@bind(vm.recursosutilizadoSelected)" rows="1"/></row>
+					<row><label value="Lugar"/>
+                    <combobox id="cmbLugar" model="@load(vm.listalugar)" selectedItem="@bind(vm.lugarSelected)">
+						<template name="model">
+							<comboitem label="@load(each.nombre)" />
+						</template>
+					</combobox> <label value="Asistentes Esperados" /><intbox value="@bind(vm.asistentesesperadosSelected)" /> </row>
+					<row><label value="Fecha Inicio" /><datebox value="@bind(vm.fechainicioSelected)" /><label value="Monto Esperado" /><intbox value="@bind(vm.montoesperadoSelected)" /> </row>
+					<row><label value="Fecha Fin" /><datebox value="@bind(vm.fechafinSelected)" /> <label value="Duracion(Horas)" /><intbox value="@bind(vm.duracionSelected)"/> </row>
+					<row><label value="Hora" /> <timebox  value="@bind(vm.horaSelected)" cols="12" format="a hh:mm:ss" onCreate="self.value = new Date()" /> <label value="Descripcion" /><textbox value="@bind(vm.solactividadSelected.descripcion)" rows="4"/> </row>
+					
+
+					</rows>
+			</grid>
+		
+		</hlayout>	
+	
+		<separator height="35px"/>
+
+    		<div align="center">
+		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividad')">Guardar</button>
+							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalregistraractividad.setVisible(false);						  	
+						</attribute>					  
+					</button>
+		</div>
+    
+ 
+      
+</window>
+
 
 	
 

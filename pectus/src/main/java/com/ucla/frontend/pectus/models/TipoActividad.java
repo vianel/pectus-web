@@ -6,6 +6,13 @@ public class TipoActividad {
 	private String nombre;
 	private String descripcion;
 	
+	
+	
+	public TipoActividad() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public TipoActividad(int id, String nombre, String descripcion) {
 		super();
 		this.id = id;

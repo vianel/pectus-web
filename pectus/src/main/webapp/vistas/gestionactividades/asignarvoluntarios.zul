@@ -1,0 +1,122 @@
+
+
+<zk xmlns:n="native">
+  <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ActividadVM')">
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Actividades"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+
+			
+
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success" >
+          		 		    <attribute name="onClick">						
+						    modalasignarvoluntarios.doModal();						  	
+			</attribute>
+			Asignar Voluntarios</button>
+  
+					
+                     </hbox></div>
+	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelactividad)"  selectedItem="@bind(vm.actividadSelected)">
+			
+			
+		  <listhead sizable="true"> 
+        				<listheader label="Descripcion" ></listheader>
+						<listheader label="Inicio">
+			                <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
+			            </listheader>
+			            <listheader label="Fin" ></listheader>
+			            <listheader label="Lugar" ></listheader>
+			            <listheader label="Observaciones" ></listheader>
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						<listcell label="@load(each.descripcion)"/>
+						<listcell label="@load(each.fechainicio)" />
+						<listcell label="@load(each.fechafin)" />
+						<listcell label="@load(each.lugar.id)" />
+						<listcell label="@load(each.observaciones)" />
+	           </listitem>
+           </template>
+</listbox>
+	
+		
+
+		
+		</tabpanel>
+		
+    </tabpanels>
+     </tabbox>
+
+
+
+<window id="modalasignarvoluntarios" title="@bind(vm.actividadSelected.id)" closable="false" visible="false" action="show: slideDown;hide: slideUp">
+
+
+<hlayout>
+        <listbox  id="left" height="250px" width="200px"
+            onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd">
+            <listhead> <listheader label="Voluntarios Disponibles" ></listheader></listhead>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Forge" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)"> 
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Mobile" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK GWT" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK JSF" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK JSP" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Spring" />
+            </listitem>
+        </listbox>
+        <separator orient="vertical" spacing="8px" />
+        <listbox id="right" height="250px" width="200px" 
+            onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd">
+            <listhead> <listheader label="Voluntarios Asignados" ></listheader></listhead>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK" />
+            </listitem>
+            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
+                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Studio" />
+            </listitem>
+        </listbox>
+    </hlayout>
+    <zscript><![CDATA[
+        void move(Component dragged) {
+            if (self instanceof Listitem) {
+                self.parent.insertBefore(dragged, self);
+            } else {
+                self.appendChild(dragged);
+            }
+        }
+    ]]></zscript>
+					<button  label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalasignarvoluntarios.setVisible(false);						  	
+						</attribute>					  
+					</button>
+
+
+</window>
+
+</div>
+</zk>
