@@ -17,39 +17,63 @@
 
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
-          		 <button id="" sclass="btn-success" >
+          		Lista de Actividades <button id="" sclass="btn-success" >
           		 		    <attribute name="onClick">						
-						    modalasignarvoluntarios.doModal();						  	
+						    dialogoasociarvoluntarios.doModal();						  	
 			</attribute>
-			Asignar Voluntarios</button>
+			Gestionar Voluntarios</button>
   
 					
                      </hbox></div>
-	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modelactividad)"  selectedItem="@bind(vm.actividadSelected)">
+                     <hlayout>
+
+	<listbox  width="650px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelactividad)"  selectedItem="@bind(vm.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
 			
 			
 		  <listhead sizable="true"> 
-        				<listheader label="Descripcion" ></listheader>
+        				<listheader label="Titulo" >
+        				       <textbox  instant="true" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
+						</listheader>
 						<listheader label="Inicio">
-			                <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
-			            </listheader>
+			             </listheader>
 			            <listheader label="Fin" ></listheader>
 			            <listheader label="Lugar" ></listheader>
-			            <listheader label="Observaciones" ></listheader>
 	
 				  </listhead>         
                
            <template name="model">
 	           <listitem>
-						<listcell label="@load(each.descripcion)"/>
-						<listcell label="@load(each.fechainicio)" />
-						<listcell label="@load(each.fechafin)" />
-						<listcell label="@load(each.lugar.id)" />
-						<listcell label="@load(each.observaciones)" />
+						<listcell label="@load(each.titulo)"/>
+						<listcell label="@load(each.fechainicio) @converter('formatedDate',format='dd/MM/yyyy') " />
+						<listcell label="@load(each.fechafin) @converter('formatedDate',format='dd/MM/yyyy') " />
+						<listcell label="@load(each.lugar.nombre)" />
 	           </listitem>
            </template>
 </listbox>
+
+	<grid  width="550px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelvoluntario)"  >
+			
+			<auxhead><auxheader colspan="4">Voluntarios Asignados</auxheader></auxhead>
+		  <columns > 
+		   				<column hflex="1" label="Cedula" />
+        				<column hflex="1" label="Nombre" />
+						<column hflex="1" label="Apellido"/>
+			            <column hflex="2" label="Direccion" />
+	
+				  </columns>         
+           <template name="model">
+	           <row>
+						<label value="@load(each.cedula)"/>
+						<label value="@load(each.nombre)" />
+						<label value="@load(each.apellido)" />
+						<label value="@load(each.direccion)" />
+	           </row>
+           </template>
+</grid>
+
+</hlayout>
 	
 		
 
@@ -61,61 +85,88 @@
 
 
 
-<window id="modalasignarvoluntarios" title="@bind(vm.actividadSelected.id)" closable="false" visible="false" action="show: slideDown;hide: slideUp">
 
-
-<hlayout>
-        <listbox  id="left" height="250px" width="200px"
-            onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd">
-            <listhead> <listheader label="Voluntarios Disponibles" ></listheader></listhead>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Forge" />
+<window id="dialogoasociarvoluntarios" title="Voluntarios" visible="false" border="normal" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" >
+    
+    <vlayout>
+    <hlayout>
+    <vlayout>
+   Voluntarios Disponibles
+   <listbox  model="@load(vm.modelvoluntarios)" selectedItem="@bind(vm.voluntarioSelected)" width="450px" mold="paging" pageSize="7"  >
+        <listhead>
+            <listheader label="Cedula" ></listheader>
+            <listheader label="Nombre" ></listheader>
+            <listheader label="Apellido" ></listheader>
+            <listheader label="Correo" ></listheader>
+            <listheader label="Telefono" ></listheader>
+               
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.cedula)"/>
+                <listcell label="@load(each.nombre)"/>
+                <listcell label="@load(each.apellido)"/>
+                <listcell label="@load(each.correo)"/>
+                <listcell label="@load(each.telefonoOficina)"/>
+                  
             </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)"> 
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Mobile" />
-            </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK GWT" />
-            </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK JSF" />
-            </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK JSP" />
-            </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Spring" />
-            </listitem>
-        </listbox>
-        <separator orient="vertical" spacing="8px" />
-        <listbox id="right" height="250px" width="200px" 
-            onDrop="move(event.dragged)" droppable="true" oddRowSclass="non-odd">
-            <listhead> <listheader label="Voluntarios Asignados" ></listheader></listhead>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK" />
-            </listitem>
-            <listitem draggable="true" droppable="true" onDrop="move(event.dragged)">
-                <listcell src="/widgets/effects/drag_n_drop/img/document.png" label="ZK Studio" />
-            </listitem>
-        </listbox>
-    </hlayout>
+        </template>
+    </listbox>
+    </vlayout>
     <zscript><![CDATA[
-        void move(Component dragged) {
-            if (self instanceof Listitem) {
-                self.parent.insertBefore(dragged, self);
-            } else {
-                self.appendChild(dragged);
-            }
-        }
-    ]]></zscript>
-					<button  label="Cancelar" sclass="btn-success">
+    String imgPath = "/widgets/listbox/dual_listbox/img";
+]]></zscript><separator height="250px" />
+    <vbox spacing="10px" height="50px" width="24px">
+        <image style="cursor:pointer" id="chooseAllBtn" src="../../assets/img/rightrightarrow_g.png" onClick="@command('seleccionartodosvoluntario')" />
+        <image style="cursor:pointer" id="chooseBtn" src="../../assets/img/rightarrow_g.png" onClick="@command('seleccionarunvoluntario')" />
+        <image style="cursor:pointer" id="removeBtn" src="../../assets/img/leftarrow_g.png" onClick="@command('removerunvoluntario')"/>
+        <image style="cursor:pointer" id="removeAllBtn" src="../../assets/img/leftleftarrow_g.png" onClick="@command('removertodosvoluntario')"/>
+    </vbox>
+    <vlayout>
+    Voluntarios Asignados
+    <listbox model="@load(vm.modelvoluntario)" selectedItem="@bind(vm.voluntarioSelected)"  width="450px" mold="paging" pageSize="7">
+        <listhead>
+          <listheader label="Cedula" ></listheader>
+            <listheader label="Nombre" ></listheader>
+            <listheader label="Apellido" ></listheader>
+            <listheader label="Correo" ></listheader>
+            <listheader label="Telefono" ></listheader>
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.cedula)"/>
+                <listcell label="@load(each.nombre)"/>
+                <listcell label="@load(each.apellido)"/>
+                <listcell label="@load(each.correo)"/>
+                <listcell label="@load(each.telefonoOficina)"/>
+            </listitem>
+        </template>
+    </listbox>
+    </vlayout>
+		
+		
+
+  
+
+    </hlayout>
+    	<hlayout>
+	    	<button style="margin-left:400px;" width="75px" height="50px" sclass="btn-success" onClick="@command('asociarVoluntariosGuardar')">
+	    		    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    dialogoasociarvoluntarios.setVisible(false);						  	
+						</attribute>
+	    	
+	    	Asociar</button>
+			<button  width="75px" height="50px" label="Cancelar" sclass="btn-success" onClick="@command('deshacerAsignacionvoluntarios')">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
-						    modalasignarvoluntarios.setVisible(false);						  	
+						    dialogoasociarvoluntarios.setVisible(false);						  	
 						</attribute>					  
 					</button>
-
-
+   		</hlayout>
+    </vlayout>
+    
 </window>
 
 </div>

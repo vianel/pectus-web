@@ -21,6 +21,7 @@ public class Actividad {
 	private boolean estatus;
 	private int montoesperado;
 	private int nroasistentesesperados;
+	private String titulo;
 	
 	
 	
@@ -74,6 +75,20 @@ public class Actividad {
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
 
 
 	public SolicitudActividad getIdSolicitudActividad() {
