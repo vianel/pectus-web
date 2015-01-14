@@ -1,6 +1,7 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Seguro;
 import com.ucla.frontend.pectus.models.SolicitudActividad;
 import com.ucla.frontend.pectus.models.TipoActividad;
+import com.ucla.frontend.pectus.models.Voluntario;
 
 public class ServicioActividad {
 
@@ -50,6 +52,7 @@ public class ServicioActividad {
 		                  Actividad actividad = new Actividad();
 		                  JSONObject obj = serActividad.getJSONObject(i);
 		                  actividad.setId(Integer.parseInt(obj.getString("id")));
+		                  actividad.setTitulo(obj.getString("titulo"));
 		                  actividad.setDescripcion(obj.getString("descripcion").toString());
 		                  actividad.setFechainicio(convertirFecha(obj.getString("fechainicio").toString()));
 		                  actividad.setFechafin(convertirFecha(obj.getString("fechafin").toString()));
@@ -156,16 +159,17 @@ public class ServicioActividad {
 	
 	public static String agregarsolicitudactividad(SolicitudActividad SA)
 	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Resty resty = new Resty();
 		JSONResource jsResource = null;
 		String ok = null;
 		
 			try {
-				jsResource = resty.json("http://localhost:5000/solicitud-actividad/agregar?idTipoActividad=" + SA.getIdTipoActividad().getId()
-						+"&descripcion " + SA.getDescripcion()
-						+"&fecSolicitud" + SA.getFecha() 
-						+"&nomSolicitante"+ SA.getNomsolicitante() 
-						+"&telfSolicitante"+ SA.getTlfsolicitante());
+				jsResource = resty.json("http://localhost:5000/solicitud-actividad/agregar?idtipoactividad=" + SA.getIdTipoActividad().getId()
+						+"&descripcion=" + SA.getDescripcion().replaceAll(" ", "%20")
+						+"&fecsolicitud=" + dateFormat.format(SA.getFecha()) 
+						+"&nombsolicitante="+ SA.getNomsolicitante() 
+						+"&telfsolicitante="+ SA.getTlfsolicitante());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -209,6 +213,7 @@ public class ServicioActividad {
 		                  actividad.setFecha(convertirFecha(obj.getString("fecsolicitud")));
 		                  actividad.setNomsolicitante(obj.getString("nombsolicitante"));
 		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
+		              //    actividad.setTlfsolicitante(obj.getString("telfsolicitante"));
 		                  actividad.setIdTipoActividad(obtenertipoactividad(obj.get("tipoactividad").toString()));
 		                  listasolactividad.add(actividad);
 
@@ -286,7 +291,105 @@ public class ServicioActividad {
 		
 	}
 
+	@SuppressWarnings("null")
+	public static List<Voluntario> buscarvoluntariosactividad(Actividad act)
+	{
+		ListModelList<Voluntario> voluntarios = new ListModelList<Voluntario>();
+	
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		
+		
+			try {
+				jsResource = resty.json("http://localhost:5000/actividad/voluntarios?id=" + act.getId());
+				String ok = jsResource.get("ok").toString();
+				if (ok.equalsIgnoreCase("true"))
+				{
+					String strVol = jsResource.get("voluntarios").toString();
+					JSONArray serVoluntario = new JSONArray(strVol);
+					 for(int i=0; i < serVoluntario.length(); i++)
+					 {
+		                  Voluntario voluntario = new Voluntario();
+		                  JSONObject obj = serVoluntario.getJSONObject(i);
+		                  
+		                  voluntario.setCedula(obj.getString("cedula"));
+		                  voluntario.setNombre(obj.getString("nombre"));
+		                  voluntario.setApellido(obj.getString("apellido"));
+		                  voluntario.setDireccion(obj.getString("direccion"));
+		                  
+		                  voluntarios.add(voluntario);
 
+					 }
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return voluntarios;
+	}
+	
+	public static String modificarsolicitudactividad(SolicitudActividad sol)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+		
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-actividad/editar?id=" + sol.getId().toString()
+					+ "&idtipoactividad=" + sol.getIdTipoActividad().getId()
+					+ "&nombsolicitante=" + sol.getNomsolicitante().toString().replaceAll(" ", "%20") + 
+					"&descricpion=" + sol.getDescripcion().replaceAll(" ", "%20"));
+			
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
+	}
+
+	public static String asignarvoluntario(List<Voluntario> currentVoluntario,
+			Actividad actividadSelected) {
+		// TODO Auto-generated method stub
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		String cedulas = "";
+		for (Voluntario temp : currentVoluntario) {
+			cedulas += temp.getCedula() + ",";
+		} //Elimina la ultima coma de la cadena anterior
+		if (cedulas.endsWith(","))
+		{
+			cedulas = cedulas.substring(0, cedulas.length()-1);
+		}
+		
+		try {
+		
+			jsResource = resty.json("http://127.0.0.1:5000/actividad/asingar-voluntario?idactividad="+ actividadSelected.getId() 
+					+"&cedula=" + cedulas.trim());
+			
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return ok;
+	}
 
 	
 }

@@ -15,6 +15,7 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.Composer;
@@ -26,11 +27,13 @@ import com.ucla.frontend.pectus.models.Lugar;
 import com.ucla.frontend.pectus.models.SolicitudActividad;
 import com.ucla.frontend.pectus.models.TipoActividad;
 import com.ucla.frontend.pectus.models.TipoEstudio;
+import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.reports.TipoestudioReportes;
 import com.ucla.frontend.pectus.services.ServicioActividad;
 import com.ucla.frontend.pectus.services.ServicioCiudad;
 import com.ucla.frontend.pectus.services.ServicioEvento;
 import com.ucla.frontend.pectus.services.ServicioTipoEstudio;
+import com.ucla.frontend.pectus.services.ServicioVoluntario;
 public class ActividadVM {
 	
 	private List<Lugar> listalugar;
@@ -44,6 +47,7 @@ public class ActividadVM {
 	private ActividadFilter actividadFilter = new ActividadFilter();
 	private SolicitudActividadFilter solicitudActividadFilter = new SolicitudActividadFilter();
 	static List<Actividad> currentActividad;
+	static List<Voluntario> currentVoluntario;
 	static List<SolicitudActividad> currentSolActividad;
 	private List<TipoActividad> listatipoactividad;
 	private TipoActividad tipoactividadSelected;
@@ -56,12 +60,16 @@ public class ActividadVM {
 	private Date fechafinSelected;
 	private Date horaSelected;
 	private String descripcionactSelected;
-	
+	private List<Voluntario> voluntarios;
+	private ListModelList<Voluntario> listaVoluntariosSeleccionados = new ListModelList<Voluntario>();
+	private Voluntario voluntarioSelected;
+	private List<Voluntario> auxvoluntario;
 	
 	@Init
 	public void init(){
 		this.currentActividad = ServicioActividad.buscaractividades();
 		this.currentSolActividad = ServicioActividad.buscarsolicitudactividades();
+		this.voluntarios = ServicioVoluntario.buscarVoluntario();
 	}
 	@Command
 	@NotifyChange({"listalugar", "listatipoactividad","currentActividad"})
@@ -70,7 +78,83 @@ public class ActividadVM {
 		listalugar = ServicioEvento.buscarLugares();
 		listatipoactividad = ServicioActividad.buscartipoactividades();
 		
+		
 	}
+	
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void seleccionarunvoluntario()
+	{
+		if (voluntarioSelected != null)
+		{
+		currentVoluntario.add(voluntarioSelected);
+		voluntarios.remove(voluntarioSelected);
+		}
+	}
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void removerunvoluntario()
+	{
+		if (voluntarioSelected != null)
+		{
+		currentVoluntario.remove(voluntarioSelected);
+		voluntarios.add(voluntarioSelected);
+		}
+	}
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void removertodosvoluntario()
+	{
+
+		
+		for (Voluntario temp : currentVoluntario) {
+			voluntarios.add(temp);
+		}
+		currentVoluntario.clear();
+	}
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void seleccionartodosvoluntario()
+	{
+
+		
+		for (Voluntario temp : voluntarios) {
+			currentVoluntario.add(temp);
+		}
+		voluntarios.clear();
+	}
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void deshacerAsignacionvoluntarios()
+	{
+		if (voluntarioSelected != null){
+		currentVoluntario.clear(); 
+		for (Voluntario temp : auxvoluntario) {
+			currentVoluntario.add(temp);
+		}
+		voluntarios = ServicioVoluntario.buscarVoluntario();
+		}
+		
+	}
+	@Command
+	public void asociarVoluntariosGuardar()
+	{
+		
+    	String response = ServicioActividad.asignarvoluntario(currentVoluntario,actividadSelected);
+		if (response.equalsIgnoreCase("true"))
+		{
+			
+			Clients.showNotification("Voluntarios Asignados", null, true);
+			buscarvoluntariosasignados();
+			
+			
+
+		}else{
+			Clients.showNotification("Error", true);
+		}
+		
+	}
+	
 	public ActividadFilter getActividadFilter(){
 		return actividadFilter;
 	}
@@ -80,7 +164,20 @@ public class ActividadVM {
 	
 	}
 	
+	public List<Voluntario> getmodelvoluntario()
+	{
+		return currentVoluntario;
+	
+	}
+	
+	public List<Voluntario> getmodelvoluntarios()
+	{
+		return voluntarios;
+	}
+	
+	
 
+	
 	public String getfooter(){
 		return String.format(footerMensajeactividad, currentActividad.size());
 	}
@@ -142,17 +239,30 @@ public class ActividadVM {
    	 
     	
     }
+
     @Command
+    @NotifyChange("modelvoluntario")
+    public void buscarvoluntariosasignados()
+    {
+
+    	currentVoluntario = ServicioActividad.buscarvoluntariosactividad(actividadSelected);
+    	auxvoluntario = ServicioActividad.buscarvoluntariosactividad(actividadSelected);
+    	
+    }
+    @Command
+    @NotifyChange("modelsolactividad")
     public void registroSolicitudActividad()
     {
- 	   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    
+ 	   DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
  	   Date date = new Date();
-    	solicitudactividadSelected = new SolicitudActividad(null, tipoactividadSelected, descripcionSelected, date, nombresolicitanteSelected, tlfsolicitanteSelected, true);
-    	String response = ServicioActividad.agregarsolicitudactividad(solicitudactividadSelected);
+    	SolicitudActividad SOL = new SolicitudActividad(null, tipoactividadSelected, descripcionSelected, date, nombresolicitanteSelected, tlfsolicitanteSelected, true);
+    	String response = ServicioActividad.agregarsolicitudactividad(SOL);
 		if (response.equalsIgnoreCase("true"))
 		{
 			
-			Clients.showNotification("Estudio Guardado", null, true);
+			Clients.showNotification("Solicitud Guardada Guardado", null, true);
+			currentSolActividad.add(SOL);
 			
 
 		}else{
@@ -161,6 +271,21 @@ public class ActividadVM {
 	
     	
     }
+    @Command
+    public void modificarSolicitudActividad()
+    {
+    	String response = ServicioActividad.modificarsolicitudactividad(solicitudactividadSelected);
+		if (response.equalsIgnoreCase("true"))
+		{
+			
+			Clients.showNotification("Solicitud Modificada", null, true);
+			
+			
+
+		}else{
+			Clients.showNotification("Error al modificar", true);
+		}
+    }
     public List<SolicitudActividad> getmodelsolactividad() {
     	return new ListModelList<SolicitudActividad>(currentSolActividad);
       }
@@ -168,6 +293,7 @@ public class ActividadVM {
     @Command
     @NotifyChange({"modelsolactividad", "footer"})
     public void changeFilter() {
+    	
     	currentSolActividad = SolicitudActividadFilter.getFilterSolicitudActiviad(solicitudActividadFilter);
     }
     
@@ -200,6 +326,18 @@ public class ActividadVM {
 
 
 
+	public static List<Voluntario> getCurrentVoluntario() {
+		return currentVoluntario;
+	}
+	public static void setCurrentVoluntario(List<Voluntario> currentVoluntario) {
+		ActividadVM.currentVoluntario = currentVoluntario;
+	}
+	public List<Voluntario> getVoluntarios() {
+		return voluntarios;
+	}
+	public void setVoluntarios(List<Voluntario> voluntarios) {
+		this.voluntarios = voluntarios;
+	}
 	public static void setCurrentActividad(List<Actividad> currentActividad) {
 		ActividadVM.currentActividad = currentActividad;
 	}
@@ -256,6 +394,12 @@ public class ActividadVM {
 	}
 
 
+	public Voluntario getVoluntarioSelected() {
+		return voluntarioSelected;
+	}
+	public void setVoluntarioSelected(Voluntario voluntarioSelected) {
+		this.voluntarioSelected = voluntarioSelected;
+	}
 	public void setListatipoactividad(List<TipoActividad> listatipoactividad) {
 		this.listatipoactividad = listatipoactividad;
 	}
@@ -332,6 +476,13 @@ public class ActividadVM {
 	}
 	public void setDescripcionactSelected(String descripcionactSelected) {
 		this.descripcionactSelected = descripcionactSelected;
+	}
+	public ListModelList<Voluntario> getListaVoluntariosSeleccionados() {
+		return listaVoluntariosSeleccionados;
+	}
+	public void setListaVoluntariosSeleccionados(
+			ListModelList<Voluntario> listaVoluntariosSeleccionados) {
+		this.listaVoluntariosSeleccionados = listaVoluntariosSeleccionados;
 	}
 	
 	

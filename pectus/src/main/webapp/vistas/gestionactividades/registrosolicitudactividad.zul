@@ -11,7 +11,7 @@
                         <hbox spacing="20px">
           		 <button id="" sclass="btn-success" >
           		 		    <attribute name="onClick">						
-						    modaltipoestudio.doModal();						  	
+						    modalsolactividad.doModal();						  	
 			</attribute>
 			EDITAR</button>
   
@@ -38,7 +38,7 @@
            <listitem>
                   <listcell label="@load(each.nomsolicitante)" />
                   <listcell label="@load(each.descripcion) " />
-                  <listcell label="@load(each.fecha)" />
+                  <listcell label="@load(each.fecha) @converter('formatedDate',format='dd/MM/yyyy') " />
                 
                </listitem>
            </template>
@@ -47,6 +47,47 @@
 		
 	
 		<separator height="35px"/>
+		
+<window id="modalsolactividad" visible="false" title="Solicitud Actividad" border="normal" width="390px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp">
+
+    <vlayout>        
+			 <grid  width="500px"  onCreate="@command('inicializarAtributos')">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+				</columns>
+				<rows>
+				    <row><label style="display:block; margin-top: 1em" value="Descripcion"/> <textbox value="@bind(vm.solicitudactividadSelected.descripcion)" rows="4" maxlength="60"  width="200px"  style="display:block;"/></row>
+					<row><label style="display:block" value="Nombre Solicitante"/> <textbox value="@bind(vm.solicitudactividadSelected.nomsolicitante)"  maxlength="20"   width="200px"/></row>
+					<row><label style="display:block" value="Telefono Solicitante"/> <textbox value="@bind(vm.solicitudactividadSelected.tlfsolicitante)"  maxlength="20"   width="200px"/></row>
+					<row>
+						Tipo Actividad <combobox style="display:block;" model="@load(vm.listatipoactividad)" selectedItem="@bind(vm.solicitudactividadSelected.idTipoActividad.nombre)" >
+						<template name="model">
+							<comboitem label="@load(each.nombre)" />
+						</template>
+					</combobox>
+					
+					
+					</row>
+				</rows>
+			</grid>
+		<hlayout>
+			<div align="center">
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('modificarSolicitudActividad')">Guardar</button>
+		    <button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalsolactividad.setVisible(false);						  	
+						</attribute>					  
+					</button>
+			</div>
+	    </hlayout>
+
+		
+    </vlayout>
+
+</window>
 
 </div>
     		

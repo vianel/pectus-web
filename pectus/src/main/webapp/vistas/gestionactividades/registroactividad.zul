@@ -61,7 +61,7 @@
 				<separator height="15px"/>	
 				
 
-				<button sclass="btn-success">Registrar Resultados</button>
+				<button sclass="btn-success">Eliminar</button>
 				<listbox    mold="paging" pageSize="5"  model="@load(vm.modelactividad)" selectedItem="@bind(vm.actividadSelected)"  >
 	
         			<listhead >
