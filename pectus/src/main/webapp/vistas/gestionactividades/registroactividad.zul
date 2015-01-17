@@ -18,12 +18,15 @@
 						     modalregistraractividad.doModal();						  	
 							</attribute>
 							Aprobar</button>
-					<button sclass="btn-success">Rechazar</button>
+					<button sclass="btn-success">   <attribute name="onClick">						
+						     modalrechazaractividad.doModal();						  	
+							</attribute>Rechazar</button>
 
 				
 				<listbox  sclass="mylist"  mold="paging" pageSize="7"  model="@load(vm.modelsolactividad)" selectedItem="@bind(vm.solactividadSelected)"  >
 	
         			<listhead >
+        				
         				<listheader label="Descripcion" ></listheader>
 						<listheader label="Fecha"></listheader>
 			            <listheader label="Solicitante" >
@@ -34,6 +37,7 @@
         			
 					<template name="model">
 					<listitem >
+						
 						<listcell label="@load(each.descripcion)"/>
 						<listcell label="@load(each.fecha) @converter('formatedDate',format='dd/MM/yyyy')" />
 						<listcell label="@load(each.nomsolicitante)" />
@@ -65,22 +69,24 @@
 				<listbox    mold="paging" pageSize="5"  model="@load(vm.modelactividad)" selectedItem="@bind(vm.actividadSelected)"  >
 	
         			<listhead >
-        				<listheader label="Descripcion" ></listheader>
-						<listheader label="Inicio">
+        			    <listheader hflex="1" label="Titulo" ></listheader>
+        				<listheader hflex="2" label="Descripcion" ></listheader>
+						<listheader hflex="1" label="Inicio">
 			                <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
 			            </listheader>
-			            <listheader label="Fin" ></listheader>
-			            <listheader label="Lugar" ></listheader>
-			            <listheader label="Observaciones" ></listheader>
+			            <listheader  hflex="1" label="Fin" ></listheader>
+			            <listheader hflex="1" label="Lugar" ></listheader>
+			     
         			</listhead>
         			
 					<template name="model">
 					<listitem >
+					    <listcell label="@load(each.titulo)" />
 						<listcell label="@load(each.descripcion)"/>
 						<listcell label="@load(each.fechainicio) @converter('formatedDate',format='dd/MM/yyyy') " />
 						<listcell label="@load(each.fechafin) @converter('formatedDate',format='dd/MM/yyyy')"/>
 						<listcell label="@load(each.lugar.nombre)" />
-						<listcell label="@load(each.observaciones)" />
+			
 						
         
 
@@ -100,14 +106,31 @@
 			
 		
         
-<window id="modalregistraractividad" title="Datos De la actividad" border="normal" width="660px" height="35em"
+<window id="modalregistraractividad" title="Datos De la actividad" border="normal" width="660px" height="45em"
     
     position="center,center" closable="false"
     action="show: slideDown;hide: slideUp" visible="false">
     
 
-		Ha Seleccionado la Actvidad <label value="@bind(vm.solactividadSelected.id)"></label>
+		<label style="font-weight:bold; font-size: 200%; margin-left: 250px;" value="@bind(vm.solactividadSelected.idTipoActividad.nombre)"></label>
       	<separator height="15px"/>
+      	<grid>
+		<columns>
+			<column width="70px" label=""/>
+			<column label=""/>
+		</columns>
+		<rows>
+			<row>
+			Solicitante: <label style="font-weight:bold; " value="@bind(vm.solactividadSelected.nomsolicitante)"></label>
+      		
+			</row>
+			<row>
+			Fecha Solicitud: <label style="font-weight:bold; " value="@bind(vm.solactividadSelected.fecha) @converter('formatedDate',format='dd/MM/yyyy')" ></label>
+      	
+			</row>
+		</rows>
+	</grid>
+      	
 			<separator height="15px"/>
 		<hlayout>
 			 <grid  width="650px"  onCreate="@command('inicializarAtributos')">
@@ -118,13 +141,8 @@
 					<column label=""/>
 				</columns>
 				<rows>
-					<row><label value="Tipo Actividad"/> 
-					<combobox model="@load(vm.listatipoactividad)" selectedItem="@bind(vm.tipoactividadSelected)">
-						<template name="model">
-							<comboitem label="@load(each.nombre)" />
-						</template>
-					
-					</combobox> <label value="Recursos Utilizados" /><textbox value="@bind(vm.recursosutilizadoSelected)" rows="1"/></row>
+					<row><label value="Titulo" /><textbox value="@bind(vm.tituloSelected)" /> 
+					<label value="Recursos Utilizados" /><textbox value="@bind(vm.recursosutilizadoSelected)" rows="1"/></row>
 					<row><label value="Lugar"/>
                     <combobox id="cmbLugar" model="@load(vm.listalugar)" selectedItem="@bind(vm.lugarSelected)">
 						<template name="model">
@@ -135,6 +153,7 @@
 					<row><label value="Fecha Fin" /><datebox value="@bind(vm.fechafinSelected)" /> <label value="Duracion(Horas)" /><intbox value="@bind(vm.duracionSelected)"/> </row>
 					<row><label value="Hora" /> <timebox  value="@bind(vm.horaSelected)" cols="12" format="a hh:mm:ss" onCreate="self.value = new Date()" /> <label value="Descripcion" /><textbox value="@bind(vm.solactividadSelected.descripcion)" rows="4"/> </row>
 					
+					
 
 					</rows>
 			</grid>
@@ -144,7 +163,11 @@
 		<separator height="35px"/>
 
     		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividad')">Guardar</button>
+		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividad')">
+							    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalregistraractividad.setVisible(false);						  	
+						</attribute>Guardar</button>
 							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
@@ -161,38 +184,69 @@
 	
 
 	
-	<window closable="false"  
-        visible = "false" id="modalResultadoActividad" 
-        title="Resultados Actividad" border="normal" width="800px" height="45em"    
-    	action="show: slideDown;hide: slideUp">
-     
-     <vlayout>	
-			<label value="Observacion de la actividad" />
-		
-		 <separator height="15px"/>
-		<div align="center">
-<!-- 			    <chart id="mychart" title="Recursos Utilizados por la Actividad" -->
-<!-- 			        width="550" height="400" paneColor="#ffffff" fgAlpha="192" -->
-<!-- 			        type="pie" threeD="@bind(vm.threeD)" -->
-<!-- 			        model="@bind(vm.model)" engine="@bind(vm.engine)" -->
-<!-- 			        onClick="@command('showMessage',msg=event.areaComponent.tooltiptext)"/> -->
-<!-- 			   <hlayout  visible="@bind(not empty vm.message)"> -->
-<!-- 			        Grafica de Muestra -->
-<!-- 			   </hlayout> -->
+        
+<window id="modalrechazaractividad" title="Datos De la actividad" border="normal" width="500px" height="35em"
+    
+    position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" visible="false">
+    
 
+		<label style="font-weight:bold; font-size: 200%; margin-left: 150px;" value="@bind(vm.solactividadSelected.idTipoActividad.nombre)"></label>
+      	<separator height="15px"/>
+      	<grid>
+		<columns>
+			<column width="70px" label=""/>
+			<column label=""/>
+		</columns>
+		<rows>
+			<row>
+			Solicitante: <label style="font-weight:bold; " value="@bind(vm.solactividadSelected.nomsolicitante)"></label>
+      		
+			</row>
+			<row>
+			Fecha Solicitud: <label style="font-weight:bold; " value="@bind(vm.solactividadSelected.fecha) @converter('formatedDate',format='dd/MM/yyyy')" ></label>
+      	
+			</row>
+		</rows>
+	</grid>
+      	
+			<separator height="15px"/>
+		<hlayout>
+			 <grid  width="650px"  onCreate="@command('inicializarAtributos')">
+				<columns>
+					<column label="" width="130px"/>
+					<column label=""/>
+
+				</columns>
+				<rows>
+					<row> <label value="Motivo de Rechazo" /><textbox value="@bind(vm.actividadSelected.descripcion)" rows="6"/> </row>
+					
+					
+
+					</rows>
+			</grid>
+		
+		</hlayout>	
 	
-	<button label="Cancelar" sclass="btn-success">
-	    <!-- Ocultamos la ventana -->
-	    <attribute name="onClick">						
-		    modalResultadoActividad.setVisible(false);						  	
-		</attribute>					  
-	</button>
-	
-			
-  		</div>
-     </vlayout>
-     	
-    </window>
+		<separator height="35px"/>
+
+    		<div align="center">
+		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividad')">
+							    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalrechazaractividad.setVisible(false);						  	
+						</attribute>Guardar</button>
+							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalrechazaractividad.setVisible(false);						  	
+						</attribute>					  
+					</button>
+		</div>
+    
+ 
+      
+</window>
     
 </div>
 
