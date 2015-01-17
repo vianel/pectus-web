@@ -262,6 +262,7 @@ public class ServicioActividad {
 			
 		try {
 			jsResource = resty.json("http://127.0.0.1:5000/actividad/agregar?idsolicitudactividad=" + act.getIdSolicitudActividad().getId()
+					+"&titulo=" + act.getTitulo()
 					+"&fechainicio=" + dateFormat.format(act.getFechainicio())
 					+"&fechafin=" + dateFormat.format(act.getFechafin())
 					//+"&hora=" + act.getHora()
@@ -388,6 +389,33 @@ public class ServicioActividad {
 			e.printStackTrace();
 		}
 	
+		return ok;
+	}
+
+	public static String modificaractividad(Actividad act) {
+		// TODO Auto-generated method stub
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+		
+			jsResource = resty.json("http://127.0.0.1:5000/actividad/editar?id=" + act.getId().toString()
+					+ "&monto=" + act.getMonto()
+					+ "&nroasistentes=" + act.getNroAsistentes() + 
+					"&observaciones=" + act.getObservaciones().replaceAll(" ", "%20"));
+			
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return ok;
 	}
 

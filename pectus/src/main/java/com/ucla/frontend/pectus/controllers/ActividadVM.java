@@ -64,6 +64,12 @@ public class ActividadVM {
 	private ListModelList<Voluntario> listaVoluntariosSeleccionados = new ListModelList<Voluntario>();
 	private Voluntario voluntarioSelected;
 	private List<Voluntario> auxvoluntario;
+	private String tituloSelected;
+	private String montoSelected;
+	private String nroasistentesSelected;
+	private String observacionesSelected;
+	
+	
 	
 	@Init
 	public void init(){
@@ -212,6 +218,7 @@ public class ActividadVM {
     {
     	
     	 Actividad act = new Actividad();
+    	 act.setTitulo(tituloSelected);
     	 act.setLugar(lugarSelected);
     	 act.setIdSolicitudActividad(solactividadSelected);
     	 act.setFechainicio(fechainicioSelected);
@@ -238,6 +245,28 @@ public class ActividadVM {
     	 
    	 
     	
+    }
+    @Command
+    @NotifyChange("modelactividad")
+    public void registroresultadoActividad()
+    {
+    	
+    	
+    	actividadSelected.setMonto(Float.parseFloat(montoSelected));
+    	actividadSelected.setNroAsistentes(Integer.parseInt(nroasistentesSelected));
+    	actividadSelected.setObservaciones(observacionesSelected);
+     	String response = ServicioActividad.modificaractividad(actividadSelected);
+ 		if (response.equalsIgnoreCase("true"))
+ 		{
+ 			
+ 			Clients.showNotification("Resultados Registrados", null, true);
+ 			
+ 			
+
+ 		}else{
+ 			Clients.showNotification("Error al guardar", true);
+ 		}
+ 	
     }
 
     @Command
@@ -271,6 +300,7 @@ public class ActividadVM {
 	
     	
     }
+
     @Command
     public void modificarSolicitudActividad()
     {
@@ -483,6 +513,30 @@ public class ActividadVM {
 	public void setListaVoluntariosSeleccionados(
 			ListModelList<Voluntario> listaVoluntariosSeleccionados) {
 		this.listaVoluntariosSeleccionados = listaVoluntariosSeleccionados;
+	}
+	public String getTituloSelected() {
+		return tituloSelected;
+	}
+	public void setTituloSelected(String tituloSelected) {
+		this.tituloSelected = tituloSelected;
+	}
+	public String getMontoSelected() {
+		return montoSelected;
+	}
+	public void setMontoSelected(String montoSelected) {
+		this.montoSelected = montoSelected;
+	}
+	public String getNroasistentesSelected() {
+		return nroasistentesSelected;
+	}
+	public void setNroasistentesSelected(String nroasistentesSelected) {
+		this.nroasistentesSelected = nroasistentesSelected;
+	}
+	public String getObservacionesSelected() {
+		return observacionesSelected;
+	}
+	public void setObservacionesSelected(String observacionesSelected) {
+		this.observacionesSelected = observacionesSelected;
 	}
 	
 	
