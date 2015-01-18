@@ -1,0 +1,18 @@
+<?page title="Pectus"?>
+<?link href="../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<?link href="../../css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<?link href="../../less/index.css.dsp" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:n="native">
+	<include src="../../barras/navbar.zul"/>             
+	<hlayout id="main" spacing="0">
+		<include src="../../barras/sidebar.zul"/>    
+		<vlayout spacing="0" hflex="1">
+			<include src="../../barras/breadcrumbs.zul"/>
+			<include src="gestionEvaluacionAyuda.zul"/> 
+			   
+		</vlayout>
+	</hlayout>
+</zk>

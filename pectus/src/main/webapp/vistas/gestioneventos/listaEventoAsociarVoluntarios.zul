@@ -1,0 +1,112 @@
+<zk xmlns:n="native">
+  <a label="Eventos" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Eventos"/>
+     <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Voluntarios"/>
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorEvento')">
+		
+<button id="btnEditarCita" onClick="@command('abrirDialogoRegistrarEvento')" sclass="btn-success" >NUEVO</button>
+	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.currentEvento)" >
+		<auxhead>
+            <auxheader label="LISTA DE EVENTOS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+        
+	        
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="3">Nombre</column>
+            <column hflex="3">Descripcion</column>
+            <column hflex="1">Fecha</column>
+            <column hflex="2">Ciudad</column>
+            <column hflex="2">Lugar</column>
+            <column hflex="2">Direccion</column>
+             <column hflex="2">Editar</column>
+                        
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.nombre) " />
+                <label value="@load(each.descripcion)" />
+                <label value="@load(each.fecha)  @converter('formatedDate',format='dd/MM/yyyy')"/>
+                <label value="@load(each.lugar.ciudad.nombre) " />
+                <label value="@load(each.lugar.nombre) " />
+                <label value="@load(each.lugar.direccion) " />
+                <button id="" sclass="btn-success" onClick="@command('asociarVoluntarios', eventoSeleccionado=each)" >Asociar Voluntarios</button>
+            </row>
+        </template>
+        
+        
+        <foot>
+            <footer span="6"  label="@load(vm.footer)" />
+        </foot>
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+		
+		
+		
+		
+		<tabpanel >
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm2') @init('com.ucla.frontend.pectus.controllers.ControladorEvento')">
+		
+<button id="btnAgregarVoluntario" sclass="btn-success" >NUEVO</button>
+<button id="btnEditarVoluntario"  sclass="btn-success" >EDITAR</button>
+	<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm2.currentVoluntario)" >
+		<auxhead>
+            <auxheader label="LISTA DE VOLUNTARIOS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+        
+	        
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="3">Cedula</column>
+            <column hflex="3">Nombre</column>
+            <column hflex="1">Apellido</column>
+            <column hflex="2">Correo</column>
+            <column hflex="2">Telefono</column>
+            <column hflex="2">Editar</column>
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.cedula) " />
+                <label value="@load(each.nombre)" />
+                <label value="@load(each.apellido)"/>
+                <label value="@load(each.correo) " />
+                <label value="@load(each.telefonoOficina) " />
+                <button id="" sclass="btn-success">Editar</button>
+            </row>
+        </template>
+        
+        
+   
+	
+	</grid>			
+</div>
+		
+		</tabpanel>
+		
+		
+		
+    </tabpanels>
+  </tabbox>
+
+</zk>

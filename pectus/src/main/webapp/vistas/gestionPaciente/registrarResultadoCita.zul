@@ -1,0 +1,69 @@
+<zk xmlns:n="native">
+ <a label="Citas" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+  <tabbox >
+    <tabs>
+      	<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Citas terminadas"/>
+<!--       	<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Citas asignadas"/>	 -->
+    </tabs>
+    <tabpanels>
+    	
+		<tabpanel>
+		 <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.CitaView')">
+<!-- 			<button id="btnEditarCita" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')" >NUEVO</button> -->
+		    <button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')">Editar</button>
+            <grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelCita)">
+				<auxhead>
+		            <auxheader label="LISTA DE CITAS" colspan="6" />
+		        </auxhead>
+<!-- 		        <auxhead sclass="category-center"> -->
+<!-- 			        <auxheader colspan="1"> -->
+<!-- 			            <textbox instant="true" width="100px"  -->
+<!-- 			                value="@bind(vm.citaFilter.paciente)" onChange="@command('changeFilter')" /> -->
+<!-- 			        </auxheader> -->
+<!-- 					<auxheader colspan="1"> -->
+<!-- 		                <textbox instant="true"  width="100px" -->
+<!-- 		                    value="@bind(vm.citaFilter.clinica)" onChange="@command('changeFilter')"/> -->
+<!-- 		            </auxheader> -->
+<!-- 		            <auxheader colspan="1"> -->
+<!-- 		                <textbox instant="true" width="100px" -->
+<!-- 		                    value="@bind(vm.citaFilter.tipoestudio)" onChange="@command('changeFilter')"/> -->
+<!-- 		            </auxheader> -->
+<!-- 		            <auxheader label="Detalles" colspan="3" /> -->
+<!-- 		        </auxhead>  -->
+				<columns>
+					
+		            <column hflex="1">Paciente</column>
+		            <column hflex="1">Patologia</column>
+		            <column hflex="1">Estudio</column>
+		            <column hflex="1">Clinica</column>
+		            <column hflex="1">Fecha Asignacion</column>
+		            <column hflex="1">Fecha Cita</column>
+		            <column hflex="1">Fecha Entrega</column>
+
+		        </columns>
+		        <template name="model">
+		            <row>
+		            	
+		            	<label value="@load(each.estudioSolicitud.ayuda.paciente.nombre)"/>
+		            	<label value="@load(each.estudioSolicitud.ayuda.diagnostico.nombre)"/>
+		            	<label value="@load(each.estudioSolicitud.estudioClinica.estudio.nombre)"/>
+		            	<label value="@load(each.estudioSolicitud.estudioClinica.clinica.nombre)"/>
+		            	<label value="@load(each.fechaAsignacion) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.fechaCita) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.fechaEntregaComprobante) @converter('formatedDate',format='dd/MM/yy')"/>
+		               <!-- <label value="@load(each.cita.hora)"/> -->
+		            </row>
+		        </template>
+		        <foot>
+		            <footer span="6"  label="asdasd" />
+		        </foot>
+			
+			</grid>			
+		</div>
+		
+		</tabpanel>
+		
+    </tabpanels>
+  </tabbox>
+
+</zk>
