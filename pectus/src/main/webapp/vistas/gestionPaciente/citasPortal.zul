@@ -1,0 +1,62 @@
+<zk xmlns:n="native">
+  <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+  <tabbox>
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes"/>
+    </tabs>
+    <tabpanels>
+	<tabpanel>
+		 <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
+			<button id="" sclass="btn-success" onClick="@command('asosiarPaciente', personaSeleccionada=each)" >Aceptar</button>
+			<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelPersona)" >
+				<auxhead>
+		            <auxheader label="LISTA DE CANDIDATOS PACIENTES" colspan="6" />
+		        </auxhead>
+		        <auxhead sclass="category-center">
+			        <auxheader colspan="1">
+			            <textbox instant="true" width="100px" value="@bind(vm.pacienteFilter.cedula)" onChange="@command('changeFilter')" />
+			        </auxheader>
+					<auxheader colspan="1">
+		                <textbox instant="true"  width="100px" value="@bind(vm.pacienteFilter.nombre)" onChange="@command('changeFilter')"/>
+		            </auxheader>
+		            <auxheader colspan="1">
+		                <textbox instant="true" width="100px"
+		                    value="@bind(vm.pacienteFilter.apellido)" onChange="@command('changeFilter')"/>
+		            </auxheader>
+		        </auxhead>
+				<columns>
+		            <column hflex="1">Cedula</column>
+		            <column hflex="1">Nombre</column>
+		            <column hflex="1">Apellido</column>
+		            <column hflex="1">Celular</column>
+		            <column hflex="1">Telefono Fijo</column>
+		            <column hflex="1">Nacimiento</column>
+		            <column hflex="1">Ciudad</column>
+		            <column hflex="1">Direccion</column>
+		            <column hflex="1">Profesion</column>
+		            <column hflex="1">Correo</column>
+		        </columns>
+		        <template name="model">
+		            <row>
+		                <label value="@load(each.cedula) " />
+		                <label value="@load(each.nombre)" />
+		                <label value="@load(each.apellido)" />
+		                <label value="@load(each.celular)"/>
+		                <label value="@load(each.fijo)"/>
+		                <label value="@load(each.fechaNacimiento) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.ciudad.nombre)" />
+		                <label value="@load(each.direccion)" />
+		                <label value="@load(each.profesion)" />
+		                <label value="@load(each.correo)" />
+		                
+		            </row>
+		        </template>
+		        <foot>
+		            <footer span="6"  label="@load(vm.footer)" />
+		        </foot>
+			</grid>			
+		</div>
+		</tabpanel>
+    </tabpanels>
+  </tabbox>
+</zk>

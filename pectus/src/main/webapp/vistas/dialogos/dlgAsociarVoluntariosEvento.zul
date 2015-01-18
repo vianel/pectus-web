@@ -1,0 +1,94 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="dialogoAsociarEvento" title="ASOCIAR VOLUNTARIOS" border="normal" width="900px"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorEvento')">
+    <div style="float:left; display:Block;" height="auto" width="1500px">
+    <label style="display:block !important; font-weight: bold; font-size:120%; margin-left:25em; padding-bottom: 10px; padding-top: 10px;" value="@load(vm.eventoSelected.nombre)"></label>
+    <label style="display:block !important; padding-bottom: 5px;" value="@load(vm.eventoSelected.descripcion)"></label>
+    <label style="display:block !important;" value="@load(vm.fechaMostrar)"></label>
+    <div style="display:block !important;">
+        <label value="Lugar:"></label>
+    <label value="@load(vm.eventoSelected.lugar.nombre)"></label>
+    </div>
+        <div style="display:block !important; padding-bottom: 10px;">
+          <label value="Direccion:"></label>
+        <label value="@load(vm.eventoSelected.lugar.direccion)"></label>
+        </div>
+        
+            <label style="margin-left:10em; font-weight: bold;" value="voluntarios" width="300px"></label> <label  style="margin-left:30em; font-weight: bold;" value="voluntarios Vinculados" width="300px"></label>
+    </div>
+   
+   
+   <div  style="float:left; display:inline;" height="350px" width="385px">
+
+   <listbox  model="@load(vm.currentVoluntario)" id="candidateLb" hflex="1" vflex="true" multiple="true" rows="8" width="350px" >
+    
+   
+     
+        <listhead>
+        
+            <listheader label="Cedula" width="80px"></listheader>
+            <listheader label="Nombre" width="80px"></listheader>
+            <listheader label="Apellido" width="80px"></listheader>
+            <listheader label="Correo" width="80px"></listheader>
+            <listheader label="Telefono" width="80px"></listheader>
+               
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.cedula)"/>
+                <listcell label="@load(each.nombre)"/>
+                <listcell label="@load(each.apellido)"/>
+                <listcell label="@load(each.correo)"/>
+                <listcell label="@load(each.telefonoOficina)"/>
+                  
+            </listitem>
+        </template>
+    </listbox>
+    </div>
+    <zscript><![CDATA[
+    String imgPath = "../../assets/img";
+]]></zscript>
+  <div style="float:left; display:inline; margin-left: 20px;" width="50px">
+    <vbox spacing="10px" width="24px">
+        <image style="cursor:pointer" id="chooseAllBtn" src="${imgPath}/rightrightarrow_g.png" onClick="@command('chooseAllItem')" />
+        <image style="cursor:pointer" id="chooseBtn" src="${imgPath}/rightarrow_g.png" onClick="@command('chooseItem')" />
+        <image style="cursor:pointer" id="removeBtn" src="${imgPath}/leftarrow_g.png" onClick="@command('unchooseItem')"/>
+        <image style="cursor:pointer" id="removeAllBtn" src="${imgPath}/leftleftarrow_g.png" onClick="@command('unchooseAll')"/>
+    </vbox>
+    </div>
+      <div style="float:left; display:inline;" width="385px" height="350px">
+    <listbox model="@load(vm.listaVoluntariosSeleccionados)" id="chosenLb" hflex="1" vflex="true" multiple="true" rows="8">
+        <listhead>
+          <listheader label="Cedula" width="80px"></listheader>
+            <listheader label="Nombre" width="80px"></listheader>
+            <listheader label="Apellido" width="80px"></listheader>
+            <listheader label="Correo" width="80px"></listheader>
+            <listheader label="Telefono" width="80px"></listheader>
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.cedula)"/>
+                <listcell label="@load(each.nombre)"/>
+                <listcell label="@load(each.apellido)"/>
+                <listcell label="@load(each.correo)"/>
+                <listcell label="@load(each.telefonoOficina)"/>
+            </listitem>
+        </template>
+    </listbox>
+ </div>
+ 
+		 <div style="float:left; display:block; height=100px">
+			<button style="margin-left:350px;" width="75px" height="50px" sclass="btn-success" onClick="@command('asociarVoluntariosGuardar')">Asociar</button>
+
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('prueba')">Cancelar</button>
+</div>
+  
+  </div>
+    </vlayout>
+</window>
+</zk>
