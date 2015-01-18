@@ -45,28 +45,26 @@
 		</nav>
 		
 		<nav label="Gestion del Paciente" iconSclass="z-icon-edit">
-			<navitem label="Citas" iconSclass="z-icon-pencil"/>
+			<navitem label="Citas del portal" href="../gestionPaciente/index_getionCitaPortal.zul" iconSclass="z-icon-pencil"/>
 			<navitem label="Registrar Paciente" href="../gestionPaciente/index_getionPaciente.zul" iconSclass="z-icon-pencil"/>
 			<navitem label="Registrar ayuda solicitada" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
-			<navitem label="Evaluacion de solicitud" iconSclass="z-icon-angle-double-right"/>
-			<navitem label="Registrar Cita medica" iconSclass="z-icon-pencil" href="../gestionCita/index_gestionCita.zul"/>
-			<navitem label="Resultados de la ayuda" iconSclass="z-icon-pencil"/>
+			<navitem label="Evaluacion de solicitud" href="../gestionPaciente/index_gestionEvaluacionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
+			<navitem label="Registrar Cita medica" iconSclass="z-icon-pencil" href="../gestionPaciente/index_gestionCita.zul"/>
+			<navitem label="Resultados de la cita" href="../gestionPaciente/index_gestionResultadoCita.zul" iconSclass="z-icon-pencil"/>
 		</nav>
 		
 		<nav label="Educacion y Prevencion" iconSclass="z-icon-list">
 			<nav label="Gestion de Actividades" iconSclass="z-icon-angle-double-right" sclass="grey">
-				<navitem label="Solicitud de Actividad" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Registrar Actividad" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Asignar voluntarios" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Resultados Esperados" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Resultados Obtenidos" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Solicitud de Actividad" href="../gestionactividades/index_gestionsolicitudactividades.zul" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Registrar Actividad" href="../gestionactividades/index_gestionactividades.zul" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Asignar voluntarios" href="../gestionactividades/index_asignarvoluntarios.zul" iconSclass="z-icon-angle-double-right" />
+				<navitem label="Resultados Obtenidos" href="../gestionactividades/index_registroresultados.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			<nav label="Gestion de Eventos" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Registrar Evento" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Asignar voluntarios" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Asignar voluntarios" href="../gestioneventos/index_asociarVoluntarios.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Registrar Colaboraciones" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
-				<navitem label="Resultados Esperados" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Resultados Obtenidos" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Resultados Obtenidos" href="../gestioneventos/index_resultadoEvento.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 		</nav>
 		

@@ -6,6 +6,6 @@
 	</div>
   <!-- Search input-->
 	<div sclass="nav-search">
-		<bandbox placeholder="Buscar ..." sclass="input-prepend"/>
+		
 	</div>
 </div>	

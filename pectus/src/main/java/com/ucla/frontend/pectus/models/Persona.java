@@ -14,16 +14,19 @@ public class Persona {
 	private Date fechaNacimiento;
 	private String profesion;
 	private char estadoCivil;
-	
+	private Ciudad ciudad;
 	
 	
 	public Persona() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public Persona(String cedula, String nombre, String apellido,
 			String celular, String fijo, String direccion, String correo,
-			Date fechaNacimiento, String profesion, char estadoCivil) {
+			Date fechaNacimiento, String profesion, char estadoCivil,
+			Ciudad ciudad) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -35,7 +38,18 @@ public class Persona {
 		this.fechaNacimiento = fechaNacimiento;
 		this.profesion = profesion;
 		this.estadoCivil = estadoCivil;
+		this.ciudad = ciudad;
 	}
+
+
+	public Ciudad getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
+	}
+
 	public String getCedula() {
 		return cedula;
 	}

@@ -1,73 +1,120 @@
 <zk xmlns:n="native">
-  <!-- Use anchor as Tabbox's header-->
-<!--   <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/> -->
-
   <tabbox >
     <tabs>
-
-      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Ayudas"/>
-    
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes a ayudar"/>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Ayudas solicitadas"/>
     </tabs>
     <tabpanels>
-		<tabpanel >
-		 <div apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-			
-	
-		<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >NUEVO</button>
-
-	
-	<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelayuda) " >
-		<auxhead>
-            <auxheader label="LISTA DE PACIENTES" colspan="6" />
-        </auxhead>
-        
-        <auxhead sclass="category-center">
-	        <auxheader colspan="1">
-	            <textbox instant="true" width="100px" 
-	                value="@bind(vm.ayudaFilter.cedula)" onChange="@command('changeFilter')" />
-	        </auxheader>
-			
-			<auxheader colspan="1">
-                <textbox instant="true"  width="100px"
-                    value="@bind(vm.ayudaFilter.patologia)" onChange="@command('changeFilter')"/>
-            </auxheader>
-            
-            
-     
-        </auxhead>
-	
-	<columns>
-            <column hflex="1">Paciente</column>
-            <column hflex="1">Patologia</column>
-            <column hflex="1">Aprobacion</column>
-            <column hflex="1">Motivo</column>
-            <column hflex="1">Fecha Solicitud</column>
-            <column hflex="1">Fecha Aceptacion</column>
-          
-			<column hflex="1">Editar</column>
-            
-        </columns>
-        <template name="model">
-            <row>
-                <label value="@load(each.paciente.cedula)"/>
-                <label value="@load(each.diagnostico.nombre) " />
-                <label value="@load(each.aprobacion)" />
-            	<label value="@load(each.motivo)" />
-             <label value="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')" />
-             <label value="@load(each.fechaAprobacion)" />
-               	<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">Editar</button>
-        
-            </row>
-        </template>
-        
-        
-	</grid>			
-</div>
-		
+    	<tabpanel>
+    		<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
+			<button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda', personaSeleccionada=each)" >AYUDAR</button>
+			<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelpaciente) 
+			   @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')" >
+				<auxhead>
+		            <auxheader label="LISTA DE PACIENTES" colspan="6" />
+		        </auxhead>
+		        <auxhead sclass="category-center">
+			        <auxheader colspan="1">
+			            <textbox instant="true" width="100px" 
+			                value="@bind(vm.pacienteFilter.cedula)" onChange="@command('changeFilter')" />
+			        </auxheader>
+					<auxheader colspan="1">
+		                <textbox instant="true"  width="100px"
+		                    value="@bind(vm.pacienteFilter.nombre)" onChange="@command('changeFilter')"/>
+		            </auxheader>
+		            <auxheader colspan="1">
+		                <textbox instant="true" width="100px"
+		                    value="@bind(vm.pacienteFilter.apellido)" onChange="@command('changeFilter')"/>
+		            </auxheader>
+		            <auxheader label="Datos Basicos" colspan="8" />
+		        	<auxheader label="Datos Conyugue" colspan="3" />
+		        	<auxheader label="Datos SocioEconomicos" colspan="2" />
+		        </auxhead>
+				<columns>
+		            <column hflex="1">Cedula</column>
+		            <column hflex="1">Nombre</column>
+		            <column hflex="1">Apellido</column>
+		            <column hflex="1">Celular</column>
+		            <column hflex="1">Fijo</column>
+		            <column hflex="1">Nacimiento</column>
+		            <column hflex="1">Estado</column>
+		            <column hflex="1">Ciudad</column>
+		            <column hflex="1">Seguro</column>  
+		            <column hflex="1">Hijos</column>
+		            <column hflex="1">Ocupacion</column>
+		            <column hflex="1">Conyugue</column>
+		            <column hflex="1">Nombre</column>
+		            <column hflex="1">Apellido</column>
+		            <column hflex="1">Egresos</column>
+		            <column hflex="1">Ingresos</column>
+		        </columns>
+		        <template name="noneditable">
+		            <row>
+		                <label value="@load(each.paciente.cedula)"/>
+		                <label value="@load(each.paciente.nombre) " />
+		                <label value="@load(each.paciente.apellido)" />
+		                <label value="@load(each.paciente.celular)"/>
+		                <label value="@load(each.paciente.fijo)"/>
+		                <label value="@load(each.paciente.fechaNacimiento) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.paciente.estado.nombre)" />
+		                <label value="@load(each.paciente.ciudad.nombre)" />
+		                <label value="@load(each.paciente.seguro.nombre)" /> 
+		                <label value="@load(each.paciente.nroHijos)" />
+		                <label value="@load(each.paciente.profesion)" />
+		                <label value="@load(each.paciente.cedulaConyugue)" />
+		                <label value="@load(each.paciente.nombreConyugue)" />
+		                <label value="@load(each.paciente.apellidoConyugue)" />
+		                <label value="@load(each.paciente.egresos)" />
+		                <label value="@load(each.paciente.ingresos)" />
+		            </row>
+		        </template>
+		        <foot>
+		            <footer span="6"  label="@load(vm.footer)" />
+		        </foot>
+			</grid>			
+		</div>
+    	</tabpanel>
+		<tabpanel>
+		 	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+			<button id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >EDITAR</button>
+			   	<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
+			<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelayuda) " >
+				<auxhead>
+		            <auxheader label="LISTA DE PACIENTES" colspan="6" />
+		        </auxhead>
+		        <auxhead sclass="category-center">
+			        <auxheader colspan="1">
+			            <textbox instant="true" width="100px" 
+			                value="@bind(vm.ayudaFilter.cedula)" onChange="@command('changeFilter')" />
+			        </auxheader>
+					
+					<auxheader colspan="1">
+		                <textbox instant="true"  width="100px"
+		                    value="@bind(vm.ayudaFilter.patologia)" onChange="@command('changeFilter')"/>
+		            </auxheader>
+		        </auxhead>
+				<columns>
+		            <column hflex="1">Paciente</column>
+		            <column hflex="1">Patologia</column>
+<!-- 		            <column hflex="1">Aprobacion</column> -->
+		            <column hflex="1">Causa</column>
+		            <column hflex="1">Fecha Solicitud</column>
+<!-- 		            <column hflex="1">Fecha Aceptacion</column>  -->
+		        </columns>
+		        <template name="model">
+		            <row>
+		                <label value="@load(each.paciente.cedula)"/>
+		                <label value="@load(each.diagnostico.nombre) " />
+<!-- 		                <label value="@load(each.aprobacion)" /> -->
+		            	<label value="@load(each.motivo)" />
+		             	<label value="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')" />
+<!-- 		             	<label value="@load(each.fechaAprobacion)" /> -->
+		            
+		            </row>
+		        </template>		        
+			</grid>			
+		</div>
 		</tabpanel>
-		
     </tabpanels>
   </tabbox>
-
 </zk>

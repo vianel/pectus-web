@@ -278,6 +278,7 @@ public class ServicioColaboracion {
 		TipoColaboracion tipoColaboracion = new TipoColaboracion();
 		try {
 			JSONObject objjson = new JSONObject(s);
+			tipoColaboracion.setId(Integer.parseInt(objjson.getString("id")));
 			tipoColaboracion.setNombre(objjson.getString("nombre"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

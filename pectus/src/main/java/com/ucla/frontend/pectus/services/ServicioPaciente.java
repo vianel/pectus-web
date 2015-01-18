@@ -33,15 +33,10 @@ import com.ucla.frontend.pectus.models.Seguro;
 
 public class ServicioPaciente {
 	
-
-
- 
     private ListModelList<Paciente> listaModelPaciente;
-
-
-	public ServicioPaciente (){
+	
+    public ServicioPaciente (){
     
-
     }
     
 	@Init
@@ -50,6 +45,7 @@ public class ServicioPaciente {
     	this.setListaModelPaciente(new ListModelList<Paciente>(this.buscarPacientes()));
     	
     }
+	
 	public static String modificarPaciente(Paciente paciente)
 	{
 		Resty resty = new Resty();
@@ -76,6 +72,7 @@ public class ServicioPaciente {
 		}
 		return ok;
 	}
+	
 	public static String agregarPaciente(Paciente paciente)
 	{
 
@@ -112,14 +109,8 @@ public class ServicioPaciente {
 	}
 
     public static ListModelList<Paciente> buscarPacientes()
-    {
-
-
-    	
-    	ListModelList<Paciente> listaPaciente = new ListModelList<Paciente>();
-     
-        
-
+    {	
+    	ListModelList<Paciente> listaPaciente = new ListModelList<Paciente>();        
         Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {
@@ -245,10 +236,6 @@ public class ServicioPaciente {
 	}
 	
 	//································································································
-
-
-
-
 
 }
 
