@@ -52,10 +52,9 @@
         </columns>
         <template name="noneditable">
             <row>
-                <label value="@load(each.cita.paciente.cedula)" />
-                <label value="@load(each.cita.estudioClinica.clinica.nombre)" />
-                <label value="@load(each.cita.estudioClinica.estudio.nombre)" />
-                <label value="@load(each.cita.fecha) @converter('formatedDate',format='dd/MM/yy')"/>
+                <label value="@load(each.fechaAsignacion) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.fechaCita) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <label value="@load(each.fechaEntregaComprobante) @converter('formatedDate',format='dd/MM/yy')"/>
              <!--    <label value="@load(each.cita.hora) @converter('formatedDate',format='HH:mm:ss')"/>  -->
                 <button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')">Editar</button>
              

@@ -3,11 +3,298 @@
 
   <tabbox >
     <tabs>
-
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Registrar Colaboraciones"/>
       <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Colaboraciones"/>
     
     </tabs>
     <tabpanels>
+    
+    
+    	<tabpanel>
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm2') @init('com.ucla.frontend.pectus.controllers.ColaboracionView')">	
+		
+
+		    <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success" onClick="@command('actualizarListas')" >
+          		 		    <attribute name="onClick">						
+						    dialogoColaboracionEvento.doModal();						  	
+			</attribute>
+			Agregar Colaboracion</button>
+			</hbox>
+			</div>
+		
+		
+		<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm2.listaEventos)"  selectedItem="@bind(vm2.eventoSelected)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  width="100px">
+          <textbox instant="true" width="100px" />
+           </listheader>       
+          
+          <listheader hflex="1" label="Descripcion" width="50%" sort="auto(descripcion)">
+      
+
+		  
+		   </listheader> 	
+		   		  
+		        <listheader hflex="1" label="fecha" width="50%"/>
+		        <listheader hflex="1" label="Ciudad" width="50%"/>
+		        <listheader hflex="1" label="Lugar" width="50%"/>
+		        <listheader hflex="1" label="Direccion" width="50%"/>
+		
+	
+				  </listhead>         
+               
+           <template name="model">
+           <listitem>
+           
+              <listcell label="@load(each.nombre) " />
+                <listcell label="@load(each.descripcion)" />
+                <listcell label="@load(each.fecha)  @converter('formatedDate',format='dd/MM/yyyy')"/>
+                <listcell label="@load(each.lugar.ciudad.nombre) " />
+                <listcell label="@load(each.lugar.nombre) " />
+                <listcell label="@load(each.lugar.direccion) " />
+
+                
+               </listitem>
+           </template>
+</listbox>
+
+
+
+<!-- DIALOGO DE COLABORACION -->
+
+<window visible="false" id="dialogoColaboracionEvento" title="Colaboraciones" border="normal" width="1100px"
+    
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+               <div style="float:left; display:Block;" height="auto" width="1500px">
+    <label style="display:block !important; font-weight: bold; font-size:120%; margin-left:25em; padding-bottom: 10px; padding-top: 10px;" value="@load(vm2.eventoSelected.nombre)"></label>
+    <label style="display:block !important; padding-bottom: 5px;" value="@load(vm2.eventoSelected.descripcion)"></label>
+    <label style="display:block !important;" value="@load(vm.fechaMostrar)"></label>
+    <div style="display:block !important;">
+        <label value="Lugar:"></label>
+    <label value="@load(vm2.eventoSelected.lugar.nombre)"></label>
+    </div>
+        <div style="display:block !important; padding-bottom: 10px;">
+          <label value="Direccion:"></label>
+        <label value="@load(vm2.eventoSelected.lugar.direccion)"></label>
+        </div>
+        </div>
+    <tabbox >
+    
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Colaboraciones"/>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Registrar Colaboracion"/>
+    
+    </tabs>
+
+    <tabpanels>
+
+    
+<tabpanel>
+    
+ 
+        <div>
+            <label style="margin-left:10em; font-weight: bold;" value="Colaboraciones anteriores" width="300px"></label> <label  style="margin-left:20em; font-weight: bold;" value="Colaboraciones del evento" width="300px"></label>
+    </div>
+   
+   
+   <div  style="float:left; display:inline; overflow-y: scroll;" height="350px" width="450px">
+
+   <listbox  model="@load(vm2.listaColaboracionesTodos)" id="candidateLb" hflex="1" vflex="true" multiple="true" rows="8" width="350px" >
+    
+   
+     
+     <listhead>
+          <listheader label="Evento" width="80px"></listheader>
+                 <listheader label="Patrocinador" width="190px">
+          
+            <textbox instant="true" width="100px"/>
+            </listheader>
+            <listheader label="Tipo de Colaboracion" width="80px"></listheader>
+            <listheader label="Cantidad" width="80px"></listheader>
+       
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.evento.nombre)"/>
+                <listcell label="@load(each.patrocinado.nombre)"/>
+                <listcell label="@load(each.tipoColaboracion.nombre)"/>
+                <listcell label="@load(each.cantidad)"/>
+          
+            </listitem>
+        </template>
+    </listbox>
+    </div>
+    <zscript><![CDATA[
+    String imgPath = "../../assets/img";
+]]></zscript>
+  <div style="float:left; display:inline; margin-left: 20px;" width="50px">
+    <vbox spacing="10px" width="24px">
+        <image style="cursor:pointer" id="chooseAllBtn" src="${imgPath}/rightrightarrow_g.png" onClick="@command('chooseAllItem')" />
+        <image style="cursor:pointer" id="chooseBtn" src="${imgPath}/rightarrow_g.png" onClick="@command('chooseItem')" />
+        <image style="cursor:pointer" id="removeBtn" src="${imgPath}/leftarrow_g.png" onClick="@command('unchooseItem')"/>
+        <image style="cursor:pointer" id="removeAllBtn" src="${imgPath}/leftleftarrow_g.png" onClick="@command('unchooseAll')"/>
+    </vbox>
+    </div>
+      <div style="float:left; display:inline; overflow-y: scroll;" width="450px" height="350px">
+    <listbox model="@load(vm2.listaColaboracionesSeleccionados)" id="chosenLb" hflex="1" vflex="true" multiple="true" rows="8">
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+        <listhead>
+          <listheader label="Evento" width="80px"></listheader>
+            <listheader label="Patrocinador" width="190px">
+          
+            <textbox instant="true" width="100px"/>
+            </listheader>
+            <listheader label="Tipo de Colaboracion" width="80px"></listheader>
+            <listheader label="Cantidad" width="80px"></listheader>
+       
+        </listhead>
+        <template name="model">
+            <listitem>
+                <listcell label="@load(each.evento.nombre)"/>
+                <listcell label="@load(each.patrocinado.nombre)"/>
+                <listcell label="@load(each.tipoColaboracion.nombre)"/>
+                <listcell label="@load(each.cantidad)"/>
+          
+            </listitem>
+        </template>
+    </listbox>
+ </div>
+ 
+		 <div style="float:left; display:block; height=100px">
+			<button style="margin-left:350px;" width="75px" height="50px" sclass="btn-success" onClick="@command('guardarAsociar')" >Asociar</button>
+
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('cancelar')">Cancelar
+			 <attribute name="onClick">						
+						    dialogoColaboracionEvento.setVisible(false);						  	
+			</attribute></button>
+			</div>
+ </tabpanel>
+ 
+  <tabpanel>
+ 
+    <label style="display:block" value="Evento" />
+        <bandbox id="bdPaciente" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm2.eventoSelected)" onSelect="bdPaciente.value=self.selectedItem.label; bdPaciente.close();" model="@load(vm2.listaEventos)">
+				                <listhead>
+				                    
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="DESCRIPCION" />
+				                </listhead>
+				                 <template name="model" var="evento">
+				                <listitem>
+				                  <listcell  label="@load(evento.nombre)" />
+				                  <listcell  label="@load(evento.descripcion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>
+
+         <label style="display:block" value="Patrocinador" />
+              <bandbox id="bdtipoestudio" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox selectedItem="@bind(vm2.patrocinadorSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+					                onSelect="bdtipoestudio.value=self.selectedItem.label; bdtipoestudio.close();" model="@load(vm2.listaPatrocinadores)">
+				                <listhead>
+				                	<listheader label="RIF" />
+				                    <listheader label="NOMBRE" />
+				                    <listheader label="DIRECCION" />
+				                </listhead>
+				                 <template name="model" var="patrocinador">
+				                <listitem>
+				                  <listcell  label="@load(patrocinador.rif)" />
+				                  <listcell  label="@load(patrocinador.nombre)" />
+				                  <listcell  label="@load(patrocinador.direccion)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				  </bandbox>
+        				
+        				
+         <label style="display:block" value="Tipo Colaboracion" />
+        <bandbox id="bdClinica" mold="rounded" autodrop="true">  
+				        <bandpopup >
+				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
+					               selectedItem="@bind(vm2.tipoColaboracionSelected)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm2.listaTipoColaboraciones)">
+				                <listhead>
+				                    <listheader label="NOMBRE" />
+				                </listhead>
+				                 <template name="model" var="tipo">
+				                <listitem>
+				                  <listcell  label="@load(tipo.nombre)" />
+				              </listitem>
+				              </template>
+				            </listbox>
+				        </bandpopup>
+				    </bandbox>     
+				    
+        <!-- Datos de la cita con el combobox finish -->
+        
+       <!-- Datos de la cita-->
+
+       <label  style="display:block" value="Cantidad" /><textbox value="@bind(vm2.cantidadSelected)"/>
+      
+       <separator height="20px"/>
+		<div align="center" style="margin-left:-1em">
+			<button width="75px" sclass="btn-success" onClick="@command('guardarColaboracion')">Guardar</button>
+			<button width="75px" sclass="btn-success">Eliminar</button>
+			<button width="75px" sclass="btn-success">
+			 <attribute name="onClick">						
+						    dialogoColaboracionEvento.setVisible(false);						  	
+			</attribute>Cancelar</button>
+		</div>
+	
+	<!-- Datos de la cita-->
+			
+	
+ 
+ 
+  </tabpanel>
+ 
+ 
+			  
+  </tabpanels>
+
+
+ </tabbox>
+    </vlayout>
+</window>
+
+
+
+
+
+
+
+
+<!-- fIN DIALOGO DE COLABORACION -->
+	
+</div>
+	
+	</tabpanel>
+    
+
 		<tabpanel >
 		 <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ColaboracionView')">
@@ -66,6 +353,13 @@
 </div>
 		
 		</tabpanel>
+		
+		
+		
+
+
+		
+		
 		
     </tabpanels>
   </tabbox>

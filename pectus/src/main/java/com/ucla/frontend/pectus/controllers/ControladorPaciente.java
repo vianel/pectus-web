@@ -1,6 +1,7 @@
 package com.ucla.frontend.pectus.controllers;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,21 +9,28 @@ import java.util.List;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
+import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Persona;
 import com.ucla.frontend.pectus.models.Seguro;
+import com.ucla.frontend.pectus.models.TipoEstudio;
 import com.ucla.frontend.pectus.services.ServicioCiudad;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
+import com.ucla.frontend.pectus.services.ServicioPersona;
 
 
-public class ControladorPaciente {
+public class ControladorPaciente implements Serializable{
 	private Paciente pacienteselected;
 	private String cedulaSelected;
 	private String nombreSelected;
@@ -54,8 +62,7 @@ public class ControladorPaciente {
 	private String phoneSelected;
 	
 	
-	
-	
+
 	private List<Ciudad> listaciudad;
 
 	private List<Estado> listaestado;
@@ -65,11 +72,45 @@ public class ControladorPaciente {
 	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PacienteFilter pacienteFilter = new PacienteFilter();
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
+	private List<Paciente> currentPacientes;
+	List<Persona> currentPersona = ServicioPersona.buscarPersonas();
 	private List<PacienteStatus> pacientestatues = generateStatusList(currentPaciente);
+
 	private boolean displayEdit = true;
 	List<String> listaedocivil = new ArrayList<String>();
 
-			
+	@Init
+	public void init(){
+		this.currentPacientes = ServicioPaciente.buscarPacientes();
+		getmodelPersona();
+//		getmodelPacientesNuevo();
+	}
+	
+//	NUEVOS METODOS
+	
+	@Command
+	@NotifyChange("personaSeleccionada")
+	public void asosiarPaciente(@BindingParam("personaSeleccionada") Persona persona){
+		Global.personaSeleccionada = persona;
+		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarPaciente.zul", null, null);
+		window.doModal();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public ListModel<Persona> getmodelPersona() {
+        return new ListModelList<Persona>(currentPersona);
+    }
+	public List<Paciente> getmodelPacientesNuevo() {
+        return currentPacientes;
+    }
+	
+	
 	
 	@Command
 	@NotifyChange({"listaciudad","listaestado"})
@@ -129,6 +170,11 @@ public class ControladorPaciente {
 		ventanaregistronuevopaciente.doModal();
 	}
 	@Command
+	public void abrirDialogoRegistrarAyuda(Event e){
+		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarAyuda.zul", null, null);
+		window.doModal();
+	}
+	@Command
 	@NotifyChange({"modelpaciente", "footer"})
 	public void modificarPaciente(@BindingParam("pacienteStatus") PacienteStatus pctes)
 	{
@@ -166,7 +212,7 @@ public class ControladorPaciente {
        // return new ListModelList<Paciente>(currentPaciente);
     	return pacientestatues;
     }
-    
+  
     public String getFooter() {
         return String.format(footerMensaje, pacientestatues.size());
     }
@@ -315,6 +361,9 @@ public class ControladorPaciente {
         }
 		return pacientes;
 	}
+	
+	
+	
 	public Paciente getPacienteselected() {
 		return pacienteselected;
 	}
@@ -615,6 +664,7 @@ public class ControladorPaciente {
 	public void setPhoneSelected(String phoneSelected) {
 		this.phoneSelected = phoneSelected;
 	}
+
 
 
 

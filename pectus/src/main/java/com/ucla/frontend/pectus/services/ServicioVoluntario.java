@@ -27,9 +27,9 @@ public class ServicioVoluntario {
 		this.setListaModelVoluntario(new ListModelList<Voluntario>(this.buscarVoluntario()));
 	}
 	
-	public static List<Voluntario> buscarVoluntario(){
+	public static ListModelList<Voluntario> buscarVoluntario(){
 		
-		List<Voluntario> listaVoluntarios = new ArrayList<Voluntario>();
+		ListModelList<Voluntario> listaVoluntarios = new ListModelList<Voluntario>();
 		Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {

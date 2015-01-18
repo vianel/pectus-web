@@ -5,30 +5,33 @@ import java.util.Date;
 public class Cita {
 	
 	private Integer id;
-	private Date fecha;
-	private Date hora;
-	private Paciente paciente;
-	//private Clinica clinica;
-	//private TipoEstudio tipoestudio;
-	private EstudioClinica estudio;
+	private EstudioSolicitud estudioSolicitud;
+	private Date fechaAsignacion;
+	private Date fechaCita;
+	private Date fechaEntregaComprobante;
+	private Date hora;	
 	private boolean estatus;
 	
-	public Cita(Integer id, Date fecha, Date hora, Paciente paciente,
-			EstudioClinica estudio, boolean estatus) {
-		super();
-		this.id = id;
-		this.fecha = fecha;
-		this.hora = hora;
-		this.paciente = paciente;
-		this.estudio = estudio;
-		//this.clinica = clinica;
-		//this.tipoestudio = tipoestudio;
-		this.estatus = estatus;
-	}
+
 	
 	public Cita(){
 		
 	}
+
+	
+	public Cita(Integer id, EstudioSolicitud estudioSolicitud,
+			Date fechaAsignacion, Date fechaCita, Date fechaEntregaComprobante, Date hora,
+			boolean estatus) {
+		super();
+		this.id = id;
+		this.estudioSolicitud = estudioSolicitud;
+		this.fechaAsignacion = fechaAsignacion;
+		this.fechaCita = fechaCita;
+		this.fechaEntregaComprobante = fechaEntregaComprobante;
+		this.hora = hora;
+		this.estatus = estatus;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -38,13 +41,6 @@ public class Cita {
 		this.id = id;
 	}
 
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
 
 	public Date getHora() {
 		return hora;
@@ -54,30 +50,6 @@ public class Cita {
 		this.hora = hora;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-/*	public Clinica getClinica() {
-		return clinica;
-	}
-
-	public void setClinica(Clinica clinica) {
-		this.clinica = clinica;
-	}
-
-	public TipoEstudio getTipoEstudio() {
-		return tipoestudio;
-	}
-
-	public void setTipoEstudio(TipoEstudio tipoestudio) {
-		this.tipoestudio = tipoestudio;
-	}
-*/
 	public boolean isEstatus() {
 		return estatus;
 	}
@@ -85,14 +57,40 @@ public class Cita {
 	public void setEstatus(boolean estatus) {
 		this.estatus = estatus;
 	}
-	
-	public EstudioClinica getEstudioClinica() {
-		return estudio;
+
+	public EstudioSolicitud getEstudioSolicitud() {
+		return estudioSolicitud;
 	}
 
-	public void setEstudioClinica(EstudioClinica estudio) {
-		this.estudio = estudio;
+	public void setEstudioSolicitud(EstudioSolicitud estudioSolicitud) {
+		this.estudioSolicitud = estudioSolicitud;
 	}
+
+	public Date getFechaAsignacion() {
+		return fechaAsignacion;
+	}
+
+	public void setFechaAsignacion(Date fechaAsignacion) {
+		this.fechaAsignacion = fechaAsignacion;
+	}
+
+	public Date getFechaCita() {
+		return fechaCita;
+	}
+
+	public void setFechaCita(Date fechaCita) {
+		this.fechaCita = fechaCita;
+	}
+
+	public Date getFechaEntregaComprobante() {
+		return fechaEntregaComprobante;
+	}
+
+	public void setFechaEntregaComprobante(Date fechaEntregaComprobante) {
+		this.fechaEntregaComprobante = fechaEntregaComprobante;
+	}
+	
+	
 	
 	
 

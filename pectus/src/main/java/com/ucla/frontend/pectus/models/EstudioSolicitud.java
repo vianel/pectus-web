@@ -7,8 +7,7 @@ public class EstudioSolicitud {
 	private Integer id;
 	private Ayuda ayuda;
 	private EstudioClinica estudioClinica;
-	private Double porcAprobacion;
-	private Date fechaAprobacion;
+	
 	private boolean estatus;
 	
 	
@@ -17,54 +16,17 @@ public class EstudioSolicitud {
 	}
 
 
-
 	public EstudioSolicitud(Integer id, Ayuda ayuda,
-			EstudioClinica estudioClinica, Double porcAprobacion,
-			Date fechaAprobacion, boolean estatus) {
+			EstudioClinica estudioClinica, boolean estatus) {
 		super();
 		this.id = id;
 		this.ayuda = ayuda;
 		this.estudioClinica = estudioClinica;
-		this.porcAprobacion = porcAprobacion;
-		this.fechaAprobacion = fechaAprobacion;
 		this.estatus = estatus;
 	}
 
 
 
-
-
-
-	public Double getPorcAprobacion() {
-		return porcAprobacion;
-	}
-
-
-
-
-
-
-	public void setPorcAprobacion(Double porcAprobacion) {
-		this.porcAprobacion = porcAprobacion;
-	}
-
-
-
-
-
-
-	public Date getFechaAprobacion() {
-		return fechaAprobacion;
-	}
-
-
-
-
-
-
-	public void setFechaAprobacion(Date fechaAprobacion) {
-		this.fechaAprobacion = fechaAprobacion;
-	}
 
 
 

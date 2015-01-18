@@ -2,7 +2,7 @@
 <zk>
 <window apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')"
-			 id="modalDialogpaciente" title="PACIENTE" border="normal" width="660px" height="29em"
+			 id="modalDialogpaciente" title="PACIENTE" border="normal" left="19em" width="79em" height="50em"
   
     position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
@@ -10,63 +10,67 @@
        <tabbox id="tb" height="630px">
     <tabs id="tabs">
         <tab id="A" label="Datos Basicos" />
-        <tab id="B" label="Datos del Conyugue" />
-        <tab id="C" label="Datos Socioeconomicos" />
+        
+<!--         <tab id="C" label="Datos Socioeconomicos" /> -->
 
     </tabs>
     <tabpanels>
         <tabpanel onCreate="@command('inicializarAtributos')">
-		
-				<label style="display:block" value="Cedula" /><textbox id="txtcedulapaciente" value="@bind(vm.cedulaSelected)"  maxlength="8"/>
-				<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
-				<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>
-				<label style="display:block" value="Celular" /><textbox value="@bind(vm.celularSelected)" />
-				<label style="display:block" value="Telefono Fijo" /><textbox value="@bind(vm.phoneSelected)" width='150px' />
-			
-				<label style="display:block;margin-left: 15em;margin-top: -16em;" value="Direccion" /><textbox value="@bind(vm.direccionSelected)" rows="4"  style="display:block;margin-left: 16em;"/>
-				<label style="display:block;margin-left: 15em;" value="Correo" /><textbox  value="@bind(vm.correoSelected)" style="display:block;margin-left: 16em;" />
-				<label style="display:block;margin-left: 15em;" value="Fecha de Nacimiento" /><datebox  value="@bind(vm.fechanacimientoSelected)" style="display:block;margin-left: 15em;" />
-				<label style="display:block;margin-left: 15em;" value="Profesion" /><textbox value="@bind(vm.profesionSelected)" style="display:block;margin-left: 16em;" />
-				
-				<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><intbox value="@bind(vm.nrohijosSelected)"  style="display:block;margin-left: 30em;"/> 
-				<label style="display:block;margin-left: 28em;" value="Estado Civil"/> <combobox  model="@load(vm.listaedocivil)" selectedItem="@bind(vm.edocivilSelected)" style="display:block;margin-left: 28em;"></combobox>
-				<label style="display:block;margin-left: 28em;" value="Estado"/> 
-				     <combobox style="display:block;margin-left: 28em;" id="cmbEstado" model="@load(vm.listaestado)" selectedItem="@bind(vm.estadoSelected)" onChange="@command('cambioEstado')">
-						<template name="model">
-							<comboitem label="@load(each.nombre)" />
-						</template>
-					</combobox>
-				<label style="display:block;margin-left: 28em;" value="Ciudad"/>
-                    <combobox style="display:block;margin-left: 28em;" id="cmbCiudad" model="@load(vm.listaciudad)" selectedItem="@bind(vm.ciudadSelected)">
-						<template name="model">
-							<comboitem label="@load(each.nombre)" />
-						</template>
-					</combobox>
-                    
-			    <button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarPaciente', cmp=modalDialogpaciente)" >Guardar</button>
+		<label value="Datos del Paciente" style="font-size: 15px;font-weight: bold;" ></label>	
+			<label style="display:block" value="Cedula" /><textbox id="txtcedulapaciente" value="@bind(vm.cedulaSelected)"  maxlength="8"/>
+			<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
+			<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>
+			<label style="display:block" value="Celular" /><textbox value="@bind(vm.celularSelected)" />
+			<label style="display:block" value="Telefono Fijo" /><textbox value="@bind(vm.phoneSelected)" width='150px' />
+			<label style="display:block;margin-left: 15em;margin-top: -16em;" value="Direccion" /><textbox value="@bind(vm.direccionSelected)" rows="4"  style="display:block;margin-left: 16em;"/>
+			<label style="display:block;margin-left: 15em;" value="Correo" /><textbox  value="@bind(vm.correoSelected)" style="display:block;margin-left: 16em;" />
+			<label style="display:block;margin-left: 15em;" value="Fecha de Nacimiento" /><datebox  value="@bind(vm.fechanacimientoSelected)" style="display:block;margin-left: 15em;" />
+			<label style="display:block;margin-left: 15em;" value="Profesion" /><textbox value="@bind(vm.profesionSelected)" style="display:block;margin-left: 16em;" />
+			<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><intbox value="@bind(vm.nrohijosSelected)"  style="display:block;margin-left: 30em;"/> 
+			<label style="display:block;margin-left: 28em;" value="Estado Civil"/> <combobox  model="@load(vm.listaedocivil)" selectedItem="@bind(vm.edocivilSelected)" style="display:block;margin-left: 28em;"></combobox>
+			<label style="display:block;margin-left: 28em;" value="Estado"/> 
+		     <combobox style="display:block;margin-left: 28em;" id="cmbEstado" model="@load(vm.listaestado)" selectedItem="@bind(vm.estadoSelected)" onChange="@command('cambioEstado')">
+				<template name="model">
+					<comboitem label="@load(each.nombre)" />
+				</template>
+			</combobox>
+			<label style="display:block;margin-left: 28em;" value="Ciudad"/>
+            <combobox style="display:block;margin-left: 28em;" id="cmbCiudad" model="@load(vm.listaciudad)" selectedItem="@bind(vm.ciudadSelected)">
+				<template name="model">
+					<comboitem label="@load(each.nombre)" />
+				</template>
+			</combobox>
+	        	<label value="Datos del Conyugue" style="position: absolute;margin-top: 3em;font-size: 15px;font-weight: bold;" ></label>	
+	        <hlayout style="margin-bottom: 3em;margin-top: 6em;">
+	        
+			<label style="display:block;margin-left: 0em;margin-top: 3em;" value="Cedula " /><textbox style="margin-top: 3em;" value="@bind(vm.cedulaconyugueSelected)"/>
+			<label style="display:block;margin-left: -16em;" value="Nombre" /><textbox style="margin-left: -13em;" value="@bind(vm.nombreconyugueSelected)"/>
+			<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoconyugueSelected)"/> 
+			<label style="display:block;margin-top: 3em;margin-left: -17em;" value="Fecha de Nacimiento" /><datebox style="margin-top: 3em;margin-left: -7em;" value="@bind(vm.fechanacimientoconyigueSelected)" />
+			<label style="display:block;margin-left: -37em;margin-top: 6em;" value="Profesion" /><textbox style="margin-top: 6em;margin-left: -35em;" value="@bind(vm.profesionconyugueSelected)"/>
+		    </hlayout>
+	     	<label value="Datos Socioeconomicos" style="position: absolute;margin-top: -28.3em;font-size: 15px;font-weight: bold;margin-left: 39em;" ></label>	
+	     	<hlayout style="position: absolute;margin-left: 45em;margin-top: -30em;">
+	     	<label style="display:block" value="Vivienda"/> <combobox style="margin-left: 8em;" selectedItem="@bind(vm.viviendaSelected)"><comboitem label="Casa"/><comboitem label="Apartamento"/><comboitem label="Rancho"/><comboitem label="Puente"/></combobox>
+			<label style="display:block;margin-top: 3em;margin-left: -27em;" value="Condicion de la Vivienda"/> <combobox style="margin-left: -15em;margin-top: 3em;" selectedItem="@bind(vm.condicionviviendaSelected)"><comboitem label="Alquilada"/><comboitem label="Propia"/></combobox>
+			<label style="display:block;margin-left: -27.4em;margin-top: 6em;" value="Numero de Habitantes" /><intbox style="margin-left: -17em;margin-top: 6em;" value="@bind(vm.nrohabitantesSelected)"/> 
+			<label style="display:block;margin-left: -28em;margin-top: 9em;" value="Precio de Alquiler" /><intbox style="margin-left: -18em;margin-top: 9em;" value="@bind(vm.precioalquilerSelected)"/> 
+			<label style="display:block;margin-left: -29em;margin-top: 12em;" value="Lugar de Trabajo" /><textbox style="margin-left: -19em;margin-top: 13em;" value="@bind(vm.lugartrabajoSelected)"/>
+			<label style="display:block;margin-left: -30em;margin-top: 15em;" value="Direccion de Trabajo" /><textbox  value="@bind(vm.direcciontrabajoSelected)" style="display:block;margin-left: -19em;margin-top: 16em;" rows="4"/> 
+			<label style="display:block;margin-left: -31em;margin-top: 21em;" value="Telefono del Trabajo" /><intbox value="@bind(vm.tlftrabajoSelected)" style="display:block;margin-left: -20em;margin-top: 23em;" /> 			
+			<label style="display:block;margin-left: -31.4em;margin-top: 24em;" value="Ingresos Familiares" /><intbox value="@bind(vm.ingfamiliaresSelected)" style="display:block;margin-left: -21em;margin-top: 26em;" />
+			<label style="display:block;margin-left: -32em;margin-top: 27em;" value="Egresos Familiares" /><intbox value="@bind(vm.egrfamiliaresSelected)" style="display:block;margin-left: -22em;margin-top: 29em;" />
+	    	</hlayout>
+		    
+		    
+		    
+		    
+		    <button style="margin-top: 0em;margin-left: 32em;" sclass="btn-success" onClick="@command('guardarPaciente', cmp=modalDialogpaciente)" >Guardar</button>
 			
 				
 		</tabpanel>
-        <tabpanel>
-        	<label style="display:block" value="Cedula" /><textbox value="@bind(vm.cedulaconyugueSelected)"/>
-			<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreconyugueSelected)"/>
-			<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoconyugueSelected)"/> 
-			<label style="display:block" value="Fecha de Nacimiento" /><datebox value="@bind(vm.fechanacimientoconyigueSelected)" />
-			<label style="display:block" value="Profesion" /><textbox value="@bind(vm.profesionconyugueSelected)"/>
-        </tabpanel>
-        <tabpanel>
-        <label style="display:block" value="Vivienda"/> <combobox selectedItem="@bind(vm.viviendaSelected)"><comboitem label="Casa"/><comboitem label="Apartamento"/><comboitem label="Rancho"/><comboitem label="Puente"/></combobox>
-		<label style="display:block" value="Condicion de la Vivienda"/> <combobox selectedItem="@bind(vm.condicionviviendaSelected)"><comboitem label="Alquilada"/><comboitem label="Propia"/></combobox>
-		<label style="display:block" value="Numero de Habitantes" /><intbox value="@bind(vm.nrohabitantesSelected)"/> 
-		<label style="display:block" value="Precio de Alquiler" /><intbox value="@bind(vm.precioalquilerSelected)"/> 
-		<label style="display:block" value="Lugar de Trabajo" /><textbox value="@bind(vm.lugartrabajoSelected)"/>
-		
-		<label style="display:block;margin-left: 18em;margin-top: -16em;" value="Direccion de Trabajo" /><textbox value="@bind(vm.direcciontrabajoSelected)" style="display:block;margin-left: 19em;" rows="4"/> 
-		<label style="display:block;margin-left: 18em;" value="Telefono del Trabajo" /><intbox value="@bind(vm.tlftrabajoSelected)" style="display:block;margin-left: 19em;" /> 			
-		<label style="display:block;margin-left: 18em;" value="Ingresos Familiares" /><intbox value="@bind(vm.ingfamiliaresSelected)" style="display:block;margin-left: 19em;" />
-		<label style="display:block;margin-left: 18em;" value="Egresos Familiares" /><intbox value="@bind(vm.egrfamiliaresSelected)" style="display:block;margin-left: 19em;" />
     
-        </tabpanel>
+       
 
     </tabpanels>
 </tabbox>

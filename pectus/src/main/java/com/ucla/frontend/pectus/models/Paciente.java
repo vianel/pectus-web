@@ -46,7 +46,7 @@ public class Paciente extends Persona{
 			String telefonoTrabajo, float ingresos, float egresos,
 			boolean estatus) {
 		super(cedula, nombre, apellido, celular, fijo, direccion, correo,
-				fechaNacimiento, profesion, estadoCivil);
+				fechaNacimiento, profesion, estadoCivil, ciudad);
 		
 		this.estado = estado;
 		this.ciudad = ciudad;

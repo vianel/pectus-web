@@ -2880,3 +2880,7 @@ background: #6fd7bb;
 	font-size: 15px;
 	font-weight: bold;
 }
+.z-tab-selected .z-tab-text{
+	background: #f7aff3;
+	color: #fff;
+}

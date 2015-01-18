@@ -19,6 +19,7 @@ import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Persona;
 import com.ucla.frontend.pectus.models.TipoEstudio;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.services.ServicioCita;
@@ -54,12 +55,16 @@ public class CitaView {
 	private List<CitaStatus> citaStatus = generateStatusList(currentCita);
 	private boolean displayEdit = true;
 	
-	/*@Init
+	@Init
 	public void init(){
-		selected = citas.get(0);
-		getmodelcita();
+//		selected = citas.get(0);
+		getmodelCita();
 		
-	}*/
+	}
+	
+	public ListModel<Cita> getmodelCita() {
+        return new ListModelList<Cita>(currentCita);
+    }
 	// Los filtros de las citas
 	
 	  public boolean isDisplayEdit() {
@@ -98,39 +103,39 @@ public class CitaView {
 	
 	/***** Guardar una cita ***********/
 	
-	@Command
-	@NotifyChange({ "modelcita", "footer" })
-	public void guardarCita(@BindingParam("cmp") Window x) throws Exception{
-		   String response=null;
-	  if (pacienteselected.getCedula()!= null){
-			
-			citaselected = new Cita();
-			
-	
-			citaselected.setPaciente(pacienteselected);
-			citaselected.setEstudioClinica(estudioselected);
-			citaselected.setFecha(fechaselected);
-			citaselected.setHora(horaselected);
-			
-		
-			response = ServicioCita.agregarCita(citaselected);
-			if (response.equalsIgnoreCase("true"))
-			{
-			
-				Clients.showNotification("Cita Guardada", null, true);
-			//	x.detach(); ver esto mosca revisar
-
-			}else{
-			
-				Clients.showNotification("Error al guardar", true);
-			
-			}
-		}
-	     else{
-	     
-	    Clients.showNotification("Porfavor ingrese todos los datos validos");
-	}
-	}
+//	@Command
+//	@NotifyChange({ "modelcita", "footer" })
+//	public void guardarCita(@BindingParam("cmp") Window x) throws Exception{
+//		   String response=null;
+//	  if (pacienteselected.getCedula()!= null){
+//			
+//			citaselected = new Cita();
+//			
+//	
+//			citaselected.setPaciente(pacienteselected);
+//			citaselected.setEstudioClinica(estudioselected);
+//			citaselected.setFecha(fechaselected);
+//			citaselected.setHora(horaselected);
+//			
+//		
+//			response = ServicioCita.agregarCita(citaselected);
+//			if (response.equalsIgnoreCase("true"))
+//			{
+//			
+//				Clients.showNotification("Cita Guardada", null, true);
+//			//	x.detach(); ver esto mosca revisar
+//
+//			}else{
+//			
+//				Clients.showNotification("Error al guardar", true);
+//			
+//			}
+//		}
+//	     else{
+//	     
+//	    Clients.showNotification("Porfavor ingrese todos los datos validos");
+//	}
+//	}
 	
 	
 

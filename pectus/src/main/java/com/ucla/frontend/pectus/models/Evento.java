@@ -20,19 +20,21 @@ public class Evento {
 	private String descripcion;
 	private Lugar lugar;
 	private List<Voluntario> voluntarios;
-	private List<Patrocinador> patrocinadores;
+	private List<Colaboracion> colaboracion;
+	private Double montoEsperado;
+	private Integer cantEntradasEsperadas;
 
 	public Evento() {
 		super();
 		this.voluntarios = new ArrayList<Voluntario>();
-		this.patrocinadores = new ArrayList<Patrocinador>();
+		this.colaboracion = new ArrayList<Colaboracion>();
 	}
 
 
 	public Evento(int id, String nombre, Date fecha, Time hora,
 			int cantEntradas, Double costoEntrada, Double montoRecaudado,
 			String observacion, String descripcion, Lugar lugar,
-			List<Voluntario> voluntarios, List<Patrocinador> patrocinadores) {
+			List<Voluntario> voluntarios, List<Colaboracion> colaboracion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -45,7 +47,7 @@ public class Evento {
 		this.descripcion = descripcion;
 		this.lugar = lugar;
 		this.voluntarios = voluntarios;
-		this.patrocinadores = patrocinadores;
+		this.colaboracion = colaboracion;
 	}
 
 
@@ -99,12 +101,16 @@ public class Evento {
 		this.voluntarios = voluntarios;
 	}
 
-	public List<Patrocinador> getPatrocinadores() {
-		return patrocinadores;
+
+
+
+	public List<Colaboracion> getColaboracion() {
+		return colaboracion;
 	}
 
-	public void setPatrocinadores(List<Patrocinador> patrocinadores) {
-		this.patrocinadores = patrocinadores;
+
+	public void setColaboracion(List<Colaboracion> colaboracion) {
+		this.colaboracion = colaboracion;
 	}
 
 
@@ -157,5 +163,31 @@ public class Evento {
 		this.observacion = observacion;
 	}
 
+
+	public Double getMontoEsperado() {
+		return montoEsperado;
+	}
+
+
+	public void setMontoEsperado(Double montoEsperado) {
+		this.montoEsperado = montoEsperado;
+	}
+
+
+	public Integer getCantEntradasEsperadas() {
+		return cantEntradasEsperadas;
+	}
+
+
+	public void setCantEntradasEsperadas(Integer cantEntradasEsperadas) {
+		this.cantEntradasEsperadas = cantEntradasEsperadas;
+	}
+
+
+	public void setCantEntradas(Integer cantEntradas) {
+		this.cantEntradas = cantEntradas;
+	}
+
+	
 	
 }

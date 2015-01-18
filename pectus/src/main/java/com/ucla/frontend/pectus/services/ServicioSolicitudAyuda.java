@@ -129,7 +129,7 @@ public class ServicioSolicitudAyuda {
                   ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
                   ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
                   ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
-                  ayuda.setMotivo(obj.get("motivosolicitud").toString());
+//                  ayuda.setMotivo(obj.get("motivosolicitud").toString());
                   ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
                   
                   listaAyudas.add(ayuda);

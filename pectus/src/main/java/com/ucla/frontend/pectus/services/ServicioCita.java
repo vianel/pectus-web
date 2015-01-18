@@ -27,7 +27,10 @@ import org.zkoss.zul.ListModelList;
 import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
 
+import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Clinica;
+import com.ucla.frontend.pectus.models.Diagnostico;
+import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Estudio;
@@ -46,103 +49,143 @@ public class ServicioCita {
 	   this.setListaModelCita(new ListModelList<Cita>(this.buscarCita()));
     	
     }
-		public static String agregarCita(Cita cita)
-		{
-
-			Resty resty = new Resty();
-		    JSONResource jsResource = null;
-		    String ok = null;
-		    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-			String fecha = df.format(cita.getFecha());
-			DateFormat hr = new SimpleDateFormat("HH:mm");
-			String hora = hr.format(cita.getHora());
-	
-			
-		   try {
-			    jsResource = resty.json("http://127.0.0.1:5000/cita/agregar?idestudio=" 
-		   + cita.getEstudioClinica().getId() 
-		   + "&cedula=" + cita.getPaciente().getCedula() 
-		  // + "&rif=" + cita.getClinica().getRif()
-		   + "&fecha=" + fecha
-		   + "&hora=" + hora);
-			   
-		    
-		   } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				 ok = jsResource.get("ok").toString();
-			
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return ok;
-			
-		}
+		
+   
+   
+//   public static String agregarCita(Cita cita)
+//		{
+//
+//			Resty resty = new Resty();
+//		    JSONResource jsResource = null;
+//		    String ok = null;
+//		    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//			String fecha = df.format(cita.getFecha());
+//			DateFormat hr = new SimpleDateFormat("HH:mm");
+//			String hora = hr.format(cita.getHora());
+//	
+//			
+//		   try {
+//			    jsResource = resty.json("http://127.0.0.1:5000/cita/agregar?idestudio=" 
+//		   + cita.getEstudioClinica().getId() 
+//		   + "&cedula=" + cita.getPaciente().getCedula() 
+//		  // + "&rif=" + cita.getClinica().getRif()
+//		   + "&fecha=" + fecha
+//		   + "&hora=" + hora);
+//			   
+//		    
+//		   } catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			try {
+//				 ok = jsResource.get("ok").toString();
+//			
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			return ok;
+//			
+//		}
 	
 	    // MOSTRAR LAS CITAS EN LA GRID 
-	
-	    public static List<Cita> buscarCita()
-	    {
 
-	    ListModelList<Cita> listaCita = new ListModelList<Cita>();
-	    
-	
-	        Resty resty = new Resty();
-	        JSONResource jsResource = null;
-			try {
-				jsResource = resty.json("http://127.0.0.1:5000/cita/todos");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+   public static List<Cita> buscarCita(){
+	   	ListModelList<Cita> listaCita = new ListModelList<Cita>();
+	   	Resty resty = new Resty();
+	   	JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/cita/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			String strPa = jsResource.get("citas").toString();
+			JSONArray serCita = new JSONArray(strPa);
+			  for(int i=0; i < serCita.length(); i++){
+				  Cita cita = new Cita();
+                  JSONObject obj = serCita.getJSONObject(i);
+                  cita.setEstudioSolicitud(obtenerEstudioSolicitud(obj.get("estudioxsolicitudayuda").toString()));
+                  cita.setId(Integer.parseInt(obj.get("id").toString()));
+                  cita.setFechaAsignacion(convertirFecha(obj.get("fechaasignacion").toString()));
+                  cita.setFechaCita(convertirFecha(obj.get("fechacita").toString()));
+                  cita.setFechaEntregaComprobante(convertirFecha(obj.get("fechaentregacomprobante").toString()));
+                  listaCita.add(cita);
+			  }
+			
 			} 
-			try {
-				String ok = jsResource.get("ok").toString();
-				if (ok.equalsIgnoreCase("true")) {
-				
-				String strPa = jsResource.get("citas").toString();
-				JSONArray serCita = new JSONArray(strPa);
-				  for(int i=0; i < serCita.length(); i++){
-					  Cita cita = new Cita();
-	                  JSONObject obj = serCita.getJSONObject(i);
-	                  cita.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
-	                  cita.setEstudioClinica(obtenerEstudioClinica(obj.get("estudio").toString()));
-	                  cita.setFecha(convertirFecha(obj.get("fecha").toString()));
-	               
-	               listaCita.add(cita);
-				  
-				  } //fin For
-				
-				} //fin IF
-				
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	 
-
-	        return listaCita;
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    	return listaCita;
 	        
 	    }
-	    // fIN DE MOSTRAR CITA
-	    
-	    
-	   // OBTENER LA CEDULA DEL PACIENTE
-	    
-	    public static Paciente obtenerPaciente (String s)
-	    {
-	    	Paciente paciente = new Paciente();
-	    	try {
-				JSONObject objjson = new JSONObject(s);
-				paciente.setCedula(objjson.getString("cedula"));
+   
+   
+   public static EstudioSolicitud obtenerEstudioSolicitud(String s){	
+	   EstudioSolicitud estudioSolicitud = new EstudioSolicitud();
+   		try {
+   			JSONObject objjson = new JSONObject(s);
+   			estudioSolicitud.setId(Integer.parseInt(objjson.getString("id")));
+   			estudioSolicitud.setAyuda(obtenerAyuda(objjson.getString("solicitudayuda")));
+   			estudioSolicitud.setEstudioClinica(obtenerEstudioClinica(objjson.getString("estudio")));
+//   			estudioSolicitud.setNombre(objjson.getString("nombre"));;
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    	return paciente;
-	    }
+	   	return estudioSolicitud;
+   }
+   
+   public static Ayuda obtenerAyuda(String s){	
+	   Ayuda ayuda = new Ayuda();
+   		try {
+   			JSONObject objjson = new JSONObject(s);
+   			ayuda.setPaciente(obtenerPaciente(objjson.getString("paciente")));
+   			ayuda.setDiagnostico(obtenerDiagnostico(objjson.getString("patologia")));
+//   			estudioSolicitud.setNombre(objjson.getString("nombre"));;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   	return ayuda;
+   }
+ 
+   
+   
+   public static Diagnostico obtenerDiagnostico (String s){
+	   Diagnostico diagnostico = new Diagnostico();
+    	try {
+			JSONObject objjson = new JSONObject(s);
+			diagnostico.setNombre(objjson.getString("nombre"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return diagnostico;
+   		}
+   
+   
+   
+   
+
+   public static Paciente obtenerPaciente (String s){
+	   Paciente paciente = new Paciente();
+    	try {
+			JSONObject objjson = new JSONObject(s);
+			paciente.setCedula(objjson.getString("cedula"));
+			paciente.setNombre(objjson.getString("nombre"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return paciente;
+   		}
 	    // OBTENER ESTUDIO-CLINICA 
 	    	
 	    	public static EstudioClinica obtenerEstudioClinica(String s)
