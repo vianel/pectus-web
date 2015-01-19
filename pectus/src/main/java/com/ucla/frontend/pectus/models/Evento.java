@@ -9,7 +9,7 @@ import org.zkoss.bind.annotation.DependsOn;
 
 public class Evento {
 
-	private int id;
+	private Integer id;
 	private String nombre;
 	private Date fecha;
 	private Time hora;
@@ -22,7 +22,7 @@ public class Evento {
 	private List<Voluntario> voluntarios;
 	private List<Colaboracion> colaboracion;
 	private Double montoEsperado;
-	private Integer cantEntradasEsperadas;
+	private Integer cantEntradasVendidas;
 
 	public Evento() {
 		super();
@@ -31,7 +31,7 @@ public class Evento {
 	}
 
 
-	public Evento(int id, String nombre, Date fecha, Time hora,
+	public Evento(Integer id, String nombre, Date fecha, Time hora,
 			int cantEntradas, Double costoEntrada, Double montoRecaudado,
 			String observacion, String descripcion, Lugar lugar,
 			List<Voluntario> voluntarios, List<Colaboracion> colaboracion) {
@@ -53,11 +53,11 @@ public class Evento {
 
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -124,7 +124,7 @@ public class Evento {
 	}
 
 
-	public int getCantEntradas() {
+	public Integer getCantEntradas() {
 		return cantEntradas;
 	}
 
@@ -174,13 +174,13 @@ public class Evento {
 	}
 
 
-	public Integer getCantEntradasEsperadas() {
-		return cantEntradasEsperadas;
+	public Integer getCantEntradasVendidas() {
+		return cantEntradasVendidas;
 	}
 
 
-	public void setCantEntradasEsperadas(Integer cantEntradasEsperadas) {
-		this.cantEntradasEsperadas = cantEntradasEsperadas;
+	public void setCantEntradasVendidas(Integer cantEntradasEsperadas) {
+		this.cantEntradasVendidas = cantEntradasEsperadas;
 	}
 
 

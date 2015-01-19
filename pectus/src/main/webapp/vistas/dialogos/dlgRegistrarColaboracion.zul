@@ -86,9 +86,9 @@
       
        <separator height="20px"/>
 		<div align="center" style="margin-left:-1em">
-			<button width="75px" sclass="btn-success" onClick="@command('guardarColaboracion')">Guardar</button>
-			<button width="75px" sclass="btn-success">Eliminar</button>
-			<button width="75px" sclass="btn-success">Cancelar</button>
+			<button  width="75px" height="50px" sclass="btn-success" onClick="@command('guardarColaboracion')">Guardar</button>
+		
+			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
 		</div>
 	
 	<!-- Datos de la cita-->

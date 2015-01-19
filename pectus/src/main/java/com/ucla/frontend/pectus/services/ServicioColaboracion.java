@@ -21,6 +21,7 @@ import us.monoid.web.Resty;
 
 
 
+
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Colaboracion;
 import com.ucla.frontend.pectus.models.Evento;
@@ -286,5 +287,40 @@ public class ServicioColaboracion {
 		}
 		return tipoColaboracion;
 	}
+	
+	 public static void editColaboracion(Colaboracion colaboracion){
+	        try {
+	        	Resty resty = new Resty();
+	    		JSONResource jsResource = null;
+	    	
+
+	    		try {
+	    			jsResource = resty.json("http://127.0.0.1:5000/colaboracion/editar?id=" + colaboracion.getId() + "&rif=" + colaboracion.getPatrocinado().getRif() + "&idtipocolaboracion=" + colaboracion.getTipoColaboracion().getId() + "&cantidad=" + colaboracion.getCantidad());
+	    		} catch (IOException e1) {
+	    			// TODO Auto-generated catch block
+	    			e1.printStackTrace();
+	    		}
+	      
+	        }catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        }
+	 public static void editColaboracion2(Colaboracion colaboracion){
+	        try {
+	        	Resty resty = new Resty();
+	    		JSONResource jsResource = null;
+	    	
+
+	    		try {
+	    			jsResource = resty.json("http://127.0.0.1:5000/colaboracion/editar?id=" + colaboracion.getId() + "&rif=" + colaboracion.getPatrocinado().getRif() + "&idtipocolaboracion=" + colaboracion.getTipoColaboracion().getId() + "&cantidad=" + colaboracion.getCantidad() + "&idevento=" + colaboracion.getEvento().getId());
+	    		} catch (IOException e1) {
+	    			// TODO Auto-generated catch block
+	    			e1.printStackTrace();
+	    		}
+	      
+	        }catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        }
 	
 }

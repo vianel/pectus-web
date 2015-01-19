@@ -91,7 +91,7 @@ public class ServicioLugar {
 				  for(int i=0; i < serLugar.length(); i++){
 					  Lugar lugar = new Lugar();
 	                  JSONObject obj = serLugar.getJSONObject(i);
-	                  
+	                  lugar.setId(obj.getInt("id"));
 	                  lugar.setTipoLugar(obtenerTipoLugar(obj.get("tipolugar").toString()));
 	                  lugar.setNombre(obj.get("nombre").toString());
 	                  lugar.setDireccion(obj.get("direccion").toString());

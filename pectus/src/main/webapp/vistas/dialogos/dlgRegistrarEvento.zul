@@ -42,7 +42,7 @@
 					<row><label value="Hora" /><textbox value="" rows="1"/></row>
 					<row><label value="Cantidad de entradas" /><textbox value="@bind(am.cantidadEntradasSelected)" rows="1"/></row>
 					<row><label value="Costo de la entrada" /><textbox value="@bind(am.costoEntradasSelected)" rows="1"/></row>
-					<row><label value="Monto Recaudado" /><textbox value="@bind(am.montoRecaudadoSelected)" rows="1"/></row>
+					<row><label value="Monto a recaudar" /><textbox value="@bind(am.montoRecaudadoSelected)" rows="1"/></row>
 					<row><label value="Observaciones" /><textbox value="@bind(am.observacionesSelected)" rows="4"/></row>
 					
 					
@@ -60,8 +60,7 @@
     
 		<separator height="35px"/>
 		<div align="center" >
-			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarEvento')">Guardar</button>
-			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
+			<button  width="75px" height="50px" sclass="btn-success" onClick="@command('guardarEvento')">Guardar</button>
 			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
 		</div>
     

@@ -218,8 +218,11 @@ public class ControladorEventoResultado implements Serializable {
 	    
 	    @Command
 	    public void cancelar(){
+	    //	this.getEventoSelecte.setCantEntradasVendidas(null);
+	    	//this.getEventoSelected().setObservacion(null);
+	    //	this.getEventoSelected().setMontoRecaudado(null);
 	    
-	    	listaColaboracionesSeleccionados.clear();
+	    	//listaColaboracionesSeleccionados.clear();
 	    	
 
 	    }
@@ -431,7 +434,9 @@ public class ControladorEventoResultado implements Serializable {
 			this.listaTipoColaboraciones = listaTipoColaboraciones;
 		}
 	    
-	    
-	    
+	    @Command
+	   public void guardarResultados(){
+		  ServicioEvento.resultadoEvento(eventoSelected);
+	   }
 
 }
