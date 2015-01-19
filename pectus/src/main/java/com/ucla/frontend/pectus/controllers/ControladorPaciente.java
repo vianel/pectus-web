@@ -32,6 +32,7 @@ import com.ucla.frontend.pectus.services.ServicioPersona;
 
 public class ControladorPaciente implements Serializable{
 	private Paciente pacienteselected;
+	private Persona personaselected;
 	private String cedulaSelected;
 	private String nombreSelected;
 	private String apellidoSelected;
@@ -96,7 +97,11 @@ public class ControladorPaciente implements Serializable{
 		window.doModal();
 	}
 	
-	
+	@Command
+	public void asignarCita(){
+		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgAsignarCita.zul", null, null);
+		window.doModal();
+	}
 	
 	
 	
@@ -663,6 +668,14 @@ public class ControladorPaciente implements Serializable{
 
 	public void setPhoneSelected(String phoneSelected) {
 		this.phoneSelected = phoneSelected;
+	}
+
+	public Persona getPersonaselected() {
+		return personaselected;
+	}
+
+	public void setPersonaselected(Persona personaselected) {
+		this.personaselected = personaselected;
 	}
 
 

@@ -1,62 +1,111 @@
 <zk xmlns:n="native">
-  <a label="Paciente" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
-  <tabbox>
-    <tabs>
-      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes"/>
-    </tabs>
-    <tabpanels>
-	<tabpanel>
-		 <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
-			<button id="" sclass="btn-success" onClick="@command('asosiarPaciente', personaSeleccionada=each)" >Aceptar</button>
-			<grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelPersona)" >
-				<auxhead>
-		            <auxheader label="LISTA DE CANDIDATOS PACIENTES" colspan="6" />
-		        </auxhead>
-		        <auxhead sclass="category-center">
-			        <auxheader colspan="1">
-			            <textbox instant="true" width="100px" value="@bind(vm.pacienteFilter.cedula)" onChange="@command('changeFilter')" />
-			        </auxheader>
-					<auxheader colspan="1">
-		                <textbox instant="true"  width="100px" value="@bind(vm.pacienteFilter.nombre)" onChange="@command('changeFilter')"/>
-		            </auxheader>
-		            <auxheader colspan="1">
-		                <textbox instant="true" width="100px"
-		                    value="@bind(vm.pacienteFilter.apellido)" onChange="@command('changeFilter')"/>
-		            </auxheader>
-		        </auxhead>
-				<columns>
-		            <column hflex="1">Cedula</column>
-		            <column hflex="1">Nombre</column>
-		            <column hflex="1">Apellido</column>
-		            <column hflex="1">Celular</column>
-		            <column hflex="1">Telefono Fijo</column>
-		            <column hflex="1">Nacimiento</column>
-		            <column hflex="1">Ciudad</column>
-		            <column hflex="1">Direccion</column>
-		            <column hflex="1">Profesion</column>
-		            <column hflex="1">Correo</column>
-		        </columns>
-		        <template name="model">
-		            <row>
-		                <label value="@load(each.cedula) " />
-		                <label value="@load(each.nombre)" />
-		                <label value="@load(each.apellido)" />
-		                <label value="@load(each.celular)"/>
-		                <label value="@load(each.fijo)"/>
-		                <label value="@load(each.fechaNacimiento) @converter('formatedDate',format='dd/MM/yy')"/>
-		                <label value="@load(each.ciudad.nombre)" />
-		                <label value="@load(each.direccion)" />
-		                <label value="@load(each.profesion)" />
-		                <label value="@load(each.correo)" />
-		                
-		            </row>
-		        </template>
-		        <foot>
-		            <footer span="6"  label="@load(vm.footer)" />
-		        </foot>
-			</grid>			
-		</div>
+  <a label="Personas registradas desde el portal" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+	<div  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
+  	<tabbox>
+    	<tabs>
+      		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoEstudio"/> 
+    	</tabs>
+    	<tabpanels>
+			<tabpanel >
+<!-- 				<button id="btnNuevoTipoEstudio" sclass="btn-success" onClick="@command('asignarCita')" >ATENDER</button> -->
+               	<div class="btn-group btn-group-sm">
+                	<hbox spacing="20px">
+          		 		<button id="" sclass="btn-success" >
+       		 		    	<attribute name="onClick">						
+						    	modalAsignarCita.doModal();						  	
+							</attribute>
+						ATENDER	
+						</button>
+                     </hbox>
+               	</div>
+				<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
+		  			<listhead sizable="true"> 
+	         				<listheader hflex="1" label="Nombre"  width="100px">
+	         					<textbox instant="true" width="75px"  />
+	          				</listheader>       
+	         				<listheader hflex="1" label="Apellido" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Celular" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Fijo" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Nacimiento" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader> 
+		   					<listheader hflex="1" label="Ciudad" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader> 
+		   					<listheader hflex="1" label="Direccion" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Profesion" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader> 
+		   					<listheader hflex="1" label="Correo" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>   	
+				  </listhead>         
+     				<template name="model">
+			           <listitem>
+			            <listcell label="@load(each.nombre)" />
+		                <listcell label="@load(each.apellido)" />
+		                <listcell label="@load(each.celular)"/>
+		                <listcell label="@load(each.fijo)"/>
+		                <listcell label="@load(each.fechaNacimiento) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <listcell label="@load(each.ciudad.nombre)" />
+		                <listcell label="@load(each.direccion)" />
+		                <listcell label="@load(each.profesion)" />
+		                <listcell label="@load(each.correo)" />
+			           </listitem>
+           			</template>
+				</listbox>
 		</tabpanel>
     </tabpanels>
-  </tabbox>
+    </tabbox>
+    
+    
+    <window visible="false" title="ASIGNAR CITA" border="normal" width="320px" height="30em" position="center,center" closable="false"
+    	action="show: slideDown;hide: slideUp" id="modalAsignarCita">
+		    <vlayout>
+		       <tabbox id="tb" height="630px">
+		    <tabs id="tabs">
+		        <tab id="A" label="Persona"/>
+		    </tabs>
+		    <tabpanels>
+		        <tabpanel>
+						<label style="display:block" value="Nombre"/>
+						<textbox value="@bind(vm.personaselected.nombre)" readonly="true" maxlength="20" width="200px"/>
+						<label style="display:block; margin-top: 1em" value="Apellido"/>
+						<textbox value="@bind(vm.personaselected.apellido)" readonly="true" maxlength="20"  width="200px"  style="display:block;"/>
+						<label style="display:block; margin-top: 1em" value="Cedula"/>
+						<textbox value="@bind(vm.personaselected.cedula)" readonly="true" maxlength="20"  width="200px"  style="display:block;"/>		
+						<label style="display:block; margin-top: 1em" value="Fecha de Asignacion"/>
+						<datebox></datebox>
+						<separator height="48px"/>
+						<button label="Guardar" style=" margin-left: 5em;" sclass="btn-success" onClick="@command('editarTipoEstudio', cmp=modaltipoestudio)">
+							<attribute name="onClick">						
+							    modaltipoestudio.setVisible(false);						  	
+							</attribute>	
+						</button>
+						<button  label="Salir" sclass="btn-success">
+						    <!-- Ocultamos la ventana -->
+						    <attribute name="onClick">						
+							    modalAsignarCita.setVisible(false);						  	
+							</attribute>					  
+						</button>
+				</tabpanel>
+		        
+		    </tabpanels>
+		</tabbox>
+		       <separator height="35px"/>
+		    </vlayout>
+	</window>
+    
+    
+    
+    
+   </div>
 </zk>

@@ -129,9 +129,10 @@ public class ServicioPaciente {
                   Paciente paciente = new Paciente();
                   JSONObject obj = serPaciente.getJSONObject(i);
                   paciente.setNombre(obj.get("nombre").toString());
-                
+//                  paciente.setEstadoCivil(obj.get("edocivil").toString());
                   paciente.setApellido(obj.get("apellido").toString());
                   paciente.setCedula(obj.get("cedula").toString());
+                  paciente.setCorreo(obj.get("correo").toString());
                   paciente.setDireccion(obj.get("direccion").toString());
                   paciente.setFechaNacimiento(convertirFecha(obj.get("fecnacimiento").toString()));
                   paciente.setCelular(obj.get("tlfcelular").toString());
@@ -139,15 +140,18 @@ public class ServicioPaciente {
                   paciente.setProfesion(obj.get("profesion").toString());
                   paciente.setNroHijos(Integer.parseInt(obj.get("nrohijos").toString()) );
                   paciente.setIngresos(Integer.parseInt(obj.get("ingfamiliares").toString()));
-                  paciente.setEgresos(Integer.parseInt(obj.get("egrfamiliares").toString())); 
+                  paciente.setEgresos(Integer.parseInt(obj.get("egrfamiliares").toString()));
                   paciente.setSeguro(obtenerSeguro(obj.get("tiposeguro").toString())); 
                   paciente.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
                   paciente.setEstado(obtenerciudad(obj.get("ciudad").toString()).getEstado());
                   paciente.setCedulaConyugue(obj.get("cedconyugue").toString());
                   paciente.setNombreConyugue(obj.get("nombconyugue").toString());
                   paciente.setApellidoConyugue(obj.get("apeconyugue").toString());
-
-   
+                  paciente.setOcupacionConyugue(obj.get("ocupconyugue").toString());
+                  paciente.setFechaNacConyugue(convertirFecha(obj.get("fecnacconyugue").toString()));
+                  paciente.setLugarTrabajo(obj.get("lugtrabajo").toString());
+                  paciente.setDireccionTrabajo(obj.get("dirtrabajo").toString());
+                  paciente.setTelefonoTrabajo(obj.get("tlftrabajo").toString());
                   
                   listaPaciente.add(paciente);
 			  
