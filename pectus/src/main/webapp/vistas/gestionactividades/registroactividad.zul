@@ -142,7 +142,7 @@
 				</columns>
 				<rows>
 					<row><label value="Titulo" /><textbox value="@bind(vm.tituloSelected)" /> 
-					<label value="Recursos Utilizados" /><textbox value="@bind(vm.recursosutilizadoSelected)" rows="1"/></row>
+					   </row>
 					<row><label value="Lugar"/>
                     <combobox id="cmbLugar" model="@load(vm.listalugar)" selectedItem="@bind(vm.lugarSelected)">
 						<template name="model">

@@ -20,6 +20,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.Composer;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Actividad;
@@ -52,7 +53,7 @@ public class ActividadVM {
 	private List<TipoActividad> listatipoactividad;
 	private TipoActividad tipoactividadSelected;
 	private SolicitudActividad solicitudactividadSelected;
-	private String recursosutilizadoSelected;
+
 	private int asistentesesperadosSelected;
 	private Date fechainicioSelected;
 	private String montoesperadoSelected;
@@ -224,7 +225,7 @@ public class ActividadVM {
     	 act.setFechainicio(fechainicioSelected);
     	 act.setFechafin(fechafinSelected);
     	// act.setHora(horaSelected.toString());
-    	 act.setRecursosUtilizados(recursosutilizadoSelected);
+    	
     	 act.setDuracion(Integer.toString(duracionSelected));
     	 act.setDescripcion(solactividadSelected.getDescripcion());
     	 act.setMontoesperado(Integer.parseInt(montoesperadoSelected));
@@ -246,6 +247,39 @@ public class ActividadVM {
    	 
     	
     }
+    @SuppressWarnings("unchecked")
+	@Command
+    @NotifyChange({"modelactividad"})
+    public void concluirasignacion()
+    {
+	    if (actividadSelected != null)
+	    {
+	    	
+	    	Messagebox.show("¿Esta Seguro Que desea concluir la actividad?", "Confirmacion", Messagebox.OK |  Messagebox.CANCEL,
+	    			Messagebox.QUESTION,  new org.zkoss.zk.ui.event.EventListener() {
+
+	    	    public void onEvent(Event evt) throws InterruptedException {
+	    			
+	    	        if (evt.getName().equals("onOK")) {
+	    	        	
+	    	        	currentActividad.remove(actividadSelected);
+	    	        	Clients.showNotification("Actividad Concluida", null, true);
+	    	        } else {
+	    	        	Clients.showNotification("Cancelado", null, true);
+	    	        }
+	    	    
+	    	    
+	    	   }
+
+	    	});
+	    }else {
+	    	Clients.showNotification("Debe seleccionar una Actividad", null, true);
+	    }
+    }
+    
+
+
+
     @Command
     @NotifyChange("modelactividad")
     public void registroresultadoActividad()
@@ -459,12 +493,7 @@ public class ActividadVM {
 	public void setSolactividadSelected(SolicitudActividad solactividadSelected) {
 		this.solactividadSelected = solactividadSelected;
 	}
-	public String getRecursosutilizadoSelected() {
-		return recursosutilizadoSelected;
-	}
-	public void setRecursosutilizadoSelected(String recursosutilizadoSelected) {
-		this.recursosutilizadoSelected = recursosutilizadoSelected;
-	}
+
 	public int getAsistentesesperadosSelected() {
 		return asistentesesperadosSelected;
 	}
