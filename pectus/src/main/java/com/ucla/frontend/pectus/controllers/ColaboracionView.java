@@ -198,6 +198,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 				Clients.showNotification("Error al guardar", true);
 			
 			}
+			colaboracionSelected = null;
 //		}
 //	     else{
 //	     
@@ -309,26 +310,26 @@ public class ColaboracionView  extends Div implements IdSpace {
 		}
     }
     @Command
-    public void guardarAsociar(){
-    	if(listaColaboracionesSeleccionados != null){
-    	for(Colaboracion colaboracion : listaColaboracionesSeleccionados){
-    		if(!eventoSelected.getColaboracion().contains(colaboracion)){
-    			colaboracion.setEvento(eventoSelected);
-    			
-    			ServicioColaboracion.agregarColaboracion(colaboracion);
-    			Clients.showNotification("Colaboraciones registradas correctamente", null, true);
-    		}
-    		
-    	}
-    	}
+    public void actualiza(){
+    	ServicioColaboracion.editColaboracion(colaboracionSelected);
+    
     }
     
     @Command
     public void cancelar(){
-    
+        eventoSelected = null;
+        patrocinadorSelected = null;
+        tipoColaboracionSelected = null;
     	listaColaboracionesSeleccionados.clear();
 
     }
+    
+    public void actualiza2(){
+    	ServicioColaboracion.editColaboracion2(colaboracionSelected);
+    
+    }
+    
+ 
     
 
 }

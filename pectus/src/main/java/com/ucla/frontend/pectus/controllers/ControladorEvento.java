@@ -67,6 +67,7 @@ public class ControladorEvento extends Div implements IdSpace{
 	private String montoRecaudadoSelected;
 	private String observacionesSelected;
 	private static ControladorEvento instance;
+	private Boolean entro;
     @Wire
     private Listbox candidateLb = new Listbox();
     @Wire
@@ -86,13 +87,13 @@ public class ControladorEvento extends Div implements IdSpace{
     	currentVoluntario = ServicioVoluntario.buscarVoluntario();
     	candidateModel = currentVoluntario;
     	if(Global.eventoSeleccionado != null){
-    		eventoSelected = Global.eventoSeleccionado;
+    		//eventoSelected = Global.eventoSeleccionado;
     		  SimpleDateFormat formatoFecha = new SimpleDateFormat(" EEEE dd 'de' MMMM 'del' yyyy ",new Locale("es_ES"));
     	
     		  this.setFechaMostrar(formatoFecha.format(eventoSelected.getFecha()));
     		
     	
-    	if(Global.eventoSeleccionado.getVoluntarios() != null){
+   /* 	if(Global.eventoSeleccionado.getVoluntarios() != null){
     	Set<Voluntario> voluntariosTransformacion = new HashSet<Voluntario>(Global.eventoSeleccionado.getVoluntarios());
     	ListModelList<Voluntario> listaSeleccionados = new ListModelList<Voluntario>();
     	listaSeleccionados.addAll(voluntariosTransformacion);
@@ -115,7 +116,7 @@ public class ControladorEvento extends Div implements IdSpace{
     	
     	
     	
-    	}
+    	}*/
     	}
 
     }
@@ -479,6 +480,68 @@ public void setFechaMostrar(String fechaMostrar) {
 	this.fechaMostrar = fechaMostrar;
 }
 
+@Command
+public void cancelar(){
+
+	listaVoluntariosSeleccionados.clear();
 	
+
+}
+
+@Command
+public void actualizarListas(){
+ currentVoluntario.clear();
+ ListModelList<Voluntario> listaAux = new  ListModelList<Voluntario>();
+ listaAux = ServicioVoluntario.buscarVoluntario();
+ currentVoluntario.addAll(listaAux);
+ listaVoluntariosSeleccionados.clear();            
+	if(eventoSelected != null){
+	
+		
+		
+		
+		if(eventoSelected.getVoluntarios() != null){
+		
+				for(Voluntario voluntario : eventoSelected.getVoluntarios()){
+					listaVoluntariosSeleccionados.add(voluntario);
+				}
+			
+		}
+		
+		
+    	List<Integer>  pos = new ArrayList<Integer>();
+    	for(Voluntario vol : eventoSelected.getVoluntarios()){
+    	for(int i = 0 ; i < currentVoluntario.size(); i++){
+    		if(currentVoluntario.get(i).getCedula().compareToIgnoreCase(vol.getCedula()) == 0){
+    			pos.add(i);
+    		}
+    	}
+    	}
+    	Collections.reverse(pos);
+    for(int posi : pos){
+    	currentVoluntario.remove(posi);
+    }
+		setEntro(true);
+	
+		
+		
+		
+	}
+}
+
+public Boolean getEntro() {
+	return entro;
+}
+
+public void setEntro(Boolean entro) {
+	this.entro = entro;
+}
+
+@Command
+public void editarEvento(){
+	ServicioEvento.editar(eventoSelected);
+}
+
+
 
 }

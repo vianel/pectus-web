@@ -60,6 +60,8 @@ public class ServicioEvento {
 					evento.setDescripcion(obj.get("descripcion").toString()); //fecha
 					evento.setLugar(obtenerLugar(obj.get("lugar").toString()));
 					evento.setFecha(convertirFecha(obj.getString("fecha").toString()));
+					evento.setCantEntradas(obj.getInt("cantentradasesperadasventa"));
+					evento.setMontoEsperado(obj.getDouble("montorecaudadoesperado"));
 //					evento.setFecha(new Date());
 					evento.setNombre(obj.get("nombre").toString());
 				
@@ -148,6 +150,7 @@ public class ServicioEvento {
 		Lugar lugar = new Lugar();
 		try {
 			JSONObject objjson = new JSONObject(s);
+			lugar.setId(objjson.getInt("id"));
 			lugar.setNombre(objjson.getString("nombre"));
 			lugar.setDireccion(objjson.getString("direccion"));
 			lugar.setCiudad(obtenerCiudad(objjson.get("ciudad").toString()));
@@ -230,11 +233,11 @@ public class ServicioEvento {
 		Resty resty = new Resty();
 	    JSONResource jsResource = null;
 	    String ok = null;
-	    DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
 	   try {
 		    jsResource = resty.json("http://127.0.0.1:5000/evento/agregar?idlugar=" + evento.getLugar().getId()
-	   + "&nombre=" + evento.getNombre() + "&fecha=" +  "&cantentradasvendidas="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada()+ "&montorecaudado="+evento.getMontoRecaudado()+ "&descripcion="+evento.getDescripcion()+ "&montorecaudadoesperado="+evento.getMontoEsperado());
+	   + "&nombre=" + evento.getNombre() + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion()+ "&montorecaudadoesperado="+evento.getMontoEsperado() + "&hora=" + evento.getHora());
 		   
 	    
 	   } catch (IOException e) {
@@ -252,6 +255,32 @@ public class ServicioEvento {
 		
 	}
 	
+	public static String editar(Evento evento){
+
+		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	    String ok = null;
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		
+	   try {
+		    jsResource = resty.json("http://127.0.0.1:5000/evento/editar?id=" + evento.getId() + "idlugar=" + evento.getLugar().getId()
+	   + "&nombre=" + evento.getNombre() + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion()+ "&montorecaudadoesperado="+evento.getMontoEsperado() + "&hora=" + evento.getHora());
+		   
+	    
+	   } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
+	}
 	
 	
 	public static Date convertirFecha(String fecha){
@@ -293,5 +322,24 @@ public class ServicioEvento {
 	}
 	
 	
+	
+	 public static void resultadoEvento(Evento evento){
+	        try {
+	        	Resty resty = new Resty();
+	    		JSONResource jsResource = null;
+	    		   Evento eventoS = new Evento();
+		            eventoS = evento;
+
+	    		try {
+	    			jsResource = resty.json("http://127.0.0.1:5000/evento/editar?id=" + eventoS.getId().toString() + "&observaciones=" + eventoS.getObservacion() + "&cantentradasvendidas=" + eventoS.getCantEntradas().toString() + "&montorecaudado=" + eventoS.getMontoRecaudado().toString());
+	    		} catch (IOException e1) {
+	    			// TODO Auto-generated catch block
+	    			e1.printStackTrace();
+	    		}
+	      
+	        }catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        }
 	
 }
