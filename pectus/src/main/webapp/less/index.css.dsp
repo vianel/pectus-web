@@ -2884,3 +2884,7 @@ background: #6fd7bb;
 	background: #f7aff3;
 	color: #fff;
 }
+.z-listitem.z-listitem-selected .z-listcell-content {
+color: #636363;
+color: #fff !important;
+}

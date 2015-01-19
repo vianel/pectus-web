@@ -16,7 +16,7 @@
     </tabs>
     <tabpanels>
         <tabpanel onCreate="@command('inicializarAtributos')">
-		<label value="Datos del Paciente" style="font-size: 15px;font-weight: bold;" ></label>	
+			<label value="Datos del Paciente" style="font-size: 15px;font-weight: bold;" ></label>	
 			<label style="display:block" value="Cedula" /><textbox id="txtcedulapaciente" value="@bind(vm.cedulaSelected)"  maxlength="8"/>
 			<label style="display:block" value="Nombre" /><textbox value="@bind(vm.nombreSelected)" maxlength="15"/>
 			<label style="display:block" value="Apellido" /><textbox value="@bind(vm.apellidoSelected)" maxlength="15"/>

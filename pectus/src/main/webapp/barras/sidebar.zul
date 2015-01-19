@@ -20,16 +20,15 @@
 		<navitem label="Inicio" iconSclass="z-icon-dashboard" href="../home/index.zul"/>
 		
 		<nav label="Datos Basicos" iconSclass="z-icon-file-o">
-			<navitem label="Publicaciones" iconSclass="z-icon-angle-double-right"/>	
+			
 			<nav label="Pacientes" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Patologias" iconSclass="z-icon-pencil" href="../gestionPatologia/index_gestionpatologia.zul"/>
 				<navitem label="Polizas de seguros" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Motivo de Solicitud" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Rechazo de Solicitud" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Clinica Convenio" iconSclass="z-icon-angle-double-right" href="../gestionClinica/index_gestionclinica1.zul" />
-				<navitem label="Estudios de clinicas" href="../gestionestudioclinica/index_gestionEstudioClinica.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Tipo de estudios" iconSclass="z-icon-pencil" href="../gestiontipoestudio/index_gestiontipoestudio.zul"/>
-				<navitem label="Estudio" iconSclass="z-icon-angle-double-right"/>
+				<navitem label="Clinica por Estudio" iconSclass="z-icon-angle-double-right" href="../gestionClinica/index_gestionclinica1.zul" />
+				<navitem label="Estudios por Clinica" href="../gestionestudioclinica/index_gestionEstudioClinica.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			
 			<nav label="Actividades y Eventos" iconSclass="z-icon-angle-double-right" sclass="grey">
@@ -45,9 +44,9 @@
 		</nav>
 		
 		<nav label="Gestion del Paciente" iconSclass="z-icon-edit">
-			<navitem label="Citas del portal" href="../gestionPaciente/index_getionCitaPortal.zul" iconSclass="z-icon-pencil"/>
-			<navitem label="Registrar Paciente" href="../gestionPaciente/index_getionPaciente.zul" iconSclass="z-icon-pencil"/>
-			<navitem label="Registrar ayuda solicitada" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
+			<navitem label="Citas" href="../gestionPaciente/index_getionCitaPortal.zul" iconSclass="z-icon-pencil"/>
+			<navitem label="Visita" href="../gestionPaciente/index_getionPaciente.zul" iconSclass="z-icon-pencil"/>
+			<navitem label="Solicitar Ayuda" href="../gestionPaciente/index_gestionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Evaluacion de solicitud" href="../gestionPaciente/index_gestionEvaluacionAyuda.zul" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Registrar Cita medica" iconSclass="z-icon-pencil" href="../gestionPaciente/index_gestionCita.zul"/>
 			<navitem label="Resultados de la cita" href="../gestionPaciente/index_gestionResultadoCita.zul" iconSclass="z-icon-pencil"/>
@@ -76,10 +75,12 @@
 
 		
 		<nav id="calitem" label="Administracion del sistema" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
+			<navitem label="Publicaciones" iconSclass="z-icon-angle-double-right"/>	
 			<nav label="Seguridad Funcional" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem label="Registrar Usuario" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Registrar Grupos" iconSclass="z-icon-angle-double-right"/>
 				<navitem label="Cambios de clave" iconSclass="z-icon-angle-double-right"/>
+				
 			</nav>
 			<navitem label="Respaldo" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Recuperacion" iconSclass="z-icon-angle-double-right"/>
