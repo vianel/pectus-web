@@ -18,6 +18,7 @@ import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
 
 import com.ucla.frontend.pectus.models.Ayuda;
+import com.ucla.frontend.pectus.models.Causa;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.EstudioClinica;
@@ -129,7 +130,8 @@ public class ServicioSolicitudAyuda {
                   ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
                   ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
                   ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
-//                  ayuda.setMotivo(obj.get("motivosolicitud").toString());
+//                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
+                  ayuda.setCausa(obtenerCausa(obj.get("causa").toString()));
                   ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
                   
                   listaAyudas.add(ayuda);
@@ -162,6 +164,19 @@ public class ServicioSolicitudAyuda {
 			e.printStackTrace();
 		}
 		return paciente;
+	}
+	private static Causa obtenerCausa(String s) {
+		// TODO Auto-generated method stub
+		Causa causa = new Causa();
+		try {
+			JSONObject objjson = new JSONObject(s);
+			causa.setNombre(objjson.getString("nombre"));
+			causa.setDescripcion(objjson.getString("descripcion"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return causa;
 	}
 	private static Diagnostico obtenerDiagnostico(String s) {
 		// TODO Auto-generated method stub
