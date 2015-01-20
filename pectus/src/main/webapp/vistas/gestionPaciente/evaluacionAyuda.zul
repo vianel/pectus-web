@@ -3,7 +3,6 @@
 <tabbox>
     <tabs>
       <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Evaluar Solicitud"/>
-      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Solicitudes Evaluadas"/>
     </tabs>
     <tabpanels>
 	<tabpanel>
@@ -11,84 +10,30 @@
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
 			<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
 			<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">RECHAZAR</button>
-        <grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelayuda) " >
-				<auxhead>
-		            <auxheader label="LISTA DE PACIENTES" colspan="6" />
-		        </auxhead>
-		        <auxhead sclass="category-center">
-			        <auxheader colspan="1">
-			            <textbox instant="true" width="100px" 
-			                value="@bind(vm.ayudaFilter.cedula)" onChange="@command('changeFilter')" />
-			        </auxheader>
-					
-					<auxheader colspan="1">
-		                <textbox instant="true"  width="100px"
-		                    value="@bind(vm.ayudaFilter.patologia)" onChange="@command('changeFilter')"/>
-		            </auxheader>
-		        </auxhead>
-				<columns>
-		            <column hflex="1">Paciente</column>
-		            <column hflex="1">Patologia</column>
-<!-- 		            <column hflex="1">Aprobacion</column> -->
-		            <column hflex="1">Causa</column>
-		            <column hflex="1">Fecha Solicitud</column>
-<!-- 		            <column hflex="1">Fecha Aceptacion</column>   -->
-			
-		        </columns>
-		        <template name="model">
-		            <row>
-		                <label value="@load(each.paciente.cedula)"/>
-		                <label value="@load(each.diagnostico.nombre) " />
-<!-- 		                <label value="@load(each.aprobacion)" /> -->
-		            	<label value="@load(each.motivo)" />
-		             	<label value="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')" />
-<!-- 		             	<label value="@load(each.fechaAprobacion)" /> -->
-		               	
-		            </row>
-		        </template>		        
-			</grid>
-    </div>
-    </tabpanel>
-    <tabpanel>
-    <div apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-			<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">Editar</button>
-        <grid height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.modelayuda) " >
-				<auxhead>
-		            <auxheader label="LISTA DE PACIENTES" colspan="6" />
-		        </auxhead>
-		        <auxhead sclass="category-center">
-			        <auxheader colspan="1">
-			            <textbox instant="true" width="100px" 
-			                value="@bind(vm.ayudaFilter.cedula)" onChange="@command('changeFilter')" />
-			        </auxheader>
-					
-					<auxheader colspan="1">
-		                <textbox instant="true"  width="100px"
-		                    value="@bind(vm.ayudaFilter.patologia)" onChange="@command('changeFilter')"/>
-		            </auxheader>
-		        </auxhead>
-				<columns>
-		            <column hflex="1">Paciente</column>
-		            <column hflex="1">Patologia</column>
-		            <column hflex="1">Aprobacion</column>
-		            <column hflex="1">Motivo</column>
-		            <column hflex="1">Fecha Solicitud</column>
-		            <column hflex="1">Fecha Aceptacion</column>  
-			
-		        </columns>
-		        <template name="model">
-		            <row>
-		                <label value="@load(each.paciente.cedula)"/>
-		                <label value="@load(each.diagnostico.nombre) " />
-		                <label value="@load(each.aprobacion)" />
-		            	<label value="@load(each.motivo)" />
-		             	<label value="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')" />
-		             	<label value="@load(each.fechaAprobacion) @converter('formatedDate',format='dd/MM/yy')" />
-		               	
-		            </row>
-		        </template>		        
-			</grid>
+        <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelayuda)"  selectedItem="@bind(vm.ayudaSelected)">
+		  			<listhead sizable="true"> 
+	         				<listheader hflex="1" label="Paciente"  width="100px">
+	         					<textbox instant="true" width="75px"  />
+	          				</listheader>       
+	         				<listheader hflex="1" label="Patologia" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Causa" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader>
+		   					<listheader hflex="1" label="Fecha de Solicitud" width="100px" >
+	         					<textbox instant="true" width="75px" />  
+		   					</listheader> 
+				  </listhead>         
+     				<template name="model">
+			           <listitem>
+			            <listcell label="@load(each.paciente.cedula)" />
+		                <listcell label="@load(each.diagnostico.nombre)" />
+		                <listcell label="@load(each.causa.nombre)"/>
+		                <listcell label="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')"/>
+               		</listitem>
+           			</template>
+				</listbox>
     </div>
     </tabpanel>
     
