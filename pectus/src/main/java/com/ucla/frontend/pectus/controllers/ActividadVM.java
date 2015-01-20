@@ -249,29 +249,18 @@ public class ActividadVM {
     }
     @SuppressWarnings("unchecked")
 	@Command
-    @NotifyChange({"modelactividad"})
+    @NotifyChange({"modelactividad", "modelvoluntario"})
     public void concluirasignacion()
     {
 	    if (actividadSelected != null)
 	    {
 	    	
-	    	Messagebox.show("¿Esta Seguro Que desea concluir la actividad?", "Confirmacion", Messagebox.OK |  Messagebox.CANCEL,
-	    			Messagebox.QUESTION,  new org.zkoss.zk.ui.event.EventListener() {
-
-	    	    public void onEvent(Event evt) throws InterruptedException {
-	    			
-	    	        if (evt.getName().equals("onOK")) {
-	    	        	
-	    	        	currentActividad.remove(actividadSelected);
-	    	        	Clients.showNotification("Actividad Concluida", null, true);
-	    	        } else {
-	    	        	Clients.showNotification("Cancelado", null, true);
-	    	        }
+	        	currentActividad.remove(actividadSelected);
+	        	actividadSelected = null;
+	        	currentVoluntario.clear();
+	        	Clients.showNotification("Actividad Concluida", null, true);
+	    
 	    	    
-	    	    
-	    	   }
-
-	    	});
 	    }else {
 	    	Clients.showNotification("Debe seleccionar una Actividad", null, true);
 	    }
