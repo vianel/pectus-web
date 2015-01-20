@@ -152,6 +152,7 @@ public class ServicioPaciente {
                   paciente.setLugarTrabajo(obj.get("lugtrabajo").toString());
                   paciente.setDireccionTrabajo(obj.get("dirtrabajo").toString());
                   paciente.setTelefonoTrabajo(obj.get("tlftrabajo").toString());
+                  paciente.setLogin(obj.get("login").toString());
                   
                   listaPaciente.add(paciente);
 			  
