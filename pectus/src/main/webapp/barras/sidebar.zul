@@ -1,4 +1,5 @@
-<div id="sidebar" sclass="sidebar" apply="vistas.SidebarComposer">
+<div id="sidebar" sclass="sidebar" apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vistas.SidebarComposer')">
 	<!-- Shortcuts Button-->
 	<div class="shortcuts">
 		<!-- Display when expanded -->
@@ -82,7 +83,8 @@
 				<navitem label="Cambios de clave" iconSclass="z-icon-angle-double-right"/>
 				
 			</nav>
-			<navitem label="Respaldo" iconSclass="z-icon-angle-double-right"/>
+			<!--  Mirar  -->
+			<navitem visible="@bind(vm.respaldo)"  label="Respaldo" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Recuperacion" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Historicos" iconSclass="z-icon-angle-double-right"/>	
 		</nav>
@@ -94,8 +96,5 @@
 	<separator/>
 	<calendar />
 
-	<popup id="calpp" zclass="tooltip" sclass="right tooltip-error cal">
-		<span zclass="tooltip-arrow"/>
-		<label zclass="tooltip-inner" value="2 Eventos"/>
-	</popup>
+
 </div>

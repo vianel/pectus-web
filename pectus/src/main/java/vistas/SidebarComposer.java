@@ -1,5 +1,6 @@
 package vistas;
 
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -14,41 +15,29 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Hlayout;
 
-public class SidebarComposer extends SelectorComposer<Component> {
+public class SidebarComposer  {
+
+	boolean respaldo;
+	//Cuando se instancia el VM le pongo false
+	public SidebarComposer() {
+		super();
+		// TODO Auto-generated constructor stub
+		respaldo = false;
+	}
+
+	public boolean getRespaldo() {
+		return respaldo;
+	}
+
+	public void setRespaldo(boolean respaldo) {
+		this.respaldo = respaldo;
+	}
 	
-	@Wire
-	Hlayout main;
-	@Wire
-	Div sidebar;
-	@Wire
-	Navbar navbar;
-	@Wire
-	Navitem calitem;
-	@Wire
-	A toggler;
+
 
 	
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-	}
-	
-	// Toggle sidebar to collapse or expand
-	@Listen("onClick = #toggler")
-	public void toggleSidebarCollapsed() {
-		if (navbar.isCollapsed()) {
-			sidebar.setSclass("sidebar");
-			navbar.setCollapsed(false);
-			calitem.setTooltip("calpp, position=end_center, delay=0");
-			toggler.setIconSclass("z-icon-angle-double-left");
-		} else {
-			sidebar.setSclass("sidebar sidebar-min");
-			navbar.setCollapsed(true);
-			calitem.setTooltip("");
-			toggler.setIconSclass("z-icon-angle-double-right");
-		}
-		// Force the hlayout contains sidebar to recalculate its size
-		Clients.resize(sidebar.getRoot().query("#main"));
-	}
+
+
 	
 	
 
