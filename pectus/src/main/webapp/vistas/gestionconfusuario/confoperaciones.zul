@@ -1,0 +1,81 @@
+<zk xmlns:n="native">
+  <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ConfigurarUsuarioVM')">
+
+
+
+			
+
+		<button id="btnNuevoTipoEstudio" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoEstudio')">ASOCIAR</button>
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+
+  
+					
+                     </hbox></div>
+                     <hlayout>
+	<listbox  width="450px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelusuario)"  selectedItem="@bind(vm.usuarioSelected)" >
+			
+			
+		  <listhead sizable="true"> 
+
+			            <listheader label="Nombre" ></listheader>
+			            <listheader label="Usuario" ></listheader>
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						<listcell label="@load(each.nombre)"/>
+						<listcell label="@load(each.login)" />
+	           </listitem>
+           </template>
+</listbox>
+
+			<listbox  width="250px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	 >
+			
+			
+		  <listhead sizable="true"> 
+
+			            <listheader label="Modulos" ></listheader>
+			
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+
+	           </listitem>
+           </template>
+</listbox>
+
+
+<listbox  width="250px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	 >
+			
+			
+		  <listhead sizable="true"> 
+
+			            <listheader label="Tareas" ></listheader>
+	
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+
+	           </listitem>
+           </template>
+</listbox>
+
+</hlayout>
+	
+
+		
+
+     
+</div>
+</zk>
