@@ -4,10 +4,17 @@
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ConfigurarUsuarioVM')">
 
 
-
-			
-
-		<button id="btnNuevoTipoEstudio" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoEstudio')">ASOCIAR</button>
+<tabbox>
+	<tabs>
+		<tab label="Configurar Usuarios" />
+		<tab label="Configurar Grupos" />
+		<tab label="Configurar Modulos" />
+		<tab label="Configurar Tareas" />
+	</tabs>
+	<tabpanels>
+		<tabpanel> <!--  INICIO USUARIOS -->
+		
+		<button  sclass="btn-success" onClick="@command('')">ASOCIAR</button>
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
 
@@ -15,67 +22,310 @@
 					
                      </hbox></div>
                      <hlayout>
-	<listbox  width="450px"  mold="paging" pageSize="7" 
+	<listbox  width="250px"  mold="paging" pageSize="7" 
           sclass="mylist" 	model="@load(vm.modelusuario)"  selectedItem="@bind(vm.usuarioSelected)" >
 			
 			
 		  <listhead sizable="true"> 
 
-			            <listheader label="Nombre" ></listheader>
+			    
 			            <listheader label="Usuario" ></listheader>
 	
 				  </listhead>         
                
            <template name="model">
 	           <listitem>
-						<listcell label="@load(each.nombre)"/>
+						
 						<listcell label="@load(each.login)" />
 	           </listitem>
            </template>
 </listbox>
 
-			<listbox  width="250px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	 >
+<grid  width="550px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelgrupo)"   >
 			
 			
-		  <listhead sizable="true"> 
+		  <columns sizable="true"> 
 
-			            <listheader label="Modulos" ></listheader>
-			
-	
-				  </listhead>         
+			    		<column width="5%"/>
+			           <column hflex="1" label="Grupos" />
+					   <column hflex="1" label="Descripcion" />
+				  </columns>         
                
            <template name="model">
-	           <listitem>
-
-	           </listitem>
+	           <row>
+						<checkbox checked= "@load(each.status)"/>
+						<label value="@load(each.nombre)"  />
+						<label value="@load(each.descripcion)" />
+	           </row>
            </template>
-</listbox>
+</grid>
 
 
-<listbox  width="250px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	 >
-			
-			
-		  <listhead sizable="true"> 
-
-			            <listheader label="Tareas" ></listheader>
-	
-	
-				  </listhead>         
-               
-           <template name="model">
-	           <listitem>
-
-	           </listitem>
-           </template>
-</listbox>
 
 </hlayout>
+		
+		</tabpanel> <!--  FIN USUARIOS -->
+		<tabpanel> <!-- INICIO GRUPOS -->
+		
+		<button  sclass="btn-success" >
+		   		 		    <attribute name="onClick">						
+						    modalgrupo.doModal();						  	
+			</attribute> NUEVO GRUPO</button>
+		<button  sclass="btn-success" onClick="@command()">ASOCIAR MODULOS</button>
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+
+  
+					
+                     </hbox></div>
+                     <hlayout>
+<listbox  width="250px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelgrupo)" selectedItem="@bind(vm.grupoSelected)" onClick="@command('compararmodulos')" >
+			
+			
+		  <listhead sizable="true"> 
+
+			            <listheader hflex="1" label="Grupos" ></listheader>
+			  
+			
 	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						<listcell label="@load(each.nombre)"></listcell>
+		
+	           </listitem>
+           </template>
+</listbox>
+
+	<grid  width="550px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelmodulo)"   >
+			
+			
+		  <columns sizable="true"> 
+
+			    		<column width="5%"/>
+			           <column hflex="1" label="Modulos" />
+					   <column hflex="1" label="Descripcion" />
+				  </columns>         
+               
+           <template name="model">
+	           <row>
+						<checkbox checked= "@load(each.status)"/>
+						<label value="@load(each.nombre)"  />
+						<label value="@load(each.descripcion)" />
+	           </row>
+           </template>
+</grid>
+
+
+
+
+</hlayout>
+		
+		</tabpanel> <!-- FIN GRUPOS -->
+		<tabpanel> <!--  INICIO MODULOS -->
+		
+		<button  sclass="btn-success" >
+		 <attribute name="onClick">						
+						    modalmodulo.doModal();						  	
+			</attribute>
+			NUEVO MODULO</button>
+		<button  sclass="btn-success" onClick="@command('')">ASOCIAR TAREAS</button>
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+
+  
+					
+                     </hbox></div>
+                     <hlayout>
+	<listbox  width="250px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modelmodulo)" >
+			
+			
+		  <listhead sizable="true"> 
+
+			    
+			           <listheader hflex="1" label="Modulos" ></listheader>
+					
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						
+						<listcell label="@load(each.nombre)" />
+					
+	           </listitem>
+           </template>
+</listbox>
+
+
+<grid  width="550px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modeltarea)"   >
+			
+			
+		  <columns sizable="true"> 
+
+			    		<column width="5%"/>
+			           <column hflex="1" label="Tareas" />
+					   <column hflex="1" label="Descripcion" />
+				  </columns>         
+               
+           <template name="model">
+	           <row>
+						<checkbox checked= "@load(each.status)"/>
+						<label value="@load(each.nombre)"  />
+						<label value="@load(each.descripcion)" />
+	           </row>
+           </template>
+</grid>
+
+
+</hlayout>
+				
+
+
+		</tabpanel> <!-- FIN MODULOS -->
+		<tabpanel> <!-- INICIO TAREAS -->
+	<button  sclass="btn-success" >
+		 <attribute name="onClick">						
+						    modaltarea.doModal();						  	
+			</attribute>
+			NUEVA TAREA</button>
+               <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+
+  
+					
+                     </hbox></div>
+                     <hlayout>
+	<listbox  width="250px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modeltarea)" >
+			
+			
+		  <listhead sizable="true"> 
+
+			    
+			           <listheader hflex="1" label="Tareas" ></listheader>
+			           <listheader hflex="1" label="Descripcion" ></listheader>
+					
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						
+						<listcell label="@load(each.nombre)" />
+						<listcell label="@load(each.descripcion)" />
+					
+	           </listitem>
+           </template>
+</listbox>		
+</hlayout>
+		</tabpanel> <!-- FIN TAREAS -->
+	</tabpanels>
+</tabbox>
 
 		
+	<!-- Registro GRUPO -->
+	<window visible="false" title="NUEVO GRUPO" border="normal" width="270px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" id="modalgrupo">
 
+    <vlayout>
+
+        
+        
+				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombregrupo)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciongrupo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+	
+				<separator height="40px"/>
+				<div>
+				<button style=" margin-left: 3em;" sclass="btn-success" onClick="@command('guardargrupo')">
+						<attribute name="onClick">						
+						    modalgrupo.setVisible(false);						  	
+						</attribute>	
+				Guardar</button>
+					<button  label="Salir" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalgrupo.setVisible(false);						  	
+						</attribute>					  
+					</button>
+				</div>
+
+       
+
+		
+    </vlayout>
+
+</window>
+
+	<!-- Registro Tarea -->
+	<window visible="false" title="NUEVA TAREA" border="normal" width="270px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" id="modaltarea">
+
+    <vlayout>
+
+        
+        
+				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombregrupo)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciongrupo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+	
+				<separator height="40px"/>
+				<div>
+				<button style=" margin-left: 3em;" sclass="btn-success" onClick="@command('guardartarea')">
+						<attribute name="onClick">						
+						    modaltarea.setVisible(false);						  	
+						</attribute>	
+				Guardar</button>
+					<button  label="Salir" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modaltarea.setVisible(false);						  	
+						</attribute>					  
+					</button>
+				</div>
+
+       
+
+		
+    </vlayout>
+
+</window>		
+
+<!-- Registro Modulo -->
+	<window visible="false" title="NUEVO MODULO" border="normal" width="270px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" id="modalmodulo">
+
+    <vlayout>
+
+        
+        
+				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombregrupo)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciongrupo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+	
+				<separator height="40px"/>
+				<div>
+				<button style=" margin-left: 3em;" sclass="btn-success" onClick="@command('guardarmodulo')">
+						<attribute name="onClick">						
+						    modalmodulo.setVisible(false);						  	
+						</attribute>	
+				Guardar</button>
+					<button  label="Salir" sclass="btn-success">
+		
+					    <attribute name="onClick">						
+						    modalmodulo.setVisible(false);						  	
+						</attribute>					  
+					</button>
+				</div>
+
+       
+
+		
+    </vlayout>
+
+</window>	
      
 </div>
 </zk>
