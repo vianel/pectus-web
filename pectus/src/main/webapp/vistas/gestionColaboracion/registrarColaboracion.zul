@@ -23,6 +23,10 @@
 						    dialogoColaboracionEvento.doModal();						  	
 			</attribute>
 			Agregar Colaboracion</button>
+			
+			  <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" sclass="btn-success"  >
+          		 	
+			Concluir</button>
 			</hbox>
 			</div>
 		
@@ -304,7 +308,7 @@
 	
 	Editar</button>
 
-    <listbox   model="@load(vm2.modelcolaboracion)" id="candidateLb5" hflex="1" vflex="true" multiple="true" rows="8" width="370px"  selectedItem="@bind(vm2.colaboracionSelected)">
+    <listbox   model="@load(vm2.listaColaboracionesTodos)" id="candidateLb5" hflex="1" vflex="true" multiple="true" rows="8" width="370px"  selectedItem="@bind(vm2.colaboracionSelected)" mold="paging" pageSize="7" >
     
    
      

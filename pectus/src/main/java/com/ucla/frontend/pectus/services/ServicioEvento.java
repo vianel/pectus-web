@@ -228,58 +228,32 @@ public class ServicioEvento {
 		return listaLugares;
 	}
 	
-	public static String agregarEvento(Evento evento){
-
+	public static boolean agregarEvento(Evento evento){
 		Resty resty = new Resty();
-	    JSONResource jsResource = null;
-	    String ok = null;
 	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		
 	   try {
-		    jsResource = resty.json("http://127.0.0.1:5000/evento/agregar?idlugar=" + evento.getLugar().getId()
-	   + "&nombre=" + evento.getNombre() + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion()+ "&montorecaudadoesperado="+evento.getMontoEsperado() + "&hora=" + evento.getHora());
-		   
-	    
+		         resty.json("http://127.0.0.1:5000/evento/agregar?idlugar=" + evento.getLugar().getId()
+				   + "&nombre=" + evento.getNombre().replaceAll(" ", "%20") + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion().replace(" ", "%20") + "&montorecaudadoesperado="+evento.getMontoEsperado());
+			return true;		      
 	   } catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		try {
-			 ok = jsResource.get("ok").toString();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ok;
 		
 	}
 	
-	public static String editar(Evento evento){
-
-		Resty resty = new Resty();
-	    JSONResource jsResource = null;
-	    String ok = null;
-	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		
+	public static boolean editar(Evento evento){
+		Resty resty = new Resty();	   
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");		
 	   try {
-		    jsResource = resty.json("http://127.0.0.1:5000/evento/editar?id=" + evento.getId() + "idlugar=" + evento.getLugar().getId()
-	   + "&nombre=" + evento.getNombre() + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion()+ "&montorecaudadoesperado="+evento.getMontoEsperado() + "&hora=" + evento.getHora());
-		   
-	    
+		   resty.json("http://127.0.0.1:5000/evento/editar?id=" + evento.getId() + "&idlugar=" + evento.getLugar().getId()
+	   + "&nombre=" + evento.getNombre().replaceAll(" ", "%20") + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion().replace(" ", "%20") + "&montorecaudadoesperado="+evento.getMontoEsperado());   
+	    return true;
 	   } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		try {
-			 ok = jsResource.get("ok").toString();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ok;
-		
+			return false;
+		}	
 	}
 	
 	
@@ -331,7 +305,7 @@ public class ServicioEvento {
 		            eventoS = evento;
 
 	    		try {
-	    			jsResource = resty.json("http://127.0.0.1:5000/evento/editar?id=" + eventoS.getId().toString() + "&observaciones=" + eventoS.getObservacion() + "&cantentradasvendidas=" + eventoS.getCantEntradas().toString() + "&montorecaudado=" + eventoS.getMontoRecaudado().toString());
+	    			jsResource = resty.json("http://127.0.0.1:5000/evento/editar?id=" + eventoS.getId().toString() + "&observaciones=" + eventoS.getObservacion().replaceAll(" ", "%20") + "&cantentradasvendidas=" + eventoS.getCantEntradas().toString() + "&montorecaudado=" + eventoS.getMontoRecaudado().toString());
 	    		} catch (IOException e1) {
 	    			// TODO Auto-generated catch block
 	    			e1.printStackTrace();

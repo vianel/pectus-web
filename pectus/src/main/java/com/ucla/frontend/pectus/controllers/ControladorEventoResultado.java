@@ -437,6 +437,7 @@ public class ControladorEventoResultado implements Serializable {
 	    @Command
 	   public void guardarResultados(){
 		  ServicioEvento.resultadoEvento(eventoSelected);
+	       Clients.showNotification("Evento editado correctamente", null, true);
 	   }
 
 }
