@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jettison.json.JSONArray;
@@ -14,6 +15,7 @@ import org.zkoss.zul.ListModelList;
 
 import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
+
 
 
 
@@ -93,7 +95,7 @@ public class ServicioColaboracion {
 		
 	   try {
 		    jsResource = resty.json("http://127.0.0.1:5000/colaboracion/agregar?idevento=" + colaboracion.getEvento().getId()
-	   + "&rif=" + colaboracion.getPatrocinado().getRif() + "&cantidad=" + colaboracion.getCantidad() + "&idtipocolaboracion="+colaboracion.getTipoColaboracion().getId() );
+	   + "&rif=" + colaboracion.getPatrocinado().getRif() + "&cantidad=" + colaboracion.getCantidad() + "&idtipocolaboracion="+colaboracion.getTipoColaboracion().getId() + "&fecha=" + df.format(new Date()));
 		   
 	    
 	   } catch (IOException e) {
@@ -128,8 +130,6 @@ public class ServicioColaboracion {
 			e1.printStackTrace();
 		} 
 		try {
-			String ok = jsResource.get("ok").toString();
-			if (ok.equalsIgnoreCase("true")) {
 			
 			String strCol = jsResource.get("colaboraciones").toString();
 			JSONArray serColaboracion = new JSONArray(strCol);
@@ -149,7 +149,7 @@ public class ServicioColaboracion {
 			  
 			  } //fin For
 			
-			} //fin IF
+	
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -229,7 +229,8 @@ public class ServicioColaboracion {
                   
                   patrocinador.setRif(obj.get("rif").toString());
                   patrocinador.setNombre(obj.get("nombre").toString());
-                  patrocinador.setDireccion(obj.get("direccion").toString());                  
+                  patrocinador.setDireccion(obj.get("direccion").toString());    
+   
                   listaPatrocinadores.add(patrocinador);
                   
        
@@ -255,6 +256,7 @@ public class ServicioColaboracion {
 			JSONObject objjson = new JSONObject(s);
 			evento.setNombre(objjson.getString("nombre"));
 			evento.setDescripcion(objjson.getString("descripcion"));
+			evento.setId(objjson.getInt("id"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -60,12 +60,7 @@ public class ControladorEvento extends Div implements IdSpace{
 	private Evento eventoSelected;
 	ListModelList<Evento> currentEventoModel = new ListModelList<Evento>(); 
 	private Lugar lugarSelected;
-	private String nombreSelected;
-	private String descripcionSelected;
-	private String cantidadEntradasSelected;
-	private String costoEntradasSelected;
-	private String montoRecaudadoSelected;
-	private String observacionesSelected;
+	private Evento eventoGuardar;
 	private static ControladorEvento instance;
 	private Boolean entro;
     @Wire
@@ -93,30 +88,6 @@ public class ControladorEvento extends Div implements IdSpace{
     		  this.setFechaMostrar(formatoFecha.format(eventoSelected.getFecha()));
     		
     	
-   /* 	if(Global.eventoSeleccionado.getVoluntarios() != null){
-    	Set<Voluntario> voluntariosTransformacion = new HashSet<Voluntario>(Global.eventoSeleccionado.getVoluntarios());
-    	ListModelList<Voluntario> listaSeleccionados = new ListModelList<Voluntario>();
-    	listaSeleccionados.addAll(voluntariosTransformacion);
-    	listaVoluntariosSeleccionados = listaSeleccionados;
-    	chosenLb.setModel(listaVoluntariosSeleccionados);
-    	//Set<Voluntario> voluntariosRemover = new HashSet<Voluntario>(Global.eventoSeleccionado.getVoluntarios());
-    	List<Integer>  pos = new ArrayList<Integer>();
-    	for(Voluntario vol : Global.eventoSeleccionado.getVoluntarios()){
-    	for(int i = 0 ; i < currentVoluntario.size(); i++){
-    		if(currentVoluntario.get(i).getCedula().compareToIgnoreCase(vol.getCedula()) == 0){
-    			pos.add(i);
-    		}
-    	}
-    	}
-    	Collections.reverse(pos);
-    for(int posi : pos){
-    	currentVoluntario.remove(posi);
-    }
-	candidateLb.setModel(currentVoluntario);
-    	
-    	
-    	
-    	}*/
     	}
 
     }
@@ -129,78 +100,6 @@ public class ControladorEvento extends Div implements IdSpace{
 
 	public void setEventoSelected(Evento eventoSelected) {
 		this.eventoSelected = eventoSelected;
-	}
-
-
-
-	public String getNombreSelected() {
-		return nombreSelected;
-	}
-
-
-
-	public void setNombreSelected(String nombreSelected) {
-		this.nombreSelected = nombreSelected;
-	}
-
-
-
-	public String getDescripcionSelected() {
-		return descripcionSelected;
-	}
-
-
-
-	public void setDescripcionSelected(String descripcionSelected) {
-		this.descripcionSelected = descripcionSelected;
-	}
-
-
-
-	public String getCantidadEntradasSelected() {
-		return cantidadEntradasSelected;
-	}
-
-
-
-	public void setCantidadEntradasSelected(String cantidadEntradasSelected) {
-		this.cantidadEntradasSelected = cantidadEntradasSelected;
-	}
-
-
-
-	public String getCostoEntradasSelected() {
-		return costoEntradasSelected;
-	}
-
-
-
-	public void setCostoEntradasSelected(String costoEntradasSelected) {
-		this.costoEntradasSelected = costoEntradasSelected;
-	}
-
-
-
-	public String getMontoRecaudadoSelected() {
-		return montoRecaudadoSelected;
-	}
-
-
-
-	public void setMontoRecaudadoSelected(String montoRecaudadoSelected) {
-		this.montoRecaudadoSelected = montoRecaudadoSelected;
-	}
-
-
-
-	public String getObservacionesSelected() {
-		return observacionesSelected;
-	}
-
-
-
-	public void setObservacionesSelected(String observacionesSelected) {
-		this.observacionesSelected = observacionesSelected;
 	}
 
 
@@ -274,34 +173,17 @@ public class ControladorEvento extends Div implements IdSpace{
 		window.doModal();
 	}
 	@Command
-//	@NotifyChange({ "modelcolaboracion", "footer" })
-	public void guardarEvento() throws Exception{
-		   String response=null;
-//	  if (eventoSelected.getCedula()!= null){
-			
-		//   eventoSelected = new Evento();
-		//   eventoSelected.setCantEntradas(Integer.parseInt(cantidadEntradasSelected));
-		//   eventoSelected.setCostoEntrada(Double.parseDouble(costoEntradasSelected));
-		//   eventoSelected.setDescripcion(descripcionSelected);
-//		   eventoSelected.setFecha(new Date());
-		 //  eventoSelected.setLugar(lugarSelected);
-	//	   eventoSelected.setMontoRecaudado(Double.parseDouble(montoRecaudadoSelected));
-	//	   eventoSelected.setNombre(nombreSelected);
-		 //  eventoSelected.setObservacion(observacionesSelected);
-		
-		   
-			response = ServicioEvento.agregarEvento(eventoSelected);
-			if (response.equalsIgnoreCase("true"))
-			{
-			
+	public void guardarEvento(){
+         if(ServicioEvento.agregarEvento(eventoGuardar)){			
 				Clients.showNotification("Evento Guardado", null, true);
-			//	x.detach(); ver esto mosca revisar
-				currentEvento = ServicioEvento.buscarEventos();
-
+				
+				 	currentEvento = ServicioEvento.buscarEventos();
+			   	currentEventoModel.clear();
+			   	for(Evento evento : currentEvento){
+			   		currentEventoModel.add(evento);
+			   	}
 			}else{
-			
-				Clients.showNotification("Error al guardar", true);
-			
+				Clients.showNotification("Error al guardar", true);			
 			}
 
 	}
@@ -413,14 +295,20 @@ public class ControladorEvento extends Div implements IdSpace{
 
 		if(listaVoluntariosSeleccionados != null){
 			for(Voluntario voluntario : listaVoluntariosSeleccionados){
-				if(!Global.eventoSeleccionado.getVoluntarios().contains(voluntario)){
+				if(!eventoSelected.getVoluntarios().contains(voluntario)){
 				
-			ServicioEvento.asociarVoluntarios(Global.eventoSeleccionado.getId(), voluntario.getCedula());
-			Global.eventoSeleccionado.getVoluntarios().add(voluntario);
+			ServicioEvento.asociarVoluntarios(eventoSelected.getId(), voluntario.getCedula());
+			eventoSelected.getVoluntarios().add(voluntario);
 				}
 			
 			}
 			Clients.showNotification("Voluntarios asociados correctamente", null, true);
+
+		 	currentEvento = ServicioEvento.buscarEventos();
+	   	currentEventoModel.clear();
+	   	for(Evento evento : currentEvento){
+	   		currentEventoModel.add(evento);
+	   	}
 			
 		}
 		
@@ -523,9 +411,6 @@ public void actualizarListas(){
     }
 		setEntro(true);
 	
-		
-		
-		
 	}
 }
 
@@ -539,7 +424,27 @@ public void setEntro(Boolean entro) {
 
 @Command
 public void editarEvento(){
-	ServicioEvento.editar(eventoSelected);
+	if(ServicioEvento.editar(eventoSelected)){
+       Clients.showNotification("Evento editado correctamente", null, true);
+   	currentEvento = ServicioEvento.buscarEventos();
+   	currentEventoModel.clear();
+   	for(Evento evento : currentEvento){
+   		currentEventoModel.add(evento);
+   	}
+	}else{
+		Clients.showNotification("Error al Editar", true);			
+	}
+}
+
+public Evento getEventoGuardar() {
+	if(eventoGuardar == null){
+		eventoGuardar = new Evento();
+	}
+	return eventoGuardar;
+}
+
+public void setEventoGuardar(Evento eventoGuardar) {
+	this.eventoGuardar = eventoGuardar;
 }
 
 

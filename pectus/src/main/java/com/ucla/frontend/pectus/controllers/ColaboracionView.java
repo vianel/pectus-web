@@ -65,6 +65,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 		for(Colaboracion colaboracion : listaColaboraciones){
 			
 			listaColaboracionesTodos.add(colaboracion);
+	
 		}
 		}
 		
@@ -189,7 +190,28 @@ public class ColaboracionView  extends Div implements IdSpace {
 			response = ServicioColaboracion.agregarColaboracion(colaboracionSelected);
 			if (response.equalsIgnoreCase("true"))
 			{
-			
+				listaColaboracionesTodos.clear();
+				listaColaboraciones = ServicioColaboracion.buscarColaboraciones();
+				if(listaColaboraciones != null){
+				for(Colaboracion colaboracion : listaColaboraciones){
+					
+					listaColaboracionesTodos.add(colaboracion);
+				}
+				}
+				List<Evento> listEvent = new ArrayList<Evento>();
+				listaEventos.clear();
+				listEvent =	ServicioEvento.buscarEventos();
+				for(Evento event : listEvent){
+					listaEventos.add(event);
+					if(event.getId() == eventoSelected.getId()){
+						eventoSelected.setColaboracion(event.getColaboracion());
+					
+					}
+				}
+				
+				
+				
+				
 				Clients.showNotification("Colaboracion Guardada", null, true);
 			//	x.detach(); ver esto mosca revisar
 
@@ -311,7 +333,17 @@ public class ColaboracionView  extends Div implements IdSpace {
     }
     @Command
     public void actualiza(){
+    	
+    	
     	ServicioColaboracion.editColaboracion(colaboracionSelected);
+    	listaColaboracionesTodos.clear();
+    	Clients.showNotification("Colaboracion Editada", null, true);
+		if(listaColaboraciones != null){
+		for(Colaboracion colaboracion : listaColaboraciones){
+			
+			listaColaboracionesTodos.add(colaboracion);
+		}
+		}
     
     }
     
@@ -326,6 +358,14 @@ public class ColaboracionView  extends Div implements IdSpace {
     
     public void actualiza2(){
     	ServicioColaboracion.editColaboracion2(colaboracionSelected);
+    	listaColaboracionesTodos.clear();
+    	Clients.showNotification("Colaboracion Editada", null, true);
+		if(listaColaboraciones != null){
+		for(Colaboracion colaboracion : listaColaboraciones){
+			
+			listaColaboracionesTodos.add(colaboracion);
+		}
+		}
     
     }
     

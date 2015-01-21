@@ -68,7 +68,7 @@
 
 <!-- DIALOGO DE COLABORACION -->
 
-<window visible="false" id="dialogoColaboracionEvento" title="Colaboraciones" border="normal" width="1100px"
+<window visible="false" id="dialogoColaboracionEvento" title="Resultados" border="normal" width="1100px"
     
     position="top,center" closable="false"
     action="show: slideDown;hide: slideUp">
