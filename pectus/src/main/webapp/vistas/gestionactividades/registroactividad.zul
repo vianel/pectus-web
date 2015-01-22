@@ -27,12 +27,15 @@
 	
         			<listhead >
         				
-        				<listheader label="Descripcion" ></listheader>
-						<listheader label="Fecha"></listheader>
-			            <listheader label="Solicitante" >
+        				<listheader hflex="3" label="Descripcion" ></listheader>
+						<listheader hflex="1" label="Fecha"></listheader>
+						<listheader hflex="1" label="Tipo de la Actividad" >  </listheader>
+			            <listheader hflex="2" label="Solicitante" >
+			           
 			                 <textbox  instant="true"  width="100px" value="@bind(vm.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
 			          
 			            </listheader>
+			              <listheader hflex="1" label="Telefono" ></listheader>
 			        </listhead>
         			
 					<template name="model">
@@ -40,7 +43,9 @@
 						
 						<listcell label="@load(each.descripcion)"/>
 						<listcell label="@load(each.fecha) @converter('formatedDate',format='dd/MM/yyyy')" />
+					    <listcell label="@load(each.idTipoActividad.nombre)" />
 						<listcell label="@load(each.nomsolicitante)" />
+						<listcell label="@load(each.tlfsolicitante)" />
 					
 						
         
@@ -86,6 +91,7 @@
 						<listcell label="@load(each.fechainicio) @converter('formatedDate',format='dd/MM/yyyy') " />
 						<listcell label="@load(each.fechafin) @converter('formatedDate',format='dd/MM/yyyy')"/>
 						<listcell label="@load(each.lugar.nombre)" />
+						
 			
 						
         
@@ -168,7 +174,14 @@
 					    <attribute name="onClick">						
 						    modalregistraractividad.setVisible(false);						  	
 						</attribute>Guardar</button>
+						
 							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					
+								  
+					</button>
+						
+						
+							<button  width="75px" height="50px" label="Salir" sclass="btn-success">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
 						    modalregistraractividad.setVisible(false);						  	

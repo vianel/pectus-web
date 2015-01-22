@@ -17,12 +17,12 @@
 
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
-          		Lista de Actividades <button id="" sclass="btn-success" >
+          		Lista de Actividades <button disabled="@load(vm.actividadSelected eq null?'true':'false')" id="" sclass="btn-success"  onClick="@command('actualizarListas')"  >
           		 		    <attribute name="onClick">						
 						    dialogoasociarvoluntarios.doModal();						  	
 			</attribute>
 			Gestionar Voluntarios</button>
-  			<button id="" sclass="btn-success"  tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad " > 
+  			<button id="" sclass="btn-success" vm.actividadSelected tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad " > 
   			 		    <attribute name="onClick">						
 						    modaldialog.doModal();						  	
 			</attribute>
@@ -167,7 +167,11 @@
 						</attribute>
 	    	
 	    	Asociar</button>
-			<button  width="75px" height="50px" label="Cancelar" sclass="btn-success" onClick="@command('deshacerAsignacionvoluntarios')">
+	    	<button  width="75px" height="50px" label="Cancelar" sclass="btn-success" onClick="@command('cancelar')">
+					    <!-- Ocultamos la ventana -->
+							  
+					</button>
+			<button  width="75px" height="50px" label="Salir" sclass="btn-success" onClick="@command('deshacerAsignacionvoluntarios')">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
 						    dialogoasociarvoluntarios.setVisible(false);						  	

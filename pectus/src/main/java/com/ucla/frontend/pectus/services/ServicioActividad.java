@@ -58,6 +58,13 @@ public class ServicioActividad {
 		                  actividad.setFechafin(convertirFecha(obj.getString("fechafin").toString()));
 		                  actividad.setLugar(obtenerlugar(obj.getString("lugar").toString()));
 		                  actividad.setObservaciones(obj.getString("observaciones").toString());
+		                  actividad.setDuracion(obj.getString("duracion").toString());
+		                  actividad.setMontoesperado((float) obj.getDouble("montoesperado"));
+		                  actividad.setNroAsistentes(obj.getInt("nroasistentes"));
+		                  actividad.setNroasistentesesperados(obj.getInt("nroasistentesesperados"));
+		                  actividad.setMonto((float) obj.getDouble("monto"));
+		                  actividad.setObservaciones(obj.getString("observaciones").toString());
+		                  actividad.setRecursosUtilizados(obj.getString("recursosutilizados").toString());
 		                  
 		                  listaActividad.add(actividad);
 
@@ -80,7 +87,7 @@ public class ServicioActividad {
 			lugar.setDireccion(objjson.getString("direccion").toString().toString());
 			lugar.setId(Integer.parseInt(objjson.getString("id").toString()));
 			lugar.setNombre(objjson.getString("nombre").toString());
-			
+			lugar.setCiudad(obtenerCiudad(objjson.get("ciudad").toString()));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,6 +123,21 @@ public class ServicioActividad {
 			e.printStackTrace();
 		}
 		return estado;
+	}
+	
+	
+	private static Ciudad obtenerCiudad(String s) {
+		// TODO Auto-generated method stub
+		Ciudad ciudad = new Ciudad();
+		try {
+			JSONObject objjson = new JSONObject(s);
+			
+			ciudad.setNombre(objjson.getString("nombre"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ciudad;
 	}
 
 	public static List<TipoActividad> buscartipoactividades() {

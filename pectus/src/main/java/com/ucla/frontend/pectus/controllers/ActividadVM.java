@@ -3,6 +3,7 @@ package com.ucla.frontend.pectus.controllers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -557,6 +558,86 @@ public class ActividadVM {
 		this.observacionesSelected = observacionesSelected;
 	}
 	
+	
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void cancelar(){
+		 voluntarios.clear();
+		 ListModelList<Voluntario> listaAux = new  ListModelList<Voluntario>();
+		 listaAux = ServicioVoluntario.buscarVoluntario();
+		 voluntarios.addAll(listaAux);
+		 currentVoluntario.clear();            
+			if(actividadSelected != null){
+			
+				
+				
+				List<Voluntario> voluntariosAct = ServicioActividad.buscarvoluntariosactividad(actividadSelected);
+				if(voluntariosAct != null){
+				
+						for(Voluntario voluntario : voluntariosAct){
+							currentVoluntario.add(voluntario);
+						}
+					
+				}
+				
+				
+		    	List<Integer>  pos = new ArrayList<Integer>();
+		    	for(Voluntario vol : voluntariosAct){
+		    	for(int i = 0 ; i < voluntarios.size(); i++){
+		    		if(voluntarios.get(i).getCedula().compareToIgnoreCase(vol.getCedula()) == 0){
+		    			pos.add(i);
+		    		}
+		    	}
+		    	}
+		    	Collections.reverse(pos);
+		    for(int posi : pos){
+		    	voluntarios.remove(posi);
+		    }
+		
+			
+			}
+		
+
+	}
+
+	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios"})
+	public void actualizarListas(){
+	 voluntarios.clear();
+	 ListModelList<Voluntario> listaAux = new  ListModelList<Voluntario>();
+	 listaAux = ServicioVoluntario.buscarVoluntario();
+	 voluntarios.addAll(listaAux);
+	 currentVoluntario.clear();            
+		if(actividadSelected != null){
+		
+			
+			
+			List<Voluntario> voluntariosAct = ServicioActividad.buscarvoluntariosactividad(actividadSelected);
+			if(voluntariosAct != null){
+			
+					for(Voluntario voluntario : voluntariosAct){
+						currentVoluntario.add(voluntario);
+					}
+				
+			}
+			
+			
+	    	List<Integer>  pos = new ArrayList<Integer>();
+	    	for(Voluntario vol : voluntariosAct){
+	    	for(int i = 0 ; i < voluntarios.size(); i++){
+	    		if(voluntarios.get(i).getCedula().compareToIgnoreCase(vol.getCedula()) == 0){
+	    			pos.add(i);
+	    		}
+	    	}
+	    	}
+	    	Collections.reverse(pos);
+	    for(int posi : pos){
+	    	voluntarios.remove(posi);
+	    }
+	
+		
+		}
+	}
 	
 
 }

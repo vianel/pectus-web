@@ -1,0 +1,223 @@
+<zk xmlns:n="native">
+  <a label="Eventos" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Registrar Resultados"/>
+      
+    
+    </tabs>
+    <tabpanels>
+    
+    
+    	<tabpanel>
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm2') @init('com.ucla.frontend.pectus.controllers.ActividadVM')">	
+		
+
+		    <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success"  disabled="@load(vm2.actividadSelected eq null?'true':'false')">
+          		 		    <attribute name="onClick">						
+						    dialogoColaboracionEvento.doModal();						  	
+			</attribute>
+			Ver Ficha</button>
+			</hbox>
+			</div>
+		
+		
+		<listbox  width="650px"  mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm2.modelactividad)"  selectedItem="@bind(vm2.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
+			
+			
+		  <listhead sizable="true"> 
+        				<listheader label="Titulo" >
+        				       <textbox  instant="true" value="@bind(vm2.actividadFilter.fecha)" onChange="@command('changeFilteractividad')"/>
+						</listheader>
+						<listheader label="Inicio">
+			             </listheader>
+			            <listheader label="Fin" ></listheader>
+			            <listheader label="Lugar" ></listheader>
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+						<listcell label="@load(each.titulo)"/>
+						<listcell label="@load(each.fechainicio) @converter('formatedDate',format='dd/MM/yyyy') " />
+						<listcell label="@load(each.fechafin) @converter('formatedDate',format='dd/MM/yyyy') " />
+						<listcell label="@load(each.lugar.nombre)" />
+	           </listitem>
+           </template>
+</listbox>
+
+
+
+<!-- DIALOGO DE COLABORACION -->
+
+<window visible="false" id="dialogoColaboracionEvento" title="Resultados" border="normal" width="800px"
+    
+    position="top,center" closable="false"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+               <div style="float:left; display:Block;" height="auto" width="1500px">
+    <label style="display:block !important; font-weight: bold; font-size:120%; margin-left:25em; padding-bottom: 10px; padding-top: 10px;" value="@load(vm2.actividadSelected.titulo)"></label>
+    <label style="display:block !important; padding-bottom: 5px;" value="@load(vm2.actividadSelected.descripcion)"></label>
+
+        </div>
+    <tabbox >
+    
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Datos Basicos"/>
+   
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Voluntarios"/>
+    
+    </tabs>
+
+    <tabpanels>
+    <tabpanel>
+ 
+       	<grid>
+		<columns>
+			<column width="400px" label=""/>
+			<column label=""/>
+		</columns>
+		<rows>
+		<row>
+			Direccion: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.lugar.direccion)"></label>
+      		
+			</row>
+			<row>
+			Lugar: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.lugar.nombre)"></label>
+      		
+			</row>
+				<row>
+			Ciudad: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.lugar.ciudad.nombre)"></label>
+      		
+			</row>
+			<row>
+			Numero de Asistentes: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.nroAsistentes)"></label>
+      		
+			</row>
+			<row>
+			numero de Asistentes Esperados: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.nroasistentesesperados)" ></label>
+      	
+			</row>
+			<row>
+			Duracion: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.duracion)" ></label>
+      	
+			</row>
+			<row>
+			Monto: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.monto)" ></label>
+      	
+			</row>
+			<row>
+			Monto Esperado: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.montoesperado)" ></label>
+      	
+			</row>
+			<row>
+			Fecha Inicio: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.fechainicio) @converter('formatedDate',format='dd/MM/yyyy')"   ></label>
+      	
+			</row>
+			<row>
+			Fecha Fin: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.fechafin) @converter('formatedDate',format='dd/MM/yyyy')"   ></label>
+      	
+			</row>
+			<row><label value="Hora" /> <label value="@load(vm2.actividadSelected.hora)" /> </row>
+	    	<row>
+			Observaciones: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.observaciones)"   ></label>
+      	
+			</row>
+			<row>
+			Recursos Utilizados: <label style="font-weight:bold; " value="@load(vm2.actividadSelected.recursosUtilizados)"   ></label>
+      	
+			</row>
+		</rows>
+	</grid>
+      	
+
+    
+    </tabpanel>
+
+    
+
+ 
+  <tabpanel>
+   
+
+   
+   <div   height="350px">
+
+   <grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm2.modelvoluntario)" >
+		<auxhead>
+            <auxheader label="LISTA DE VOLUNTARIOS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+        
+	        
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Cedula</column>
+            <column hflex="1">Nombre</column>
+            <column hflex="2">Apellido</column>
+            <column hflex="1">Correo</column>
+            <column hflex="1">Telefono</column>
+    
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.cedula) " />
+                <label value="@load(each.nombre)" />
+                <label value="@load(each.apellido)"/>
+                <label value="@load(each.correo) " />
+                <label value="@load(each.telefonoOficina) " />
+
+            </row>
+        </template>
+        
+        
+   
+	
+	</grid>			
+    </div>
+   
+ 
+     
+		 
+  
+
+ 
+ 
+  </tabpanel>
+ 
+ 
+			  
+  </tabpanels>
+
+
+ </tabbox>
+ 
+ <div style="float:left; display:block; height=100px">
+
+			<button width="75px" height="50px" sclass="btn-success" >Salir
+			 <attribute name="onClick">						
+						    dialogoColaboracionEvento.setVisible(false);						  	
+			</attribute></button>
+			</div>
+
+    </vlayout>
+</window>
+
+<!-- fIN DIALOGO DE COLABORACION -->
+	
+</div>
+	
+	</tabpanel>
+
+    </tabpanels>
+  </tabbox>
+
+</zk>
