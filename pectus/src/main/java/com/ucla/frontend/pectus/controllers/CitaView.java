@@ -276,9 +276,83 @@ public class CitaView {
 	}
     
 	
+	@Command
+	public void guardarCita() throws Exception{
+
+		
+		Clients.showNotification("Cita registrada", null, true);
 	
+
+//		if (motivoSelected!= null) {
+//	
+//			ayudaSelected = new Ayuda();
+//			
+//			ayudaSelected.setDiagnostico(diagnosticoSelected);
+//			ayudaSelected.setPaciente(pacienteSelected);
+//			ayudaSelected.setMotivo(motivoSelected);
+//
+//			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
+//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
+//			if (response.equalsIgnoreCase("true"))
+//			{
+////				//currentPaciente.add(pacienteselected);
+////				currentPaciente = ServicioPaciente.buscarPacientes();
+////				pacientestatues = generateStatusList(currentPaciente);
+////				s
+//				Clients.showNotification("Ayuda registrada", null, true);
+////				x.detach();
+//
+//			}else
+//			{
+//				Clients.showNotification("Error al guardar", true);
+//			}
+//		}	else{
+////			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
+//			Clients.showNotification("Porfavor ingrese todos los datos validos");
+//		}
+//
+
+
+	}
 	
+	@Command
+	public void resultadoCita() throws Exception{
+
+		
+		Clients.showNotification("Resultado registrado", null, true);
 	
+
+//		if (motivoSelected!= null) {
+//	
+//			ayudaSelected = new Ayuda();
+//			
+//			ayudaSelected.setDiagnostico(diagnosticoSelected);
+//			ayudaSelected.setPaciente(pacienteSelected);
+//			ayudaSelected.setMotivo(motivoSelected);
+//
+//			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
+//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
+//			if (response.equalsIgnoreCase("true"))
+//			{
+////				//currentPaciente.add(pacienteselected);
+////				currentPaciente = ServicioPaciente.buscarPacientes();
+////				pacientestatues = generateStatusList(currentPaciente);
+////				s
+//				Clients.showNotification("Ayuda registrada", null, true);
+////				x.detach();
+//
+//			}else
+//			{
+//				Clients.showNotification("Error al guardar", true);
+//			}
+//		}	else{
+////			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
+//			Clients.showNotification("Porfavor ingrese todos los datos validos");
+//		}
+//
+
+
+	}
 	
 	
 }

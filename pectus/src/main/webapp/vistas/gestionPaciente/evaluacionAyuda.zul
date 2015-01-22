@@ -8,8 +8,8 @@
 	<tabpanel>
     <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-			<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
-			<button id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">RECHAZAR</button>
+			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
+			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">RECHAZAR</button>
         <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelayuda)"  selectedItem="@bind(vm.ayudaSelected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Paciente"  width="100px">

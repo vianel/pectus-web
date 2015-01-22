@@ -3,7 +3,7 @@
 	<div  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
   	<tabbox>
     	<tabs>
-      		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoEstudio"/> 
+      		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Citas"/> 
     	</tabs>
     	<tabpanels>
 			<tabpanel >
@@ -87,9 +87,9 @@
 						<label style="display:block; margin-top: 1em" value="Hora"/>
 						<timebox></timebox>
 						<separator height="23px"/>
-						<button label="Guardar" style=" margin-left: 5em;" sclass="btn-success" onClick="@command('editarTipoEstudio', cmp=modaltipoestudio)">
+						<button label="Guardar" style=" margin-left: 5em;" sclass="btn-success" onClick="@command('asignarCitaPaciente', cmp=modalAsignarCita)">
 							<attribute name="onClick">						
-							    modaltipoestudio.setVisible(false);						  	
+							    modalAsignarCita.setVisible(false);						  	
 							</attribute>	
 						</button>
 						<button  label="Salir" sclass="btn-success">

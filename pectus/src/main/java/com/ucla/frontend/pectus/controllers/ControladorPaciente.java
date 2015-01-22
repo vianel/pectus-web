@@ -31,6 +31,7 @@ import com.ucla.frontend.pectus.services.ServicioPersona;
 
 
 public class ControladorPaciente implements Serializable{
+	private String resp;
 	private Paciente pacienteselected;
 	private Persona personaselected;
 	private String cedulaSelected;
@@ -75,6 +76,7 @@ public class ControladorPaciente implements Serializable{
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
 	private List<Paciente> currentPacientes;
 	List<Persona> currentPersona = ServicioPersona.buscarPersonas();
+	List<Persona> currentPersonaAceptada = ServicioPersona.buscarPersonasAceptadas();
 	private List<PacienteStatus> pacientestatues = generateStatusList(currentPaciente);
 
 	private boolean displayEdit = true;
@@ -97,11 +99,11 @@ public class ControladorPaciente implements Serializable{
 		window.doModal();
 	}
 	
-	@Command
-	public void asignarCita(){
-		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgAsignarCita.zul", null, null);
-		window.doModal();
-	}
+//	@Command
+//	public void asignarCita(){
+//		Window window = (Window)Executions.createComponents("/vistas/dialogos/dlgAsignarCita.zul", null, null);
+//		window.doModal();
+//	}
 	
 	
 	
@@ -110,6 +112,9 @@ public class ControladorPaciente implements Serializable{
 	
 	public ListModel<Persona> getmodelPersona() {
         return new ListModelList<Persona>(currentPersona);
+    }
+	public ListModel<Persona> getmodelPersonaAceptada() {
+        return new ListModelList<Persona>(currentPersonaAceptada);
     }
 	public List<Paciente> getmodelPacientesNuevo() {
         return currentPacientes;
@@ -231,7 +236,7 @@ public class ControladorPaciente implements Serializable{
 
 
 	@Command
-	@NotifyChange({ "modelpaciente", "footer" })
+//	@NotifyChange({ "modelpaciente", "footer" })
 	public void guardarPaciente(@BindingParam("cmp") Window x) throws Exception{
 		String response = null;
 		if (cedulaSelected!= null) {
@@ -242,15 +247,15 @@ public class ControladorPaciente implements Serializable{
 			pacienteselected.setCedula(cedulaSelected);
 			pacienteselected.setNombre(nombreSelected);
 			pacienteselected.setApellido(apellidoSelected);
-			pacienteselected.setCelular(celularSelected);
-			pacienteselected.setFijo(fijoSelected);
-			pacienteselected.setFechaNacimiento(fechanacimientoSelected);
-			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
-			pacienteselected.setProfesion(profesionSelected);
-			
-			
-			pacienteselected.setCedula(cedulaSelected);
-			pacienteselected.setCiudad(ciudadSelected);
+//			pacienteselected.setCelular(celularSelected);
+//			pacienteselected.setFijo(fijoSelected);
+//			pacienteselected.setFechaNacimiento(fechanacimientoSelected);
+//			pacienteselected.setNroHijos(Integer.parseInt(nrohijosSelected));
+//			pacienteselected.setProfesion(profesionSelected);
+//			
+//			
+//			pacienteselected.setCedula(cedulaSelected);
+//			pacienteselected.setCiudad(ciudadSelected);
 			
 
 		/*	
@@ -300,7 +305,6 @@ public class ControladorPaciente implements Serializable{
 				Clients.showNotification("Error al guardar", true);
 			}
 		}	else{
-			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
 			Clients.showNotification("Porfavor ingrese todos los datos validos");
 		}
 
@@ -677,10 +681,45 @@ public class ControladorPaciente implements Serializable{
 	public void setPersonaselected(Persona personaselected) {
 		this.personaselected = personaselected;
 	}
+	public String getResp() {
+		return resp;
+	}
+
+	public void setResp(String resp) {
+		this.resp = resp;
+	}
 
 
+//	METODOS NUEVOS PARA AGREGAR Y EDITAR
+	
+	@Command
+	public void aceptarPaciente(){
+		resp = ServicioPaciente.aceptarPaciente(personaselected);
+		
+		if (resp.equalsIgnoreCase("true"))
+	      {
+	  		Clients.showNotification("El Paciente ha sido agregado Exitosamente", true);
+	      }else
+	      {
+	  		Clients.showNotification("Error al modificar", true);
+	      }
+		
+	}
 
-
+	@Command
+	public void asignarCitaPaciente(){
+		resp = ServicioPaciente.asignarCitaPaciente(personaselected);
+		
+		if (resp.equalsIgnoreCase("true"))
+	      {
+	  		Clients.showNotification("Se le ha asignado una cita Exitosamente", true);
+	      }else
+	      {
+	  		Clients.showNotification("Error al modificar", true);
+	      }
+		
+	}
+	
 
 
 

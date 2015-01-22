@@ -38,8 +38,9 @@ public class AyudaView {
 	private String motivoSelected;
 	private Ayuda ayudaSelected;
 	private Set <EstudioClinica> estudioclinicaSelected;
-	
+	private Window ventanaregistronuevacita;
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
+	List<Ayuda> currentAyudaAceptada = ServicioSolicitudAyuda.buscarAyudasAceptadas();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
@@ -56,11 +57,15 @@ public class AyudaView {
 		selected = ayudas.get(0);
 		getmodelpaciente();
 		getmodelayuda();
+		getmodelAyudaAceptada();
 	}
 	
 
 	public ListModel<Ayuda> getmodelayuda() {
         return new ListModelList<Ayuda>(currentAyuda);
+    }
+	public ListModel<Ayuda> getmodelAyudaAceptada() {
+        return new ListModelList<Ayuda>(currentAyudaAceptada);
     }
 	
 	public String getfooter(){
@@ -171,37 +176,37 @@ public class AyudaView {
 		String response = null;
 
 		
+		Clients.showNotification("Ayuda registrada", null, true);
 	
-	
 
-		if (motivoSelected!= null) {
-	
-			ayudaSelected = new Ayuda();
-			
-			ayudaSelected.setDiagnostico(diagnosticoSelected);
-			ayudaSelected.setPaciente(pacienteSelected);
-			ayudaSelected.setMotivo(motivoSelected);
-
-			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
-			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
-			if (response.equalsIgnoreCase("true"))
-			{
-//				//currentPaciente.add(pacienteselected);
-//				currentPaciente = ServicioPaciente.buscarPacientes();
-//				pacientestatues = generateStatusList(currentPaciente);
-//				s
-				Clients.showNotification("Ayuda registrada", null, true);
-//				x.detach();
-
-			}else
-			{
-				Clients.showNotification("Error al guardar", true);
-			}
-		}	else{
-//			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
-			Clients.showNotification("Porfavor ingrese todos los datos validos");
-		}
-
+//		if (motivoSelected!= null) {
+//	
+//			ayudaSelected = new Ayuda();
+//			
+//			ayudaSelected.setDiagnostico(diagnosticoSelected);
+//			ayudaSelected.setPaciente(pacienteSelected);
+//			ayudaSelected.setMotivo(motivoSelected);
+//
+//			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
+//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
+//			if (response.equalsIgnoreCase("true"))
+//			{
+////				//currentPaciente.add(pacienteselected);
+////				currentPaciente = ServicioPaciente.buscarPacientes();
+////				pacientestatues = generateStatusList(currentPaciente);
+////				s
+//				Clients.showNotification("Ayuda registrada", null, true);
+////				x.detach();
+//
+//			}else
+//			{
+//				Clients.showNotification("Error al guardar", true);
+//			}
+//		}	else{
+////			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
+//			Clients.showNotification("Porfavor ingrese todos los datos validos");
+//		}
+//
 
 
 	}
@@ -231,7 +236,15 @@ public class AyudaView {
 		this.ayudaSelected = ayudaSelected;
 	}
 	
-	
+	@Command
+	@NotifyChange({"modelcita", "footer"})
+	public void abrirDialogoRegistrarCita(){
+
+	   
+		ventanaregistronuevacita = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarCita.zul", null, null);
+		
+		ventanaregistronuevacita.doModal();
+	}
 	
 		
 }

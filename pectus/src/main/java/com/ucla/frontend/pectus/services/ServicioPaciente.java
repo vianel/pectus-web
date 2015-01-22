@@ -29,11 +29,13 @@ import us.monoid.web.Resty;
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Persona;
 import com.ucla.frontend.pectus.models.Seguro;
 
 public class ServicioPaciente {
 	
     private ListModelList<Paciente> listaModelPaciente;
+    private ListModelList<Paciente> listModelPacienteCandidato;
 	
     public ServicioPaciente (){
     
@@ -43,9 +45,18 @@ public class ServicioPaciente {
     public void init(){
 
     	this.setListaModelPaciente(new ListModelList<Paciente>(this.buscarPacientes()));
-    	
+//    	this.setListModelPacienteCandidato(new ListModelList<Paciente>(this.buscarPacientesCandidato()));
     }
 	
+	public ListModelList<Paciente> getListModelPacienteCandidato() {
+		return listModelPacienteCandidato;
+	}
+
+	public void setListModelPacienteCandidato(
+			ListModelList<Paciente> listModelPacienteCandidato) {
+		this.listModelPacienteCandidato = listModelPacienteCandidato;
+	}
+
 	public static String modificarPaciente(Paciente paciente)
 	{
 		Resty resty = new Resty();
@@ -84,13 +95,13 @@ public class ServicioPaciente {
 		try {
 			jsResource = resty.json("http://localhost:5000/paciente/agregar?cedula=" + paciente.getCedula() +
 					"&nombre=" + paciente.getNombre() +
-					"&apellido=" + paciente.getApellido() +
-					"&tlfcelular=" + paciente.getCelular() +
-					"&tlfijo=" + paciente.getFijo() +
-					"&profesion=" + paciente.getProfesion() +
-					"&nrohijos=" + paciente.getNroHijos() + 
-					"&fecnacimiento=" + fecha +
-					"&idciudad=" + paciente.getCiudad().getId()
+					"&apellido=" + paciente.getApellido() //+
+//					"&tlfcelular=" + paciente.getCelular() +
+//					"&tlfijo=" + paciente.getFijo() +
+//					"&profesion=" + paciente.getProfesion() +
+//					"&nrohijos=" + paciente.getNroHijos() + 
+//					"&fecnacimiento=" + fecha +
+//					"&idciudad=" + paciente.getCiudad().getId()
 					);
 	    
 		} catch (IOException e) {
@@ -152,7 +163,7 @@ public class ServicioPaciente {
                   paciente.setLugarTrabajo(obj.get("lugtrabajo").toString());
                   paciente.setDireccionTrabajo(obj.get("dirtrabajo").toString());
                   paciente.setTelefonoTrabajo(obj.get("tlftrabajo").toString());
-                  paciente.setLogin(obj.get("login").toString());
+//                  paciente.setLogin(obj.get("login").toString());
                   
                   listaPaciente.add(paciente);
 			  
@@ -241,6 +252,112 @@ public class ServicioPaciente {
 	}
 	
 	//································································································
+
+	public static String aceptarPaciente(Persona persona){
+		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	    String ok = null;
+//		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//		String fecha = df.format(paciente.getFechaNacimiento());
+		try {
+			
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + persona.getCedula() + 
+					"&estatus=I" );
+//			jsResource = resty.json("http://localhost:5000/paciente/agregar?cedula=15468585&nombre=" + persona.getNombre() +
+//					"&apellido=" + persona.getApellido() //+
+//					"&tlfcelular=" + paciente.getCelular() +
+//					"&tlfijo=" + paciente.getFijo() +
+//					"&profesion=" + paciente.getProfesion() +
+//					"&nrohijos=" + paciente.getNroHijos() + 
+//					"&fecnacimiento=" + fecha +
+//					"&idciudad=" + paciente.getCiudad().getId()
+//					);
+	    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
+	}
+	
+//	public static ListModelList<Paciente> buscarPacienteCandidato(){
+//		ListModelList<Paciente> listaPacientesCandidatos = new  ListModelList<Paciente>();
+//		Resty resty = new Resty();
+//		JSONResource jsResource = null;
+//		
+//		try {
+//			jsResource = resty.json("http://127.0.0.1:5000/paciente/buscar?type=paciente&estatus=A");
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		try {
+//			String ok = jsResource.get("ok").toString();
+//			if (ok.equalsIgnoreCase("true")) {
+//			
+//			String strPer = jsResource.get("personas").toString();
+//			JSONArray serPersona = new JSONArray(strPer);
+//			  for(int i=0; i < serPersona.length(); i++){
+//                  Persona persona = new Persona();
+//                  JSONObject obj = serPersona.getJSONObject(i);
+//                  
+//                  persona.setCedula(obj.get("cedula").toString());
+//                  persona.setNombre(obj.get("nombre").toString());
+//                  persona.setApellido(obj.get("apellido").toString());
+//                  persona.setCelular(obj.get("tlfcelular").toString());
+//                  persona.setFijo(obj.get("tlffijo").toString());
+//                  persona.setFechaNacimiento(convertirFecha(obj.get("fecnacimiento").toString()));
+//                  persona.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
+//                  persona.setDireccion(obj.get("direccion").toString());
+//                  persona.setProfesion(obj.get("profesion").toString());
+//                  persona.setCorreo(obj.get("correo").toString());
+//                  listaPersonas.add(persona);
+//			  
+//			  } //fin For
+//			
+//			} //fin IF
+//			
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		return listaPersonas;
+//	}
+	
+
+	public static String asignarCitaPaciente(Persona persona)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		try {
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + persona.getCedula() + 
+					"&estatus=A" );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	
+	
+	
+	
+	
 
 }
 
