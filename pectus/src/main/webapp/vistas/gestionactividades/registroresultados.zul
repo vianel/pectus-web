@@ -18,7 +18,7 @@
 				
 
 				<button sclass="btn-success">
-							        <attribute name="onClick">						
+							        <attribute name="onClick" disabled="@load(vm.actividadSelected eq null?'true':'false')">						
 						     modalregistrarresulactividad.doModal();						  	
 							</attribute>
 							Resultados Obtenidos</button>

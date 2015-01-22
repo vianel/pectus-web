@@ -1,0 +1,267 @@
+<zk xmlns:n="native">
+  <a label="Eventos" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
+  <tabbox >
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Registrar Resultados"/>
+      
+    
+    </tabs>
+    <tabpanels>
+    
+    
+    	<tabpanel>
+		 <div apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm2') @init('com.ucla.frontend.pectus.controllers.ControladorEventoResultado')">	
+		
+
+		    <div class="btn-group btn-group-sm">
+                        <hbox spacing="20px">
+          		 <button id="" sclass="btn-success" onClick="@command('cancelar')" disabled="@load(vm2.eventoSelected eq null?'true':'false')">
+          		 		    <attribute name="onClick">						
+						    dialogoColaboracionEvento.doModal();						  	
+			</attribute>
+			Registrar Resultados</button>
+			</hbox>
+			</div>
+		
+		
+		<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm2.listaEventoTodos)"  selectedItem="@bind(vm2.eventoSelected)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  width="100px">
+          <textbox instant="true" width="100px" />
+           </listheader>       
+          
+          <listheader hflex="1" label="Descripcion" width="50%" sort="auto(descripcion)">
+      
+
+		  
+		   </listheader> 	
+		   		  
+		        <listheader hflex="1" label="fecha" width="50%"/>
+		        <listheader hflex="1" label="Ciudad" width="50%"/>
+		        <listheader hflex="1" label="Lugar" width="50%"/>
+		        <listheader hflex="1" label="Direccion" width="50%"/>
+		
+	
+				  </listhead>         
+               
+           <template name="model">
+           <listitem>
+           
+              <listcell label="@load(each.nombre) " />
+                <listcell label="@load(each.descripcion)" />
+                <listcell label="@load(each.fecha)  @converter('formatedDate',format='dd/MM/yyyy')"/>
+                <listcell label="@load(each.lugar.ciudad.nombre) " />
+                <listcell label="@load(each.lugar.nombre) " />
+                <listcell label="@load(each.lugar.direccion) " />
+
+                
+               </listitem>
+           </template>
+</listbox>
+
+
+
+<!-- DIALOGO DE COLABORACION -->
+
+<window visible="false" id="dialogoColaboracionEvento" title="Resultados" border="normal" width="800px"
+    
+    position="top,center" closable="false"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+               <div style="float:left; display:Block;" height="auto" width="1500px">
+    <label style="display:block !important; font-weight: bold; font-size:120%; margin-left:25em; padding-bottom: 10px; padding-top: 10px;" value="@load(vm2.eventoSelected.nombre)"></label>
+    <label style="display:block !important; padding-bottom: 5px;" value="@load(vm2.eventoSelected.descripcion)"></label>
+
+        </div>
+    <tabbox >
+    
+    <tabs>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Datos Basicos"/>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Colaboraciones"/>
+   
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Voluntarios"/>
+    
+    </tabs>
+
+    <tabpanels>
+    <tabpanel>
+ <grid  width="800px">
+				<columns>
+					<column label="Datos del Evento" width="150px"/>
+					<column label=""/>
+				</columns>
+				
+				<rows>
+				
+	
+				                <row>	<label value="Ciudad" /> <label  value="@load(vm2.eventoSelected.lugar.ciudad.nombre)" /></row>
+				                  <row>  <label value="Lugar" /><label  value="@load(vm2.eventoSelected.lugar.nombre)" /></row>
+				                <row>    <label value="Direccion" /><label  value="@load(vm2.eventoSelected.lugar.direccion)" /></row>
+
+					
+					<row> <label style="display:block" value="Fecha" /><label value="@load(vm2.eventoSelected.fecha)"/></row>
+					<row><label value="Hora" /></row>
+					<row><label value="Costo de la entrada" /><label value="@load(vm2.eventoSelected.costoEntrada)" /></row>
+					<row><label value="Cantidad de entradas" /><label value="@load(vm2.eventoSelected.cantEntradas)" /> <label  value="Cantidad de entradas Vendidas" /><label value="@load(vm2.eventoSelected.cantEntradasVendidas)" /></row>
+					
+					<row><label value="Monto a Recaudadar" /><label value="@load(vm2.eventoSelected.montoEsperado)" /><label value="Monto Recaudado" /><label value="@load(vm2.eventoSelected.montoRecaudado)" /></row>
+									<row> <label value="Observaciones" /><label value="@load(vm2.eventoSelected.observacion)"/></row>
+					
+					
+					</rows>
+					
+			</grid>
+    
+    
+    </tabpanel>
+
+    
+<tabpanel>
+    
+ 
+        <div>
+            <label style="margin-left:10em; font-weight: bold;" value="Colaboraciones anteriores" width="300px"></label> <label  style="margin-left:20em; font-weight: bold;" value="Colaboraciones del evento" width="300px"></label>
+    </div>
+   
+   
+   <div  height="350px">
+
+
+
+<grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm2.eventoSelected.colaboracion)" >
+		<auxhead>
+            <auxheader label="LISTA DE VOLUNTARIOS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+        
+	        
+        
+        </auxhead>
+	
+	<columns>
+      
+            <column hflex="3">Patrocinador</column>
+            <column hflex="1">Tipo de Colaboracion</column>
+            <column hflex="2">Cantidad</column>
+    
+        </columns>
+        <template name="model">
+            <row>
+
+            
+            
+            
+               
+                <label value="@load(each.patrocinado.nombre)" />
+                <label value="@load(each.tipoColaboracion.nombre)"/>
+                <label value="@load(each.cantidad) " />
+             
+
+            </row>
+        </template>
+        
+        
+   
+	
+	</grid>			
+
+
+
+  
+    </div>
+    <zscript><![CDATA[
+    String imgPath = "../../assets/img";
+]]></zscript>
+ 
+    
+ </tabpanel>
+ 
+ 
+ 
+ 
+ 
+  <tabpanel>
+   
+
+   
+   <div   height="350px">
+
+   <grid height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm2.eventoSelected.voluntarios)" >
+		<auxhead>
+            <auxheader label="LISTA DE VOLUNTARIOS" colspan="6" />
+        </auxhead>
+        
+        <auxhead sclass="category-center">
+        
+	        
+        
+        </auxhead>
+	
+	<columns>
+            <column hflex="1">Cedula</column>
+            <column hflex="1">Nombre</column>
+            <column hflex="2">Apellido</column>
+            <column hflex="1">Correo</column>
+            <column hflex="1">Telefono</column>
+    
+        </columns>
+        <template name="model">
+            <row>
+                <label value="@load(each.cedula) " />
+                <label value="@load(each.nombre)" />
+                <label value="@load(each.apellido)"/>
+                <label value="@load(each.correo) " />
+                <label value="@load(each.telefonoOficina) " />
+
+            </row>
+        </template>
+        
+        
+   
+	
+	</grid>			
+    </div>
+   
+ 
+     
+		 
+  
+
+ 
+ 
+  </tabpanel>
+ 
+ 
+			  
+  </tabpanels>
+
+
+ </tabbox>
+ 
+ <div style="float:left; display:block; height=100px">
+
+			<button width="75px" height="50px" sclass="btn-success" >Salir
+			 <attribute name="onClick">						
+						    dialogoColaboracionEvento.setVisible(false);						  	
+			</attribute></button>
+			</div>
+
+    </vlayout>
+</window>
+
+<!-- fIN DIALOGO DE COLABORACION -->
+	
+</div>
+	
+	</tabpanel>
+
+    </tabpanels>
+  </tabbox>
+
+</zk>

@@ -19,7 +19,7 @@ public class Actividad {
 	private String descripcion;
 	private String observaciones;
 	private boolean estatus;
-	private int montoesperado;
+	private Float montoesperado;
 	private int nroasistentesesperados;
 	private String titulo;
 	
@@ -39,7 +39,7 @@ public class Actividad {
 			Date fechafin, String hora, String recursosUtilizados,
 			Float monto, String duracion, Integer nroAsistentes,
 			String descripcion, String observaciones, boolean estatus,
-			int montoesperado, int nroasistentesesperados) {
+			float montoesperado, int nroasistentesesperados) {
 		super();
 		this.id = id;
 		this.lugar = lugar;
@@ -163,12 +163,12 @@ public class Actividad {
 	}
 
 
-	public int getMontoesperado() {
+	public float getMontoesperado() {
 		return montoesperado;
 	}
 
 
-	public void setMontoesperado(int montoesperado) {
+	public void setMontoesperado(float montoesperado) {
 		this.montoesperado = montoesperado;
 	}
 
