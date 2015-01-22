@@ -29,6 +29,7 @@ import com.ucla.frontend.pectus.models.Paciente;
 public class ServicioSolicitudAyuda {
 	
 	private ListModelList<Ayuda> listaModelAyudas;
+	private ListModelList<Ayuda> listaModelAyudasAceptadas;
 	
 	public ServicioSolicitudAyuda(){
 		
@@ -40,7 +41,23 @@ public class ServicioSolicitudAyuda {
 	public void init(){
 
     	this.setListaModelAyudas(new ListModelList<Ayuda>(this.buscarAyudas()));
+    	this.setListaModelAyudasAceptadas(new ListModelList<Ayuda>(this.buscarAyudasAceptadas()));
     }
+
+	
+	
+	public ListModelList<Ayuda> getListaModelAyudasAceptadas() {
+		return listaModelAyudasAceptadas;
+	}
+
+
+
+	public void setListaModelAyudasAceptadas(
+			ListModelList<Ayuda> listaModelAyudasAceptadas) {
+		this.listaModelAyudasAceptadas = listaModelAyudasAceptadas;
+	}
+
+
 
 	public ListModelList<Ayuda> getListaModelAyudas() {
 		return listaModelAyudas;
@@ -100,15 +117,8 @@ public class ServicioSolicitudAyuda {
 	
 	
 	
-	public static List<Ayuda> buscarAyudas()
-    {
-
-
-    	
+	public static List<Ayuda> buscarAyudas(){
         List<Ayuda> listaAyudas = new ArrayList<Ayuda>();
-     
-        
-
         Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {
@@ -135,9 +145,6 @@ public class ServicioSolicitudAyuda {
                   ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
                   
                   listaAyudas.add(ayuda);
-                  
-       
-			  
 			  } //fin For
 			
 			} //fin IF
@@ -147,10 +154,49 @@ public class ServicioSolicitudAyuda {
 			e1.printStackTrace();
 		}
  
-
         return listaAyudas;
-        
     }
+	
+	public static List<Ayuda> buscarAyudasAceptadas(){
+        List<Ayuda> listaAyudas = new ArrayList<Ayuda>();
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/buscar?estatus=A");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("solicitudes").toString();
+			JSONArray serAyuda = new JSONArray(strPa);
+			  for(int i=0; i < serAyuda.length(); i++){
+                  Ayuda ayuda = new Ayuda();
+                  JSONObject obj = serAyuda.getJSONObject(i);
+                  
+                  ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
+                  ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
+                  ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
+//                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
+                  ayuda.setCausa(obtenerCausa(obj.get("causa").toString()));
+                  ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
+                  
+                  listaAyudas.add(ayuda);
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+        return listaAyudas;
+    }
+	
 	
 	private static Paciente obtenerPaciente(String s) {
 		// TODO Auto-generated method stub

@@ -9,9 +9,9 @@
     	<tabpanel >
     	<div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-			<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.CitaView')">
-			<button id="btnEditaASrCita" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')" >NUEVO</button> </div>
-        <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelayuda)"  selectedItem="@bind(vm.ayudaSelected)">
+			
+			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="btnEditaASrCita" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')" >NUEVO</button>
+        <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelAyudaAceptada)"  selectedItem="@bind(vm.ayudaSelected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Paciente"  width="100px">
 	         					<textbox instant="true" width="75px"  />

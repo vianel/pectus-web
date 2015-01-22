@@ -21,6 +21,7 @@ import com.ucla.frontend.pectus.models.Persona;
 public class ServicioPersona {
 
 	private ListModelList<Persona> listaModelPersona;
+	private ListModelList<Persona> listaModelPersonaAceptada;
 	
 	public ServicioPersona(){
 		
@@ -28,9 +29,18 @@ public class ServicioPersona {
 	 @Init
 	 public void init(){
 		 this.setListaModelPersona(new ListModelList<Persona>(this.buscarPersonas()));
+		 this.setListaModelPersonaAceptada(new ListModelList<Persona>(this.buscarPersonasAceptadas()) );
 	 }
+	 
 	
-	 public ListModelList<Persona> getListaModelPersona() {
+	 public ListModelList<Persona> getListaModelPersonaAceptada() {
+		return listaModelPersonaAceptada;
+	}
+	public void setListaModelPersonaAceptada(
+			ListModelList<Persona> listaModelPersonaAceptada) {
+		this.listaModelPersonaAceptada = listaModelPersonaAceptada;
+	}
+	public ListModelList<Persona> getListaModelPersona() {
 		return listaModelPersona;
 	}
 	public void setListaModelPersona(ListModelList<Persona> listaModelPersona) {
@@ -43,7 +53,50 @@ public class ServicioPersona {
 		JSONResource jsResource = null;
 		
 		try {
-			jsResource = resty.json("http://127.0.0.1:5000/persona/buscar?type=paciente&estatus=a");
+			jsResource = resty.json("http://127.0.0.1:5000/persona/buscar?type=paciente&estatus=S");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPer = jsResource.get("personas").toString();
+			JSONArray serPersona = new JSONArray(strPer);
+			  for(int i=0; i < serPersona.length(); i++){
+                  Persona persona = new Persona();
+                  JSONObject obj = serPersona.getJSONObject(i);
+                  
+                  persona.setCedula(obj.get("cedula").toString());
+                  persona.setNombre(obj.get("nombre").toString());
+                  persona.setApellido(obj.get("apellido").toString());
+                  persona.setCelular(obj.get("tlfcelular").toString());
+                  persona.setFijo(obj.get("tlffijo").toString());
+                  persona.setFechaNacimiento(convertirFecha(obj.get("fecnacimiento").toString()));
+                  persona.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
+                  persona.setDireccion(obj.get("direccion").toString());
+                  persona.setProfesion(obj.get("profesion").toString());
+                  persona.setCorreo(obj.get("correo").toString());
+                  listaPersonas.add(persona);
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return listaPersonas;
+	}
+	public static ListModelList<Persona> buscarPersonasAceptadas(){
+		ListModelList<Persona> listaPersonas = new  ListModelList<Persona>();
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/persona/buscar?type=paciente&estatus=A");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
