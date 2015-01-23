@@ -101,8 +101,14 @@ public class ColaboracionView  extends Div implements IdSpace {
 		this.listaColaboraciones = listaColaboraciones;
 	}
 	
-	
-	
+    @Command
+    @NotifyChange({"patrocinadorSelected", "tipoColaboracionSelected", "cantidadSelected"})
+	public void limpiarCampos(){
+    	patrocinadorSelected = new Patrocinador();
+    	tipoColaboracionSelected = new TipoColaboracion();
+    	cantidadSelected = null;
+		
+	}
 	
 	
 	public Colaboracion getColaboracionSelected() {
@@ -174,11 +180,12 @@ public class ColaboracionView  extends Div implements IdSpace {
 	}
 	
 	@Command
-	@NotifyChange({ "modelcolaboracion", "footer" })
+	@NotifyChange({ "modelcolaboracion", "footer", "patrocinadorSelected", "tipoColaboracionSelected", "cantidadSelected" })
 	public void guardarColaboracion() throws Exception{
 		   String response=null;
 //	  if (eventoSelected.getCedula()!= null){
-			
+		   if(cantidadSelected != null && patrocinadorSelected.getRif() != null 
+					&& tipoColaboracionSelected.getNombre() != null){
 			colaboracionSelected = new Colaboracion();
 			
 			colaboracionSelected.setCantidad(cantidadSelected);
@@ -212,17 +219,24 @@ public class ColaboracionView  extends Div implements IdSpace {
 				
 				
 				
-				Clients.showNotification("Colaboracion Guardada", null, true);
+				Clients.showNotification("Colaboracion Guardada", null, null, null, 2000);
+				patrocinadorSelected = new Patrocinador();
+		    	tipoColaboracionSelected = new TipoColaboracion();
+		    	cantidadSelected = null;
 			//	x.detach(); ver esto mosca revisar
 
 			}else{
 			
-				Clients.showNotification("Error al guardar", true);
+				Clients.showNotification("Error al guardar", null, null, null, 2000);
 			
 			}
 			colaboracionSelected = null;
-//		}
-//	     else{
+		}
+	     else{
+	    	 
+	    	 Clients.showNotification("No se permiten campos vacios", null, null, null, 2000); 
+	     }
+	    
 //	     
 //	    Clients.showNotification("Porfavor ingrese todos los datos validos");
 //	}
@@ -333,16 +347,27 @@ public class ColaboracionView  extends Div implements IdSpace {
     }
     @Command
     public void actualiza(){
+ 	   if(colaboracionSelected.getCantidad() != null && colaboracionSelected.getPatrocinado().getRif() != null 
+				&& colaboracionSelected.getTipoColaboracion().getNombre() != null){
     	
-    	
-    	ServicioColaboracion.editColaboracion(colaboracionSelected);
+    	if(ServicioColaboracion.editColaboracion(colaboracionSelected)){
     	listaColaboracionesTodos.clear();
-    	Clients.showNotification("Colaboracion Editada", null, true);
+    	Clients.showNotification("Colaboracion Editada", null, null, null, 2000);
 		if(listaColaboraciones != null){
 		for(Colaboracion colaboracion : listaColaboraciones){
 			
 			listaColaboracionesTodos.add(colaboracion);
 		}
+		}
+    	}else{
+    		
+        	Clients.showNotification("La colaboracion no se pudo guardar correctamente", null, null, null, 2000);
+    	}
+			
+		
+			
+		}else{
+			Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
 		}
     
     }
@@ -355,11 +380,16 @@ public class ColaboracionView  extends Div implements IdSpace {
     	listaColaboracionesSeleccionados.clear();
 
     }
-    
-    public void actualiza2(){
-    	ServicioColaboracion.editColaboracion2(colaboracionSelected);
+    @Command
+    public void actualizar2(){
+    	
+    	if(colaboracionSelected.getCantidad() != null && colaboracionSelected.getPatrocinado() != null 
+				&& colaboracionSelected.getTipoColaboracion().getNombre() != null && colaboracionSelected.getEvento() != null){
+    	
+    	
+    	if(ServicioColaboracion.editColaboracion2(colaboracionSelected)){
     	listaColaboracionesTodos.clear();
-    	Clients.showNotification("Colaboracion Editada", null, true);
+    	Clients.showNotification("Colaboracion Editada", null, null, null, 2000);
 		if(listaColaboraciones != null){
 		for(Colaboracion colaboracion : listaColaboraciones){
 			
@@ -368,8 +398,13 @@ public class ColaboracionView  extends Div implements IdSpace {
 		}
     
     }
+    else{
+    	Clients.showNotification("No se pudo editar la Colaboracion", null, null, null, 2000);
     
  
-    
-
+    }
+    	}else{
+    		Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
+    	}
+    }
 }

@@ -24,6 +24,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.impl.Attribute;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Bandbox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
@@ -61,12 +62,17 @@ public class ControladorEvento extends Div implements IdSpace{
 	ListModelList<Evento> currentEventoModel = new ListModelList<Evento>(); 
 	private Lugar lugarSelected;
 	private Evento eventoGuardar;
+	private Boolean mostrarDialogoRegistrar;
+	private Boolean mostrarDialoEditar;
 	private static ControladorEvento instance;
 	private Boolean entro;
     @Wire
     private Listbox candidateLb = new Listbox();
     @Wire
     private Listbox chosenLb = new Listbox();
+  
+    @Wire
+    private Bandbox bdLugar2;
     @Wire
     private Label actualiza = new Label();
     private ListModelList<Voluntario> chosenDataModel;
@@ -81,7 +87,7 @@ public class ControladorEvento extends Div implements IdSpace{
     	}
     	currentVoluntario = ServicioVoluntario.buscarVoluntario();
     	candidateModel = currentVoluntario;
-    	if(Global.eventoSeleccionado != null){
+    	if(eventoSelected != null){
     		//eventoSelected = Global.eventoSeleccionado;
     		  SimpleDateFormat formatoFecha = new SimpleDateFormat(" EEEE dd 'de' MMMM 'del' yyyy ",new Locale("es_ES"));
     	
@@ -173,21 +179,47 @@ public class ControladorEvento extends Div implements IdSpace{
 		window.doModal();
 	}
 	@Command
+	@NotifyChange("eventoGuardar")
+	public void limpiarCampos(){
+		eventoGuardar = new Evento();
+	//	eventoSelected = new Evento();
+	}
+	
+	@Command
+	@NotifyChange("eventoGuardar")
 	public void guardarEvento(){
+		if(eventoGuardar != null){
+			if(eventoGuardar.getCantEntradas() != null && eventoGuardar.getCostoEntrada() != null 
+					&& eventoGuardar.getDescripcion() != null && eventoGuardar.getFecha() != null 
+					&& eventoGuardar.getLugar() != null && eventoGuardar.getMontoEsperado() != null
+					&& eventoGuardar.getNombre() != null){
+					
          if(ServicioEvento.agregarEvento(eventoGuardar)){			
-				Clients.showNotification("Evento Guardado", null, true);
+				Clients.showNotification("Evento Guardado", null, null, null, 2000);
 				
 				 	currentEvento = ServicioEvento.buscarEventos();
 			   	currentEventoModel.clear();
 			   	for(Evento evento : currentEvento){
 			   		currentEventoModel.add(evento);
+			   		eventoGuardar = new Evento();
+			   		cambiar();
 			   	}
 			}else{
-				Clients.showNotification("Error al guardar", true);			
+				Clients.showNotification("Error al guardar", null, null, null, 2000);			
 			}
+		}else{
+			Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
+		}
+			
+		}
 
 	}
 
+
+	public void cambiar(){
+	
+
+	}
 
 
 	public ListModelList<Voluntario> getCurrentVoluntario() {
@@ -302,7 +334,7 @@ public class ControladorEvento extends Div implements IdSpace{
 				}
 			
 			}
-			Clients.showNotification("Voluntarios asociados correctamente", null, true);
+			Clients.showNotification("Se asocio correctamente los Voluntarios al evento", null, null, null, 2000);
 
 		 	currentEvento = ServicioEvento.buscarEventos();
 	   	currentEventoModel.clear();
@@ -423,16 +455,27 @@ public void setEntro(Boolean entro) {
 }
 
 @Command
+@NotifyChange("eventoSelected")
 public void editarEvento(){
+	if(eventoSelected != null){
+		if(eventoSelected.getCantEntradas() != null && eventoSelected.getCostoEntrada() != null 
+				&& eventoSelected.getDescripcion() != null && eventoSelected.getFecha() != null 
+				&& eventoSelected.getLugar() != null && eventoSelected.getMontoEsperado() != null
+				&& eventoSelected.getNombre() != null){
 	if(ServicioEvento.editar(eventoSelected)){
-       Clients.showNotification("Evento editado correctamente", null, true);
+       Clients.showNotification("Evento editado correctamente", null, null, null, 2000);
    	currentEvento = ServicioEvento.buscarEventos();
    	currentEventoModel.clear();
    	for(Evento evento : currentEvento){
    		currentEventoModel.add(evento);
    	}
+   	
 	}else{
-		Clients.showNotification("Error al Editar", true);			
+		Clients.showNotification("Error al Editar", null, null, null, 2000);			
+	}
+}else{
+	Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);		
+}
 	}
 }
 
@@ -445,6 +488,22 @@ public Evento getEventoGuardar() {
 
 public void setEventoGuardar(Evento eventoGuardar) {
 	this.eventoGuardar = eventoGuardar;
+}
+
+public Boolean getMostrarDialogoRegistrar() {
+	return mostrarDialogoRegistrar;
+}
+
+public void setMostrarDialogoRegistrar(Boolean mostrarDialogoRegistrar) {
+	this.mostrarDialogoRegistrar = mostrarDialogoRegistrar;
+}
+
+public Boolean getMostrarDialoEditar() {
+	return mostrarDialoEditar;
+}
+
+public void setMostrarDialoEditar(Boolean mostrarDialoEditar) {
+	this.mostrarDialoEditar = mostrarDialoEditar;
 }
 
 

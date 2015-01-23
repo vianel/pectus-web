@@ -109,10 +109,10 @@
    
 
          <label style="display:block" value="Patrocinador" />
-              <bandbox id="bdtipoestudio" mold="rounded" autodrop="true" >  
+              <bandbox readonly="true" id="bdtipoestudio" mold="rounded" autodrop="true" value="@load(vm2.patrocinadorSelected.nombre)" >  
 				        <bandpopup>
 				            <listbox  selectedItem="@bind(vm2.patrocinadorSelected)" height="250px" width="450px" mold="paging" autopaging="true"
-					                onSelect="bdtipoestudio.value=self.selectedItem.label; bdtipoestudio.close();" model="@load(vm2.listaPatrocinadores)">
+					                onSelect="bdtipoestudio.close();" model="@load(vm2.listaPatrocinadores)">
 				                <listhead>
 				                	<listheader label="RIF" />
 				                    <listheader label="NOMBRE" />
@@ -131,10 +131,10 @@
         				
         				
          <label style="display:block" value="Tipo Colaboracion" />
-        <bandbox id="bdClinica" mold="rounded" autodrop="true">  
+        <bandbox readonly="true" id="bdClinica" mold="rounded" autodrop="true" value="@load(vm2.tipoColaboracionSelected.nombre)" >  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
-					               selectedItem="@bind(vm2.tipoColaboracionSelected)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm2.listaTipoColaboraciones)">
+					               selectedItem="@bind(vm2.tipoColaboracionSelected)" onSelect="bdClinica.close();" model="@load(vm2.listaTipoColaboraciones)">
 				                <listhead>
 				                    <listheader label="NOMBRE" />
 				                </listhead>
@@ -156,7 +156,9 @@
        <separator height="20px"/>
 		<div align="center" style="margin-left:-1em">
 			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarColaboracion')">Guardar</button>
-			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('limpiarCampos')">Cancelar	
+			
+			</button>
 			<button width="75px" height="50px" sclass="btn-success" onClick="@command('cancelar')">
 			 <attribute name="onClick">						
 						    dialogoColaboracionEvento.setVisible(false);						  	
@@ -174,7 +176,7 @@
   	
   <div width="600px" style="float:left; margin-top:50px">
   
-    <listbox   model="@load(vm2.eventoSelected.colaboracion)" id="candidateLb" hflex="1" vflex="true" multiple="true" rows="8" width="370px"  selectedItem="@bind(vm2.colaboracionSelected)">
+    <listbox  model="@load(vm2.eventoSelected.colaboracion)" id="candidateLb" hflex="1" vflex="true" multiple="true" rows="8" width="370px"  selectedItem="@bind(vm2.colaboracionSelected)">
     
    
      
@@ -200,9 +202,10 @@
     </listbox>
 
 </div>
-<div  width="200px" style="float:left; margin-top:50px; margin-left:30px">
+<div width="200px" style="float:left; margin-top:50px; margin-left:30px">
+
  <label style="display:block" value="Patrocinador" />
-              <bandbox id="bdtipoestudio2" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.patrocinado.nombre)" >  
+              <bandbox disabled="@load(vm2.colaboracionSelected eq null?'true':'false')" readonly="true" id="bdtipoestudio2" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.patrocinado.nombre)" >  
 				        <bandpopup>
 				            <listbox  selectedItem="@bind(vm2.colaboracionSelected.patrocinado)" height="250px" width="450px" mold="paging" autopaging="true"
 					                onSelect="bdtipoestudio2.value=self.selectedItem.label; bdtipoestudio2.close();" model="@load(vm2.listaPatrocinadores)">
@@ -224,7 +227,7 @@
         				
         				
          <label style="display:block" value="Tipo Colaboracion" />
-        <bandbox id="bdClinica2" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.tipoColaboracion.nombre)">  
+        <bandbox disabled="@load(vm2.colaboracionSelected eq null?'true':'false')" readonly="true" id="bdClinica2" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.tipoColaboracion.nombre)">  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
 					               selectedItem="@bind(vm2.colaboracionSelected.tipoColaboracion)" onSelect="bdClinica2.value=self.selectedItem.label; bdClinica2.close();" model="@load(vm2.listaTipoColaboraciones)">
@@ -244,16 +247,16 @@
         
        <!-- Datos de la cita-->
 
-       <label  style="display:block" value="Cantidad" /><textbox value="@bind(vm2.colaboracionSelected.cantidad)"/>
-      
+       <label  style="display:block" value="Cantidad" /><textbox disabled="@load(vm2.colaboracionSelected eq null?'true':'false')" value="@bind(vm2.colaboracionSelected.cantidad)"/>
+  
        <separator height="20px"/>
        	    <div width="600px" style="margin-top:150px; margin-left:-200px">
                        
-                        <button width="75px" height="50px" sclass="btn-success" onClick="@command('actualiza')">
+                        <button disabled="@load(vm2.colaboracionSelected eq null?'true':'false')" width="75px" height="50px" sclass="btn-success" onClick="@command('actualiza')">
           		 	
 			Editar</button>
                         
-          		 <button width="75px" height="50px" sclass="btn-success" >
+          		 <button disabled="@load(vm2.colaboracionSelected eq null?'true':'false')" width="75px" height="50px" sclass="btn-success" >
           		 		    <attribute name="onClick">						
 						  					  	
 			</attribute>
@@ -301,12 +304,14 @@
 
 		<button  sclass="btn-success" onClick="@command('abrirDialogoRegistrarColaboracion')" >Nuevo</button>
 
-	<button  sclass="btn-success">
+	<button disabled="@load(vm2.colaboracionSelected eq null?'true':'false')"   sclass="btn-success">
 	<attribute name="onClick">
 	dialogoEditarCola.doModal();
 	</attribute>
 	
 	Editar</button>
+	<button disabled="@load(vm2.colaboracionSelected eq null?'true':'false')"   sclass="btn-success" >Eliminar</button>
+	
 
     <listbox   model="@load(vm2.listaColaboracionesTodos)" id="candidateLb5" hflex="1" vflex="true" multiple="true" rows="8" width="370px"  selectedItem="@bind(vm2.colaboracionSelected)" mold="paging" pageSize="7" >
     
@@ -350,7 +355,7 @@
         <!-- Datos de la cita con el combobox -->
         
         <label style="display:block" value="Evento" />
-        <bandbox id="bdPaciente" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.evento.nombre)">  
+        <bandbox readonly="true" id="bdPaciente" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.evento.nombre)">  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
 					               selectedItem="@bind(vm2.colaboracionSelected.evento)" onSelect="bdPaciente.value=self.selectedItem.label; bdPaciente.close();" model="@load(vm2.listaEventos)">
@@ -370,7 +375,7 @@
 				    </bandbox>
 
          <label style="display:block" value="Patrocinador" />
-              <bandbox id="bdtipoestudio" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.patrocinado.nombre)">  
+              <bandbox readonly="true" id="bdtipoestudio" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.patrocinado.nombre)">  
 				        <bandpopup >
 				            <listbox selectedItem="@bind(vm2.colaboracionSelected.patrocinado.nombre)" height="250px" width="450px" mold="paging" autopaging="true"
 					                onSelect="bdtipoestudio.value=self.selectedItem.label; bdtipoestudio.close();" model="@load(vm2.listaPatrocinadores)">
@@ -392,7 +397,7 @@
         				
         				
          <label style="display:block" value="Tipo Colaboracion" />
-        <bandbox id="bdClinica" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.tipoColaboracion.nombre)">  
+        <bandbox readonly="true" id="bdClinica" mold="rounded" autodrop="true" value="@load(vm2.colaboracionSelected.tipoColaboracion.nombre)">  
 				        <bandpopup >
 				            <listbox height="250px" width="450px" mold="paging" autopaging="true"
 					               selectedItem="@bind(vm2.colaboracionSelected.tipoColaboracion)" onSelect="bdClinica.value=self.selectedItem.label; bdClinica.close();" model="@load(vm2.listaTipoColaboraciones)">

@@ -436,8 +436,12 @@ public class ControladorEventoResultado implements Serializable {
 	    
 	    @Command
 	   public void guardarResultados(){
+	    	if(eventoSelected.getCantEntradasVendidas() != null && eventoSelected.getMontoRecaudado() != null && eventoSelected.getObservacion() != null ){
 		  ServicioEvento.resultadoEvento(eventoSelected);
-	       Clients.showNotification("Evento editado correctamente", null, true);
-	   }
+		 	Clients.showNotification("Resultados del Evento guardado", null, null, null, 2000);
+	    	}else{
+	    		Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
+	    	}
+	    	}
 
 }

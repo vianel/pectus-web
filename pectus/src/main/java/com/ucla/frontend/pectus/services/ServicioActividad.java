@@ -275,7 +275,7 @@ public class ServicioActividad {
     	return tipoactividad;
 	}
 
-	public static String agregaractividad(Actividad act) {
+	public static boolean agregaractividad(Actividad act) {
 		String ok = null;
 		Resty resty = new Resty();
 		
@@ -288,28 +288,24 @@ public class ServicioActividad {
 					+"&fechainicio=" + dateFormat.format(act.getFechainicio())
 					+"&fechafin=" + dateFormat.format(act.getFechafin())
 					//+"&hora=" + act.getHora()
-					+"&recursosutilizados=" + act.getRecursosUtilizados()
-					+"&montoesperado=" + act.getMontoesperado()
-					+"&nroasistentesesperados=" + act.getNroasistentesesperados()
+				//	+"&recursosutilizados=" + act.getRecursosUtilizados()
+					+"&montoesperado=" + (int)act.getMontoesperado()
+					+"&nroasistentesesperados=" + Integer.valueOf(act.getNroasistentesesperados())
 				//	+"&duracion=" + act.getDuracion()
 					+"&idlugar=" + act.getLugar().getId().toString() 
+				//	+"&duracion=" + act.getDuracion()
 					+"&descripcion=" + act.getDescripcion().replaceAll(" ", "%20"));
 			
-
+return true;
 		}
 			
 			catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		try {
-			 ok = jsResource.get("ok").toString();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ok;	
+
+
 
 		
 	}
