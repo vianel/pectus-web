@@ -14,7 +14,7 @@
 	<tabpanels>
 		<tabpanel> <!--  INICIO USUARIOS -->
 		
-		<button  sclass="btn-success" onClick="@command('')">ASOCIAR</button>
+	
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
 
@@ -23,7 +23,7 @@
                      </hbox></div>
                      <hlayout>
 	<listbox  width="250px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modelusuario)"  selectedItem="@bind(vm.usuarioSelected)" >
+          sclass="mylist" 	model="@load(vm.modelusuario)"  selectedItem="@bind(vm.usuarioSelected)" onClick="@command('vergruposxusuario')">
 			
 			
 		  <listhead sizable="true"> 
@@ -54,7 +54,7 @@
                
            <template name="model">
 	           <row>
-						<checkbox checked= "@load(each.status)"/>
+						<checkbox checked= "@load(each.status) @save(each.status)" onCheck="@command('asociarusuarios')"  />
 						<label value="@load(each.nombre)"  />
 						<label value="@load(each.descripcion)" />
 	           </row>
@@ -72,7 +72,7 @@
 		   		 		    <attribute name="onClick">						
 						    modalgrupo.doModal();						  	
 			</attribute> NUEVO GRUPO</button>
-		<button  sclass="btn-success" onClick="@command()">ASOCIAR MODULOS</button>
+	
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
 
@@ -101,7 +101,7 @@
 </listbox>
 
 	<grid  width="550px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modelmodulo)"   >
+          sclass="mylist" 	model="@load(vm.modelmodulo)"  >
 			
 			
 		  <columns sizable="true"> 
@@ -119,7 +119,7 @@
 	           </row>
            </template>
 </grid>
-
+	
 
 
 
@@ -133,7 +133,7 @@
 						    modalmodulo.doModal();						  	
 			</attribute>
 			NUEVO MODULO</button>
-		<button  sclass="btn-success" onClick="@command('')">ASOCIAR TAREAS</button>
+		
                <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
 
@@ -142,7 +142,7 @@
                      </hbox></div>
                      <hlayout>
 	<listbox  width="250px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modelmodulo)" >
+          sclass="mylist" 	model="@load(vm.modelmodulo)" selectedItem="@bind(vm.moduloSelected)" onClick="@command('vermoduloxtareas')">
 			
 			
 		  <listhead sizable="true"> 
@@ -175,7 +175,7 @@
                
            <template name="model">
 	           <row>
-						<checkbox checked= "@load(each.status)"/>
+						<checkbox checked= "@load(each.status) @save(each.status)" onCheck="@command('asociartareas')"/>
 						<label value="@load(each.nombre)"  />
 						<label value="@load(each.descripcion)" />
 	           </row>
@@ -184,7 +184,7 @@
 
 
 </hlayout>
-				
+	
 
 
 		</tabpanel> <!-- FIN MODULOS -->
@@ -269,8 +269,8 @@
 
         
         
-				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombregrupo)"  maxlength="20"   width="200px"/>
-				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciongrupo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombretarea)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciontarea)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
 	
 				<separator height="40px"/>
 				<div>
@@ -302,8 +302,8 @@
 
         
         
-				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombregrupo)"  maxlength="20"   width="200px"/>
-				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripciongrupo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+				<label style="display:block; margin-left: 1em;" value="Nombre"/><textbox value="@bind(vm.nombremodulo)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em; margin-left: 1em;" value="Descripcion"/><textbox value="@bind(vm.descripcionmodulo)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
 	
 				<separator height="40px"/>
 				<div>
@@ -326,6 +326,8 @@
     </vlayout>
 
 </window>	
+
+
      
 </div>
 </zk>
