@@ -22,6 +22,7 @@ import com.ucla.frontend.pectus.models.Causa;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.EstudioClinica;
+import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 
 
@@ -252,6 +253,48 @@ public class ServicioSolicitudAyuda {
 		}
  
         return listaAyudas;
+    }
+	
+	public static List<MotivoRechazo> buscarMotivosRechazos()
+    {
+        List<MotivoRechazo> listaMotivosRechazos = new ArrayList<MotivoRechazo>();
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/motivo-rechazo/buscar?tipo=S");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strMot = jsResource.get("motivosrechazos").toString();
+			JSONArray serMotivoRechazo = new JSONArray(strMot);
+			  for(int i=0; i < serMotivoRechazo.length(); i++){
+                  MotivoRechazo motivoRechazo = new MotivoRechazo();
+                  JSONObject obj = serMotivoRechazo.getJSONObject(i);
+                  motivoRechazo.setId(Integer.parseInt(obj.get("id").toString()));
+                  motivoRechazo.setNombre(obj.get("nombre").toString());
+                  motivoRechazo.setTipo(obj.get("tipo").toString());
+                  
+                  listaMotivosRechazos.add(motivoRechazo);
+                  
+       
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+
+        return listaMotivosRechazos;
+        
     }
 	
 	

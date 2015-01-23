@@ -9,6 +9,7 @@ import java.util.Set;
 
 
 
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -25,6 +26,7 @@ import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
+import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
@@ -47,6 +49,9 @@ public class AyudaView {
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
 	List<Ayuda> currentAyudaAceptada = ServicioSolicitudAyuda.buscarAyudasAceptadas();
 	List<Ayuda> currentAyudaSolicitada = ServicioSolicitudAyuda.buscarAyudasSolicitadas();
+	List<MotivoRechazo> currenMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
+	List<MotivoRechazo> listaMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
+	MotivoRechazo motivoRechazoSelected;
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
@@ -72,8 +77,7 @@ public class AyudaView {
 		getmodelayuda();
 		getmodelAyudaAceptada();
 		getmodelAyudaSolicitada();
-		
-		
+		getmodelMotivoRechazo();
 		
 	}
 	
@@ -86,6 +90,9 @@ public class AyudaView {
     }
 	public ListModel<Ayuda> getmodelAyudaSolicitada() {
         return new ListModelList<Ayuda>(currentAyudaSolicitada);
+    }
+	public ListModel<MotivoRechazo> getmodelMotivoRechazo() {
+        return new ListModelList<MotivoRechazo>(currenMotivoRechazo);
     }
 	
 	public String getfooter(){
@@ -114,6 +121,27 @@ public class AyudaView {
 		return diagnosticoSelected;
 	}
 
+
+	
+	
+	public List<MotivoRechazo> getListaMotivoRechazo() {
+		return listaMotivoRechazo;
+	}
+
+
+	public void setListaMotivoRechazo(List<MotivoRechazo> listaMotivoRechazo) {
+		this.listaMotivoRechazo = listaMotivoRechazo;
+	}
+
+
+	public MotivoRechazo getMotivoRechazoSelected() {
+		return motivoRechazoSelected;
+	}
+
+
+	public void setMotivoRechazoSelected(MotivoRechazo motivoRechazoSelected) {
+		this.motivoRechazoSelected = motivoRechazoSelected;
+	}
 
 
 	public void setDiagnosticoSelected(Diagnostico diagnosticoSelected) {

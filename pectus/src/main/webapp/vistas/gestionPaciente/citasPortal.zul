@@ -83,7 +83,7 @@
 						<label style="display:block; margin-top: 1em" value="Cedula"/>
 						<textbox value="@bind(vm.personaselected.cedula)" readonly="true" maxlength="20"  width="200px"  style="display:block;"/>		
 						<label style="display:block; margin-top: 1em" value="Fecha de Asignacion"/>
-						<datebox></datebox>
+						<datebox value="@bind(vm.visita.fecha)" format="dd/MM/yyyy"></datebox>
 						<label style="display:block; margin-top: 1em" value="Hora"/>
 						<timebox></timebox>
 						<separator height="23px"/>
