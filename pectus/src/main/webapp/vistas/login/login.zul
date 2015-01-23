@@ -14,7 +14,11 @@
 
 
 <zk xmlns:w="client" xmlns:n="native" >
-<div align="left" height="685px" style="background-image: url(../../assets/fondo.jpg);" >
+<div align="left" height="685px" style="background-image: url(../../assets/fondo.jpg);" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vistas.SidebarComposer')" >
+	 
+
 <hlayout>
 
 
@@ -37,7 +41,7 @@
 				<div style="padding-top: 60px; ">
 				<button style="padding: 10px 15px;
     background: #6fd7bb;
-    color: #FFF;" label="Entrar" id="btnInicioSesion" width="75px" height="50px" href="http://localhost:8080/ui-examples/vistas/home/index.zul"/>
+    color: #FFF;" label="Entrar" id="btnInicioSesion" width="75px" height="50px" onClick="@command('loguearse')"/>
 				<button style="padding: 10px 15px;
     background: #6fd7bb;
     color: #FFF;" label="Registrar" width="80px" height="50px" id="btnRegistrarUsuario" />

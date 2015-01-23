@@ -23,14 +23,22 @@ import com.ucla.frontend.pectus.services.ServicioGrupo;
 public class ConfigurarUsuarioVM {
 	private String nombregrupo;
 	private String descripciongrupo;
+	private String nombremodulo;
+	private String descripcionmodulo;
+	private String nombretarea;
+	private String descripciontarea;
+	private String chequeogrupo;
 	
 	private List<Usuario> currentUsuario;
 	private List<Modulo> currentModulo;
 	private List<Grupo> currentGrupo;
 	private List<Tarea> currentTarea;
+	private List<Grupo> auxgrupo = new ArrayList<Grupo>();
+	private List<Tarea> auxtarea = new ArrayList<Tarea>();
 	private Usuario usuarioSelected;
+	private Modulo moduloSelected;
 	private Grupo grupoSelected;
-	private boolean grupoComun;
+
 	
 	public ConfigurarUsuarioVM() {
 		// TODO Auto-generated constructor stub
@@ -45,6 +53,29 @@ public class ConfigurarUsuarioVM {
 	
 	}
 	@Command
+	@NotifyChange("modelmodulo")
+	public void guardarmodulo()
+	{
+		String response = null;
+		Modulo modulo = new Modulo();
+		modulo.setNombre(nombremodulo);
+		modulo.setDescripcion(descripcionmodulo);
+		response = ServicioModulo.agregarModulo(modulo);
+		if (response.equalsIgnoreCase("true"))
+		{
+			
+			currentModulo = ServicioModulo.buscarModulos();
+			Clients.showNotification("Modulo Guardado", null, true);
+
+			
+
+		}else
+		{
+			Clients.showNotification("Error al guardar", true);
+		}
+
+	}
+	@Command
 	@NotifyChange("modelgrupo")
 	public void guardargrupo()
 	{
@@ -56,10 +87,10 @@ public class ConfigurarUsuarioVM {
 			if (response.equalsIgnoreCase("true"))
 			{
 				
-				currentGrupo.add(grupo);
+				currentGrupo = ServicioGrupo.buscarGrupos();
 				Clients.showNotification("Grupo Guardado", null, true);
-				nombregrupo=null;
-				descripciongrupo= null;
+				nombregrupo=" ";
+				descripciongrupo=" ";
 				
 	
 			}else
@@ -67,8 +98,146 @@ public class ConfigurarUsuarioVM {
 				Clients.showNotification("Error al guardar", true);
 			}
 
-		}
+	}
+	@Command
+	@NotifyChange("modeltarea")
+	public void guardartarea()
+	{
+			String response = null;
+			Tarea tarea = new Tarea();
+			tarea.setNombre(nombretarea);
+			tarea.setDescripcion(descripciontarea);
+			response = ServicioTarea.agregarTarea(tarea);
+			if (response.equalsIgnoreCase("true"))
+			{
+				
+				currentTarea = ServicioTarea.buscarTareas();
+				Clients.showNotification("Tarea Guardada", null, true);
+				
 	
+			}else
+			{
+				Clients.showNotification("Error al guardar", true);
+			}
+
+	}
+	@Command
+	@NotifyChange({"modelgrupo","modelusuario"})
+	public void asociarusuarios()
+	{
+		List<Grupo> temporal = new ArrayList<Grupo>();
+		String response = null;
+		if (auxgrupo.isEmpty() == false)
+		{
+			for (int i=0; i<currentGrupo.size() ; i++)
+			{
+				
+					if (currentGrupo.get(i).isStatus() == true)
+					{
+						for (int j=0; j< auxgrupo.size(); j++)
+						{
+							if (currentGrupo.get(i).getId() != auxgrupo.get(j).getId())
+							{
+								temporal.add(currentGrupo.get(i));
+							}
+						}
+					}	
+			}
+		}else
+		{
+			for (int i=0; i<currentGrupo.size(); i++)
+			{
+				if (currentGrupo.get(i).isStatus() == true)
+				{
+					temporal.add(currentGrupo.get(i));
+				}
+			}
+		}
+		response = ServicioUsuario.asociarGrupos(usuarioSelected,temporal);
+		
+	}
+
+	@Command
+	@NotifyChange({"modelmodulo","modeltarea"})
+	public void asociartareas()
+	{
+		List<Tarea> temporal = new ArrayList<Tarea>();
+		String response = null;
+		if (auxtarea.isEmpty() == false)
+		{
+			for (int i=0; i<currentTarea.size() ; i++)
+			{
+				
+					if (currentTarea.get(i).isStatus() == true)
+					{
+						for (int j=0; j< auxtarea.size(); j++)
+						{
+							if (currentTarea.get(i).getId() != auxtarea.get(j).getId())
+							{
+								temporal.add(currentTarea.get(i));
+							}
+						}
+					}	
+			}
+		}else
+		{
+			for (int i=0; i<currentTarea.size(); i++)
+			{
+				if (currentTarea.get(i).isStatus() == true)
+				{
+					temporal.add(currentTarea.get(i));
+				}
+			}
+		}
+		response = ServicioModulo.asociarTareas(moduloSelected,temporal);
+		
+	}
+	
+	@Command
+	@NotifyChange("modeltarea")
+	public void vermoduloxtareas()
+	{
+		auxtarea = ServicioModulo.buscarTareas(moduloSelected);
+		for (Tarea temp : currentTarea)
+		{
+			temp.setStatus(false);
+		}
+		for (int i=0; i< currentTarea.size() ; i++)
+		{
+			for (int j=0; j<auxtarea.size(); j++)
+			{
+				if (auxtarea.get(j).getId() == currentTarea.get(i).getId())
+				{
+					currentTarea.get(i).setStatus(true);
+					
+				}
+			}
+		}
+	}
+	@Command
+	@NotifyChange("modelgrupo")
+	public void vergruposxusuario()
+	{
+		auxgrupo = ServicioUsuario.buscarGrupos(usuarioSelected);
+		
+
+		//auxgrupo.retainAll(currentGrupo);
+		for (Grupo temp : currentGrupo)
+		{
+			temp.setStatus(false);
+		}
+		for (int i=0; i< currentGrupo.size() ; i++)
+		{
+			for (int j=0; j<auxgrupo.size(); j++)
+			{
+				if (auxgrupo.get(j).getId() == currentGrupo.get(i).getId())
+				{
+					currentGrupo.get(i).setStatus(true);
+					
+				}
+			}
+		}
+	}
 	@Command
 	@NotifyChange("modelmodulo")
 	public void compararmodulos()
@@ -130,12 +299,22 @@ public class ConfigurarUsuarioVM {
 		this.grupoSelected = grupoSelected;
 	}
 
-	public boolean isGrupoComun() {
-		return grupoComun;
+
+
+	public String getNombremodulo() {
+		return nombremodulo;
 	}
 
-	public void setGrupoComun(boolean grupoComun) {
-		this.grupoComun = grupoComun;
+	public void setNombremodulo(String nombremodulo) {
+		this.nombremodulo = nombremodulo;
+	}
+
+	public String getDescripcionmodulo() {
+		return descripcionmodulo;
+	}
+
+	public void setDescripcionmodulo(String descripcionmodulo) {
+		this.descripcionmodulo = descripcionmodulo;
 	}
 
 	public String getNombregrupo() {
@@ -152,6 +331,38 @@ public class ConfigurarUsuarioVM {
 
 	public void setDescripciongrupo(String descripciongrupo) {
 		this.descripciongrupo = descripciongrupo;
+	}
+
+	public Modulo getModuloSelected() {
+		return moduloSelected;
+	}
+
+	public void setModuloSelected(Modulo moduloSelected) {
+		this.moduloSelected = moduloSelected;
+	}
+
+	public String getNombretarea() {
+		return nombretarea;
+	}
+
+	public void setNombretarea(String nombretarea) {
+		this.nombretarea = nombretarea;
+	}
+
+	public String getDescripciontarea() {
+		return descripciontarea;
+	}
+
+	public void setDescripciontarea(String descripciontarea) {
+		this.descripciontarea = descripciontarea;
+	}
+
+	public String getChequeogrupo() {
+		return chequeogrupo;
+	}
+
+	public void setChequeogrupo(String chequeogrupo) {
+		this.chequeogrupo = chequeogrupo;
 	}
 	    
 	

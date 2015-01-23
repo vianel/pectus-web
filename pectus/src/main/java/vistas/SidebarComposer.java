@@ -23,6 +23,17 @@ public class SidebarComposer  {
 		super();
 		// TODO Auto-generated constructor stub
 		respaldo = false;
+		System.out.println("Se instancio");
+		
+		
+	}
+	
+	
+	@Command
+	public void loguearse()
+	{
+		Executions.sendRedirect("../home/index.zul");
+
 	}
 
 	public boolean getRespaldo() {

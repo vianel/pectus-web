@@ -10,7 +10,6 @@ import org.codehaus.jettison.json.JSONObject;
 import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
 
-
 import com.ucla.frontend.pectus.models.Tarea;
 
 public class ServicioTarea {
@@ -64,6 +63,36 @@ public class ServicioTarea {
 		
 		
 		
+	}
+
+	public static String agregarTarea(Tarea tarea) {
+		// TODO Auto-generated method stub
+		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	  
+		String ok = null;
+	    
+	   
+		
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/tarea/agregar?nombre=" + tarea.getNombre().replaceAll(" ", "%20")
+					+"&descripcion=" + tarea.getDescripcion().replaceAll(" ", "%20"));
+			
+
+		}
+			
+			catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
 	}
 
 }
