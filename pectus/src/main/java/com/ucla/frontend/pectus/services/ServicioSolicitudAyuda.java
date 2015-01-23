@@ -30,6 +30,7 @@ public class ServicioSolicitudAyuda {
 	
 	private ListModelList<Ayuda> listaModelAyudas;
 	private ListModelList<Ayuda> listaModelAyudasAceptadas;
+	private ListModelList<Ayuda> listaModelAyudasSolicitadas;
 	
 	public ServicioSolicitudAyuda(){
 		
@@ -42,10 +43,25 @@ public class ServicioSolicitudAyuda {
 
     	this.setListaModelAyudas(new ListModelList<Ayuda>(this.buscarAyudas()));
     	this.setListaModelAyudasAceptadas(new ListModelList<Ayuda>(this.buscarAyudasAceptadas()));
-    }
+    	this.setListaModelAyudasSolicitadas(new ListModelList<Ayuda>(this.buscarAyudasSolicitadas()));
+    	
+	}
 
 	
 	
+	public ListModelList<Ayuda> getListaModelAyudasSolicitadas() {
+		return listaModelAyudasSolicitadas;
+	}
+
+
+
+	public void setListaModelAyudasSolicitadas(
+			ListModelList<Ayuda> listaModelAyudasSolicitadas) {
+		this.listaModelAyudasSolicitadas = listaModelAyudasSolicitadas;
+	}
+
+
+
 	public ListModelList<Ayuda> getListaModelAyudasAceptadas() {
 		return listaModelAyudasAceptadas;
 	}
@@ -197,6 +213,47 @@ public class ServicioSolicitudAyuda {
         return listaAyudas;
     }
 	
+	public static List<Ayuda> buscarAyudasSolicitadas(){
+        List<Ayuda> listaAyudas = new ArrayList<Ayuda>();
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/buscar?estatus=S");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("solicitudes").toString();
+			JSONArray serAyuda = new JSONArray(strPa);
+			  for(int i=0; i < serAyuda.length(); i++){
+                  Ayuda ayuda = new Ayuda();
+                  JSONObject obj = serAyuda.getJSONObject(i);
+                  
+                  ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
+                  ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
+                  ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
+//                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
+                  ayuda.setCausa(obtenerCausa(obj.get("causa").toString()));
+                  ayuda.setMotivo(obj.get("observacion").toString());
+//                  ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
+                  
+                  listaAyudas.add(ayuda);
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+        return listaAyudas;
+    }
+	
 	
 	private static Paciente obtenerPaciente(String s) {
 		// TODO Auto-generated method stub
@@ -204,7 +261,12 @@ public class ServicioSolicitudAyuda {
 		try {
 			JSONObject objjson = new JSONObject(s);
 			paciente.setCedula( objjson.getString("cedula"));
+			paciente.setNombre(objjson.getString("nombre"));
 			paciente.setApellido(objjson.getString("apellido"));
+			paciente.setApellidoConyugue(objjson.getString("apeconyugue"));
+			paciente.setProfesion(objjson.getString("profesion"));
+			paciente.setNombreConyugue(objjson.getString("nombconyugue"));
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

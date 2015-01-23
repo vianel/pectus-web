@@ -44,10 +44,10 @@ public class ServicioEstudioClinicaMonto {
     }
 	
 	
-	public static List<EstudioClinica> buscarEstudiosXClinica()
+	public static ListModelList<EstudioClinica> buscarEstudiosXClinica()
     {
 
-        List<EstudioClinica> listaEstudiosXClinica = new ArrayList<EstudioClinica>();
+        ListModelList<EstudioClinica> listaEstudiosXClinica = new ListModelList<EstudioClinica>();
      
         
 

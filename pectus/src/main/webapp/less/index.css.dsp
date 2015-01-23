@@ -1034,7 +1034,9 @@ a:focus {
 .btn-success:focus {
   background-color: #6fd7bb !important;
   border-color: #6fd7bb;
+  text-transform :uppercase;
 }
+
 .btn-success:hover,
 .btn-success.open {
 	border: 3px solid #f5f5f5;
@@ -2891,3 +2893,25 @@ color: #fff !important;
 .z-listheader-hover{
 	background: #45f78f;
 }
+
+
+.rechazar {
+width: 36em;
+height: 8em;
+position: absolute;
+top: 15em;
+left: 3em;
+}
+
+
+.aprobar{
+	width: 16em;
+	height: 7em;
+	position: absolute;
+	top: 15em;
+	left: 3em;
+}
+
+
+
+
