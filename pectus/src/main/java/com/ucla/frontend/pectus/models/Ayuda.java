@@ -14,18 +14,18 @@ public class Ayuda {
 	private Date fechaAprobacion;
 	private Date fechaSolicitud;
 	private Double aprobacion;
+	private List<EstudioClinica> listaEstudioClinicas;
 	private Character estatus;
 	
 	public Ayuda(){
 		
 	}
 
-	
-
 
 	public Ayuda(Paciente paciente, Diagnostico diagnostico, Causa causa,
 			String motivo, Date fechaAprobacion, Date fechaSolicitud,
-			Double aprobacion, Character estatus) {
+			Double aprobacion, List<EstudioClinica> listaEstudioClinicas,
+			Character estatus) {
 		super();
 		this.paciente = paciente;
 		this.diagnostico = diagnostico;
@@ -34,10 +34,19 @@ public class Ayuda {
 		this.fechaAprobacion = fechaAprobacion;
 		this.fechaSolicitud = fechaSolicitud;
 		this.aprobacion = aprobacion;
+		this.listaEstudioClinicas = listaEstudioClinicas;
 		this.estatus = estatus;
 	}
 
 
+	public List<EstudioClinica> getListaEstudioClinicas() {
+		return listaEstudioClinicas;
+	}
+
+
+	public void setListaEstudioClinicas(List<EstudioClinica> listaEstudioClinicas) {
+		this.listaEstudioClinicas = listaEstudioClinicas;
+	}
 
 
 	public Character getEstatus() {

@@ -7,21 +7,26 @@ import java.util.Set;
 
 
 
+
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
+import com.ucla.frontend.pectus.controllers.ControladorEvento.ChooseEvent;
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPatologia;
@@ -41,23 +46,35 @@ public class AyudaView {
 	private Window ventanaregistronuevacita;
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
 	List<Ayuda> currentAyudaAceptada = ServicioSolicitudAyuda.buscarAyudasAceptadas();
+	List<Ayuda> currentAyudaSolicitada = ServicioSolicitudAyuda.buscarAyudasSolicitadas();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
 	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
-	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>(); 
-	private List<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
+	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>();
+	
+//	private ListModelList<EstudioClinica> listaEstudiosTodos = new ListModelList<EstudioClinica>();
+
+	private ListModelList<EstudioClinica> estudiosClinica = ServicioEstudioClinicaMonto.buscarEstudiosXClinica();
+	
+	private ListModelList<EstudioClinica> estudioClinicaSeleccionado = new ListModelList<EstudioClinica>();
+	private EstudioClinica estudioClinicaSeleccionados = new EstudioClinica();
+ 	
 	private static final String footer = "Estas son todas los Ayudas Solicitadas";
 	
 	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
 	
 	@Init
 	public void init(){
-		selected = ayudas.get(0);
+//		selected = ayudas.get(0);
 		getmodelpaciente();
 		getmodelayuda();
 		getmodelAyudaAceptada();
+		getmodelAyudaSolicitada();
+		
+		
+		
 	}
 	
 
@@ -66,6 +83,9 @@ public class AyudaView {
     }
 	public ListModel<Ayuda> getmodelAyudaAceptada() {
         return new ListModelList<Ayuda>(currentAyudaAceptada);
+    }
+	public ListModel<Ayuda> getmodelAyudaSolicitada() {
+        return new ListModelList<Ayuda>(currentAyudaSolicitada);
     }
 	
 	public String getfooter(){
@@ -124,13 +144,13 @@ public class AyudaView {
 		this.motivoSelected = motivoSelected;
 	}
 
-	public List<EstudioClinica> getEstudiosClinica() {
+	public ListModelList<EstudioClinica> getEstudiosClinica() {
 		return estudiosClinica;
 	}
 
 
 
-	public void setEstudiosClinica(List<EstudioClinica> estudiosClinica) {
+	public void setEstudiosClinica(ListModelList<EstudioClinica> estudiosClinica) {
 		this.estudiosClinica = estudiosClinica;
 	}
 
@@ -146,6 +166,30 @@ public class AyudaView {
 		this.diagnosticos = diagnosticos;
 	}
 
+	
+
+
+	public ListModelList<EstudioClinica> getEstudioClinicaSeleccionado() {
+		return estudioClinicaSeleccionado;
+	}
+
+
+	public void setEstudioClinicaSeleccionado(
+			ListModelList<EstudioClinica> estudioClinicaSeleccionado) {
+		this.estudioClinicaSeleccionado = estudioClinicaSeleccionado;
+	}
+	
+
+
+	public EstudioClinica getEstudioClinicaSeleccionados() {
+		return estudioClinicaSeleccionados;
+	}
+
+
+	public void setEstudioClinicaSeleccionados(
+			EstudioClinica estudioClinicaSeleccionados) {
+		this.estudioClinicaSeleccionados = estudioClinicaSeleccionados;
+	}
 
 
 	public ListModel<Paciente> getmodelpaciente() {
@@ -245,6 +289,36 @@ public class AyudaView {
 		
 		ventanaregistronuevacita.doModal();
 	}
+	
+	
+	
+	
+	@Command
+    public void chooseItem() {
+		Set<EstudioClinica> set = estudiosClinica.getSelection();
+    	estudioClinicaSeleccionado.addAll(set);
+    	estudiosClinica.removeAll(set);
+    }
+ 
+	@Command
+    public void unchooseItem() {
+		Set<EstudioClinica> set = estudioClinicaSeleccionado.getSelection();
+		estudiosClinica.addAll(set);
+		estudioClinicaSeleccionado.removeAll(set);
+		
+    }
+ 
+    @Command
+    public void chooseAllItem() {
+    	estudioClinicaSeleccionado.addAll(estudiosClinica);
+    	estudiosClinica.clear();
+    }
+ 
+    @Command
+    public void unchooseAll() {
+    	estudiosClinica.addAll(estudioClinicaSeleccionado);
+    	estudioClinicaSeleccionado.clear();
+    }
 	
 		
 }
