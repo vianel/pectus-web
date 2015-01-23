@@ -25,6 +25,7 @@ import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Persona;
 import com.ucla.frontend.pectus.models.Seguro;
 import com.ucla.frontend.pectus.models.TipoEstudio;
+import com.ucla.frontend.pectus.models.Visita;
 import com.ucla.frontend.pectus.services.ServicioCiudad;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPersona;
@@ -32,6 +33,9 @@ import com.ucla.frontend.pectus.services.ServicioPersona;
 
 public class ControladorPaciente implements Serializable{
 	private String resp;
+	private String resp2;
+	private Visita visita = new Visita();
+	
 	private Paciente pacienteselected;
 	private Persona personaselected;
 	private String cedulaSelected;
@@ -688,10 +692,27 @@ public class ControladorPaciente implements Serializable{
 	public void setResp(String resp) {
 		this.resp = resp;
 	}
+	
 
 
 //	METODOS NUEVOS PARA AGREGAR Y EDITAR
 	
+	public Visita getVisita() {
+		return visita;
+	}
+
+	public void setVisita(Visita visita) {
+		this.visita = visita;
+	}
+
+	public String getResp2() {
+		return resp2;
+	}
+
+	public void setResp2(String resp2) {
+		this.resp2 = resp2;
+	}
+
 	@Command
 	public void aceptarPaciente(){
 		resp = ServicioPaciente.aceptarPaciente(personaselected);
@@ -710,7 +731,9 @@ public class ControladorPaciente implements Serializable{
 	public void asignarCitaPaciente(){
 		resp = ServicioPaciente.asignarCitaPaciente(personaselected);
 		
-		if (resp.equalsIgnoreCase("true"))
+		resp2 = ServicioPaciente.agregarCitaPostulado(personaselected, visita);
+		
+		if (resp.equalsIgnoreCase("true") && resp2.equalsIgnoreCase("true"))
 	      {
 	  		Clients.showNotification("Se le ha asignado una cita Exitosamente", true);
 	      }else

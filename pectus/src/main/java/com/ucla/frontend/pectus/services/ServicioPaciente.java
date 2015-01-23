@@ -31,6 +31,7 @@ import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Persona;
 import com.ucla.frontend.pectus.models.Seguro;
+import com.ucla.frontend.pectus.models.Visita;
 
 public class ServicioPaciente {
 	
@@ -257,22 +258,11 @@ public class ServicioPaciente {
 		Resty resty = new Resty();
 	    JSONResource jsResource = null;
 	    String ok = null;
-//		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-//		String fecha = df.format(paciente.getFechaNacimiento());
 		try {
 			
 			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + persona.getCedula() + 
 					"&estatus=I" );
-//			jsResource = resty.json("http://localhost:5000/paciente/agregar?cedula=15468585&nombre=" + persona.getNombre() +
-//					"&apellido=" + persona.getApellido() //+
-//					"&tlfcelular=" + paciente.getCelular() +
-//					"&tlfijo=" + paciente.getFijo() +
-//					"&profesion=" + paciente.getProfesion() +
-//					"&nrohijos=" + paciente.getNroHijos() + 
-//					"&fecnacimiento=" + fecha +
-//					"&idciudad=" + paciente.getCiudad().getId()
-//					);
-	    
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -341,6 +331,27 @@ public class ServicioPaciente {
 		try {
 			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + persona.getCedula() + 
 					"&estatus=A" );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	public static String agregarCitaPostulado(Persona persona, Visita visita)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			jsResource = resty.json("http://localhost:5000/visita/agregar?cedulapersona=" + persona.getCedula() + 
+					"&fecha="+ fecha.format(visita.getFecha())+"&codigo=VI005" );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -137,15 +137,15 @@
 							<label value="Motivo del Rechazo" style="display:block;"/>
 							<bandbox id="bd1" mold="rounded" autodrop="true">  
 						        <bandpopup >
-						            <listbox selectedItem="@bind(am.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
-							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(am.diagnosticos)">
+						            <listbox selectedItem="@bind(am.motivoRechazoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(am.listaMotivoRechazo)">
 						                <listhead>
-						                    <listheader label="PATOLOGIAS" />
+						                    <listheader label="Motivo Rechazo" />
 						                </listhead>
-						                 <template name="model" var="patologia">
+						                 <template name="model" var="motivoRechazo">
 						                <listitem>
-						                  <listcell  label="@load(patologia.nombre)" />
-						                  <listcell  label="@load(patologia.observacion)" />
+						                  <listcell  label="@load(motivoRechazo.nombre)" />
+						                  <listcell  label="@load(motivoRechazo.id)" />
 						              </listitem>
 						              </template>
 						            </listbox>
