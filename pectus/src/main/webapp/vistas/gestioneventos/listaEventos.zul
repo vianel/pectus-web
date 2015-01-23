@@ -23,19 +23,21 @@
 				<rows>
 					<row><label value="Nombre" /><textbox  value="@bind(vm2.eventoGuardar.nombre)" rows="2"/></row>
 					<row><label style="display:block" value="Lugar" />
-              <bandbox id="bdLugar2" mold="rounded" autodrop="true" constraint="no empty">  
+              <bandbox readonly="true" id="bdLugar2" mold="rounded" autodrop="true" value="@load(vm2.eventoGuardar.lugar.nombre)">  
 				        <bandpopup >
 				            <listbox selectedItem="@bind(vm2.eventoGuardar.lugar)" height="250px" width="450px" mold="paging" autopaging="true"
-					                onSelect="bdLugar2.value=self.selectedItem.label; bdLugar2.close();" model="@load(vm2.lugares)">
+					                onSelect="bdLugar2.close();" model="@load(vm2.lugares)">
 				                <listhead>
-				                	<listheader label="Ciudad" />
+				                	
 				                    <listheader label="Nombre" />
+				                    <listheader label="Ciudad" />
 				                    <listheader label="Direccion" />
 				                </listhead>
 				                 <template name="model" var="lugar">
 				                <listitem>
-				                  <listcell  label="@load(lugar.ciudad.nombre)" />
+				                
 				                  <listcell  label="@load(lugar.nombre)" />
+				                    <listcell  label="@load(lugar.ciudad.nombre)" />
 				                  <listcell  label="@load(lugar.direccion)" />
 				              </listitem>
 				              </template>
@@ -50,7 +52,7 @@
 					<row><label value="Hora" />  <timebox id="tb4" cols="12" format="a hh:mm" value="@bind(vm2.eventoGuardar.hora)" /></row>
 					<row><label value="Cantidad de entradas" /><textbox value="@bind(vm2.eventoGuardar.cantEntradas)"  rows="1"/></row>
 					<row><label value="Costo de la entrada" /><textbox value="@bind(vm2.eventoGuardar.costoEntrada)" constraint="no empty" rows="1"/></row>
-					<row><label value="Monto a recaudar" /><textbox value="@bind(vm2.eventoGuardar.montoEsperado)" constraint="no empty" rows="1"/></row>
+					<row><label value="Monto a recaudar" /><textbox  value="@bind(vm2.eventoGuardar.montoEsperado)" constraint="no empty" rows="1"/></row>
 			
 					
 					
@@ -69,8 +71,15 @@
 		<separator height="35px"/>
 		<div align="center" >
 			<button  width="75px" height="50px" sclass="btn-success" onClick="@command('guardarEvento')">Guardar</button>
-			<button width="75px" height="50px" sclass="btn-success">Cancelar</button>
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('limpiarCampos')">
+			<attribute name="onClick">
+			bdLugar2.setValue("");
+			
+			
+			</attribute>
+			Cancelar</button>
 		</div>
+		
     
     
     
@@ -82,12 +91,12 @@
                         <hbox spacing="20px">
                       
                         
-          		 <button id="" sclass="btn-success" >
+          		 <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" id="" sclass="btn-success" >
           		 		    <attribute name="onClick">						
 						    modalDialog2.doModal();						  	
 			</attribute>
 			Editar</button>
-			 		 <button id="" sclass="btn-success" >
+			 		 <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" id="" sclass="btn-success" >
           		 	
 			Eliminar</button>
 			</hbox>
@@ -152,7 +161,7 @@
 				<rows>
 				<row><label value="Nombre" /><textbox value="@bind(vm2.eventoSelected.nombre)" rows="2"/></row>
 					<row><label style="display:block" value="Lugar" />
-              <bandbox id="bdLugar" mold="rounded" autodrop="true" value="@bind(vm2.eventoSelected.lugar.nombre)">  
+              <bandbox readonly="true" id="bdLugar" mold="rounded" autodrop="true" value="@bind(vm2.eventoSelected.lugar.nombre)">  
 				        <bandpopup >
 				            <listbox selectedItem="@bind(vm2.eventoSelected.lugar)" height="250px" width="450px" mold="paging" autopaging="true"
 					                onSelect="bdLugar.value=self.selectedItem.label; bdLugar.close();" model="@load(vm2.lugares)">
@@ -197,13 +206,19 @@
     
 		<separator height="35px"/>
 		<div align="center" >
-			<button width="75px" height="50px" sclass="btn-success" onClick="@command('editarEvento')" >Editar</button>
+			<button width="75px" height="50px" sclass="btn-success" onClick="@command('editarEvento')" >
+			<attribute name="onClick">
+				    modalDialog2.setVisible(false);	
+			</attribute>
+			
+			Editar</button>
+		
 			<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
 			<button width="75px" height="50px" sclass="btn-success">
 			<attribute name="onClick">
 			    modalDialog2.setVisible(false);	
 			</attribute>
-			Cancelar</button>
+			Salir</button>
 		</div>
     
     </window>

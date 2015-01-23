@@ -231,9 +231,9 @@ public class ActividadVM {
     	 act.setDescripcion(solactividadSelected.getDescripcion());
     	 act.setMontoesperado(Integer.parseInt(montoesperadoSelected));
     	 act.setNroasistentesesperados(asistentesesperadosSelected);
-    	 String response = ServicioActividad.agregaractividad(act);
- 		if (response.equalsIgnoreCase("true"))
- 		{
+    	 
+
+ 				if (ServicioActividad.agregaractividad(act)){ 
  			
  			Clients.showNotification("Actividad Aprobada", null, true);
  			currentActividad.add(act);
