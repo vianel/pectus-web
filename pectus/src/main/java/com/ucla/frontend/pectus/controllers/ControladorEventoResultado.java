@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -35,6 +36,7 @@ public class ControladorEventoResultado implements Serializable {
 	private ListModelList<Voluntario> currentVoluntario = ServicioVoluntario.buscarVoluntario();
 	private ListModelList<Colaboracion> listaColaboracionesSeleccionados = new ListModelList<Colaboracion>();;
 	private ListModelList<Voluntario> listaVoluntariosSeleccionados = new ListModelList<Voluntario>();
+	private ListModelList<Evento> listaEventosFicha = new ListModelList<Evento>();
 	private boolean entro = false;
 	private Patrocinador patrocinadorSelected;
 	private TipoColaboracion tipoColaboracionSelected;
@@ -48,7 +50,13 @@ public class ControladorEventoResultado implements Serializable {
 		// TODO Auto-generated constructor stub
 		if(currentEvento != null){
 		for(Evento evento : currentEvento){
+			if(evento.getEstatus().compareTo('L') == 0)
 			listaEventoTodos.add(evento);
+			
+			if(evento.getEstatus().compareTo('R') == 0){
+				listaEventosFicha.add(evento);
+				
+			}
 		}
 		}
 		if(currentColaboracion != null){
@@ -435,13 +443,42 @@ public class ControladorEventoResultado implements Serializable {
 		}
 	    
 	    @Command
+	    @NotifyChange("eventoSelected")
 	   public void guardarResultados(){
 	    	if(eventoSelected.getCantEntradasVendidas() != null && eventoSelected.getMontoRecaudado() != null && eventoSelected.getObservacion() != null ){
 		  ServicioEvento.resultadoEvento(eventoSelected);
 		 	Clients.showNotification("Resultados del Evento guardado", null, null, null, 2000);
+		 	eventoSelected.setEstatus('R');
+		 	if(ServicioEvento.cambiarEstatus(eventoSelected)){
+		 		currentEvento = ServicioEvento.buscarEventos();
+		 		listaEventoTodos.clear();
+		 		for(Evento event : currentEvento){
+		 			if(event.getEstatus().compareTo('L') == 0)
+		 			listaEventoTodos.add(event);
+		 		}
+		 		eventoSelected = null;
+		 	}
+		 	
+		 	
+		 	
+		 	
 	    	}else{
 	    		Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
 	    	}
 	    	}
+
+
+
+		public ListModelList<Evento> getListaEventosFicha() {
+			return listaEventosFicha;
+		}
+
+
+
+		public void setListaEventosFicha(ListModelList<Evento> listaEventosFicha) {
+			this.listaEventosFicha = listaEventosFicha;
+		}
+	    
+	    
 
 }

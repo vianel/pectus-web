@@ -27,7 +27,7 @@
 		
 		
 		<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm2.listaEventoTodos)"  selectedItem="@bind(vm2.eventoSelected)">
+          sclass="mylist" 	model="@load(vm2.listaEventosFicha)"  selectedItem="@bind(vm2.eventoSelected)">
 			
 			
 		  <listhead sizable="true"> 

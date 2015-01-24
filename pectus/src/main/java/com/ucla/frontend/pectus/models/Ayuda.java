@@ -7,6 +7,7 @@ import com.ucla.frontend.pectus.controllers.controladoractividad;
 
 public class Ayuda {
 	
+	private Integer id;
 	private Paciente paciente;
 	private Diagnostico diagnostico;
 	private Causa causa;
@@ -22,21 +23,20 @@ public class Ayuda {
 	}
 
 
-	public Ayuda(Paciente paciente, Diagnostico diagnostico, Causa causa,
-			String motivo, Date fechaAprobacion, Date fechaSolicitud,
-			Double aprobacion, List<EstudioClinica> listaEstudioClinicas,
-			Character estatus) {
-		super();
-		this.paciente = paciente;
-		this.diagnostico = diagnostico;
-		this.causa = causa;
-		this.motivo = motivo;
-		this.fechaAprobacion = fechaAprobacion;
-		this.fechaSolicitud = fechaSolicitud;
-		this.aprobacion = aprobacion;
-		this.listaEstudioClinicas = listaEstudioClinicas;
-		this.estatus = estatus;
+
+
+	public Integer getId() {
+		return id;
 	}
+
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 
 
 	public List<EstudioClinica> getListaEstudioClinicas() {

@@ -10,6 +10,7 @@ import java.util.Set;
 
 
 
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -28,6 +29,7 @@ import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.SolicitudRechazada;
 import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
@@ -44,6 +46,9 @@ public class AyudaView {
 	private Paciente pacienteSelected;
 	private String motivoSelected;
 	private Ayuda ayudaSelected;
+	private MotivoRechazo motivoRechazoSelected;
+	private SolicitudRechazada solicitudRechazadaSelected =  new SolicitudRechazada();
+	
 	private Set <EstudioClinica> estudioclinicaSelected;
 	private Window ventanaregistronuevacita;
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
@@ -51,7 +56,6 @@ public class AyudaView {
 	List<Ayuda> currentAyudaSolicitada = ServicioSolicitudAyuda.buscarAyudasSolicitadas();
 	List<MotivoRechazo> currenMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
 	List<MotivoRechazo> listaMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
-	MotivoRechazo motivoRechazoSelected;
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
@@ -212,6 +216,19 @@ public class AyudaView {
 	public EstudioClinica getEstudioClinicaSeleccionados() {
 		return estudioClinicaSeleccionados;
 	}
+	
+	
+
+
+	public SolicitudRechazada getSolicitudRechazadaSelected() {
+		return solicitudRechazadaSelected;
+	}
+
+
+	public void setSolicitudRechazadaSelected(
+			SolicitudRechazada solicitudRechazadaSelected) {
+		this.solicitudRechazadaSelected = solicitudRechazadaSelected;
+	}
 
 
 	public void setEstudioClinicaSeleccionados(
@@ -283,7 +300,35 @@ public class AyudaView {
 
 	}
 
+	@Command
+	public void aprobarAyuda() throws Exception{
 
+		if(ayudaSelected.getAprobacion() > 100){
+			Clients.showNotification("Seleccione un valor valido", null, true);
+		}else{
+			String resp = ServicioSolicitudAyuda.aprobarAyuda(ayudaSelected);
+			if (resp.equalsIgnoreCase("true"))
+		      {
+				Clients.showNotification("Ayuda Aprobada", null, true);
+		      }else
+		      {
+		  		Clients.showNotification("Error al evaluar", true);
+		      }
+		}
+		
+
+	}
+	@Command
+	public void rechazarAyuda() throws Exception{
+		String resp = ServicioSolicitudAyuda.RechazarAyuda(ayudaSelected, motivoRechazoSelected, solicitudRechazadaSelected.getDescripcion());
+		if (resp.equalsIgnoreCase("true"))
+	      {
+			Clients.showNotification("Ayuda Rechazada", null, true);
+	      }else
+	      {
+	  		Clients.showNotification("Error al evaluar", true);
+	      }
+	}
 
 	public Set<EstudioClinica> getestudioclinicaSelected() {
 		System.out.println("Entra en getSelected");

@@ -46,6 +46,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 	private ListModelList<Colaboracion> listaColaboracionesSeleccionados = new ListModelList<Colaboracion>();
 	List<Colaboracion> listaColaboraciones = ServicioColaboracion.buscarColaboraciones();
 	List<Evento> listaEventos = ServicioEvento.buscarEventos();
+	ListModelList<Evento> listaEventoTodos = new ListModelList<Evento>();
 	private ListModelList<Colaboracion> listaColaboracionesTodos;
 	List<Patrocinador> listaPatrocinadores = ServicioColaboracion.buscarPatrocinadores();
 	List<TipoColaboracion> listaTipoColaboraciones = ServicioColaboracion.buscarTipoColaboracion();
@@ -59,6 +60,11 @@ public class ColaboracionView  extends Div implements IdSpace {
 	
 	public ColaboracionView() {
 		super();
+		for(Evento evento : listaEventos){
+			if(evento.getEstatus().compareTo('V') == 0)
+			listaEventoTodos.add(evento);
+		}
+		
 		// TODO Auto-generated constructor stub
 		listaColaboracionesTodos = new ListModelList<Colaboracion>();
 		if(listaColaboraciones != null){
@@ -180,7 +186,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 	}
 	
 	@Command
-	@NotifyChange({ "modelcolaboracion", "footer", "patrocinadorSelected", "tipoColaboracionSelected", "cantidadSelected" })
+	@NotifyChange({ "modelcolaboracion", "footer", "patrocinadorSelected", "tipoColaboracionSelected", "cantidadSelected", "eventoSelected", "listaEventos" })
 	public void guardarColaboracion() throws Exception{
 		   String response=null;
 //	  if (eventoSelected.getCedula()!= null){
@@ -209,6 +215,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 				listaEventos.clear();
 				listEvent =	ServicioEvento.buscarEventos();
 				for(Evento event : listEvent){
+					if(event.getEstatus().compareTo('V') == 0)
 					listaEventos.add(event);
 					if(event.getId() == eventoSelected.getId()){
 						eventoSelected.setColaboracion(event.getColaboracion());
@@ -374,7 +381,7 @@ public class ColaboracionView  extends Div implements IdSpace {
     
     @Command
     public void cancelar(){
-        eventoSelected = null;
+     
         patrocinadorSelected = null;
         tipoColaboracionSelected = null;
     	listaColaboracionesSeleccionados.clear();
@@ -396,7 +403,7 @@ public class ColaboracionView  extends Div implements IdSpace {
 			listaColaboracionesTodos.add(colaboracion);
 		}
 		}
-    
+
     }
     else{
     	Clients.showNotification("No se pudo editar la Colaboracion", null, null, null, 2000);
@@ -407,4 +414,34 @@ public class ColaboracionView  extends Div implements IdSpace {
     		Clients.showNotification("No se permiten campos vacios", null, null, null, 2000);
     	}
     }
+
+	public ListModelList<Evento> getListaEventoTodos() {
+		return listaEventoTodos;
+	}
+
+	public void setListaEventoTodos(ListModelList<Evento> listaEventoTodos) {
+		this.listaEventoTodos = listaEventoTodos;
+	}
+	
+	
+	
+	@Command
+	@NotifyChange("eventoSelected")
+	public void terminarC(){
+		Clients.showNotification("Colaboraciones agregadas al Evento", null, null, null, 2000);
+		eventoSelected.setEstatus('L');
+		if(ServicioEvento.cambiarEstatus(eventoSelected)){
+			Clients.showNotification("Colaboraciones agregadas al Evento", null, null, null, 2000);
+			listaEventos= ServicioEvento.buscarEventos();	
+			listaEventoTodos.clear();
+			for(Evento event : listaEventos){
+				if(event.getEstatus().compareTo('V') == 0)
+				listaEventoTodos.add(event);
+			}
+		 	
+	}
+		eventoSelected=null;
+	}
+	
+    
 }

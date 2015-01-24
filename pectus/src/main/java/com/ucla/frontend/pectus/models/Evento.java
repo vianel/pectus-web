@@ -23,6 +23,7 @@ public class Evento {
 	private List<Colaboracion> colaboracion;
 	private Double montoEsperado;
 	private Integer cantEntradasVendidas;
+	private Character estatus;
 
 	public Evento() {
 		super();
@@ -186,6 +187,16 @@ public class Evento {
 
 	public void setCantEntradas(Integer cantEntradas) {
 		this.cantEntradas = cantEntradas;
+	}
+
+
+	public Character getEstatus() {
+		return estatus;
+	}
+
+
+	public void setEstatus(Character estatus) {
+		this.estatus = estatus;
 	}
 
 	

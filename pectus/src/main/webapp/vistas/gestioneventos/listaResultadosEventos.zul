@@ -242,7 +242,11 @@
  </tabbox>
  
  <div style="float:left; display:block; height=100px">
-			<button style="margin-left:350px;" width="155px" height="50px" sclass="btn-success" onClick="@command('guardarResultados')">Guardar Resultado</button>
+			<button style="margin-left:350px;" width="155px" height="50px" sclass="btn-success" onClick="@command('guardarResultados')">
+			<attribute name="onClick">						
+						    dialogoColaboracionEvento.setVisible(false);						  	
+			</attribute>
+			Guardar Resultado</button>
 
 <button width="75px" height="50px" sclass="btn-success" onClick="limpiar()">Cancelar
 			</button>

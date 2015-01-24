@@ -24,6 +24,8 @@ import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.Persona;
+import com.ucla.frontend.pectus.models.SolicitudRechazada;
 
 
 
@@ -233,7 +235,7 @@ public class ServicioSolicitudAyuda {
 			  for(int i=0; i < serAyuda.length(); i++){
                   Ayuda ayuda = new Ayuda();
                   JSONObject obj = serAyuda.getJSONObject(i);
-                  
+                  ayuda.setId(Integer.parseInt(obj.get("id").toString()));
                   ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
                   ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
                   ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
@@ -296,6 +298,46 @@ public class ServicioSolicitudAyuda {
         return listaMotivosRechazos;
         
     }
+	public static String aprobarAyuda(Ayuda ayuda)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		try {
+			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/aprobar-estudio?solicitud=" + ayuda.getId() + 
+					"&porcaprobacion="+ ayuda.getAprobacion() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
+	public static String RechazarAyuda(Ayuda ayuda, MotivoRechazo motivoRechazo, String solicitudRechazada )
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		try {
+			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/rechazar?idmotivo=1"+  
+					"&idsolicitudayuda="+ ayuda.getId() + "&descripcion="+solicitudRechazada );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
 	
 	
 	private static Paciente obtenerPaciente(String s) {

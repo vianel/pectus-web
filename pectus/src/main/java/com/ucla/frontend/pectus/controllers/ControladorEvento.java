@@ -1,5 +1,6 @@
 package com.ucla.frontend.pectus.controllers;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.services.ServicioColaboracion;
 import com.ucla.frontend.pectus.services.ServicioEvento;
 import com.ucla.frontend.pectus.services.ServicioVoluntario;
+import com.ucla.frontend.pectus.utils.Email;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -70,7 +72,7 @@ public class ControladorEvento extends Div implements IdSpace{
     private Listbox candidateLb = new Listbox();
     @Wire
     private Listbox chosenLb = new Listbox();
-  
+    Email email;
     @Wire
     private Bandbox bdLugar2;
     @Wire
@@ -79,8 +81,13 @@ public class ControladorEvento extends Div implements IdSpace{
     private ListModelList<Voluntario> candidateModel;
     private String fechaMostrar;
     public ControladorEvento(){
+    	   try {
+              email = new Email();
+           } catch (IOException ex) {
+           }
     	if(currentEvento != null){
     		for(Evento event: currentEvento){
+    			if(event.getEstatus().compareTo('C') == 0)
     			currentEventoModel.add(event);
     		}
     	
@@ -172,6 +179,37 @@ public class ControladorEvento extends Div implements IdSpace{
 	        
 	        
 	    }
+	  @Command
+	  @NotifyChange("eventoSelected")
+public void terminarVoluntarios(){
+
+	eventoSelected.setEstatus('V');
+	if(ServicioEvento.cambiarEstatus(eventoSelected)){
+		Clients.showNotification("Voluntarios agregados al Evento", null, null, null, 2000);
+		currentEvento= ServicioEvento.buscarEventos();	
+		currentEventoModel.clear();
+		for(Evento event : currentEvento){
+			if(event.getEstatus().compareTo('C') == 0)
+			currentEventoModel.add(event);
+		}
+		
+		for(Voluntario voluntario : eventoSelected.getVoluntarios()){
+		email.llenarCabecera(voluntario.getCorreo(), "Eventos Pectus", "Estos son los datos del evento en la cual usted participara: Evento: "
+				+ eventoSelected.getNombre() + " " + eventoSelected.getDescripcion() + " " + eventoSelected.getLugar().getNombre() + " " + eventoSelected.getLugar().getDireccion()
+				+ " " + eventoSelected.getFecha());
+		
+		if(email.sendMail()){
+			
+		}
+		}
+	}else{
+		
+	}
+	eventoSelected = null;
+	}
+	
+	
+
 	
 	@Command
 	public void abrirDialogoRegistrarEvento(Event e){
@@ -193,17 +231,19 @@ public class ControladorEvento extends Div implements IdSpace{
 					&& eventoGuardar.getDescripcion() != null && eventoGuardar.getFecha() != null 
 					&& eventoGuardar.getLugar() != null && eventoGuardar.getMontoEsperado() != null
 					&& eventoGuardar.getNombre() != null){
-					
+					eventoGuardar.setEstatus('C');
          if(ServicioEvento.agregarEvento(eventoGuardar)){			
 				Clients.showNotification("Evento Guardado", null, null, null, 2000);
 				
 				 	currentEvento = ServicioEvento.buscarEventos();
 			   	currentEventoModel.clear();
 			   	for(Evento evento : currentEvento){
+			   		if(evento.getEstatus().compareTo('C') == 0)
 			   		currentEventoModel.add(evento);
+				}
 			   		eventoGuardar = new Evento();
 			   		cambiar();
-			   	}
+			   
 			}else{
 				Clients.showNotification("Error al guardar", null, null, null, 2000);			
 			}
@@ -323,6 +363,7 @@ public class ControladorEvento extends Div implements IdSpace{
 		}
 	
 @Command
+@NotifyChange("eventoSelected")
 	public void asociarVoluntariosGuardar(){
 
 		if(listaVoluntariosSeleccionados != null){
@@ -339,7 +380,9 @@ public class ControladorEvento extends Div implements IdSpace{
 		 	currentEvento = ServicioEvento.buscarEventos();
 	   	currentEventoModel.clear();
 	   	for(Evento evento : currentEvento){
+	   		if(evento.getEstatus().compareTo('C') == 0)
 	   		currentEventoModel.add(evento);
+	   		
 	   	}
 			
 		}
@@ -467,6 +510,7 @@ public void editarEvento(){
    	currentEvento = ServicioEvento.buscarEventos();
    	currentEventoModel.clear();
    	for(Evento evento : currentEvento){
+   		if(evento.getEstatus().compareTo('C') == 0)
    		currentEventoModel.add(evento);
    	}
    	
