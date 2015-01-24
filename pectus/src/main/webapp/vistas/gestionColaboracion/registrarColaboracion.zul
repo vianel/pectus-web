@@ -24,7 +24,7 @@
 			</attribute>
 			Agregar Colaboracion</button>
 			
-			  <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" sclass="btn-success"  >
+			  <button  disabled="@load(vm2.eventoSelected eq null?'true':'false')" sclass="btn-success" onClick="@command('terminarC')">
           		 	
 			Concluir</button>
 			</hbox>
@@ -32,7 +32,7 @@
 		
 		
 		<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm2.listaEventos)"  selectedItem="@bind(vm2.eventoSelected)">
+          sclass="mylist" 	model="@load(vm2.listaEventoTodos)"  selectedItem="@bind(vm2.eventoSelected)">
 			
 			
 		  <listhead sizable="true"> 
@@ -151,8 +151,7 @@
         
        <!-- Datos de la cita-->
 
-       <label  style="display:block" value="Cantidad" /><textbox value="@bind(vm2.cantidadSelected)"/>
-      
+       <label  style="display:block" value="Cantidad" /><intbox constraint="/[0-9]" value="@bind(vm2.cantidadSelected)"/>
        <separator height="20px"/>
 		<div align="center" style="margin-left:-1em">
 			<button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarColaboracion')">Guardar</button>

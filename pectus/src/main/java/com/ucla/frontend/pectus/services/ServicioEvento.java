@@ -26,6 +26,20 @@ import com.ucla.frontend.pectus.models.TipoColaboracion;
 import com.ucla.frontend.pectus.models.Voluntario;
 
 public class ServicioEvento {
+	
+	public static boolean cambiarEstatus(Evento evento){
+		Resty resty = new Resty();	   
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");		
+	   try {
+		   resty.json("http://127.0.0.1:5000/evento/editar?id=" + evento.getId() + "&estatus=" + evento.getEstatus());   
+	    return true;
+	   } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}	
+		
+	}
 
 	public static List<Evento> buscarEventos() {
 
@@ -62,6 +76,7 @@ public class ServicioEvento {
 					evento.setFecha(convertirFecha(obj.getString("fecha").toString()));
 					evento.setCantEntradas(obj.getInt("cantentradasesperadasventa"));
 					evento.setMontoEsperado(obj.getDouble("montorecaudadoesperado"));
+					evento.setEstatus(obj.getString("estatus").charAt(0));
 //					evento.setFecha(new Date());
 					evento.setNombre(obj.get("nombre").toString());
 				
@@ -233,7 +248,7 @@ public class ServicioEvento {
 	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	   try {
 		         resty.json("http://127.0.0.1:5000/evento/agregar?idlugar=" + evento.getLugar().getId()
-				   + "&nombre=" + evento.getNombre().replaceAll(" ", "%20") + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion().replace(" ", "%20") + "&montorecaudadoesperado="+evento.getMontoEsperado());
+				   + "&nombre=" + evento.getNombre().replaceAll(" ", "%20") + "&fecha=" + df.format(evento.getFecha()) +  "&cantentradasesperadasventa="+evento.getCantEntradas()+ "&costoentradas="+evento.getCostoEntrada() + "&descripcion="+evento.getDescripcion().replace(" ", "%20") + "&montorecaudadoesperado="+evento.getMontoEsperado() + "&estatus=" + evento.getEstatus().toString());
 			return true;		      
 	   } catch (IOException e) {
 			e.printStackTrace();

@@ -23,7 +23,7 @@
 						    dialogoAsociarEvento.doModal();						  	
 			</attribute>
 			Gestionar Voluntarios</button>
-                        <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" sclass="btn-success" onClick="@command('abrirDialogoRegistrarEvento')" >
+                        <button disabled="@load(vm2.eventoSelected eq null?'true':'false')" sclass="btn-success" onClick="@command('terminarVoluntarios')" >
           		 	
 			Concluir Asignacion</button>
                         

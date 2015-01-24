@@ -50,9 +50,9 @@
 					<row><label value="Descripcion" /><textbox value="@bind(vm2.eventoGuardar.descripcion)"   rows="4"/></row>
 				<row> <label style="display:block" value="Fecha" /><datebox value="@bind(vm2.eventoGuardar.fecha)" format="dd/MM/yyyy" /></row>
 					<row><label value="Hora" />  <timebox id="tb4" cols="12" format="a hh:mm" value="@bind(vm2.eventoGuardar.hora)" /></row>
-					<row><label value="Cantidad de entradas" /><textbox value="@bind(vm2.eventoGuardar.cantEntradas)"  rows="1"/></row>
-					<row><label value="Costo de la entrada" /><textbox value="@bind(vm2.eventoGuardar.costoEntrada)" constraint="no empty" rows="1"/></row>
-					<row><label value="Monto a recaudar" /><textbox  value="@bind(vm2.eventoGuardar.montoEsperado)" constraint="no empty" rows="1"/></row>
+					<row><label value="Cantidad de entradas" /><intbox value="@bind(vm2.eventoGuardar.cantEntradas)"/></row>
+					<row><label value="Costo de la entrada" /><doublebox value="@bind(vm2.eventoGuardar.costoEntrada)" constraint="no empty" /></row>
+					<row><label value="Monto a recaudar" /><doublebox  value="@bind(vm2.eventoGuardar.montoEsperado)" constraint="no empty"/></row>
 			
 					
 					
@@ -186,9 +186,9 @@
 					<row><label value="Descripcion" /><textbox value="@bind(vm2.eventoSelected.descripcion)" rows="4"/></row>
 					<row> <label style="display:block" value="Fecha" /><datebox value="@bind(vm2.eventoSelected.fecha)" format="dd/MM/yyyy" /></row>
 					<row><label value="Hora" />     <timebox id="tb3" cols="12" format="a hh:mm" onCreate="self.value = new Date()" /></row>
-					<row><label value="Cantidad de entradas" /><textbox value="@bind(vm2.eventoSelected.cantEntradas)" rows="1"/></row>
-					<row><label value="Costo de la entrada" /><textbox value="@bind(vm2.eventoSelected.costoEntrada)" rows="1"/></row>
-					<row><label value="Monto a Recaudadar" /><textbox value="@bind(vm2.eventoSelected.montoEsperado)" rows="1"/></row>
+					<row><label value="Cantidad de entradas" /><intbox value="@bind(vm2.eventoSelected.cantEntradas)"/></row>
+					<row><label value="Costo de la entrada" /><doublebox value="@bind(vm2.eventoSelected.costoEntrada)"/></row>
+					<row><label value="Monto a Recaudadar" /><doublebox value="@bind(vm2.eventoSelected.montoEsperado)"/></row>
 					
 					
 					
