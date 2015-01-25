@@ -254,13 +254,17 @@ public class ServicioPaciente {
 	
 	//································································································
 
-	public static String aceptarPaciente(Persona persona){
+	public static String aceptarPaciente(Paciente paciente){
 		Resty resty = new Resty();
 	    JSONResource jsResource = null;
 	    String ok = null;
+	    DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			
-			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + persona.getCedula() + 
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nrohijos=" + paciente.getNroHijos() +
+					"&nombconyugue=" + paciente.getNombreConyugue() +"&apeconyugue=" + paciente.getApellidoConyugue() +"&cedconyugue=" + paciente.getCedulaConyugue() +"&ocupconyugue=" + paciente.getOcupacionConyugue() +"&fecnacconyugue=" + fecha.format(paciente.getFechaNacConyugue()) +
+					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() +   
+					
 					"&estatus=I" );
 			
 		} catch (IOException e) {

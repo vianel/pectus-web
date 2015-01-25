@@ -19,8 +19,10 @@ import us.monoid.web.Resty;
 
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Causa;
+import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Estado;
+import com.ucla.frontend.pectus.models.Estudio;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
@@ -199,9 +201,34 @@ public class ServicioSolicitudAyuda {
                   ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
                   ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
                   ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
-//                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
+                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
                   ayuda.setCausa(obtenerCausa(obj.get("causa").toString()));
                   ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
+                  
+                  JSONArray serEstudios = serAyuda.getJSONObject(i).getJSONArray("estudios");
+                  List<EstudioClinica> listaEstudios = new ArrayList<EstudioClinica>();
+                  for(int l = 0; l<serEstudios.length(); l++){
+                	  
+                	  Estudio tipoEstudio = new Estudio();
+                	  tipoEstudio.setNombre((String)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").get("nombre"));
+                	  tipoEstudio.setId((Integer)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").get("id"));
+                	  tipoEstudio.setDescripcion((String)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").getString("descripcion"));
+                	  
+                	  Clinica clinica = new Clinica();
+                	  clinica.setNombre((String)serEstudios.getJSONObject(l).getJSONObject("clinica").get("nombre"));
+                	  
+                	  EstudioClinica estudioClinica = new EstudioClinica();
+                	  estudioClinica.setMonto(Double.parseDouble(serEstudios.getJSONObject(l).get("monto").toString()));
+                	  estudioClinica.setClinica(clinica);
+                	  estudioClinica.setEstudio(tipoEstudio);
+                	  
+                	  listaEstudios.add(estudioClinica);
+                	  
+                	  
+                	  
+                  }
+                  ayuda.setListaEstudioClinicas(listaEstudios);
+                  
                   
                   listaAyudas.add(ayuda);
 			  } //fin For
@@ -272,7 +299,7 @@ public class ServicioSolicitudAyuda {
 			String ok = jsResource.get("ok").toString();
 			if (ok.equalsIgnoreCase("true")) {
 			
-			String strMot = jsResource.get("motivosrechazos").toString();
+			String strMot = jsResource.get("motivorechazos").toString();
 			JSONArray serMotivoRechazo = new JSONArray(strMot);
 			  for(int i=0; i < serMotivoRechazo.length(); i++){
                   MotivoRechazo motivoRechazo = new MotivoRechazo();

@@ -22,7 +22,7 @@
 				</columns>
 				<rows>
 					<row>
-						Tipo Actividad <combobox style="display:block;" model="@load(vm.listatipoactividad)" selectedItem="@bind(vm.tipoactividadSelected)" >
+						Tipo Actividad <combobox readonly="true"  style="display:block;" model="@load(vm.listatipoactividad)" selectedItem="@bind(vm.tipoactividadSelected)" >
 						<template name="model">
 							<comboitem label="@load(each.nombre)" />
 						</template>

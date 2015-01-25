@@ -22,7 +22,7 @@
 						    dialogoasociarvoluntarios.doModal();						  	
 			</attribute>
 			Gestionar Voluntarios</button>
-  			<button id="" sclass="btn-success" vm.actividadSelected tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad " > 
+  			<button id="" sclass="btn-success"  tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad" > 
   			 		    <attribute name="onClick">						
 						    modaldialog.doModal();						  	
 			</attribute>
@@ -37,7 +37,7 @@
                      <hlayout>
 
 	<listbox  width="650px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modelactividad)"  selectedItem="@bind(vm.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
+          sclass="mylist" 	model="@load(vm.listaActividadesC)"  selectedItem="@bind(vm.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
 			
 			
 		  <listhead sizable="true"> 
@@ -190,7 +190,7 @@
                 ¿Ha terminado de Asociar los voluntarios?
 			</div>
 			<div  align="center" >
-			<button style="margin-left: 60px;"  width="55px" height="30px" sclass="btn-success" onClick="@command('concluirasignacion')">
+			<button style="margin-left: 60px;"  width="55px" height="30px" sclass="btn-success" onClick="@command('terminar')">
 					    <attribute name="onClick">						
 						    modaldialog.setVisible(false);						  	
 						</attribute>		

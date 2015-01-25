@@ -23,7 +23,7 @@
 							</attribute>Rechazar</button>
 
 				
-				<listbox  sclass="mylist"  mold="paging" pageSize="7"  model="@load(vm.modelsolactividad)" selectedItem="@bind(vm.solactividadSelected)"  >
+				<listbox  sclass="mylist"  mold="paging" pageSize="7"  model="@load(vm.listaSolicitudes)" selectedItem="@bind(vm.solactividadSelected)"  >
 	
         			<listhead >
         				

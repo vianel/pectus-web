@@ -64,6 +64,7 @@ public class ServicioActividad {
 		                  actividad.setNroasistentesesperados(obj.getInt("nroasistentesesperados"));
 		                  actividad.setMonto((float) obj.getDouble("monto"));
 		                  actividad.setObservaciones(obj.getString("observaciones").toString());
+		                  actividad.setEstatus(obj.getString("estatus").toString().charAt(0));
 		                  actividad.setRecursosUtilizados(obj.getString("recursosutilizados").toString());
 		                  
 		                  listaActividad.add(actividad);
@@ -179,6 +180,50 @@ public class ServicioActividad {
 		return listaTipoActividad;
 	}
 	
+	public static boolean cambiarEstatusSolicitud(SolicitudActividad solicitud){
+		
+			Resty resty = new Resty();
+			JSONResource jsResource = null;
+			String ok = null;
+			
+			try {
+			
+				jsResource = resty.json("http://127.0.0.1:5000/solicitud-actividad/editar?id=" + solicitud.getId().toString()
+						+ "&estatus=" + solicitud.getEstatus().toString());
+				return true;
+						
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+			
+		
+		
+	}
+	public static boolean cambiarEstatusActividad(Actividad actividad){
+
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+		
+			jsResource = resty.json("http://127.0.0.1:5000/actividad/editar?id=" + actividad.getId().toString()
+					+ "&estatus=" + actividad.getEstatus().toString());
+			return true;
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+		
+	}
+	
 	public static String agregarsolicitudactividad(SolicitudActividad SA)
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -191,7 +236,8 @@ public class ServicioActividad {
 						+"&descripcion=" + SA.getDescripcion().replaceAll(" ", "%20")
 						+"&fecsolicitud=" + dateFormat.format(SA.getFecha()) 
 						+"&nombsolicitante="+ SA.getNomsolicitante() 
-						+"&telfsolicitante="+ SA.getTlfsolicitante());
+						+"&telfsolicitante="+ SA.getTlfsolicitante()
+						+"&estatus=" + SA.getEstatus().toString());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -235,6 +281,7 @@ public class ServicioActividad {
 		                  actividad.setFecha(convertirFecha(obj.getString("fecsolicitud")));
 		                  actividad.setNomsolicitante(obj.getString("nombsolicitante"));
 		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
+		                //  actividad.setEstatus(obj.getString("estatus".toString()).charAt(0));
 		              //    actividad.setTlfsolicitante(obj.getString("telfsolicitante"));
 		                  actividad.setIdTipoActividad(obtenertipoactividad(obj.get("tipoactividad").toString()));
 		                  listasolactividad.add(actividad);
@@ -293,6 +340,7 @@ public class ServicioActividad {
 					+"&nroasistentesesperados=" + Integer.valueOf(act.getNroasistentesesperados())
 				//	+"&duracion=" + act.getDuracion()
 					+"&idlugar=" + act.getLugar().getId().toString() 
+					+"&estatus=" + act.getEstatus().toString()
 				//	+"&duracion=" + act.getDuracion()
 					+"&descripcion=" + act.getDescripcion().replaceAll(" ", "%20"));
 			

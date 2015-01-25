@@ -11,6 +11,7 @@ import java.util.Set;
 
 
 
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -24,6 +25,7 @@ import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.controllers.ControladorEvento.ChooseEvent;
 import com.ucla.frontend.pectus.models.Ayuda;
+import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
@@ -31,6 +33,7 @@ import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.SolicitudRechazada;
 import com.ucla.frontend.pectus.models.Voluntario;
+import com.ucla.frontend.pectus.services.ServicioCita;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPatologia;
@@ -41,14 +44,14 @@ public class AyudaView {
 	
 	
 
-
 	private Diagnostico diagnosticoSelected;
 	private Paciente pacienteSelected;
 	private String motivoSelected;
 	private Ayuda ayudaSelected;
 	private MotivoRechazo motivoRechazoSelected;
 	private SolicitudRechazada solicitudRechazadaSelected =  new SolicitudRechazada();
-	
+	private Cita citaselected;
+	List<Cita> currentCita = ServicioCita.buscarCita(); //servicio cita
 	private Set <EstudioClinica> estudioclinicaSelected;
 	private Window ventanaregistronuevacita;
 	List<Ayuda> currentAyuda = ServicioSolicitudAyuda.buscarAyudas();
@@ -59,7 +62,7 @@ public class AyudaView {
 	private AyudaFilter ayudaFilter = new AyudaFilter();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
-	private List<Paciente > pacientes = ServicioPaciente.buscarPacientes();
+	private List<Paciente> pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>();
 	
@@ -74,6 +77,11 @@ public class AyudaView {
 	
 	List<Paciente> listaPacientes = ServicioPaciente.buscarPacientes();
 	
+	
+	
+	
+	
+	
 	@Init
 	public void init(){
 //		selected = ayudas.get(0);
@@ -82,10 +90,13 @@ public class AyudaView {
 		getmodelAyudaAceptada();
 		getmodelAyudaSolicitada();
 		getmodelMotivoRechazo();
+		getmodelCita();
 		
 	}
 	
-
+	public ListModel<Cita> getmodelCita() {
+        return new ListModelList<Cita>(currentCita);
+    }
 	public ListModel<Ayuda> getmodelayuda() {
         return new ListModelList<Ayuda>(currentAyuda);
     }
@@ -260,6 +271,14 @@ public class AyudaView {
 	}
 	
 	
+	public Cita getCitaselected() {
+		return citaselected;
+	}
+
+	public void setCitaselected(Cita citaselected) {
+		this.citaselected = citaselected;
+	}
+
 	@Command
 	public void guardarAyuda() throws Exception{
 		String response = null;

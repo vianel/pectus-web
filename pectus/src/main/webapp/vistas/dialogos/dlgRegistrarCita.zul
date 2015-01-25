@@ -87,11 +87,13 @@
 				                <listhead>
 				                    <listheader label="Clinica" />
 				                    <listheader label="Estudio" />
+				                    <listheader label="Monto" />
 				                </listhead>
 				                 <template name="model" var="estudioclinica">
 				                <listitem>
 				                  <listcell  label="@load(estudioclinica.clinica.nombre)" />
 				                  <listcell  label="@load(estudioclinica.estudio.nombre)" />
+				                  <listcell  label="@load(estudioclinica.monto)" />
 				              </listitem>
 				              </template>
 				            </listbox>

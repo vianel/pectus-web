@@ -36,7 +36,7 @@ public class ControladorPaciente implements Serializable{
 	private String resp2;
 	private Visita visita = new Visita();
 	
-	private Paciente pacienteselected;
+	private Paciente pacienteselected = new Paciente();
 	private Persona personaselected;
 	private String cedulaSelected;
 	private String nombreSelected;
@@ -715,7 +715,8 @@ public class ControladorPaciente implements Serializable{
 
 	@Command
 	public void aceptarPaciente(){
-		resp = ServicioPaciente.aceptarPaciente(personaselected);
+		pacienteselected.setCedula(personaselected.getCedula());
+		resp = ServicioPaciente.aceptarPaciente(pacienteselected);
 		
 		if (resp.equalsIgnoreCase("true"))
 	      {

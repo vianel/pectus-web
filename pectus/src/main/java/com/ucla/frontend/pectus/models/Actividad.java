@@ -18,7 +18,7 @@ public class Actividad {
 	private Integer nroAsistentes;
 	private String descripcion;
 	private String observaciones;
-	private boolean estatus;
+	private Character estatus;
 	private Float montoesperado;
 	private int nroasistentesesperados;
 	private String titulo;
@@ -38,7 +38,7 @@ public class Actividad {
 			SolicitudActividad idSolicitudActividad, Date fechainicio,
 			Date fechafin, String hora, String recursosUtilizados,
 			Float monto, String duracion, Integer nroAsistentes,
-			String descripcion, String observaciones, boolean estatus,
+			String descripcion, String observaciones, Character estatus,
 			float montoesperado, int nroasistentesesperados) {
 		super();
 		this.id = id;
@@ -145,10 +145,10 @@ public class Actividad {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-	public boolean isEstatus() {
+	public Character getEstatus() {
 		return estatus;
 	}
-	public void setEstatus(boolean estatus) {
+	public void setEstatus(Character estatus) {
 		this.estatus = estatus;
 	}
 
