@@ -17,17 +17,15 @@
 				<separator height="15px"/>	
 				
 
-				<button sclass="btn-success">
-							        <attribute name="onClick" disabled="@load(vm.actividadSelected eq null?'true':'false')">						
+				<button sclass="btn-success" disabled="@load(vm.actividadSelected eq null?'true':'false')" >
+							        <attribute name="onClick" >						
 						     modalregistrarresulactividad.doModal();						  	
 							</attribute>
 							Resultados Obtenidos</button>
-			   <button sclass="btn-success">
-				        <attribute name="onClick">						
-			   			  modalResultadoActividad.doModal();						  	
-						</attribute>
-							Ver Graficas</button>
-				<listbox    mold="paging" pageSize="5"  model="@load(vm.modelactividad)" selectedItem="@bind(vm.actividadSelected)"  >
+			   <button   disabled="@load(vm.actividadSelected eq null?'true':'false')"    sclass="btn-success" onClick ="@command('terminarResultado')">
+	
+							Terminar</button>
+				<listbox    mold="paging" pageSize="5"  model="@load(vm.listaActividadesV)" selectedItem="@bind(vm.actividadSelected)"  >
 	
         			<listhead >
         			    <listheader label="Titulo" ></listheader>
@@ -106,7 +104,7 @@
 <!-- 			        model="@bind(vm.model)" engine="@bind(vm.engine)" -->
 <!-- 			        onClick="@command('showMessage',msg=event.areaComponent.tooltiptext)"/> -->
 <!-- 			   <hlayout  visible="@bind(not empty vm.message)"> -->
-<!-- 			        Grafica de Muestra -->
+<!-- 			        Terminar-->
 <!-- 			   </hlayout> -->
 
 	

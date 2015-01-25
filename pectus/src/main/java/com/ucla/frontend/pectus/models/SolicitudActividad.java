@@ -11,13 +11,13 @@ public class SolicitudActividad {
 	private Date fecha;
 	private String nomsolicitante;
 	private String tlfsolicitante;
-	private boolean estatus;
+	private Character estatus;
 	
 	
 	
 	public SolicitudActividad(Integer id, TipoActividad idTipoActividad,
 			String descripcion, Date fecha, String nomsolicitante,
-			String tlfsolicitante, boolean estatus) {
+			String tlfsolicitante, Character estatus) {
 		super();
 		this.id = id;
 		this.idTipoActividad = idTipoActividad;
@@ -54,10 +54,10 @@ public class SolicitudActividad {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public boolean isEstatus() {
+	public Character getEstatus() {
 		return estatus;
 	}
-	public void setEstatus(boolean estatus) {
+	public void setEstatus(Character estatus) {
 		this.estatus = estatus;
 	}
 	public String getNomsolicitante() {

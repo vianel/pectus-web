@@ -27,7 +27,7 @@
 		
 		
 		<listbox  width="650px"  mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm2.modelactividad)"  selectedItem="@bind(vm2.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
+          sclass="mylist" 	model="@load(vm2.listaActividadesT)"  selectedItem="@bind(vm2.actividadSelected)" onClick="@command('buscarvoluntariosasignados')">
 			
 			
 		  <listhead sizable="true"> 
