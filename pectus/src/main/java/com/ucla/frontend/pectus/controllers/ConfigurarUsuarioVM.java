@@ -197,19 +197,22 @@ public class ConfigurarUsuarioVM {
 	@NotifyChange("modeltarea")
 	public void vermoduloxtareas()
 	{
-		auxtarea = ServicioModulo.buscarTareas(moduloSelected);
-		for (Tarea temp : currentTarea)
+		if (moduloSelected != null)
 		{
-			temp.setStatus(false);
-		}
-		for (int i=0; i< currentTarea.size() ; i++)
-		{
-			for (int j=0; j<auxtarea.size(); j++)
+			auxtarea = ServicioModulo.buscarTareas(moduloSelected);
+			for (Tarea temp : currentTarea)
 			{
-				if (auxtarea.get(j).getId() == currentTarea.get(i).getId())
+				temp.setStatus(false);
+			}
+			for (int i=0; i< currentTarea.size() ; i++)
+			{
+				for (int j=0; j<auxtarea.size(); j++)
 				{
-					currentTarea.get(i).setStatus(true);
-					
+					if (auxtarea.get(j).getId() == currentTarea.get(i).getId())
+					{
+						currentTarea.get(i).setStatus(true);
+						
+					}
 				}
 			}
 		}
@@ -218,22 +221,25 @@ public class ConfigurarUsuarioVM {
 	@NotifyChange("modelgrupo")
 	public void vergruposxusuario()
 	{
-		auxgrupo = ServicioUsuario.buscarGrupos(usuarioSelected);
-		
-
-		//auxgrupo.retainAll(currentGrupo);
-		for (Grupo temp : currentGrupo)
+		if (usuarioSelected != null)
 		{
-			temp.setStatus(false);
-		}
-		for (int i=0; i< currentGrupo.size() ; i++)
-		{
-			for (int j=0; j<auxgrupo.size(); j++)
+			auxgrupo = ServicioUsuario.buscarGrupos(usuarioSelected);
+			
+	
+			//auxgrupo.retainAll(currentGrupo);
+			for (Grupo temp : currentGrupo)
 			{
-				if (auxgrupo.get(j).getId() == currentGrupo.get(i).getId())
+				temp.setStatus(false);
+			}
+			for (int i=0; i< currentGrupo.size() ; i++)
+			{
+				for (int j=0; j<auxgrupo.size(); j++)
 				{
-					currentGrupo.get(i).setStatus(true);
-					
+					if (auxgrupo.get(j).getId() == currentGrupo.get(i).getId())
+					{
+						currentGrupo.get(i).setStatus(true);
+						
+					}
 				}
 			}
 		}
@@ -242,29 +248,32 @@ public class ConfigurarUsuarioVM {
 	@NotifyChange("modelmodulo")
 	public void compararmodulos()
 	{
-		List<Modulo> aux = new ArrayList<Modulo>();
-			aux.addAll(currentModulo);
-			
-			for (int i=0; i<7; i++)
-			{
-				aux.remove(i).getClass();
-			}
-
-		
-	
-		
-		aux.retainAll(currentModulo);
-		
-	
-		
-		for (int i=0; i< currentModulo.size() ; i++)
+		if (grupoSelected != null)
 		{
-			for (int j=0; j<aux.size(); j++)
-			{
-				if (aux.get(j).getId() == currentModulo.get(i).getId())
+			List<Modulo> aux = new ArrayList<Modulo>();
+				aux.addAll(currentModulo);
+				
+				for (int i=0; i<7; i++)
 				{
-					currentModulo.get(i).setStatus(true);
-					
+					aux.remove(i).getClass();
+				}
+	
+			
+		
+			
+			aux.retainAll(currentModulo);
+			
+		
+			
+			for (int i=0; i< currentModulo.size() ; i++)
+			{
+				for (int j=0; j<aux.size(); j++)
+				{
+					if (aux.get(j).getId() == currentModulo.get(i).getId())
+					{
+						currentModulo.get(i).setStatus(true);
+						
+					}
 				}
 			}
 		}
