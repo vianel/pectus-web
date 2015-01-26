@@ -1,7 +1,13 @@
 package vistas;
 
+import java.net.URL;
 import java.util.List;
 
+
+
+
+
+import org.apache.http.HttpRequest;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -16,6 +22,15 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Hlayout;
+
+
+
+
+
+
+
+import org.zkoss.zul.Panel;
+import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Modulo;
 import com.ucla.frontend.pectus.services.ServicioModulo;
@@ -61,21 +76,18 @@ public class SidebarComposer  {
 	private boolean resulevento;
 	private boolean consultas;
 	private boolean adminsistema;
+	private boolean seguridadfuncional;
 	private List<Modulo> modulos;
+	private boolean seguridadSelected;
+	private Window ventanaconfusuario;
 
 	public SidebarComposer() {
 		super();
 		// TODO Auto-generated constructor stub
 		modulos = ServicioModulo.buscarModulos();
-	//************* PRINCIPALES ****************
-		maestros = true;
-			maestropacientes = true;
-				gestionpaciente = true;
-				maestroactividadevento = true;
-		adminsistema = true;
+
 		consultas = true;
-		educacionprevencion = true;
-	// *****************************************
+
 		buscarmodulos(modulos);
 		
 		
@@ -85,7 +97,8 @@ public class SidebarComposer  {
 		
 		for (int i=0;i< modulos.size(); i++)
 		{
-			if (modulos.get(i).getNombre().equals("Patologia"))  { maestropatologias = true; }
+			//DATOS BASICOS
+			if (modulos.get(i).getId() == 1)  { maestropatologias = true; }
 			if (modulos.get(i).getId() == 2) {maestropolizas = true; }
 			if (modulos.get(i).getId() == 3) {maestromotivosol = true; }
 			if (modulos.get(i).getId() == 4) {maestrorechazosol = true; }
@@ -99,16 +112,156 @@ public class SidebarComposer  {
 			if (modulos.get(i).getId() == 12) {maestrocomisiones = true; }
 			if (modulos.get(i).getId() == 13) {maestrovoluntario = true; }
 			if (modulos.get(i).getId() == 14) {maestrotipolugar = true; }
-		}
-	}
+			if (modulos.get(i).getId() == 15) {maestrolugar = true; }
 
-	 
+			// GESTION DEL PACIENTE
+			if (modulos.get(i).getId() == 16) {cita = true; }
+			if (modulos.get(i).getId() == 17) {visita = true; }
+			if (modulos.get(i).getId() == 18) {solayuda = true; }
+			if (modulos.get(i).getId() == 19) {evalsolicitud = true; }
+			if (modulos.get(i).getId() == 19) {registrarcita = true; }
+			if (modulos.get(i).getId() == 20) {resulcita = true; }
+			//EDUCACION Y PREVENCION
+				//ACTIVIDAD
+			if (modulos.get(i).getId() == 22) {solactividad = true; }
+			if (modulos.get(i).getId() == 23) {registraractividad = true; }
+			if (modulos.get(i).getId() == 24) {asignarvoluntarioactividad = true; }
+			if (modulos.get(i).getId() == 25) {resulactividad = true; }
+				//EVENTOS
+			if (modulos.get(i).getId() == 26) {registrarevento = true; }
+			if (modulos.get(i).getId() == 27) {asignarvoluntarioevento = true; }
+			if (modulos.get(i).getId() == 28) {resulevento = true; }
+			if (modulos.get(i).getId() == 29) {registrarcolaboevento = true; }
+			//ADMINISTRACION DEL SISTEMA
+			if (modulos.get(i).getId() == 32) {seguridadfuncional = true; }
+		
+			
+		}
+		visualizarmaestrospaciente();
+		visualizarmaestrosactevent();
+		visualizarmaestros();
+		visualizargestionpaciente();
+		visualizaractividad();
+		visualizarevento();
+		visualizareducacionyprevencion();
+		visualizaradminsistema();
+	}
 	@Command
 	public void loguearse()
 	{
 		Executions.sendRedirect("../home/index.zul");
 
 	}
+	public void visualizarmaestrospaciente()
+	{
+		if (maestropatologias == true || maestropolizas == true || maestromotivosol == true || maestrorechazosol == true || 
+				clinicaestudio == true || tipoestudio == true || maestroestudioclinica == true)
+		{
+			maestropacientes = true;
+		} else if (maestropatologias == false && maestropolizas == false && maestromotivosol == false && maestrorechazosol == false && 
+				clinicaestudio == false && tipoestudio == false && maestroestudioclinica == false)
+		{
+			maestropacientes = false;
+		}
+	}
+	public void visualizarmaestrosactevent()
+	{
+		if (patrocinador == true || tipocolaboracion == true || tipoactividad == true || maestrocomisiones == true || 
+				maestrovoluntario == true || maestrotipolugar == true || maestrolugar == true)
+		{
+			maestroactividadevento = true;
+		} else if (patrocinador == false && tipocolaboracion == false && tipoactividad == false && maestrocomisiones == false && 
+				maestrovoluntario == false && maestrotipolugar == false && maestrolugar == false)
+		{
+			maestroactividadevento = false;
+		}
+	}
+	public void visualizarmaestros()
+	{
+		if (maestropacientes == true || maestroactividadevento == true )
+		{
+			maestros = true;
+		}
+		else if (maestropacientes == false && maestroactividadevento == false )
+		{
+			maestros = false;
+		}
+	}
+	public void visualizargestionpaciente()
+	{
+		if (cita == true || visita == true || solayuda == true || 
+			evalsolicitud == true || registrarcita == true || resulcita == true)
+		{
+			gestionpaciente = true;
+		}
+		else if (cita == false && visita == false && solayuda == false && 
+				evalsolicitud == false && registrarcita == false && resulcita == false)
+		{
+			gestionpaciente = false;
+		}
+		
+	}
+	public void visualizaractividad()
+	{
+		if (solactividad == true || registraractividad == true || asignarvoluntarioactividad == true || 
+				resulactividad == true )
+			{
+				gestionactividades = true;
+			}
+			else if (solactividad == false && registraractividad == false && asignarvoluntarioactividad == false && 
+					resulactividad == false )
+			{
+				gestionactividades = false;
+			}
+	}
+	public void visualizarevento()
+	{
+		if (registrarevento == true || asignarvoluntarioevento == true || resulevento == true || 
+				registrarcolaboevento == true )
+			{
+			gestionevento = true;
+			}
+			else if (registrarevento == false && asignarvoluntarioevento == false && resulevento == false && 
+					registrarcolaboevento == false )
+			{
+				gestionevento = false;
+			}
+		
+	}
+	public void visualizareducacionyprevencion()
+	{
+		if (gestionactividades == true || gestionevento == true )
+		{
+			educacionprevencion = true;
+		}
+		else if (gestionactividades == false && gestionevento == false )
+		{
+			educacionprevencion = false;
+		}
+		
+	}
+	public void visualizaradminsistema()
+	{
+		if (seguridadfuncional == true || respaldo == true)
+		{
+			adminsistema = true;
+		}
+		else if (seguridadfuncional == false && respaldo == false)
+		{
+			adminsistema = false;
+		}
+	}
+	@Command
+	public void Seleccionconfusuario()
+             
+	{
+		// href= "../gestionconfusuario/index_confusuario.zul"
+		ventanaconfusuario = (Window)Executions.createComponents("gestionconfusuario/confoperaciones.zul", null, null);
+		ventanaconfusuario.doPopup();
+
+		seguridadSelected = true;
+	}
+
 	public boolean getRespaldo() {
 		return respaldo;
 	}
@@ -495,6 +648,18 @@ public class SidebarComposer  {
 
 	public void setAdminsistema(boolean adminsistema) {
 		this.adminsistema = adminsistema;
+	}
+	public boolean isSeguridadfuncional() {
+		return seguridadfuncional;
+	}
+	public void setSeguridadfuncional(boolean seguridadfuncional) {
+		this.seguridadfuncional = seguridadfuncional;
+	}
+	public boolean isSeguridadSelected() {
+		return seguridadSelected;
+	}
+	public void setSeguridadSelected(boolean seguridadSelected) {
+		this.seguridadSelected = seguridadSelected;
 	}
 	
 

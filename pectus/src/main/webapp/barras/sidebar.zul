@@ -75,14 +75,9 @@
 		</nav>
 
 		
-		<nav id="calitem" visible="@bind(vm.adminsistema)" label="Administracion del sistema" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
+		<nav id="calitem" visible="@bind(vm.adminsistema)"  label="Administracion del sistema" iconSclass="z-icon-calendar" sclass="notify" tooltip="calpp, position=end_center, delay=0">
 			<navitem label="Publicaciones" iconSclass="z-icon-angle-double-right"/>	
-			<nav label="Seguridad Funcional" iconSclass="z-icon-angle-double-right" sclass="grey">
-				<navitem label="Registrar Usuario" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Registrar Grupos" iconSclass="z-icon-angle-double-right"/>
-				<navitem label="Cambios de clave" iconSclass="z-icon-angle-double-right"/>
-				
-			</nav>
+			<navitem visible="@bind(vm.seguridadfuncional)"  selected="@bind(vm.seguridadSelected)" onClick="@command('Seleccionconfusuario')" label="Seguridad Funcional" iconSclass="z-icon-angle-double-right" sclass="grey" /> 
 			<navitem visible="@bind(vm.respaldo)"  label="Respaldo" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Recuperacion" iconSclass="z-icon-angle-double-right"/>
 			<navitem label="Historicos" iconSclass="z-icon-angle-double-right"/>	
