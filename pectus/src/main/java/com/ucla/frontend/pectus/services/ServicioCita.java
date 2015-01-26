@@ -31,10 +31,12 @@ import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioSolicitud;
+import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Estudio;
 import com.ucla.frontend.pectus.models.EstudioClinica;
+import com.ucla.frontend.pectus.models.ResultadoAyuda;
 
 public class ServicioCita {
 
@@ -125,6 +127,30 @@ public class ServicioCita {
 	    	return listaCita;
 	        
 	    }
+   
+   public static String ResultadoCita(int idCita,ResultadoAyuda resultadoAyuda )
+	{
+//		Resty resty = new Resty();
+//		JSONResource jsResource = null;
+//		String ok = null;
+//		try {
+//			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/rechazar?idmotivorechazo="+ motivoRechazo.getId()+  
+//					"&idsolicitudayuda="+ ayuda.getId() + "&descripcion="+solicitudRechazada+  
+//					"&estatus=R" );
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		 try {
+//			ok = jsResource.get("ok").toString();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	   
+	   String ok = "true";
+		return ok;
+	}
    
    
    public static EstudioSolicitud obtenerEstudioSolicitud(String s){	

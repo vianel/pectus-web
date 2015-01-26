@@ -2911,6 +2911,19 @@ left: 3em;
 	top: 15em;
 	left: 3em;
 }
+.z-listbox-emptybody td {
+	font-family: Arial,Sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	color: #6FD7BB;
+	text-align: center;
+	font-size: 31px;
+	text-transform: uppercase;
+	margin-top: 4em;
+	position: absolute;
+	margin-left: 10em;
+	border: 22px double #F5F5F5;
+}
 
 
 

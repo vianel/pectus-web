@@ -112,7 +112,7 @@ public class ServicioSolicitudAyuda {
 	    String ok = null;
 		try {
 			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/agregar?cedula=" + ayuda.getPaciente().getCedula() +
-					"&motivosolicitud=" + ayuda.getMotivo() +
+					"&observacion=" + ayuda.getMotivo() +
 					"&idpatologia=" + ayuda.getDiagnostico().getId() +
 					"&estudios=" + estudios +
 					"&fecsolicitud=" + dateFormat.format(fechadehoy) +
@@ -177,6 +177,76 @@ public class ServicioSolicitudAyuda {
  
         return listaAyudas;
     }
+	
+	public static void guardarListaEstudio(List<EstudioClinica> estudios, String cedula, String motivo, Diagnostico diagnostico, Causa causa, Date fecha){
+
+		    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		 Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000//solicitud-ayuda/agregar?cedula=" + cedula + "&observacion=" + motivo + "&idpatologia=" + diagnostico.getId() + "&idcausa=" + causa.getId() + 
+					"&fechasolicitud=" + dateFormat.format(new Date()).toString() +  "&estudios=" + metodoConcatenacion(estudios));
+				
+					
+					
+					
+					
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	public static ListModelList<Causa> buscarCausas(){
+        ListModelList<Causa> listaCausas = new ListModelList<Causa>();
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/causa/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("causas").toString();
+			JSONArray serCausa = new JSONArray(strPa);
+			  for(int i=0; i < serCausa.length(); i++){
+                  Causa causa = new Causa();
+                  JSONObject obj = serCausa.getJSONObject(i);
+                  
+                  causa.setId(Integer.valueOf(obj.get("id").toString()));
+                  causa.setNombre(obj.get("nombre").toString());
+                  causa.setDescripcion(obj.get("descripcion").toString());
+//         
+                  
+                  listaCausas.add(causa);
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+        return listaCausas;
+    }
+	
+	
+	
+	
+	
+	
 	
 	public static List<Ayuda> buscarAyudasAceptadas(){
         List<Ayuda> listaAyudas = new ArrayList<Ayuda>();
@@ -351,8 +421,9 @@ public class ServicioSolicitudAyuda {
 		JSONResource jsResource = null;
 		String ok = null;
 		try {
-			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/rechazar?idmotivo=1"+  
-					"&idsolicitudayuda="+ ayuda.getId() + "&descripcion="+solicitudRechazada );
+			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/rechazar?idmotivorechazo="+ motivoRechazo.getId()+  
+					"&idsolicitudayuda="+ ayuda.getId() + "&descripcion="+solicitudRechazada+  
+					"&estatus=R" );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -378,7 +449,13 @@ public class ServicioSolicitudAyuda {
 			paciente.setApellidoConyugue(objjson.getString("apeconyugue"));
 			paciente.setProfesion(objjson.getString("profesion"));
 			paciente.setNombreConyugue(objjson.getString("nombconyugue"));
-			
+			paciente.setCedulaConyugue(objjson.getString("cedconyugue"));
+			paciente.setOcupacionConyugue(objjson.getString("ocupconyugue"));
+			paciente.setIngresos(Float.parseFloat(objjson.getString("ingfamiliares")));
+			paciente.setEgresos(Float.parseFloat(objjson.getString("egrfamiliares")));
+			paciente.setLugarTrabajo(objjson.getString("lugtrabajo"));
+			paciente.setDireccionTrabajo(objjson.getString("dirtrabajo"));
+			paciente.setTelefonoTrabajo(objjson.getString("tlftrabajo"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -424,6 +501,21 @@ public class ServicioSolicitudAyuda {
 
 	        return calendario.getTime();
 	    }
+	public static String metodoConcatenacion(List<EstudioClinica> estudios){
 	
+		StringBuilder concatenarTodo = new StringBuilder();	
+		if(estudios != null){
+		if(estudios.size() > 1){
+		for(int i = 0; i<estudios.size()-1; i++){
+	
+			concatenarTodo.append(estudios.get(i).getId().toString()).append(",");			
+		}
+		}
+		
+		concatenarTodo.append(estudios.get(estudios.size()-1).getId());
+		}
+		return concatenarTodo.toString();
+		
+	}
 
 }

@@ -20,6 +20,7 @@ import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Persona;
+import com.ucla.frontend.pectus.models.ResultadoAyuda;
 import com.ucla.frontend.pectus.models.TipoEstudio;
 import com.ucla.frontend.pectus.models.EstudioClinica;
 import com.ucla.frontend.pectus.services.ServicioCita;
@@ -33,6 +34,7 @@ import com.ucla.frontend.pectus.controllers.CitaStatus;
 public class CitaView {
 	
 	private Cita citaselected;
+	private ResultadoAyuda resultadoSelected;
 	private Integer idselected;
 	private Date fechaselected;
 	private Date horaselected;
@@ -206,8 +208,16 @@ public class CitaView {
 		this.clinicaselected = clinicaselected;
 	}
 
-
 	
+	
+	public ResultadoAyuda getResultadoSelected() {
+		return resultadoSelected;
+	}
+
+	public void setResultadoSelected(ResultadoAyuda resultadoSelected) {
+		this.resultadoSelected = resultadoSelected;
+	}
+
 	public Window getVentanaregistronuevacita() {
 		return ventanaregistronuevacita;
 	}
@@ -317,40 +327,15 @@ public class CitaView {
 	
 	@Command
 	public void resultadoCita() throws Exception{
-
-		
-		Clients.showNotification("Resultado registrado", null, true);
-	
-
-//		if (motivoSelected!= null) {
-//	
-//			ayudaSelected = new Ayuda();
-//			
-//			ayudaSelected.setDiagnostico(diagnosticoSelected);
-//			ayudaSelected.setPaciente(pacienteSelected);
-//			ayudaSelected.setMotivo(motivoSelected);
-//
-//			List<EstudioClinica> estudiosclinicas = new ArrayList<EstudioClinica>(estudioclinicaSelected);
-//			response = ServicioSolicitudAyuda.agregarAyuda(ayudaSelected,estudiosclinicas);
-//			if (response.equalsIgnoreCase("true"))
-//			{
-////				//currentPaciente.add(pacienteselected);
-////				currentPaciente = ServicioPaciente.buscarPacientes();
-////				pacientestatues = generateStatusList(currentPaciente);
-////				s
-//				Clients.showNotification("Ayuda registrada", null, true);
-////				x.detach();
-//
-//			}else
-//			{
-//				Clients.showNotification("Error al guardar", true);
-//			}
-//		}	else{
-////			System.out.println(ciudadSelected.getNombre() + ciudadSelected.getId());
-//			Clients.showNotification("Porfavor ingrese todos los datos validos");
-//		}
-//
-
+		int idCita = citaselected.getId();
+		String resp = ServicioCita.ResultadoCita(idCita, resultadoSelected);		
+		if (resp.equalsIgnoreCase("true"))
+	      {
+	  		Clients.showNotification("Resultado de la cita agregado exitosamente", true);
+	      }else
+	      {
+	  		Clients.showNotification("Error al modificar", true);
+	      }
 
 	}
 	

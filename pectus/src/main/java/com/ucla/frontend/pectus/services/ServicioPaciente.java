@@ -138,10 +138,10 @@ public class ServicioPaciente {
 			String strPa = jsResource.get("paciente").toString();
 			JSONArray serPaciente = new JSONArray(strPa);
 			  for(int i=0; i < serPaciente.length(); i++){
+				 
                   Paciente paciente = new Paciente();
                   JSONObject obj = serPaciente.getJSONObject(i);
                   paciente.setNombre(obj.get("nombre").toString());
-//                  paciente.setEstadoCivil(obj.get("edocivil").toString());
                   paciente.setApellido(obj.get("apellido").toString());
                   paciente.setCedula(obj.get("cedula").toString());
                   paciente.setCorreo(obj.get("correo").toString());
@@ -151,9 +151,9 @@ public class ServicioPaciente {
                   paciente.setFijo(obj.get("tlffijo").toString());
                   paciente.setProfesion(obj.get("profesion").toString());
                   paciente.setNroHijos(Integer.parseInt(obj.get("nrohijos").toString()) );
-                  paciente.setIngresos(Integer.parseInt(obj.get("ingfamiliares").toString()));
-                  paciente.setEgresos(Integer.parseInt(obj.get("egrfamiliares").toString()));
-                  paciente.setSeguro(obtenerSeguro(obj.get("tiposeguro").toString())); 
+                  paciente.setIngresos(Float.parseFloat(obj.get("ingfamiliares").toString()));
+                  paciente.setEgresos(Float.parseFloat(obj.get("egrfamiliares").toString()));
+//                  paciente.setSeguro(obtenerSeguro(obj.get("tiposeguro").toString())); 
                   paciente.setCiudad(obtenerciudad(obj.get("ciudad").toString()));
                   paciente.setEstado(obtenerciudad(obj.get("ciudad").toString()).getEstado());
                   paciente.setCedulaConyugue(obj.get("cedconyugue").toString());
@@ -231,6 +231,9 @@ public class ServicioPaciente {
     	return seguro;
     }
     public static Date convertirFecha(String fecha){
+    	if(fecha == null){
+    		return null;
+    	}
         Calendar calendario = Calendar.getInstance();
         Calendar calendarioActual = Calendar.getInstance();
         String fechaFraccionada[] = fecha.split("-");
@@ -261,9 +264,9 @@ public class ServicioPaciente {
 	    DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			
-			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nrohijos=" + paciente.getNroHijos() +
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nrohijos=" + paciente.getNroHijos() + "&edocivil=" + paciente.getEstadoCivil() +
 					"&nombconyugue=" + paciente.getNombreConyugue() +"&apeconyugue=" + paciente.getApellidoConyugue() +"&cedconyugue=" + paciente.getCedulaConyugue() +"&ocupconyugue=" + paciente.getOcupacionConyugue() +"&fecnacconyugue=" + fecha.format(paciente.getFechaNacConyugue()) +
-					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() +   
+					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() + "&tenvivienda=" + paciente.getTendenciaVivienda() +"&tipovivienda=" + paciente.getTipoVivienda() +  
 					
 					"&estatus=I" );
 			

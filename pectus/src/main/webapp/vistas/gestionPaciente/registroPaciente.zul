@@ -19,7 +19,7 @@
 						</button>
                      </hbox>
                	</div>
-				<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersonaAceptada)"  selectedItem="@bind(vm.personaselected)">
+				<listbox emptyMessage="NO EXISTEN PACIENTES POR CONFIRMAR" height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersonaAceptada)"  selectedItem="@bind(vm.personaselected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Nombre"  width="100px">
 	         					<textbox instant="true" width="75px"  />
@@ -66,15 +66,16 @@
 				
 				
 	<window visible="false" title="ACEPTAR PACIENTE" border="normal" position="center,center" closable="false"
-    	action="show: slideDown;hide: slideUp" id="modalRegistrarPaciente"  left="19em" width="79em" height="50em">
+    	action="show: slideDown;hide: slideUp" id="modalRegistrarPaciente"  left="19em" width="49em" height="40em">
 		    <vlayout>
 		       <tabbox id="tb" height="630px">
 		    <tabs id="tabs">
-		        <tab id="A" label="Registrar Paciente"/>
+		        <tab id="A" label="Datos básicos"/>
+		        <tab id="e" label="Datos del conyugue"/>
+		        <tab id="ex" label="Datos Socieconomicos"/>
 		    </tabs>
 		    <tabpanels>
 		        <tabpanel>
-						<label value="Datos del Paciente" style="font-size: 15px;font-weight: bold;" ></label>	
 						<label style="display:block" value="Cedula" />
 						<textbox value="@bind(vm.personaselected.cedula)" readonly="true" maxlength="8"/>
 						<label style="display:block" value="Nombre" />
@@ -95,7 +96,11 @@
 						<textbox value="@bind(vm.personaselected.profesion)" readonly="true" style="display:block;margin-left: 16em;" />
 						<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><intbox value="@bind(vm.pacienteselected.nroHijos)"  style="display:block;margin-left: 30em;"/> 
 						<label style="display:block;margin-left: 28em;" value="Estado Civil"/> 
-						<combobox  model="@load(vm.listaedocivil)" value="@bind(vm.personaselected.estadoCivil)" style="display:block;margin-left: 28em;"></combobox>
+						<combobox  model="@load(vm.listaedocivil)" selectedItem="@bind(vm.pacienteselected.estadoCivil)"  style="display:block;margin-left: 28em;">
+							<template name="model">
+								<comboitem label="@load(each)" />
+							</template>
+						</combobox>
 						<label style="display:block;margin-left: 28em;" value="Estado"/> 
 					     <combobox style="display:block;margin-left: 28em;" readonly="true" id="cmbEstado" model="@load(vm.listaestado)" value="@bind(vm.personaselected.ciudad.estado.nombre)" onChange="@command('cambioEstado')">
 							<template name="model">
@@ -108,56 +113,69 @@
 								<comboitem label="@load(each.nombre)" />
 							</template>
 						</combobox>
+	        	</tabpanel>
 			        	
-			        	<label value="Datos del Conyugue" style="position: absolute;margin-top: 3em;font-size: 15px;font-weight: bold;" ></label>	
-				        <hlayout style="margin-bottom: 3em;margin-top: 6em;">
-						<label style="display:block;margin-left: 0em;margin-top: 3em;" value="Cedula " /><textbox style="margin-top: 3em;" value="@bind(vm.pacienteselected.cedulaConyugue)"/>
-						<label style="display:block;margin-left: -16em;" value="Nombre" /><textbox style="margin-left: -13em;" value="@bind(vm.pacienteselected.nombreConyugue)"/>
-						<label style="display:block" value="Apellido" /><textbox value="@bind(vm.pacienteselected.apellidoConyugue)"/> 
-						<label style="display:block;margin-top: 3em;margin-left: -17em;" value="Fecha de Nacimiento" /><datebox style="margin-top: 3em;margin-left: -7em;" value="@bind(vm.pacienteselected.fechaNacConyugue)" format="dd/MM/yyyy"  />
-						<label style="display:block;margin-left: -37em;margin-top: 6em;" value="Profesion" /><textbox style="margin-top: 6em;margin-left: -35em;" value="@bind(vm.pacienteselected.ocupacionConyugue)"/>
-					    </hlayout>
+			        	
+	        	<tabpanel>	
+		        	<hlayout style="margin-bottom: 3em;margin-top: 6em;">
+						<label style="display:block;margin-left: 0em;margin-top: 3em;" value="Cedula " />
+						<textbox style="margin-top: 3em;" value="@bind(vm.pacienteselected.cedulaConyugue)"/>
+						<label style="display:block;margin-left: -16em;" value="Nombre" />
+						<textbox style="margin-left: -13em;" value="@bind(vm.pacienteselected.nombreConyugue)"/>
+						<label style="display:block" value="Apellido" />
+						<textbox value="@bind(vm.pacienteselected.apellidoConyugue)"/> 
+						<label style="display:block;margin-top: 3em;margin-left: -17em;" value="Fecha de Nacimiento" />
+						<datebox style="margin-top: 3em;margin-left: -7em;" value="@bind(vm.pacienteselected.fechaNacConyugue)" format="dd/MM/yyyy"  />
+						<label style="display:block;margin-left: -37em;margin-top: 6em;" value="Profesion" />
+						<textbox style="margin-top: 6em;margin-left: -35em;" value="@bind(vm.pacienteselected.ocupacionConyugue)"/>
+			    	</hlayout>
+			    </tabpanel>
 					    
-				     	<label value="Datos Socioeconomicos" style="position: absolute;margin-top: -28.3em;font-size: 15px;font-weight: bold;margin-left: 39em;" ></label>	
-				     	<hlayout style="position: absolute;margin-left: 45em;margin-top: -30em;">
-				     	<label style="display:block" value="Vivienda"/> 
-				     	<combobox style="margin-left: 8em;" selectedItem="@bind(vm.pacienteselected.tendenciaVivienda)">
-				     	<comboitem label="Casa"/><comboitem label="Apartamento"/><comboitem label="Rancho"/><comboitem label="Puente"/></combobox>
-						<label style="display:block;margin-top: 3em;margin-left: -27em;" value="Condicion de la Vivienda"/> 
-						<combobox style="margin-left: -15em;margin-top: 3em;" selectedItem="@bind(vm.condicionviviendaSelected)"><comboitem label="Alquilada"/><comboitem label="Propia"/></combobox>
-						<label style="display:block;margin-left: -27.4em;margin-top: 6em;" value="Numero de Habitantes" />
-						<intbox style="margin-left: -17em;margin-top: 6em;" value="@bind(vm.pacienteselected.nroHabitantes)"/> 
-						<label style="display:block;margin-left: -28em;margin-top: 9em;" value="Precio de Alquiler" />
-						<intbox style="margin-left: -18em;margin-top: 9em;" value="@bind(vm.pacienteselected.alquiler)"/> 
-						<label style="display:block;margin-left: -29em;margin-top: 12em;" value="Lugar de Trabajo" />
-						<textbox style="margin-left: -19em;margin-top: 13em;" value="@bind(vm.pacienteselected.lugarTrabajo)"/>
-						<label style="display:block;margin-left: -30em;margin-top: 15em;" value="Direccion de Trabajo" />
-						<textbox  value="@bind(vm.pacienteselected.direccionTrabajo)" style="display:block;margin-left: -19em;margin-top: 16em;" rows="4"/> 
-						<label style="display:block;margin-left: -31em;margin-top: 21em;" value="Telefono del Trabajo" />
-						<intbox value="@bind(vm.pacienteselected.telefonoTrabajo)" style="display:block;margin-left: -20em;margin-top: 23em;" /> 			
-						<label style="display:block;margin-left: -31.4em;margin-top: 24em;" value="Ingresos Familiares" />
-						<intbox value="@bind(vm.pacienteselected.ingresos)" style="display:block;margin-left: -21em;margin-top: 26em;" />
-						<label style="display:block;margin-left: -32em;margin-top: 27em;" value="Egresos Familiares" />
-						<intbox value="@bind(vm.pacienteselected.egresos)" style="display:block;margin-left: -22em;margin-top: 29em;" />
-				    	</hlayout>
-						
-						
-						<separator height="48px"/>
-						<button label="Guardar" style=" margin-left: 5em;" sclass="btn-success" onClick="@command('aceptarPaciente', cmp=modalRegistrarPaciente)">
-							<attribute name="onClick">						
-							    modalRegistrarPaciente.setVisible(false);						  	
-							</attribute>	
-						</button>
-						<button  label="Salir" sclass="btn-success">
-						    <!-- Ocultamos la ventana -->
-						    <attribute name="onClick">						
-							    modalRegistrarPaciente.setVisible(false);						  	
-							</attribute>					  
-						</button>
+			    <tabpanel>
+			     	<hlayout style="position: absolute;">
+			     	<label style="display:block" value="Vivienda"/> 
+	     	     	<combobox model="@load(vm.listaVivienda)" style="margin-left: 8em;" selectedItem="@bind(vm.pacienteselected.tipoVivienda)">
+			     		<template name="model">
+							<comboitem label="@load(each)"/>
+					  </template>
+			     	</combobox>
+					<label style="display:block;margin-top: 3em;margin-left: -27em;" value="Condicion de la Vivienda"/> 
+					<combobox model="@load(vm.listaCondicionesVivienda)" style="margin-left: -15em;margin-top: 3em;" selectedItem="@bind(vm.pacienteselected.tendenciaVivienda)">
+					  <template name="model">
+					<comboitem label="@load(each)"/>
+					  </template>
+					</combobox>						
+					<label style="display:block;margin-left: -27.4em;margin-top: 6em;" value="Numero de Habitantes" />
+					<intbox style="margin-left: -17em;margin-top: 6em;" value="@bind(vm.pacienteselected.nroHabitantes)"/> 
+					<label style="display:block;margin-left: -28em;margin-top: 9em;" value="Precio de Alquiler" />
+					<intbox style="margin-left: -18em;margin-top: 9em;" value="@bind(vm.pacienteselected.alquiler)"/> 
+					<label style="display:block;margin-left: -29em;margin-top: 12em;" value="Lugar de Trabajo" />
+					<textbox style="margin-left: -19em;margin-top: 13em;" value="@bind(vm.pacienteselected.lugarTrabajo)"/>
+					<label style="display:block;margin-left: -30em;margin-top: 15em;" value="Direccion de Trabajo" />
+					<textbox  value="@bind(vm.pacienteselected.direccionTrabajo)" style="display:block;margin-left: -19em;margin-top: 16em;" rows="4"/> 
+					<label style="display:block;margin-left: -31em;margin-top: 21em;" value="Telefono del Trabajo" />
+					<intbox value="@bind(vm.pacienteselected.telefonoTrabajo)" style="display:block;margin-left: -20em;margin-top: 23em;" /> 			
+					<label style="display:block;margin-left: -31.4em;margin-top: 24em;" value="Ingresos Familiares" />
+					<intbox value="@bind(vm.pacienteselected.ingresos)" style="display:block;margin-left: -21em;margin-top: 26em;" />
+					<label style="display:block;margin-left: -32em;margin-top: 27em;" value="Egresos Familiares" />
+					<intbox value="@bind(vm.pacienteselected.egresos)" style="display:block;margin-left: -22em;margin-top: 29em;" />
+			    	</hlayout>
+					<separator height="48px"/>
+					<button label="Guardar" style=" margin-left: 5em;margin-top: 26em;" sclass="btn-success" onClick="@command('aceptarPaciente', cmp=modalRegistrarPaciente)">
+						<attribute name="onClick">						
+						    modalRegistrarPaciente.setVisible(false);						  	
+						</attribute>	
+					</button>
+					<button style="margin-top: 26em;" label="Salir" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalRegistrarPaciente.setVisible(false);						  	
+						</attribute>					  
+					</button>
 				</tabpanel>
-		        
 		    </tabpanels>
 		</tabbox>
+		asdasdasd
 		       <separator height="35px"/>
 		    </vlayout>
 	`</window>		
@@ -274,7 +292,22 @@
 						<textbox value="@bind(vm.pacienteselected.profesion)" style="display:block;margin-left: 16em;" />
 						<label style="display:block;margin-left: 28em;margin-top: -16.2em;" value="Numero de Hijos" /><intbox value="@bind(vm.pacienteselected.nroHijos)"  style="display:block;margin-left: 30em;"/> 
 						<label style="display:block;margin-left: 28em;" value="Estado Civil"/> 
-						<combobox  model="@load(vm.listaedocivil)" value="@bind(vm.pacienteselected.estadoCivil)" style="display:block;margin-left: 28em;"></combobox>
+						
+						
+						
+						<combobox  model="@load(vm.listaedocivil)" selectedItem="@bind(vm.valorEstadoCivil)" style="display:block;margin-left: 28em;">
+						<template name="model">
+								<comboitem label="@load(each)" />
+							</template>
+						
+						
+						
+						</combobox>
+						
+						
+						
+						
+						
 						<label style="display:block;margin-left: 28em;" value="Estado"/> 
 					     <combobox style="display:block;margin-left: 28em;" readonly="true" id="cmbEstado" model="@load(vm.listaestado)" value="@bind(vm.pacienteselected.ciudad.estado.nombre)" onChange="@command('cambioEstado')">
 							<template name="model">
@@ -282,11 +315,18 @@
 							</template>
 						</combobox>
 						<label style="display:block;margin-left: 28em;" value="Ciudad"/>
+						
+						
 			            <combobox readonly="true" style="display:block;margin-left: 28em;" id="cmbCiudad" model="@load(vm.listaciudad)" value="@bind(vm.pacienteselected.ciudad.nombre)" >
 							<template name="model">
 								<comboitem label="@load(each.nombre)" />
 							</template>
 						</combobox>
+						
+						
+						
+						
+						
 				        	<label value="Datos del Conyugue" style="position: absolute;margin-top: 3em;font-size: 15px;font-weight: bold;" ></label>	
 				        <hlayout style="margin-bottom: 3em;margin-top: 6em;">
 				        
@@ -303,10 +343,52 @@
 				     	<label value="Datos Socioeconomicos" style="position: absolute;margin-top: -28.3em;font-size: 15px;font-weight: bold;margin-left: 39em;" ></label>	
 				     	<hlayout style="position: absolute;margin-left: 45em;margin-top: -30em;">
 				     	<label style="display:block" value="Vivienda"/> 
-				     	<combobox style="margin-left: 8em;" selectedItem="@bind(vm.pacienteselected.tipoVivienda)"><comboitem label="Casa"/>
-				     	<comboitem label="Apartamento"/><comboitem label="Rancho"/><comboitem label="Puente"/></combobox>
+				     	
+				     	
+				     	
+				     	<combobox model="@load(vm.listaVivienda)" style="margin-left: 8em;" selectedItem="@bind(vm.pacienteselected.tipoVivienda)">
+				     <template name="model">
+						<comboitem label="@load(each)"/>
+						  </template>
+				     	</combobox>
+				     	
+				     	
+				     	
+				     	
 						<label style="display:block;margin-top: 3em;margin-left: -27em;" value="Condicion de la Vivienda"/> 
-						<combobox style="margin-left: -15em;margin-top: 3em;" selectedItem="@bind(vm.pacienteselected.tendenciaVivienda)"><comboitem label="Alquilada"/><comboitem label="Propia"/></combobox>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+						<combobox model="@load(vm.listaCondicionesVivienda)" style="margin-left: -15em;margin-top: 3em;" selectedItem="@bind(vm.pacienteselected.tendenciaVivienda)">
+						  <template name="model">
+						<comboitem label="@load(each)"/>
+						  </template>
+						
+						</combobox>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						<label style="display:block;margin-left: -27.4em;margin-top: 6em;" value="Numero de Habitantes" />
 						<intbox style="margin-left: -17em;margin-top: 6em;" value="@bind(vm.pacienteselected.nroHabitantes)"/> 
 						<label style="display:block;margin-left: -28em;margin-top: 9em;" value="Precio de Alquiler" />
@@ -316,7 +398,7 @@
 						<label style="display:block;margin-left: -30em;margin-top: 15em;" value="Direccion de Trabajo" />
 						<textbox  value="@bind(vm.pacienteselected.direccionTrabajo)" style="display:block;margin-left: -19em;margin-top: 16em;" rows="4"/> 
 						<label style="display:block;margin-left: -31em;margin-top: 21em;" value="Telefono del Trabajo" />
-						<intbox value="@bind(vm.pacienteselected.telefonoTrabajo)" style="display:block;margin-left: -20em;margin-top: 23em;" /> 			
+						<textbox value="@bind(vm.pacienteselected.telefonoTrabajo)" style="display:block;margin-left: -20em;margin-top: 23em;" /> 			
 						<label style="display:block;margin-left: -31.4em;margin-top: 24em;" value="Ingresos Familiares" />
 						<intbox value="@bind(vm.pacienteselected.ingresos)" style="display:block;margin-left: -21em;margin-top: 26em;" />
 						<label style="display:block;margin-left: -32em;margin-top: 27em;" value="Egresos Familiares" />

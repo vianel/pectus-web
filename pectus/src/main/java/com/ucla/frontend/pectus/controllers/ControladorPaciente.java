@@ -1,6 +1,7 @@
 package com.ucla.frontend.pectus.controllers;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,13 +30,14 @@ import com.ucla.frontend.pectus.models.Visita;
 import com.ucla.frontend.pectus.services.ServicioCiudad;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPersona;
+import com.ucla.frontend.pectus.utils.Email;
 
 
 public class ControladorPaciente implements Serializable{
 	private String resp;
 	private String resp2;
 	private Visita visita = new Visita();
-	
+	private Email email;
 	private Paciente pacienteselected = new Paciente();
 	private Persona personaselected;
 	private String cedulaSelected;
@@ -66,15 +68,12 @@ public class ControladorPaciente implements Serializable{
 	private String ingfamiliaresSelected;
 	private String egrfamiliaresSelected;
 	private String phoneSelected;
-	
-	
-
+	ListModelList<String> listaCondicionesVivienda = new ListModelList<String>();
+	ListModelList<String> listaVivienda = new ListModelList<String>();
+	private String valorEstadoCivil;
 	private List<Ciudad> listaciudad;
-
 	private List<Estado> listaestado;
-
 	private Window ventanaregistronuevopaciente;
-	
 	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PacienteFilter pacienteFilter = new PacienteFilter();
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
@@ -82,14 +81,31 @@ public class ControladorPaciente implements Serializable{
 	List<Persona> currentPersona = ServicioPersona.buscarPersonas();
 	List<Persona> currentPersonaAceptada = ServicioPersona.buscarPersonasAceptadas();
 	private List<PacienteStatus> pacientestatues = generateStatusList(currentPaciente);
-
+	
 	private boolean displayEdit = true;
 	List<String> listaedocivil = new ArrayList<String>();
 
 	@Init
 	public void init(){
+		try {
+			email = new Email();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.currentPacientes = ServicioPaciente.buscarPacientes();
 		getmodelPersona();
+		
+		listaCondicionesVivienda.add("Propia");
+		listaCondicionesVivienda.add("Alquilada");
+	 	listaVivienda.add("Casa");
+	 	listaVivienda.add("Apartamento");
+	 	listaVivienda.add("Rancho");
+	 	
+	 	listaedocivil.add("Casad@");
+	 	listaedocivil.add("Solter@");
+	 	listaedocivil.add("Viud@");
+	 	
 //		getmodelPacientesNuevo();
 	}
 	
@@ -713,22 +729,28 @@ public class ControladorPaciente implements Serializable{
 		this.resp2 = resp2;
 	}
 
+	
 	@Command
+	@NotifyChange("modelPersonaAceptada")
 	public void aceptarPaciente(){
 		pacienteselected.setCedula(personaselected.getCedula());
+		String n = pacienteselected.getNombre();
 		resp = ServicioPaciente.aceptarPaciente(pacienteselected);
 		
 		if (resp.equalsIgnoreCase("true"))
 	      {
-	  		Clients.showNotification("El Paciente ha sido agregado Exitosamente", true);
+	  		Clients.showNotification("La persona"+ n , null,null,null,2000);
 	      }else
 	      {
 	  		Clients.showNotification("Error al modificar", true);
 	      }
-		
+		currentPersonaAceptada = ServicioPersona.buscarPersonasAceptadas();
+		getmodelPersonaAceptada();
 	}
 
+	
 	@Command
+	@NotifyChange("modelPersona")
 	public void asignarCitaPaciente(){
 		resp = ServicioPaciente.asignarCitaPaciente(personaselected);
 		
@@ -737,11 +759,39 @@ public class ControladorPaciente implements Serializable{
 		if (resp.equalsIgnoreCase("true") && resp2.equalsIgnoreCase("true"))
 	      {
 	  		Clients.showNotification("Se le ha asignado una cita Exitosamente", true);
+	  		email.llenarCabecera(personaselected.getCorreo(), "Se le ha aceptado en la fundacion debe asistir la siguiente fecha", "gggg" );
 	      }else
 	      {
 	  		Clients.showNotification("Error al modificar", true);
 	      }
-		
+		currentPersona = ServicioPersona.buscarPersonas();
+		getmodelPersona();
+	}
+
+
+	public ListModelList<String> getListaCondicionesVivienda() {
+		return listaCondicionesVivienda;
+	}
+
+	public void setListaCondicionesVivienda(
+			ListModelList<String> listaCondicionesVivienda) {
+		this.listaCondicionesVivienda = listaCondicionesVivienda;
+	}
+
+	public ListModelList<String> getListaVivienda() {
+		return listaVivienda;
+	}
+
+	public void setListaVivienda(ListModelList<String> listaVivienda) {
+		this.listaVivienda = listaVivienda;
+	}
+
+	public String getValorEstadoCivil() {
+		return valorEstadoCivil;
+	}
+
+	public void setValorEstadoCivil(String valorEstadoCivil) {
+		this.valorEstadoCivil = valorEstadoCivil;
 	}
 	
 
