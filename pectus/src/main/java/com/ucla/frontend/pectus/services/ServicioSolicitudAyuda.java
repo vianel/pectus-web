@@ -184,8 +184,8 @@ public class ServicioSolicitudAyuda {
 		 Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {
-			jsResource = resty.json("http://127.0.0.1:5000//solicitud-ayuda/agregar?cedula=" + cedula + "&observacion=" + motivo + "&idpatologia=" + diagnostico.getId() + "&idcausa=" + causa.getId() + 
-					"&fechasolicitud=" + dateFormat.format(new Date()).toString() +  "&estudios=" + metodoConcatenacion(estudios));
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/agregar?cedula=00000000"  + "&observacion=" + motivo + "&idpatologia=" + diagnostico.getId() + "&idcausa=" + causa.getId() + 
+					"&feczsolicitud=" + dateFormat.format(new Date()).toString() +  "&estudios=" + metodoConcatenacion(estudios));
 				
 					
 					
@@ -517,5 +517,117 @@ public class ServicioSolicitudAyuda {
 		return concatenarTodo.toString();
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static List<EstudioClinica> probarLista(int id){
+        List<EstudioClinica> lista = new ArrayList<EstudioClinica>();
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/buscar?id="+id);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("solicitudes").toString();
+			JSONArray serAyuda = new JSONArray(strPa);
+	
+                  Ayuda ayuda = new Ayuda();
+                  JSONObject obj = serAyuda.getJSONObject(0);
+                  
+                  ayuda.setPaciente(obtenerPaciente(obj.get("paciente").toString()));
+                  ayuda.setDiagnostico(obtenerDiagnostico(obj.get("patologia").toString()));
+                  ayuda.setFechaSolicitud(convertirFecha(obj.get("fecsolicitud").toString()));
+                  ayuda.setFechaAprobacion(convertirFecha(obj.get("fecaprobacion").toString()));
+                  ayuda.setCausa(obtenerCausa(obj.get("causa").toString()));
+                  ayuda.setAprobacion(Double.parseDouble(obj.get("porcaprobacion").toString()));
+                  
+                  JSONArray serEstudios = serAyuda.getJSONObject(0).getJSONArray("estudios");
+                   lista = new ArrayList<EstudioClinica>();
+                  for(int l = 0; l<serEstudios.length(); l++){
+                	  
+                	  Estudio tipoEstudio = new Estudio();
+                	  tipoEstudio.setNombre((String)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").get("nombre"));
+                	  tipoEstudio.setId((Integer)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").get("id"));
+                	  tipoEstudio.setDescripcion((String)serEstudios.getJSONObject(l).getJSONObject("tipoestudio").getString("descripcion"));
+                	  
+                	  Clinica clinica = new Clinica();
+                	  clinica.setNombre((String)serEstudios.getJSONObject(l).getJSONObject("clinica").get("nombre"));
+                	  
+                	  EstudioClinica estudioClinica = new EstudioClinica();
+                	  estudioClinica.setMonto(Double.parseDouble(serEstudios.getJSONObject(l).get("monto").toString()));
+                	  estudioClinica.setClinica(clinica);
+                	  estudioClinica.setEstudio(tipoEstudio);
+                	  
+                	  lista.add(estudioClinica);
+                	  
+                	  
+                	  
+                  }
+//                  ayuda.setListaEstudioClinicas(listaEstudios);
+                  
+                  
+//                  listaAyudas.add(ayuda);
+			 
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+ 
+        return lista;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

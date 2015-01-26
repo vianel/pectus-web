@@ -47,7 +47,7 @@ public class AyudaView {
 
 	
 	
-
+	private List<EstudioClinica> listaNueva = new ArrayList<EstudioClinica>();
 	private Diagnostico diagnosticoSelected;
 	private Paciente pacienteSelected;
 	private String motivoSelected;
@@ -439,15 +439,28 @@ private Causa causaSelected;
 		this.causaSelected = causaSelected;
 	}
     
+	public List<EstudioClinica> getListaNueva() {
+		return listaNueva;
+	}
+
+	public void setListaNueva(List<EstudioClinica> listaNueva) {
+		this.listaNueva = listaNueva;
+	}
+
+	@NotifyChange("listaNueva")
 	@Command
 	public void probar() throws Exception{
-		System.out.println(ayudaSelected.getPaciente() + "tttttttt");
-		if(ayudaSelected.getListaEstudioClinicas() != null){
-			
-			for(EstudioClinica eestudio: ayudaSelected.getListaEstudioClinicas()){
-				System.out.println(eestudio.getId().toString() + "ffffffffffffffff");
-			}
-		}
+		
+		listaNueva = ServicioSolicitudAyuda.probarLista(ayudaSelected.getId());
+		
+		
+//		System.out.println(ayudaSelected.getPaciente() + "tttttttt");
+//		if(ayudaSelected.getListaEstudioClinicas() != null){
+//			
+//			for(EstudioClinica eestudio: ayudaSelected.getListaEstudioClinicas()){
+//				System.out.println(eestudio.getId().toString() + "ffffffffffffffff");
+//			}
+//		}
 		
 
 	}

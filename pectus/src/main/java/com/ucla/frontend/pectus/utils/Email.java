@@ -100,6 +100,7 @@ public class Email {
             Session session = Session.getDefaultInstance(props, null);
             BodyPart texto = new MimeBodyPart();
             texto.setText(mensaje);
+            session.setDebug(true);
 
             BodyPart adjunto = new MimeBodyPart();
             if (!rutaArchivo.equals("")) {
