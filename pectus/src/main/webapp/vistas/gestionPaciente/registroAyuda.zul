@@ -1,4 +1,5 @@
 <zk xmlns:n="native">
+<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
   <tabbox >
     <tabs>
       <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Pacientes a ayudar"/>
@@ -6,13 +7,13 @@
     </tabs>
     <tabpanels>
     	<tabpanel>
-    		<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
-               	<button disabled="@load(vm.pacienteselected eq null?'true':'false')" label="ACEPTAR" id="" sclass="btn-success" >
+    		
+               	<button disabled="@load(vm.pacienteSelected eq null?'true':'false')" label="ACEPTAR" id="" sclass="btn-success" >
      		 		    	<attribute name="onClick">						
 				    	modalRegistrarAyuda.doModal();						  	
 					</attribute>
 				</button>
-				<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPacientesNuevo)"  selectedItem="@bind(vm.pacienteselected)">
+				<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPaciente)"  selectedItem="@bind(vm.pacienteSelected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Nombre"  width="100px">
 	         					<textbox instant="true" width="75px"  />
@@ -58,7 +59,7 @@
 				</listbox>
 				
 	<window visible="false" id="modalRegistrarAyuda" title="AYUDA" border="normal" width="1160px" height="42em" position="center,center" closable="false"
-		action="show: slideDown;hide: slideUp" apply="org.zkoss.bind.BindComposer">
+		action="show: slideDown;hide: slideUp">
 	   <hlayout>
 			 <grid  width="500px">
 				<columns>
@@ -68,15 +69,15 @@
 				<rows>
 					<row>
 						<label value="Cedula del Paciente"/>
-						<textbox value="@bind(vm.pacienteselected.cedula)" readonly="true" maxlength="20" width="200px"/>
+						<textbox value="@bind(vm.pacienteSelected.cedula)" readonly="true" maxlength="20" width="200px"/>
 				    </row>
 				    <row>
 				    	<label value="Nombre del Paciente"/>
-						<textbox value="@bind(vm.pacienteselected.nombre)" readonly="true" maxlength="20" width="200px"/>
+						<textbox value="@bind(vm.pacienteSelected.nombre)" readonly="true" maxlength="20" width="200px"/>
 				    </row>
 				    <row>
 				    	<label value="Apellido del Paciente"/>
-						<textbox value="@bind(vm.pacienteselected.apellido)" readonly="true" maxlength="20" width="200px"/>
+						<textbox value="@bind(vm.pacienteSelected.apellido)" readonly="true" maxlength="20" width="200px"/>
 				    </row>
 				    <row>
 				    	<label value="Fecha de Solicitud"/>
@@ -84,11 +85,11 @@
 				    </row>
 					<row>
 						<label value="Patologia"/>
-						<div apply="org.zkoss.bind.BindComposer" viewModel="@id('am') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+						
 							<bandbox id="bd1" mold="rounded" autodrop="true">  
 						        <bandpopup >
-						            <listbox selectedItem="@bind(am.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
-							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(am.diagnosticos)">
+						            <listbox selectedItem="@bind(vm.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.diagnosticos)">
 						                <listhead>
 						                    <listheader label="PATOLOGIAS" />
 						                </listhead>
@@ -101,37 +102,55 @@
 						            </listbox>
 						        </bandpopup>
 						    </bandbox>
-				        </div>
+				    
 				    </row>
 				    <row>
 				    <label value="Causa"/>
-					    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('cau') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+				    
+				    
+				    
+				    
+				    
+				    
+				    
+				
 						<bandbox id="bd123" mold="rounded" autodrop="true">  
 					        <bandpopup >
-					            <listbox selectedItem="@bind(cau.diagnosticoSelected)" height="250px" width="450px" mold="paging" autopaging="true"
-						                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(cau.diagnosticos)">
+					            <listbox selectedItem="@bind(vm.causaSelected)" height="250px" width="450px" mold="paging" autopaging="true"
+						                onSelect="bd123.value=self.selectedItem.label; bd123.close();" model="@load(vm.listaCausas)">
 					                <listhead>
 					                    <listheader label="CAUSA" />
 					                </listhead>
-					                 <template name="model" var="patologia">
+					                 <template name="model" var="causa">
 					                <listitem>
-					                  <listcell  label="@load(patologia.nombre)" />
-					                  <listcell  label="@load(patologia.observacion)" />
+					                  <listcell  label="@load(causa.nombre)" />
+					                  <listcell  label="@load(causa.descripcion)" />
 					              </listitem>
 					              </template>
 					            </listbox>
 					        </bandpopup>
 					    </bandbox>
-						</div>
+						
+						
+						
+						
+						
+						
+						
 				    </row>
 					<row>
 						<label value="Observaciones" />
-						<textbox value="@bind(am.motivoSelected)" rows="4"/></row>
+						<textbox value="@bind(vm.motivoSelected)" rows="4"/></row>
 					</rows>
 			</grid>
 			
-			<div apply="org.zkoss.bind.BindComposer" viewModel="@id('ca') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
-				<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="false" model="@load(ca.estudiosClinica)" 
+			
+			
+			
+			
+			
+	
+				<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="false" model="@load(vm.estudiosClinica)" 
 				>
 			        <listhead>
 			            <listheader label="Clinica" />
@@ -149,7 +168,7 @@
 			    <zscript><![CDATA[
 				    String imgPath = "../../assets/img";
 				]]></zscript>
-				  <div style="float:left; display:inline; margin-left: 20px;" width="50px">
+				  <div style="margin-left: -801px; margin-top: 125px;" width="50px">
 				    <vbox spacing="10px" width="24px">
 				        <image style="cursor:pointer" id="chooseAllBtn" src="${imgPath}/rightrightarrow_g.png" onClick="@command('chooseAllItem')" />
 				        <image style="cursor:pointer" id="chooseBtn" src="${imgPath}/rightarrow_g.png" onClick="@command('chooseItem')" />
@@ -157,9 +176,9 @@
 				        <image style="cursor:pointer" id="removeAllBtn" src="${imgPath}/leftleftarrow_g.png" onClick="@command('unchooseAll')"/>
 				    </vbox>
 				    </div>
-				    
-			    <listbox height="200px" width="750px" mold="paging"  autopaging="true" id="asignados" multiple="true" checkmark="false" model="@load(ca.estudioClinicaSeleccionado)" 
-				selectedItems="@bind(ca.estudioclinicaSelected)">
+				    <div style="margin-left: -760px; margin-top: 178px;">
+			    <listbox height="200px" width="750px" mold="paging"  autopaging="true" id="asignados" multiple="true" checkmark="false" model="@load(vm.estudioClinicaSeleccionado)" 
+				selectedItems="@bind(vm.estudioclinicaSelected)">
 			        <listhead>
 			            <listheader label="Clinica" />
 			            <listheader label="Estudio" />
@@ -173,7 +192,13 @@
 			        </listitem>
 			  		</template>
 			    </listbox>
-		    </div>
+		 </div>
+		    
+		    
+		    
+		    
+		    
+		    
 		</hlayout>	
 		
 		<separator height="35px"/>
@@ -191,7 +216,7 @@
 			</button>
 		</div>
     </window>
-</div>
+
     	
     	
     	
@@ -199,7 +224,12 @@
     	
     	</tabpanel>
 		<tabpanel>
-		 	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+		
+		
+		
+		
+		
+		
 			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >EDITAR</button>
 		   	<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
 			<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelayuda)"  selectedItem="@bind(vm.ayudaSelected)">
@@ -235,27 +265,19 @@
            			</template>
 				</listbox>
 				
-				<grid width="350px" height="400px"  pagingPosition="bottom" mold="paging" pageSize="7" model="@load(vm.ayudaSelected)"  visible="@load(vm2.eventoSelected eq null?'false':'true')" >
-					<auxhead>
-			            <auxheader label="LISTA DE VOLUNTARIOS" colspan="6" />
-			        </auxhead>
-			        <auxhead sclass="category-center">
-			        </auxhead>
-					<columns>
-			            <column hflex="1">Cedula</column>
-			            <column hflex="2">Nombre</column>
-			            <column hflex="2">Apellido</column>
-			        </columns>
-			        <template name="model">
-			            <row>
-			                <label value="@load(each.cedula) " />
-			                <label value="@load(each.nombre)" />
-			                <label value="@load(each.apellido)"/>
-			            </row>
-			        </template>
-				</grid>
-		</div>
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		</tabpanel>
     </tabpanels>
   </tabbox>
+  </div>
 </zk>

@@ -18,7 +18,7 @@
 						</button>
                      </hbox>
                	</div>
-				<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
+				<listbox emptyMessage="NO hay registro desde el portal"  height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Nombre" sort="auto(nombre)" width="100px">
 	         					<textbox instant="true" width="75px"  />

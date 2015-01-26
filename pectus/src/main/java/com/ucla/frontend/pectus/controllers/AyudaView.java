@@ -1,8 +1,11 @@
 package com.ucla.frontend.pectus.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+
 
 
 
@@ -25,6 +28,7 @@ import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.controllers.ControladorEvento.ChooseEvent;
 import com.ucla.frontend.pectus.models.Ayuda;
+import com.ucla.frontend.pectus.models.Causa;
 import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.EstudioClinica;
@@ -51,6 +55,7 @@ public class AyudaView {
 	private MotivoRechazo motivoRechazoSelected;
 	private SolicitudRechazada solicitudRechazadaSelected =  new SolicitudRechazada();
 	private Cita citaselected;
+private Causa causaSelected;
 	List<Cita> currentCita = ServicioCita.buscarCita(); //servicio cita
 	private Set <EstudioClinica> estudioclinicaSelected;
 	private Window ventanaregistronuevacita;
@@ -60,11 +65,13 @@ public class AyudaView {
 	List<MotivoRechazo> currenMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
 	List<MotivoRechazo> listaMotivoRechazo = ServicioSolicitudAyuda.buscarMotivosRechazos();
 	private AyudaFilter ayudaFilter = new AyudaFilter();
+	private ListModelList<Causa> listaCausas = ServicioSolicitudAyuda.buscarCausas();
 	private Ayuda selected;
 	private List<Ayuda> ayudas = ServicioSolicitudAyuda.buscarAyudas();
 	private List<Paciente> pacientes = ServicioPaciente.buscarPacientes();
 	private List<Diagnostico> diagnosticos = ServicioPatologia.buscarDiagnosticos();
 	private List<EstudioSolicitud> estudios = new ArrayList<EstudioSolicitud>();
+	
 	
 //	private ListModelList<EstudioClinica> listaEstudiosTodos = new ListModelList<EstudioClinica>();
 
@@ -91,6 +98,7 @@ public class AyudaView {
 		getmodelAyudaSolicitada();
 		getmodelMotivoRechazo();
 		getmodelCita();
+		getmodelPaciente();
 		
 	}
 	
@@ -108,6 +116,9 @@ public class AyudaView {
     }
 	public ListModel<MotivoRechazo> getmodelMotivoRechazo() {
         return new ListModelList<MotivoRechazo>(currenMotivoRechazo);
+    }
+	public ListModel<Paciente> getmodelPaciente() {
+        return new ListModelList<Paciente>(pacientes);
     }
 	
 	public String getfooter(){
@@ -283,7 +294,7 @@ public class AyudaView {
 	public void guardarAyuda() throws Exception{
 		String response = null;
 
-		
+		ServicioSolicitudAyuda.guardarListaEstudio(estudioClinicaSeleccionado, pacienteSelected.getCedula(), motivoSelected, diagnosticoSelected, causaSelected, new Date());
 		Clients.showNotification("Ayuda registrada", null, true);
 	
 
@@ -411,6 +422,35 @@ public class AyudaView {
     	estudiosClinica.addAll(estudioClinicaSeleccionado);
     	estudioClinicaSeleccionado.clear();
     }
+
+	public ListModelList<Causa> getListaCausas() {
+		return listaCausas;
+	}
+
+	public void setListaCausas(ListModelList<Causa> listaCausas) {
+		this.listaCausas = listaCausas;
+	}
+
+	public Causa getCausaSelected() {
+		return causaSelected;
+	}
+
+	public void setCausaSelected(Causa causaSelected) {
+		this.causaSelected = causaSelected;
+	}
+    
+	@Command
+	public void probar() throws Exception{
+		System.out.println(ayudaSelected.getPaciente() + "tttttttt");
+		if(ayudaSelected.getListaEstudioClinicas() != null){
+			
+			for(EstudioClinica eestudio: ayudaSelected.getListaEstudioClinicas()){
+				System.out.println(eestudio.getId().toString() + "ffffffffffffffff");
+			}
+		}
+		
+
+	}
 	
 		
 }
