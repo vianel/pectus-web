@@ -7,7 +7,7 @@
     </tabs>
     <tabpanels>
 	<tabpanel>
-			<button label="EVALUAR" disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" sclass="btn-success" >
+			<button label="EVALUAR" onClick="@command('probar')" disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" sclass="btn-success" >
  		    	<attribute name="onClick">						
 			    	modalEvaluarSolicitud.doModal();						  	
 				</attribute>
@@ -96,21 +96,21 @@
 	        
 	        
 	        <tabpanel>
-	        	<listbox  model="@load(vm.listaMotivoRechazo)" id="candidasdateLb2" hflex="1" vflex="true" multiple="true" rows="8" width="370px" >
+	        	<listbox  model="@load(vm.listaNueva)" id="candidasdateLb2" hflex="1" vflex="true" multiple="true" rows="8" width="370px" >
 			     	<listhead>       
-			            <listheader label="Tipo de Colaboracion" width="150px"></listheader>
-			            <listheader label="Cantidad" width="80px"></listheader>
+			            <listheader label="Estudio" width="150px"></listheader>
+			            <listheader label="Clinica" width="80px"></listheader>
+			            <listheader label="Monto" width="80px"></listheader>
 			        </listhead>
 			        <template name="model">
 			            <listitem>
-			                <listcell label="@load(each.nombre)"/>
-			                <listcell label="@load(each.tipo)"/>
+			                <listcell label="@load(each.estudio.nombre)"/>
+			                <listcell label="@load(each.clinica.nombre)"/>
+			                <listcell label="@load(each.monto)"/>
 			            </listitem>
 			        </template>
 			    </listbox>
-			    <button label="EVALUAR" onClick="@command('probar')" id="" sclass="btn-success" >
-
-			</button>
+			    
 	        </tabpanel>
 	        
 	        
