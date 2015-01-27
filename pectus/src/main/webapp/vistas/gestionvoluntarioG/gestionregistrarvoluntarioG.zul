@@ -1,0 +1,19 @@
+<panel border="false" visible="true">
+<panelchildren>
+<vlayout sclass="page-content" xmlns:n="native" spacing="0">
+  <div sclass="page-header">
+    <label value="VOLUNTARIO"/>
+    <a label="REGISTRO DE VOLUNTARIO" iconSclass="z-icon-angle-double-right" sclass="subtitle"/>
+  </div>
+ 
+ 	<hlayout spacing="24px">
+	     <include src="/vistas/gestionvoluntarioG/registrarvoluntarioG.zul" hflex="7" style="position: relative;"/>
+	 	 
+ 	 </hlayout>
+ 	 <separator height="24px"/>
+
+
+</vlayout>
+</panelchildren>
+</panel>
+
