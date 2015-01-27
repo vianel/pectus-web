@@ -1,0 +1,104 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.VoluntarioGVM')"
+			 id="modalDialogvoluntario" title="Voluntario" border="normal" left="19em" width="45em" height="48em"
+  
+    position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Datos Voluntario" />
+        
+<!-- *********************************  Datos de persona ********************************* -->
+
+    </tabs>
+    <tabpanels>
+        <tabpanel onCreate="@command('inicializarAtributos')">
+		
+			<label style="display:block;margin-top: 1em;"  value="Cedula" />
+			<textbox  value="@bind(vm.cedulaSelected)"  maxlength="8" style="display:block;" />
+			<label style="display:block;margin-top: 1em;"  value="Nombre" />
+			<textbox value="@bind(vm.nombreSelected)" maxlength="15" style="display:block;"/>
+			<label style="display:block;margin-top: 1em;" value="Apellido" />
+			<textbox value="@bind(vm.apellidoSelected)" maxlength="15" style="display:block;"/>
+			
+			<label style="display:block;margin-top: 1em;" value="Estado Civil"/> 
+			 <combobox style="display:block;" width="150px" model="@load(vm.listaedocivil)" selectedItem="@bind(vm.edocivilSelected)">
+			 <template name="model">
+					<comboitem label="@load(each)" />
+				</template>
+			</combobox> 
+			<label style="display:block;margin-top: 1em;" value="Sexo"/> 
+			 <combobox style="display:block;" width="150px" model="@load(vm.listasexo)" selectedItem="@bind(vm.sexoSelected)">
+			 <template name="model">
+					<comboitem label="@load(each)" />
+				</template>
+			</combobox> 
+			
+		    <label style="display:block;margin-left: 14em; margin-top: -21em;" value="Fecha de Nacimiento" />
+			<datebox  value="@bind(vm.fechanacimientoSelected)" width='150px' style="display:block;margin-left: 14em;" />
+			<label style="display:block;margin-left: 14em; margin-top: 1em;" value="Direccion" />
+			<textbox value="@bind(vm.direccionSelected)" rows="4"  style="display:block;margin-left: 15em;"/>
+			<label style="display:block;margin-left: 14em; margin-top: 1em;" value="Estado"/> 
+		     <combobox style="display:block;margin-left: 14em;" width="150px" id="cmbEstado" model="@load(vm.listaestado)" selectedItem="@bind(vm.estadoSelected)" onChange="@command('cambioEstado')">
+				<template name="model">
+					<comboitem label="@load(each.nombre)" />
+				</template>
+			</combobox>
+			<label style="display:block;margin-left: 14em; margin-top: 1em;" value="Ciudad"/>
+            <combobox style="display:block;margin-left: 14em;"  width="150px" id="cmbCiudad" model="@load(vm.listaciudad)" selectedItem="@bind(vm.ciudadSelected)">
+				<template name="model">
+					<comboitem label="@load(each.nombre)" />
+				</template>
+			</combobox>
+			
+			<label style="display:block;margin-top: -21em; margin-left: 28em;" value="Profesion" />
+			<textbox value="@bind(vm.profesionSelected)" style="display:block;margin-left: 30em;" />
+			<label  style="display:block;margin-top: 1em; margin-left: 28em;"  value="Celular" />
+			<textbox value="@bind(vm.celularSelected)" style="display:block;margin-left: 30em;" />
+			<label  style="display:block;margin-top: 1em; margin-left: 28em;" value="Telefono Fijo" />
+			<textbox value="@bind(vm.fijoSelected)" width='150px' style="display:block;margin-left: 30em;" />
+			<label style="display:block;margin-top: 1em; margin-left: 28em;" value="Correo" />
+			<textbox  value="@bind(vm.correoSelected)" style="display:block;margin-left: 30em;" />
+			
+<!-- *********************************  Datos de Voluntario ********************************* -->
+
+<label value="___________________________________________________________________________________" style="position: absolute;margin-top: 5em;font-size: 15px" ></label>
+ 
+            <label style="display:block;margin-top: 8em;" value="Cargo de Trabajo" />
+			<textbox value="@bind(vm.cargoSelected)" style="display:block;"/> 
+            <label style="display:block;margin-top: 1em;" value="Lugar de trabajo" />
+			<textbox style="display:block;" value="@bind(vm.lugartrabajoSelected)"/>
+ 
+			<label style="display:block;margin-top:-8em;margin-left: 14em" value="Direccion Trabajo" />
+			<textbox value="@bind(vm.direcciontrabajoSelected)" rows="4" style="display:block;margin-left: 15em;"/>
+ 
+			<label style="display:block;margin-left: 29em;margin-top: -7em;" value="Telefono Oficina" />
+			<textbox value="@bind(vm.tlftrabajoSelected)" style="display:block;margin-left: 30em;"/>		
+			<label  style="display:block;margin-left: 29em;margin-top: 1em;" value="Referido por:" />
+			<textbox value="@bind(vm.referidoSelected)" style="display:block;margin-left: 30em;"/> 	
+			
+		 
+			<div align="center" style="margin-top:3em;">
+			<button width="75px" sclass="btn-success"  onClick="@command('guardarVoluntario', cmp=modalDialogvoluntarios)">
+			<attribute name="onClick">						
+				modalDialogvoluntario.setVisible(false);						  	
+			</attribute>
+	Guardar</button>
+			<button width="75px" sclass="btn-success">Limpiar</button>
+			<button width="75px" sclass="btn-success">Salir</button>
+		</div>
+				
+		</tabpanel>
+    
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+</window>
+</zk>
