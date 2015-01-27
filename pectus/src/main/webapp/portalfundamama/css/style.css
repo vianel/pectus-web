@@ -14,7 +14,7 @@
 
 	body
 	{
-		background: #303238 url('images/bg01.png');
+		background: #404248;
 	}
 
 		body.is-loading *
@@ -234,6 +234,7 @@
 
 		form
 		{
+
 		}
 		
 			form label
@@ -270,6 +271,7 @@
 				}
 
 			form input[type="text"],
+			
 			form input[type="email"],
 			form input[type="password"],
 			form select
@@ -277,11 +279,21 @@
 				line-height: 3em;
 				padding: 0 1em;
 			}
+			form  input[type="date"]
+			{
 				
+				
+				width: 100%;
+				height: 45px;
+				border: 0;
+				border-radius: 8px;
+
+			}	
 			form textarea
 			{
 				min-height: 9em;
 				padding: 1em;
+				height: 5px;
 			}
 
 			form .formerize-placeholder
@@ -319,12 +331,14 @@
 		table
 		{
 			width: 100%;
+			height: 100%;
 		}
 		
 			table.default
 			{
-				width: 100%;
-			}
+			
+			width: 100%;
+			height: 100%;}
 
 				table.default tr
 				{
@@ -465,7 +479,7 @@ button:hover span {display:none}
 #btn1:hover:before 
 	{
 	vertical-align:bottom;	
-	content:"Solicita tu cita";
+	content:"Solicitar cita";
 	}
 #btn2:hover:before 
 	{
@@ -475,7 +489,7 @@ button:hover span {display:none}
 #btn3:hover:before 
 	{
 	vertical-align:bottom;	
-	content:"Postulate";
+	content:"Se Voluntario";
 	}
 #btn4:hover:before 
 	{
@@ -890,18 +904,7 @@ button:hover span {display:none}
 		background: #FFF;
 	}
 
-	#footer-wrapper
-	{
-		position: relative;
-		background-image:		-moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5)),		url('images/bg03.png'),		url('images/bg02.png');
-		background-image:		-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5)),	url('images/bg03.png'),		url('images/bg02.png');
-		background-image:		-o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5)),		url('images/bg03.png'),		url('images/bg02.png');
-		background-image:		-ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5)),		url('images/bg03.png'),		url('images/bg02.png');
-		background-image:		linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5)),			url('images/bg03.png'),		url('images/bg02.png');
-		background-repeat:		repeat-x,														no-repeat,					repeat;
-		background-size:		100% 100%,														100% 15em,					auto auto;
-		background-position:	top left,														top center,					top left;
-	}
+	
 
 	.wrapper
 	{

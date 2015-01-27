@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>fundamama</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<!-- Esto es para validar-->
+		<script src="js/lib/jquery.js"></script>
+		<script src="js/dist/jquery.validate.js"></script>
+	
+		
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/screen.css">
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<script type="text/javascript">
+
+	$(document).ready(function() {
+
+
+
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("Su Solicitud de Charla ha sido Enviada!");
+			RegistrarCharla();
+			console.log(RegistrarCharla());
+			
+			$('#formCharla').each (function(){
+			  this.reset();
+			});
+
+
+		}
+	});
+
+
+$("#formCharla").validate();
+			// al cargar la pagina cargamos las Actividades
+		
+	cargarTipoActividad();
+
+	// 	}
+	// });
+	// 	// validate the comment form when it is submitted
+	// $("#formVoluntario").validate({
+	// rules: {
+	// cedula: {
+	// required: true,
+	// maxlength: 11,
+	// number: true
+	// },
+	// txtnombre: "required",
+	// txtapellido: "required",
+	// Fnacimiento: "required",
+	// tlffijo: {
+	// required: true,
+	// maxlength: 11
+	// },
+	// txtemail: {
+	// required: true,
+	// minlength: 2,
+	// email:true
+	// },
+	// txtcelular: {
+	// required: true,
+	// minlength: 3
+
+	// },
+	// txtprofesion:{
+	// required: true,
+	// maxlength: 30
+	// },
+	// txtdireccion:{
+	// required: true
+
+	// },
+	// },
+	// messages: {
+	// cedula: {
+	// required: "Por favor introdusca su Cedula",
+	// maxlength: "El numero debe poseer menos de 11 caracteres",
+	// number: "Lo digitos deben numericos"	
+
+	// },
+	// txtnombre: "Por favor introdusca un nombre",
+	// txtapellido: "Por favor introdusca un apellido",
+
+	// tlffijo: {
+	// required: "Por favor introdusca un telefono fijo",
+	// maxlength: "El numero debe poseer menos de 11 caracteres"
+	// },
+	// txtprofesion: {
+	// required: "Por favor introdusca una profesion",
+	// maxlength: "El numero debe poseer menos de 11 caracteres"
+	// },
+
+	// Fnacimiento: {
+	// required: "Por favor introdusca una Fecha de Nacimiento"
+	// },
+	// txtcelular: {
+	// required: "Por favor introdusca un telefono celular",
+	// maxlength: "El numero debe poseer menos de 11 caracteres"
+
+	// },
+	// txtemail: {
+	// required: "Por favor introdusca su E-mail",
+	// minlength: "El E-mail debe poseer al menos 3 caracteres",
+	// email: "Debe ser un E-mail"
+	// }
+	// }
+	// });
+	
+		
+		// function limpiarFormulario(){
+
+		// }
+
+} ); // fin del onready
+
+		function RegistrarCharla(){
+
+			var nomb = document.getElementById("nombSolicitante").value.trim();
+			var descrip = document.getElementById("DescripcionSolicitante").value.trim().replace(" ","%20");
+			var tpoAct = document.getElementById("cboTipoActividad").value;
+			var fecha = document.getElementById("FSolicitud").value;
+			var TlfSolicit = document.getElementById("TlfSolicitante").value;
+			
+			$.ajax({
+                    url: 'http://localhost:5000/solicitud-actividad/agregar',
+                    dataType: 'json',
+
+				data: {codigo: 'SA001',idtipoactividad:tpoAct,descripcion:descrip,fecsolicitud:fecha, nombsolicitante : nomb ,telfsolicitante : TlfSolicit, estatus :'S'} ,
+                    success: function(data){
+                        
+                        var len = data.length;
+                     
+                    },
+                    error: function(error){
+                    	alert("error");
+                    }
+                });
+		} // fin Registrar
+
+		
+		
+
+	
+	function cargarTipoActividad(){
+
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/tipo-actividad/todos',
+            dataType: 'json',
+            success: function(data){
+            
+            	for(var key in data) {
+
+                	if (key.localeCompare('tipoactividades' ==0)){
+                    	// si retornó alguna key = estados
+                        console.log('hay tipo actividades ');	
+                        // recorremos cada estado
+                        // IMPORTANTE BORRAR EL COMBO 
+                        $("#cboTipoActividad").empty();
+                        
+                        for(i= 0; i< data['tipoactividades'].length; i++){
+                        
+                        	// agregamos como value el idEstado y mostramos el Nombre en el combo
+
+                        	$("#cboTipoActividad").append("<option value='"+ data['tipoactividades'][i].id  + " '> "+ data['tipoactividades'][i].nombre  +" </option>");
+                        				
+                        }// for i
+                        			
+                    }// if
+				}// for key
+                        
+			}, // success
+			error: function( error ){
+					// Log any error.
+					console.log("Error al cargar las ciudades");
+						
+			}
+			
+
+        }); // ajax
+	} // fin cargarTipoActividad
+
+
+
+		
+
+
+		</script>
+
+		<style>
+	#commentForm {
+		width: 500px;
+	}
+	#commentForm label {
+		width: 250px;
+	}
+	#commentForm label.error, #commentForm input.submit {
+		margin-left: 253px;
+	}
+	#formPostular {
+		width: 670px;
+	}
+	#formPostular label.error {
+		margin-left: 10px;
+		width: auto;
+		display: inline;
+	}
+	#newsletter_topics label.error {
+		display: none;
+		margin-left: 103px;
+	}
+	</style>
+
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="no-sidebar">
+			<article>
+				<section>
+					<div class="separator"> 
+						<div class="line"></div>
+					
+						<div class="line"></div>
+					</div>
+					<div class="clear"></div>
+					<div style=" background-color: #ecf5eb; padding: 20px; padding-top: 20px;"class="content">
+				
+					<form id="formCharla">
+					<fieldset>
+						<div class="row">
+							<div class="6u 12u(3)">
+							Nombre del Solicitante:  
+							<input type="text" name="NombSolicitante" id="NombSolicitante" "placeholder="Nombre del Solicitante:" />
+							</div>
+							<div class="6u 12u(3)">
+							
+							Tlf Solicitante:
+
+							<input type="text" name="TlfSolicitante" id="TlfSolicitante" placeholder="Tlf Solicitante:" />
+							</div>
+
+						</div>
+					
+						<div class="row">
+							<div class="6u 12u(3)">
+								Fecha de Solicitud:  <input type="date" name="FSolicitud" id="FSolicitud" placeholder="Fecha de Solicitud:" />
+							</div>
+							<div class="6u 12u(3)">
+								Tipo de Actividad:
+
+								<select id='cboTipoActividad'>    
+									<!-- llenado via ajax -->
+						  			<div class="optEstado">
+						  				 
+						  			</div>
+			 					 </select>
+							</div>
+
+						</div>
+					
+						<div class="row 100%">
+							<div class="12u">
+								<textarea name="DescripcionSolicitante" id="DescripcionSolicitante" placeholder="Descripcion:" rows="7"></textarea>
+							</div>
+					</div>
+					</fieldset>
+						<div class="row">
+							<div class="12u">
+								<ul class="buttons">
+									<li><input type="submit" class="special" id="postularse" value="Solicitar." /></li>
+								</ul>
+							</div>
+						
+						</div>
+
+				</form>
+				</div>
+			</div>
+			
+			
+			<div class="bottom-shadow"></div>
+			<div class="no-shadow hidden"></div>
+			<div class="clear"></div>
+			
+		</section>
+	</article>
+				
+						
+
+	</body>
+</html>

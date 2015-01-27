@@ -1,36 +1,41 @@
-<!DOCTYPE HTML>
-<!--
-	ZeroFour by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
 <html>
-	<head>
-		<title>Fundamama</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery.dropotron.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
 
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-desktop.css" />
-             <link href="css/glDatePicker.default.css" rel="stylesheet" type="text/css">
-		</noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+<head>
+<title>FUNDAMAMA</title>
+<!--DEVELOPER BY ZKS-->
+<meta name = "keywords" content = "" />
+<meta name = "description" content = "" />
+<meta name="viewport" content="w">
 
+<link href="css/demo.css" rel="stylesheet" type="text/css">
+<link href="css/style5.css" rel="stylesheet" type="text/css">
+<!--<link href="css/demoBox.css" rel="stylesheet" type="text/css">-->
+<link href="css/styleBox.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
 
-    <link href="css\datapicker\jquery-ui.css" rel="stylesheet">
+<script	src="js/jquery.smint.js" type="text/javascript" ></script>
+<link href="css\datapicker\jquery-ui.css" rel="stylesheet">
 
 <script src="js/jquery-ui.js"></script>
 <script src="js/jquery.datePicker.js"></script>
+
+<script type="text/javascript">
+	
+// DEFINCION DEL TIEMPO PARA HACER EL SCROLL
+$(document).ready( function() {
+    $('.subMenu').smint({
+    	'scrollSpeed' : 1000
+    });
+});
+
+
+</script>
+
 <script>
 $(function () {
     $.datepicker.regional['es'] = {
@@ -55,368 +60,323 @@ $(function () {
         firstDay: 1
     });
 });
+
 </script>
 
-	</head>
-	<body class="homepage">
+</head>
+<body>
+<div class="wrap ">
+	<div class="section sTop">
+		<div class="section banner">
+		
+		<img src="img\BannerFundamamaPNG.png" >
+		
+	</div>
+		
+		
+	</div>
 
-		<!-- Header -->
-			<div id="header-wrapper">
-				<div class="container">
+	<div class="subMenu" >
+	 	<div class="inner">
+	 		<a href="#sTop" class="subNavBtn">INICIO</a>
+	 		<a href="#s1" class="subNavBtn">FUNDAMAMA</a> 
+			<a href="#s2" class="subNavBtn">DONACIONES</a>
+			<a href="#s3" class="subNavBtn">EVENTOS</a>
+			<a href="#s4" class="subNavBtn">CONTACTO</a>
+			<a href="#s5" class="subNavBtn">PECTUS</a>
+			
+		</div>
+	</div>
+<div class="sectionInicio s0">
+		<div class="innerNoticia">
+			<!-- Start WOWSlider.com -->
+<iframe src="wowNoticia.html" style="width:650px;height:390px;max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;"marginheight="0" marginwidth="0"></iframe>
+<!-- End WOWSlider.com -->
 
-					<!-- Header -->
-						<header id="header">
-							<div class="inner">
-							
-								<!-- Logo -->
-									<h1><a href="index.html" id="logo">Fundamama</a></h1><br>
-                                    <span style="position: relative; top: 20px; left: 40px; color: #FFFFFF; font-size=1px;">Una Esperanza de vida</span>
-                                    
+		</div>
+<div class="innerBotones">
+<section>
+				<ul class="lb-album3">
+				<!--	<li>
+						<h4>NECESITAS AYUDA? <span></h4>
+						<a href="#image-2">
+							<img class="imgBotones"src="img\cita.png" alt="image02">
+							<span><br>SOLICITA TU CITA</span>
+						</a>
+						<div class="lb-overlay" id="image-2">
+							<img src="" alt="image02" />
+							<div>							
+								<h3>Kits de Inicio <span></h3>
 								
-								<!-- Nav -->
-									<nav id="nav">
-										<ul>
-											<li class="current_page_item"><a href="index.html">Home</a></li>
-											<li>
-												<a href="">Fundamama</a>
-												<ul>
-													<li><a href="misionvision.html">Mision y Vision</a></li>
-													<li><a href="actividades.html">Actividades</a></li>
-													<li><a href="cancerdemama.html">La Enfermedad</a></li>
-													<li>
-														<a href="">Nuestro Aporte</a>
-														<ul>
-															<li><a href="personasayudadas.html">Personas Ayudadas</a></li>
-															<li><a href="dinerootorgado.html">Dinero Otorgado</a></li>
-															<li><a href="tiposdecancer.html">Tipo de Canceres Atendidos</a></li>
-															<li><a href="porcentajedeedad.html">Porcentaje de edad de las personas atendidas</a></li>
-
-													
-														</ul>
-													</li>
-													
-												</ul>
-											</li>
-											<li><a href="donaciones.html">Donaciones</a></li>
-											<li><a href="eventos.html">Eventos</a></li>
-											<li><a href="http://localhost:8081/ui-examples/vistas/login/login.zul">Pectus</a></li>
-										</ul>
-									</nav>
-							
 							</div>
-						</header>
-
-				
-		
-    <script type="text/javascript" src="../portalfundamama/js/jssor.js"></script>
-    <script type="text/javascript" src="../portalfundamama/js/jssor.slider.js"></script>
-
-    <script>
-
-        jssor_sliderb_starter = function (containerId) {
-            //Reference http://www.jssor.com/development/slider-with-slideshow-no-jquery.html
-            //Reference http://www.jssor.com/development/tool-slideshow-transition-viewer.html
-
-            var _SlideshowTransitions = [
-            //Fade in R
-            {$Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            //Fade out L
-            , { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $JssorEasing$.$EaseInCubic, $Opacity: $JssorEasing$.$EaseLinear }, $Opacity: 2 }
-            ];
-
-            var options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
-                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
-                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
-
-                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
-                $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
-                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
-                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
-                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
-                $SlideSpacing: 0,                                   //[Optional] Space between each slide in pixels, default value is 0
-                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
-                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
-                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
-                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
-                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
-
-                $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
-                    $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
-                    $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
-                    $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
-                    $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
-                },
-
-                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
-                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
-                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
-                    $SpacingX: 10,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
-                    $SpacingY: 10                                    //[Optional] Vertical space between each item in pixel, default value is 0
-                },
-
-                $ArrowNavigatorOptions: {
-                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
-                    $ChanceToShow: 2,                                //[Required] 0 Never, 1 Mouse Over, 2 Always
-                    $AutoCenter: 2                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
-                },
-
-                $ThumbnailNavigatorOptions: {
-                    $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
-                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
-                    $ActionMode: 0,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
-                    $DisableDrag: true                              //[Optional] Disable drag or not, default value is false
-                }
-            };
-
-            var jssor_sliderb = new $JssorSlider$(containerId, options);
-            //responsive code begin
-            //you can remove responsive code if you don't want the slider scales while window resizes
-            function ScaleSlider() {
-                var parentWidth = jssor_sliderb.$Elmt.parentNode.clientWidth;
-                if (parentWidth)
-                    jssor_sliderb.$ScaleWidth(Math.min(parentWidth, 600));
-                else
-                    $Jssor$.$Delay(ScaleSlider, 30);
-            }
-
-            ScaleSlider();
-            $Jssor$.$AddEvent(window, "load", ScaleSlider);
-
-
-            if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-                $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
-            }
-
-            //if (navigator.userAgent.match(/(iPhone|iPod|iPad)/)) {
-            //    $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
-            //}
-            //responsive code end
-        };
-    </script>
-    <!-- Jssor Slider Begin -->
-    <!-- You can move inline styles to css file or css block. -->
-    <div style="position: absolute; left:62%; ">
-       <a href="citas.html"><button id="btn1"><span>¿Necesitas Ayuda?</span></button></a><br>
+							<a href="#page" class="lb-close">Cerrar</a>
+							<a href="https://6f73bd942a941885322e60c9228b7dcbdbb0aa4d.googledrive.com/host/0B9seJkYL9PBSOHU0OEZhS2RRMGc/productos.html#page" class="lb-closed">Ver Detalle</a>
+						</div>
+					</li>
+					<li>
+						<h4>CHARLA PREVENTIVA <span></h4>
+						<a href="#image-3">
+							<img class="imgBotones"src="img\actividad.png" alt="image03">
+							<span><br>SOLICITAR UNA CHARLA</span>
+						</a>
+						<div class="lb-overlay" id="image-3">
+							<img src="http://imageshack.com/a/img538/2911/vAPdFl.jpg" alt="image03" />
+							<div>							
+								<h3><span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							<a href="https://6f73bd942a941885322e60c9228b7dcbdbb0aa4d.googledrive.com/host/0B9seJkYL9PBSOHU0OEZhS2RRMGc/productos.html#page" class="lb-closed">Ver Detalle</a>
+						</div>
+					</li>
+					<li>
+						<h4>¿QUIERES PARTICIPAR? <span></h4>
+						<a href="#image-4">
+							<img class="imgBotones"src="img\voluntario.png" alt="image03">
+							<span><br>POSTÚLATE A VOLUNTARIO</span>
+						</a>
+						<div class="lb-overlay" id="image-3">
+							<img src="http://imageshack.com/a/img538/2911/vAPdFl.jpg" alt="image03" />
+							<div>							
+								<h3>Desechables<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							<a href="https://6f73bd942a941885322e60c9228b7dcbdbb0aa4d.googledrive.com/host/0B9seJkYL9PBSOHU0OEZhS2RRMGc/productos.html#page" class="lb-closed">Ver Detalle</a>
+						</div>
+					</li>
+					<li>
+						<h4>¿CONOCES TU ESTATUS?<span></h4>
+						<a href="#image-3">
+							<img class="imgBotones"src="img\consultar_estatus.png" alt="image03">
+							<span><br>CONSULTA TU SOLICITUD</span>
+						</a>
+						<div class="lb-overlay" id="image-3">
+							<img src="http://imageshack.com/a/img538/2911/vAPdFl.jpg" alt="image03" />
+							<div>							
+								<h3>Desechables<span>Muy práctico para cargarlo a cualquier lugar y usarlo inmediatamente</h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							<a href="https://6f73bd942a941885322e60c9228b7dcbdbb0aa4d.googledrive.com/host/0B9seJkYL9PBSOHU0OEZhS2RRMGc/productos.html#page" class="lb-closed">Ver Detalle</a>
+						</div>
+					</li>-->
+		<a href="index_formularios.html"><button id="btn1"><span>¿Necesitas Ayuda?</span></button></a><br>
       <!--  <a href="patrocinador.html"><button id="btn2"><span>¿Quieres Apoyarnos?</span></button><br></a> -->
-        <a href="voluntarios.html"><button id="btn3"><span>¿Quieres ser Voluntario?</span></button><br></a>
-        <a href="charlas.html"><button id="btn4"><span>Charlas Preventivas</span></button><br></a>
-        
-
-            
-            <div id="datepicker"></div>
-    </div>
-    <div id="sliderb_container" style="position: relative; left: 150px; top: 5px; width: 800px; height: 600px; overflow: hidden; ">
-
-     
-        <!-- Loading Screen -->
-        <div u="loading" style="position: absolute; top: 0px; left: 400px;">
-            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
-                background-color: #000; top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
-                top: 0px; left: 0px;width: 100%;height:100%;">
-            </div>
-        </div>
-
-        <!-- Slides Container -->
-        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 600px;
-            overflow: hidden;">
-            <div>
-                <img u=image src="../portalfundamama/images/9.jpg" />
-                <div u="thumb">5ta Carrera</div>
-            </div>
-            <div>
-                <img u=image src="../portalfundamama/images/11.jpg" />
-                <div u="thumb">"Una esperanza de vida"</div>
-            </div>
-            <div>
-                <img u=image src="../portalfundamama/images/sergio.jpg" />
-                <div u="thumb">5ta Caminata</div>
-            </div>
-            <div>
-                <img u=image src="../portalfundamama/images/6.jpg" />
-                <div u="thumb">Fundamama</div>
-            </div>
-        </div>
-        
-        <!-- ThumbnailNavigator Skin Begin -->
-        <div u="thumbnavigator" class="sliderb-T" style="position: absolute; bottom: 0px; left: 0px; height:45px; width:600px;">
-            <div style="filter: alpha(opacity=40); opacity:0.4; position: absolute; display: block;
-                background-color: #000000; top: 0px; left: 0px; width: 100%; height: 100%;">
-            </div>
-            <!-- Thumbnail Item Skin Begin -->
-            <div u="slides">
-                <div u="prototype" style="position: absolute; width: 600px; height: 45px; top: 0; left: 0;">
-                    <thumbnailtemplate style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; font-family: verdana; font-weight: normal; color:#fff; line-height: 45px; font-size:20px; padding-left:10px;"></thumbnailtemplate>
-                </div>
-            </div>
-            <!-- Thumbnail Item Skin End -->
-        </div>
-        <!-- ThumbnailNavigator Skin End -->
-        
-        <!-- Bullet Navigator Skin Begin -->
-        <!-- jssor slider bullet navigator skin 01 -->
-        <style>
-            /*
-            .jssorb01 div           (normal)
-            .jssorb01 div:hover     (normal mouseover)
-            .jssorb01 .av           (active)
-            .jssorb01 .av:hover     (active mouseover)
-            .jssorb01 .dn           (mousedown)
-            */
-            .jssorb01 div, .jssorb01 div:hover, .jssorb01 .av
-            {
-                filter: alpha(opacity=70);
-                opacity: .7;
-                overflow:hidden;
-                cursor: pointer;
-                border: #000 1px solid;
-            }
-            .jssorb01 div { background-color: gray; }
-            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #d3d3d3; }
-            .jssorb01 .av { background-color: #fff; }
-            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #555555; }
-        </style>
-        <!-- bullet navigator container -->
-        <div u="navigator" class="jssorb01" style="position: absolute; bottom: 16px; right: 10px;">
-            <!-- bullet navigator item prototype -->
-            <div u="prototype" style="POSITION: absolute; WIDTH: 12px; HEIGHT: 12px;"></div>
-        </div>
-        <!-- Bullet Navigator Skin End -->
-        
-        <!-- Arrow Navigator Skin Begin -->
-        <style>
-            /* jssor slider arrow navigator skin 05 css */
-            /*
-            .jssora05l              (normal)
-            .jssora05r              (normal)
-            .jssora05l:hover        (normal mouseover)
-            .jssora05r:hover        (normal mouseover)
-            .jssora05ldn            (mousedown)
-            .jssora05rdn            (mousedown)
-            */
-            .jssora05l, .jssora05r, .jssora05ldn, .jssora05rdn
-            {
-                position: absolute;
-                cursor: pointer;
-                display: block;
-                background: url(../img/a17.png) no-repeat;
-                overflow:hidden;
-            }
-            .jssora05l { background-position: -10px -40px; }
-            .jssora05r { background-position: -70px -40px; }
-            .jssora05l:hover { background-position: -130px -40px; }
-            .jssora05r:hover { background-position: -190px -40px; }
-            .jssora05ldn { background-position: -250px -40px; }
-            .jssora05rdn { background-position: -310px -40px; }
-        </style>
-        <!-- Arrow Left -->
-        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 123px; left: 8px;">
-        </span>
-        <!-- Arrow Right -->
-        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 123px; right: 8px">
-        </span>
-        <!-- Arrow Navigator Skin End -->
-        <a style="display: none" href="http://www.jssor.com">javascript</a>
-        <!-- Trigger -->
-        <script>
-            jssor_sliderb_starter('sliderb_container');
-        </script>
-    </div>
-    <!-- Jssor Slider End -->
-
-				</div>
-            <div   align="center">
-               
-                    <a style="margin-right: 3%;  margin-top: 3%;"  href="#" class="icon circle fa fa-twitter-square fa-3x"><span hidden="">Twitter</span></a>
-                    <a style="margin-right: 3%;" href="#" class="icon circle fa fa-facebook-square fa-3x"><span hidden="">Facebook</span></a>
-                    <a style="margin-right: 3%;" href="#" class="icon circle fa fa-google-plus-square fa-3x"><span hidden="">Google+</span></a>
-               
-            </div>
-
-			</div>
+        <a href="index_formularios.html"><button id="btn3"><span>¿Quieres ser Voluntario?</span></button><br></a>
+        <a href="index_formularios.html"><button id="btn4"><span>Charlas Preventivas</span></button><br></a>
+         <a href="index_formularios.html" ><button id="btn5"><span>¿Estatus de Solicitud?</span></button><br></a>
+		<div class="calendario">
+			<h1><br>PRÓXIMOS EVENTOS</h1>
 		
-		<!-- Main Wrapper -->
-		
+		<div  id="datepicker"></div>
+		</div>		</ul>
+				</section>
 
-
-		
-		
-
-		<!-- Footer Wrapper -->
-			<div id="footer-wrapper">
-				<footer id="footer" class="container">
-					<div class="row">
-						<div class="3u">
-						              <h2 align="center">Links informativos</h2>
-							<!-- Links -->
-								<section>
-					
-									<ul class="divided">
-										<li><a href="#">http://www.senosayuda.org.ve/ </a></li>
-										<li><a href="#">https://www.aecc.es/</a></li>
-										<li><a href="#">http://www.breastcancer.org/es/sintomas</a></li>
-
-
-
-
-
-									</ul>
-								</section>
-						
-						</div>
-						<div class="3u">
-						
-							<!-- Links -->
-								<section>
-									<h2></h2>
-									<ul class="divided">
-                                        <li><a href="#">http://www.badanlara.org.ve/</a></li>
-                                        <li><a href="#">http://www.acelin.com.ve/</a></li>
-                                        <li><a href="#">http://www.cancer.net/</a></li>
-										
-									</ul>
-								</section>
-                    <div style="position:relative; left:-120px;">
-               
-                        <a style="margin-right: 10%; margin-top: 3%;"  href="#" class="icon circle fa fa-twitter fa-3x"><span hidden="">Twitter</span></a>
-                        <a style="margin-right: 10%;" href="#" class="icon circle fa fa-facebook fa-3x"><span hidden="">Facebook</span></a>
-                        <a style="margin-right: 10%;" href="#" class="icon circle fa fa-google-plus fa-3x"><span hidden="">Google+</span></a>
-                   
-                     </div>
-
-						
-						</div>
-
-
-						<div class="6u">
-						
-							<!-- About -->
-								<section>
-									<h2> SIEMPRE HAY  UNA FORMA DE PARTICIPAR</h2>
-									<p>Si deseas realizar donaciones para ayudar a cubrir costos de consultas, exámenes, tratamientos de quimioterapia y radioterapias a pacientes de bajos recursos de diversos municipios del estado Lara y  estados vecinos.</p>
-									<a href="donaciones.html" class="button alt icon fa-arrow-circle-right">Haz click aqui</a>
-								</section>
-						
-							<!-- Contact -->
-
-						
-						</div>
-					</div>
-					<div class="row">
-						<div class="12u">
-							<div id="copyright">
-								<ul class="menu">
-									<li>&copy; Todos los derechos Reservados</li><li>Diseño: ChronoShift</li>
-								</ul>
+</div>
+	</div>
+	<div class="section s1">
+		<div class="inner ">
+			<h1><br>LA FUNDACIÓN</h1>
+<section>
+				<ul class="lb-album">
+					<li>
+						<a href="#img-1">
+							<img src="img\1.jpg">
+							<h4><span><br><br><br>¿Quiénes Somos?</span></h4>
+						</a>
+						<div class="lb-overlay" id="img-1">
+							<img src="img\QuienesSomos.jpg" />
+							<div>							
+								<h3>Una Esperanza de Vida<span></h3>
+								
 							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
 						</div>
-					</div>
-				</footer>
+					</li>
+					<li>
+						<a href="#imagen-3">
+							<img src="img\2.jpg">
+							<h4><span><br><br><br>Misión y Visión</span></h4>
+							
+						</a>
+						<div class="lb-overlay" id="imagen-3">
+							<img src="img\MisionVision.jpg" />
+							<div>							
+								<h3>Misión o Visión<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					
+					<li>
+						<a href="#image-5">
+							<img src="img\3.jpg">
+							<h4><span><br><br><br>Objetivos</span></h4>
+						</a>
+						<div class="lb-overlay" id="image-5">
+							<img src="img\objetivos.jpg" alt="image05" />
+							<div>							
+								<h3>Objetivos<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					<li>
+						<a href="#image-6">
+							<img src="img\4.jpg">
+							<h4><span><br><br><br>Actividades</span></h4>
+						</a>
+						<div class="lb-overlay" id="image-6">
+							<img src="img\actividadesjpg.jpg" alt="image06" />
+							<div>							
+								<h3>Actividades de la Fundación<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					<li>
+						<a href="#image-1">
+							<img src="img\5.jpg">
+							<h4><span><br><br><br>Programas</span></h4>
+						</a>
+						<div class="lb-overlay" id="image-1">
+							<img src="img\nuestrosprogramas.jpg" alt="image06" />
+							<div>							
+								<h3>Programas<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					<div ALIGN=center><h3></h3></div>
+					
+				</ul>
+			</section>
+			
+							<div class="img1" align="center">
+				<img src="" height="100px" >
 			</div>
+		</div>
+	</div>
 
-	</body>
+	<div class="section s2">
+		<div class="inner">
+			<h1><br>DONACIONES</h1>
+			<section>
+				<ul class="lb-album4">
+					<li>
+						<a href="#imagi-6">
+							<img src="images\ayudamujer.jpg">
+							<h4><span><br><br><br>Que hacemos con tus donaciones?</span></h4>
+						</a>
+						<div class="lb-overlay" id="imagi-6">
+							<img src="images\donaciones1.jpg" alt="image06" />
+							<div>							
+								<h3>Apoya nuestra gestión <span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					<li>
+						<a href="#imago-1">
+							<img src="images\ayudamujer2.jpg">
+							<h4><span><br><br><br>Siempre hay una forma de participar</span></h4>
+						</a>
+						<div class="lb-overlay" id="imago-1">
+							<img src="images\donaciones2.jpg" alt="image06" />
+							<div>							
+								<h3>Agradecemos tu colaboración<span></h3>
+								
+							</div>
+							<a href="#page" class="lb-close">Cerrar</a>
+							
+						</div>
+					</li>
+					<div ALIGN=center><h3></h3></div>
+					
+				</ul>
+			</section>
+		</div>
+	</div>
+
+
+
+	<div class="section s3">
+		<div class="inner">
+			<h1><br>EVENTOS</h1>
+			
+				<!-- Start WOWSlider.com -->
+					<iframe src="gridEventos.html" style="margin-left:-70px;width:120%;height:85%;overflow:hidden;border:none;padding:0;display:block;"marginheight="0" marginwidth="0"></iframe>
+					<!-- End WOWSlider.com -->
+				
+		</div>
+		
+		
+	</div>
+
+	
+	<div class="section s4">
+		<div class="innerContactanos">
+			<h1><br>CONTÁCTANOS</h1>
+
+			<h2 style="text-align: right;margin-right:10%;"><p> Localiza nuestra sede en el mapa </p></h2>
+
+			<iframe class="iframeRedes" src="MenuRedes.html" ></iframe>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d62853.823179279294!2d-69.32982156637256!3d10.069235264505194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!1i0!3e6!4m0!4m5!1s0x8e87677c1b45106b%3A0x15d47a8dd76808b6!2sAv+Cr%C3%ADspulo+Benitez%2C+Barquisimeto!3m2!1d10.0691528!2d-69.2929134!5e0!3m2!1ses!2sve!4v1416857951899" width="400" height="350" frameborder="0" style="border:0"></iframe>
+			
+				
+
+		</div>
+		
+	</div>
+
+	<div class="sectionLogin s5">
+		<div class="inner">
+			<h1><br>PECTUS</h1>
+			<div> <img src="img\pectussistema.png">
+				  <div id="login-form">
+
+					    <h3>Iniciar Sesion</h3>
+
+					    <fieldset>
+
+					      <form id="login-pectus"  method="post">
+								<input type="text" name="usuario" id="txtusuario" placeholder="Usuario:" /> 
+						        <input type="password" id="txtpassword" required placeholder="*******" > <!-- JS because of IE support; better: placeholder="Password" -->
+
+						        <input onclick="login()" type="button" value="Ingresar">
+
+						        <footer class="clearfix">
+
+						          <p><span class="info">?</span><a href="#">Olvido su contraseña?</a></p>
+
+						        </footer>
+					      </form>
+
+					    </fieldset>
+
+					  </div> <!-- end login-form -->
+
+					</div>
+		
+	
+		</div>
+		
+	</div>
+
+	
+</div>
+
+</body>
 </html>

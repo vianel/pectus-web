@@ -1,0 +1,72 @@
+
+.jimgMenu {
+	position:relative;
+	
+	padding: 0px;
+	width:475px;
+	height:250px;
+	
+}
+
+.jimgMenu ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+	height: 200px;
+	position: relative;
+	}
+	
+.jimgMenu ul li {
+	width: 95px;
+	float: left;
+	display: block;
+	overflow: hidden;
+}
+
+.jimgMenu ul li a {
+	text-indent: -1000px;
+	background:#fff repeat scroll 0%;
+	border-right: 2px solid #fff;
+	cursor:pointer;
+	display:block;
+	overflow: hidden;
+	height: 200px;
+}
+h5 {
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: bold;
+	font-size:14px;
+	color:#000000;
+	text-shadow: 3px 3px 8px rgba(150, 150, 150, 1);
+	text-align: left;
+}
+.jimgMenu ul li#landscapes a {
+	background: url(../images/facebook.jpg) repeat scroll 0%;
+  
+}
+
+.jimgMenu ul li#people a {
+	background: url(../images/twitter.jpg) repeat scroll 0%;
+
+}
+
+.jimgMenu ul li#nature a {
+	background: url(../images/instagram.jpg) repeat scroll 0%;
+  
+}
+
+.jimgMenu ul li#abstract a {
+	background: url(../images/youtube.jpg) repeat scroll 0%;
+
+}
+
+.jimgMenu ul li#urban a {
+	background: url(../images/gmail.jpg) repeat scroll 0%;
+	border-right-style: none;
+}
+
+.clear {
+	clear: both;
+}

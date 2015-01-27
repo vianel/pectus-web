@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>fundamama</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<!-- Esto es para validar-->
+		<script src="js/lib/jquery.js"></script>
+		<script src="js/dist/jquery.validate.js"></script>
+	
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/screen.css">
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<script type="text/javascript">
+
+	$(document).ready(function() {
+
+
+	$.validator.setDefaults({
+		submitHandler: function() {
+			alert("Su Solicitud de Cita ha sido Enviada!");
+			RegistrarVoluntario();
+			console.log(RegistrarVoluntario());
+			//$("#formPostular").c;
+			$('#formVoluntario').each (function(){
+			  this.reset();
+			});
+
+
+		}
+	});
+		// validate the comment form when it is submitted
+	$("#formVoluntario").validate({
+	rules: {
+	cedula: {
+	required: true,
+	maxlength: 11,
+	number: true
+	},
+	txtnombre: "required",
+	txtapellido: "required",
+	Fnacimiento: "required",
+	tlffijo: {
+	required: true,
+	maxlength: 11
+	},
+	txtemail: {
+	required: true,
+	minlength: 2,
+	email:true
+	},
+	txtcelular: {
+	required: true,
+	minlength: 3
+
+	},
+	txtprofesion:{
+	required: true,
+	maxlength: 30
+	},
+	txtdireccion:{
+	required: true
+
+	},
+	},
+	messages: {
+	cedula: {
+	required: "Por favor introdusca su Cedula",
+	maxlength: "El numero debe poseer menos de 11 caracteres",
+	number: "Lo digitos deben numericos"	
+
+	},
+	txtnombre: "Por favor introdusca un nombre",
+	txtapellido: "Por favor introdusca un apellido",
+
+	tlffijo: {
+	required: "Por favor introdusca un telefono fijo",
+	maxlength: "El numero debe poseer menos de 11 caracteres"
+	},
+	txtprofesion: {
+	required: "Por favor introdusca una profesion",
+	maxlength: "El numero debe poseer menos de 11 caracteres"
+	},
+
+	Fnacimiento: {
+	required: "Por favor introdusca una Fecha de Nacimiento"
+	},
+	txtcelular: {
+	required: "Por favor introdusca un telefono celular",
+	maxlength: "El numero debe poseer menos de 11 caracteres"
+
+	},
+	txtemail: {
+	required: "Por favor introdusca su E-mail",
+	minlength: "El E-mail debe poseer al menos 3 caracteres",
+	email: "Debe ser un E-mail"
+	}
+	}
+	});
+	
+			// al cargar la pagina cargamos los estados
+		cargarEstados();
+			//listener para el boton modificar de la tabla empleado
+			$("#cboEstado").click(function() {
+				// listener para el combo estadp
+				// al cambiar el estado, cargamos sus ciudades respectivas	
+				cargarComboCiudades();
+			});
+
+		function limpiarFormulario(){
+
+		}
+		function RegistrarVoluntario(){
+
+			var ced = document.getElementById("cedula").value.trim();
+			var mail = document.getElementById("txtemail").value.trim();
+			var nomb = document.getElementById("txtnombre").value.trim().replace(" ","%20");
+			var ape = document.getElementById("txtapellido").value.trim().replace(" ","%20");
+			var fijo = document.getElementById("tlffijo").value.trim().replace(" ","%20");
+			var celu = document.getElementById("txtcelular").value.trim().replace(" ","%20");
+			var fnaci = document.getElementById("Fnacimiento").value;
+			var profe = document.getElementById("txtprofesion").value.trim().replace(" ","%20");
+			var ciudad = document.getElementById("cboCiudad").value;
+			var direcc = document.getElementById("txtdireccion").value.trim().replace(" ","%20");
+			var civil = document.getElementById("cboEstadoCivil").value.charAt(0);
+			var sex= document.getElementById("cboSexo").value.charAt(0);
+
+			$.ajax({
+                    url: 'http://localhost:5000/voluntario/agregar',
+                    dataType: 'json',
+
+				data: {cedula:ced,idciudad:ciudad,nombre:nomb, apellido : ape ,tlfcelular : celu, tlffijo : fijo,direccion : direcc , correo : mail, fecnacimiento : fnaci , profesion : profe ,edocivil : civil,estatus :'S',
+					sexo:sex} ,
+                   success: function(data){
+                        
+                        var len = data.length;
+                        
+                     
+                    }
+                });
+		} // fin Registrar
+
+		
+		
+
+	function cargarComboCiudades()
+	{
+
+		console.log('buscando ciudades');
+		// obtenemos el pais seleccionado
+		var parametro = document.getElementById("cboEstado").value ;
+
+		if (parametro == null || parametro.length == 0 || /^\s+$/.test(parametro)){
+			// si se selecciono algun estado cargamos las ciudades de este
+			alert('Seleccione un Estado');
+		}
+		else{
+
+			// cargamos las ciudades de ese estado
+
+			
+			
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/ciudad/buscar',
+            dataType: 'json',
+            	data: { idestado: parametro } ,
+            success: function(data){
+            
+            	for(var key in data) {
+
+                	if (key.localeCompare('ciudades' ==0)){
+                    	// si retornó alguna key = estados
+                        console.log('hay estados ');	
+                        // recorremos cada estado
+                        // IMPORTANTE BORRAR EL COMBO 
+                        $("#cboCiudad").empty();
+                        
+                        for(i= 0; i< data['ciudades'].length; i++){
+                        
+                        	// agregamos como value el idEstado y mostramos el Nombre en el combo
+							$("#cboCiudad").append("<option value='"+ data['ciudades'][i].id  + " '> "+ data['ciudades'][i].nombre  +" </option>");
+                        	//$("#cboCiudad").append("<option value='" + val.id +"'>"  +val.nombre + "</option>");
+                        				
+                        }// for i
+                        			
+                    }// if
+				}// for key
+                        
+			}, // success
+			error: function( error ){
+					// Log any error.
+					console.log("Error al cargar las ciudades");
+						
+			}
+			
+        }); // ajax
+
+			
+		}// else
+
+}//func
+			
+
+	function cargarEstados(){
+
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/estado/todos',
+            dataType: 'json',
+            success: function(data){
+            
+            	for(var key in data) {
+
+                	if (key.localeCompare('estados' ==0)){
+                    	// si retornó alguna key = estados
+                        console.log('hay estados ');	
+                        // recorremos cada estado
+                        // IMPORTANTE BORRAR EL COMBO 
+                        $("#cboEstado").empty();
+                        
+                        for(i= 0; i< data['estados'].length; i++){
+                        
+                        	// agregamos como value el idEstado y mostramos el Nombre en el combo
+
+                        	$("#cboEstado").append("<option value='"+ data['estados'][i].id  + " '> "+ data['estados'][i].nombre  +" </option>");
+                        				
+                        }// for i
+                        			
+                    }// if
+				}// for key
+                        
+			}, // success
+			error: function( error ){
+					// Log any error.
+					console.log("Error al cargar los estados");
+						
+			}
+
+        }); // ajax
+	} // fin cargarEstados
+
+		
+$.validator.setDefaults({
+		submitHandler: function() {
+			alert("Su Solicitud de Cita ha sido Enviada!");
+			RegistrarPaciente();
+			$("#formPostular").reset();
+
+		}
+	});
+			
+
+
+		} ); // fin del onready
+
+
+		</script>
+
+		<style>
+	#commentForm {
+		width: 500px;
+	}
+	#commentForm label {
+		width: 250px;
+	}
+	#commentForm label.error, #commentForm input.submit {
+		margin-left: 253px;
+	}
+	#formPostular {
+		width: 670px;
+	}
+	#formPostular label.error {
+		margin-left: 10px;
+		width: auto;
+		display: inline;
+	}
+	#newsletter_topics label.error {
+		display: none;
+		margin-left: 103px;
+	}
+	</style>
+
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body class="no-sidebar">
+		<article>
+							
+			<section>
+			<div class="separator"> 
+				<div class="line"></div>
+				<div class="line"></div>
+			</div>
+				
+			<div class="clear"></div>
+				<div style=" background-color: #ecf5eb; padding: 20px; padding-top: 20px;"class="content">
+					
+					<form class="cmxform" id="formVoluntario">
+						<div class="row 50%">
+							<div class="6u 12u(3)">
+								<input type="text" name="cedula" id="cedula" placeholder="Cedula:"/>
+							</div>
+			
+							<div class="6u 12u(3)">
+								<input type="text" name="txtnombre" id="txtnombre" placeholder="Nombre:" />
+							</div>
+						</div>
+						<div class="row 50%">
+
+							<div class="6u 12u(3)">
+								<input type="text" name="txtapellido" id="txtapellido" placeholder="Apellido:" />
+							</div>
+
+							<div class="6u 12u(3)">
+								<input  type="text" name="txtemail" id="txtemail" placeholder="Email:" />
+							</div>
+
+						</div>
+
+
+						<div class="row 50%">
+							<div class="6u 12u(3)">
+								Estado Civil:
+
+								<select id='cboEstadoCivil'>    
+									<!-- llenado via ajax -->
+						  			<div class="optEstado">
+						  				 <option>Soltero</option>
+										<option>Casado</option>													
+										<option>Divorciado</option>
+										<option>Viudo</option>
+						  			</div>
+			 					 </select>
+							</div>
+							
+							<div class="6u 12u(3)">
+								Sexo:
+
+								<select id='cboSexo'>    
+									<!-- llenado via ajax -->
+						  			<div class="optEstado">
+						  				<option>Masculino</option>
+										<option>Femenino</option>					
+										
+						  			</div>
+			 					 </select>
+							</div>
+						
+						</div>
+
+
+						<div class="row 50%">
+							<div class="6u 12u(3)">
+								<input type="text" name="tlffijo" id="tlffijo" placeholder="Tlf Fijo:" />
+							</div>
+							<div class="6u 12u(3)">
+								<input type="text" name="txtcelular" id="txtcelular" placeholder="Celular:" />
+							</div>
+						</div>
+						<div class="row 50%">
+							<div class="6u 12u(3)">
+								Fecha Nacimiento:  <input type="date" name="Fnacimiento" id="Fnacimiento" placeholder="Fecha Nacimiento:" />
+							</div>
+							<div class="6u 12u(3)">
+								Profesion
+								<input type="text" name="txtprofesion" id="txtprofesion" placeholder="Profesion:" />
+							</div>
+						</div>
+
+						<div class="row 50%">
+							
+							<div class="6u 12u(3)">
+								Estado:
+
+								<select id='cboEstado'>    
+									<!-- llenado via ajax -->
+						  			<div class="optEstado">
+
+						  			</div>
+			 					 </select>
+							</div>
+
+							<div class="6u 12u(3)">
+								Ciudad:
+								<select id='cboCiudad'class='form-control'>    
+									<!-- llenado via ajax -->
+						  			<div class="optCiudad">
+						  				 
+						  			</div>
+			 					 </select>
+							</div>
+	
+							
+						</div>
+
+						<div class="row 20%">
+							<div class="12u">
+								<textarea name="txtdireccion" id="txtdireccion" placeholder="Direccion:" ref="Small" rows="7"></textarea>
+							</div>
+						</div>
+						<div class="row">
+							<div class="12u">
+								<ul class="buttons">
+									<li><input type="submit" class="special" id="postularse" value="Postularse." /></li>
+								</ul>
+							</div>
+						</div>
+						
+					</form>
+					
+
+				</div>
+		</div>
+									
+
+		<div class="bottom-shadow"></div>
+		<div class="no-shadow hidden"></div>
+		<div class="clear"></div>
+		
+	</section>
+	</article>
+						
+						
+
+	</body>
+</html>

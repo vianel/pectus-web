@@ -310,7 +310,7 @@ button.ui-button::-moz-focus-inner {
 	padding: 0;
 }
 .ui-datepicker {
-	width: 17em;
+	width: 15em;
 	padding: .2em .2em 0;
 	display: none;
 }
@@ -1222,4 +1222,10 @@ body .ui-tooltip {
 	opacity: .2;
 	filter: Alpha(Opacity=20); /* support: IE8 */
 	border-radius: 5px;
+}
+
+
+.ui-datepicker, .ui-state-default, .ui-state-hover, .ui-state-active
+{
+    font-size:13px;
 }
