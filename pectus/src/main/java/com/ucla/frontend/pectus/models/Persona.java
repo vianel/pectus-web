@@ -15,6 +15,7 @@ public class Persona {
 	private String profesion;
 	private char estadoCivil;
 	private Ciudad ciudad;
+	private char sexo;
 	
 	
 	public Persona() {
@@ -23,10 +24,29 @@ public class Persona {
 	}
 	
 	
+	
+
+
+	public char getSexo() {
+		return sexo;
+	}
+
+
+
+
+
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
+
+
+
+
+
 	public Persona(String cedula, String nombre, String apellido,
 			String celular, String fijo, String direccion, String correo,
 			Date fechaNacimiento, String profesion, char estadoCivil,
-			Ciudad ciudad) {
+			Ciudad ciudad, char sexo) {
 		super();
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -39,7 +59,11 @@ public class Persona {
 		this.profesion = profesion;
 		this.estadoCivil = estadoCivil;
 		this.ciudad = ciudad;
+		this.sexo = sexo;
 	}
+
+
+
 
 
 	public Ciudad getCiudad() {

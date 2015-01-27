@@ -4,33 +4,37 @@ import java.util.List;
 
 public class Comision {
 	
-	private int id;
+	private Integer id;
 	private String nombre;
 	private String descripcion;
-	private List<Voluntario> voluntarios[];
-	
+
+
+
 	public Comision(){
 		
 	}
 	
 	
 	
-	public Comision(int id, String nombre, String descripcion,
-			List<Voluntario>[] voluntarios) {
+	public Comision(Integer id, String nombre, String descripcion) {
 		super();
-		this.id = id;
+		this.setId(id);
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.voluntarios = voluntarios;
 	}
 	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -43,12 +47,7 @@ public class Comision {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public List<Voluntario>[] getVoluntarios() {
-		return voluntarios;
-	}
-	public void setVoluntarios(List<Voluntario>[] voluntarios) {
-		this.voluntarios = voluntarios;
-	}
+	
 	
 	
 	

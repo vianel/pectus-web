@@ -11,9 +11,8 @@ import com.ucla.frontend.pectus.services.ServicioVoluntario;
 public class VoluntarioFilter {
 	
 	private String nombre = "";
-	private String referido = "";
 	private String cedula = "";
-	static List<Voluntario> voluntarios = ServicioVoluntario.buscarVoluntario();
+	static List<Voluntario> voluntarios = ServicioVoluntario.buscarVoluntarioI();
 	
 	
 	public String getNombre() {
@@ -22,14 +21,7 @@ public class VoluntarioFilter {
 	public void setNombre(String nombre) {
 		this.nombre = nombre==null?"":nombre.trim();
 	}
-	public String getReferido() {
-		return referido;
-	}
-	public void setReferido(String referido) {
-		this.referido = referido==null?"":referido.trim();
-	}
-	
-	
+
 	public String getCedula() {
 		return cedula;
 	}
@@ -40,13 +32,11 @@ public class VoluntarioFilter {
 		List<Voluntario> someVoluntarios = new ArrayList<Voluntario>();
 		String nombre = voluntarioFilter.getNombre().toLowerCase();
 		String cedula = voluntarioFilter.getCedula().toLowerCase();
-		String referido = voluntarioFilter.getReferido().toLowerCase();
 		
 		for(Iterator<Voluntario> i = voluntarios.iterator(); i.hasNext();){
 			Voluntario tmp = i.next();
 			if(tmp.getNombre().toLowerCase().contains(nombre) &&
-			   tmp.getCedula().toLowerCase().contains(cedula)&&
-			   tmp.getDireccion().toLowerCase().contains(referido)){
+			   tmp.getCedula().toLowerCase().contains(cedula)){
 			
 				someVoluntarios.add(tmp);
 			}

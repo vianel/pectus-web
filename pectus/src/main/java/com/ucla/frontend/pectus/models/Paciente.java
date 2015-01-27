@@ -35,38 +35,8 @@ public class Paciente extends Persona{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Paciente(Estado estado, Ciudad ciudad, Seguro seguro,
-			String cedula, String nombre, String apellido, String celular,
-			String fijo, String direccion, String correo,
-			Date fechaNacimiento, String profesion, char estadoCivil,
-			Integer nroHijos, String cedulaConyugue, String nombreConyugue,
-			String apellidoConyugue, String ocupacionConyugue,
-			char tipoVivienda, Integer nroHabitantes, char tendenciaVivienda,
-			Double alquiler, String lugarTrabajo, String direccionTrabajo,
-			String telefonoTrabajo, float ingresos, float egresos,
-			boolean estatus) {
-		super(cedula, nombre, apellido, celular, fijo, direccion, correo,
-				fechaNacimiento, profesion, estadoCivil, ciudad);
+
 		
-		this.estado = estado;
-		this.ciudad = ciudad;
-		this.seguro = seguro;
-		this.nroHijos = nroHijos;
-		this.cedulaConyugue = cedulaConyugue;
-		this.nombreConyugue = nombreConyugue;
-		this.apellidoConyugue = apellidoConyugue;
-		this.ocupacionConyugue = ocupacionConyugue;
-		this.tipoVivienda = tipoVivienda;
-		this.nroHabitantes = nroHabitantes;
-		this.tendenciaVivienda = tendenciaVivienda;
-		this.alquiler = alquiler;
-		this.lugarTrabajo = lugarTrabajo;
-		this.direccionTrabajo = direccionTrabajo;
-		this.telefonoTrabajo = telefonoTrabajo;
-		this.ingresos = ingresos;
-		this.egresos = egresos;
-		this.estatus = estatus;
-	}
 
 	public Estado getEstado() {
 		return estado;
