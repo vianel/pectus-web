@@ -18,8 +18,11 @@
 						</button>
                      </hbox>
                	</div>
-				<listbox emptyMessage="NO hay registro desde el portal"  height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
-		  			<listhead sizable="true"> 
+				<listbox emptyMessage="NO hay solicitudes de cita"  height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
+		  			<listhead sizable="true">
+		  					<listheader hflex="1" label="Cedula" sort="auto(nombre)" width="100px">
+	         					<textbox instant="true" width="75px"  />
+	          				</listheader> 
 	         				<listheader hflex="1" label="Nombre" sort="auto(nombre)" width="100px">
 	         					<textbox instant="true" width="75px"  />
 	          				</listheader>       
@@ -50,6 +53,7 @@
 				  </listhead>         
      				<template name="model">
 			           <listitem>
+			           <listcell label="@load(each.cedula)" />
 			            <listcell label="@load(each.nombre)" />
 		                <listcell label="@load(each.apellido)" />
 		                <listcell label="@load(each.celular)"/>

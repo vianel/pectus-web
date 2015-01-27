@@ -746,6 +746,9 @@ public class ControladorPaciente implements Serializable{
 	      }
 		currentPersonaAceptada = ServicioPersona.buscarPersonasAceptadas();
 		getmodelPersonaAceptada();
+		currentPacientes = ServicioPaciente.buscarPacientes();
+		getmodelPacientesNuevo();
+		
 	}
 
 	
