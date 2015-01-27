@@ -15,13 +15,7 @@ public class Voluntario extends Persona{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Voluntario(String cedula, String nombre, String apellido,
-			String celular, String fijo, String direccion, String correo,
-			Date fechaNacimiento, String profesion, char estadoCivil) {
-		super(cedula, nombre, apellido, celular, fijo, direccion, correo,
-				fechaNacimiento, profesion, estadoCivil);
-		// TODO Auto-generated constructor stub
-	}
+
 	public Voluntario(String login, String lugarTrabajo, String cargo,
 			String direccionTrabajo, String telefonoOficina, String referido) {
 		super();

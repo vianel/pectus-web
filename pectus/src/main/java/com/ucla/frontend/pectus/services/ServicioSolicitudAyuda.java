@@ -184,7 +184,7 @@ public class ServicioSolicitudAyuda {
 		 Resty resty = new Resty();
         JSONResource jsResource = null;
 		try {
-			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/agregar?cedula=00000000"  + "&observacion=" + motivo + "&idpatologia=" + diagnostico.getId() + "&idcausa=" + causa.getId() + 
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-ayuda/agregar?cedula="+cedula  + "&observacion=" + motivo + "&idpatologia=" + diagnostico.getId() + "&idcausa=" + causa.getId() + 
 					"&feczsolicitud=" + dateFormat.format(new Date()).toString() +  "&estudios=" + metodoConcatenacion(estudios));
 				
 					
