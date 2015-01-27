@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dynamic Image Menu Example</title>
+<link href="css/jimgMenukwicks.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script><script type="text/javascript" src="js/jquery-easing-1.3.pack.js"></script><script type="text/javascript" src="js/jquery-easing-compatibility.1.2.pack.js"></script>
+<script type="text/javascript" src="js/jquery.kwicks-1.5.1.pack.js"></script>
+<style type="text/css">
+body {
+	margin:0;
+	padding:0;
+	color: #333;
+	font: normal 0.6em sans-serif,Arial;
+	width: 100%;
+}
+</style>
+<style type="text/css">
+.description {padding-left: 40px;}
+h1 {
+padding-left: 10px;
+font: normal 18px;
+}
+</style>
+<!--[if IE]>
+<script type="text/javascript">
+$().ready(function() {
+	$(".jimgMenu ul").kwicks({max: 310, duration: 400, easing: "easeOutQuad"});
+});
+</script> 
+<![endif]-->
+<script type="text/javascript">
+$().ready(function() {
+	$('.jimgMenu ul').kwicks({max: 310, duration: 300, easing: 'easeOutQuad'});
+	});
+</script>
+</head>
+<body>
+<h1>Síguenos en nuestras Redes Sociales</h1>
+<div class="jimgMenu">
+  <ul>
+    <li id="landscapes"><a href="https://www.facebook.com/pages/FUNDAMAMA/65668945845"target="_blank">Facebook</a></li>
+    <li id="people"><a href="https://twitter.com/Fundamama"target="_blank">Twitter</a></li>
+    <li id="nature"><a href="http://instagram.com/fundamamalara/"target="_blank">Instagram</a></li>
+    <li id="abstract"><a href="https://www.youtube.com/channel/UCtIOJQt8j2cwyS7A3-xjJfQ"target="_blank">Youtube</a></li>
+    <li id="urban"><a href="mailto:fundamamalara@gmail.com"target="_blank">Email</a></li>
+  </ul>
+  
+
+</div>
+<br  style="clear:both"/><br />
+<div class="description">
+	
+</div>
+<hr style="width:92%;text-align:center;height:1px;border:1px;color:#e2e2e2;background-color:#e2e2e2;" />
+</body>
+</html>

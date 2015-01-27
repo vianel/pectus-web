@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+
+<html>
+
+<head>
+<title>Fundamama</title>
+<!--DEVELOPER BY ZKS-->
+<meta name = "keywords" content = "" />
+<meta name = "description" content = "" />
+<meta name="viewport" content="w">
+
+<link href="css/demo_formularios.css" rel="stylesheet" type="text/css">
+<link href="css/style5.css" rel="stylesheet" type="text/css">
+<!--<link href="css/demoBox.css" rel="stylesheet" type="text/css">-->
+<link href="css/styleBox.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+<script	src="js/jquery.smint.js" type="text/javascript" ></script>
+
+<script type="text/javascript">
+
+
+	
+// DEFINCION DEL TIEMPO PARA HACER EL SCROLL
+$(document).ready( function() {
+    $('.subMenu').smint({
+    	'scrollSpeed' : 1000
+    });
+});
+		
+  
+function consultarPaciente(){
+   
+var	cedPacient=(document).getElementById("cedPaciente");
+	
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/persona/buscar',
+            dataType: 'json',
+				data: { 
+        //    		type: 'paciente',
+            		cedula: cedPacient
+            	 } ,
+            success: function(data){
+            alert("lo hace");
+    		},
+    			error: function( error ){
+					// Log any error.
+					alert("si hay error");
+						
+			}
+			
+    	});
+
+
+	
+	};
+
+
+
+</script>
+
+
+</head>
+<body>
+<div class="wrap ">
+	<div class="section sTop">
+		<div class="section banner">
+		
+	
+		<img src="img\BannerFundamamaPNG.png" >
+			
+	</div>
+		
+		
+	</div>
+
+	<div class="subMenu" >
+	 	<div class="inner">
+	 		<!-- Logo -->
+									
+                                    
+                              
+	 		<a href="#sTop" class="subNavBtn">CITA</a>
+	 		<a href="#s1" class="subNavBtn">POSTULATE</a> 
+			<a href="#s2" class="subNavBtn">CHARLA </a>
+			<a href="#s3" class="subNavBtn">CONSULTAR</a>
+	
+			<a href="index.html" class="subNavBtn">INICIO</a>
+			
+		</div>
+	</div>
+<div class="sectionInicio s0">
+		<div class="innerNoticia">
+		<div style="margin-left:10%;">
+			<h1>Solicitud de Cita Paciente</h1>
+		</div>
+			<!-- Start WOWSlider.com -->
+		<iframe src="citas.html" style="margin-left:10%; width:1050px;height:840px;overflow:hidden;border:none;padding:0;display:block;"marginheight="0" marginwidth="0"></iframe>
+		<!-- End WOWSlider.com -->
+
+		</div>
+
+	</div>
+	<div class="section s1">
+		<div class="inner ">
+			<h1>Solicitud de Voluntario</h1>
+
+			<!-- Start WOWSlider.com -->
+			<iframe src="voluntario.html" style="width:1050px;height:840px;overflow:hidden;border:none;padding:0;display:block;"marginheight="0" marginwidth="0"></iframe>
+			<!-- End WOWSlider.com -->
+		</div>
+	</div>
+
+	<div class="section s2">
+		<div class="inner">
+			<h1>Solicitar una Charla</h1>
+			<section>
+						<!-- Start WOWSlider.com -->
+			<iframe src="charla.html" style="width:1050px;height:460px;overflow:hidden;border:none;padding:0;display:block;"marginheight="0" marginwidth="0"></iframe>
+			<!-- End WOWSlider.com -->
+			</section>
+		</div>
+	</div>
+
+
+
+	<div class="section s3">
+		<div class="inner">
+			<h1>Consulta el estatus de tu Solicitud</h1>
+
+				<div id="consultarVoluntario">
+
+			 <div id="consultar-form">
+
+					    <h3>Solicitud Voluntario</h3>
+
+					    <fieldset>
+				      <form id="consultar-pectus"  method="post">
+								<input type="text" name="Cedula" id="cedVoluntario" placeholder="Cedula:" /> 
+						        
+						        <input onclick="consultarVoluntario()" type="button" value="Consultar">
+
+						        <footer class="clearfix">
+
+						          <p>Consultar estatus de Solicitud</p>
+
+						        </footer>
+					      </form>
+
+					    </fieldset>
+
+					  </div> <!-- end consultar-form -->
+				</div><!--end consultar Persona -->
+
+
+
+			 <div id="consultar-form">
+
+					    <h3>Solicitud de Paciente</h3>
+
+					    <fieldset>
+				      <form id="consultar-pectus"  method="post">
+								<input type="text" name="Cedula" id="cedPaciente" placeholder="Cedula:" /> 
+
+						        <input onclick="consultarVoluntario()" type="button" value="Consultar">
+						        <footer class="clearfix">
+
+						          <p>Consultar estatus de Solicitud</p>
+
+						        </footer>
+					      
+						 </form>       
+
+						      
+					    </fieldset>
+
+					  </div> <!-- end consultar-form -->
+	
+		</div>
+		
+		
+	</div>
+
+	
+
+	
+
+	
+</div>
+
+</body>
+
+</html>

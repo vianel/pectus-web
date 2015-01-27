@@ -1,0 +1,192 @@
+<head>
+        <title>fundamama</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.dropotron.min.js"></script>
+        <script src="js/skel.min.js"></script>
+        <script src="js/skel-layers.min.js"></script>
+        <script src="js/init.js"></script>
+        <!-- Esto es para validar-->
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/dist/jquery.validate.js"></script>
+        
+
+        <noscript>
+            <link rel="stylesheet" href="css/skel.css" />
+            <link rel="stylesheet" href="css/screen.css">
+            <link rel="stylesheet" href="css/style.css" />
+            <link rel="stylesheet" href="css/style-desktop.css" />
+        </noscript>
+        <script type="text/javascript">
+
+    $(document).ready(function() {
+        cargarLista();
+    }); // fin cargarEstados
+
+
+    function cargarLista(){
+              $.ajax({
+            url: 'http://127.0.0.1:5000/evento/todos',
+            dataType: 'json',
+            success: function(data){
+            
+              
+                        var cont=0;
+                        
+                        for(j= 0; j< data['eventos'].length; ++j){
+                            
+                           var row = $("<tr />")
+                            row.append($("<td>" + data['eventos'][j].fecha + "</td>"));
+                            row.append($("<td>" + data['eventos'][j].nombre + "</td>"));
+                            row.append($("<td>" + data['eventos'][j].lugar.nombre + "</td>"));
+                            row.append($("<td>" + data['eventos'][j].costoentradas + "</td>"));
+                             $("#personDataTable").append(row); 
+                            
+                             cont=cont+1;
+                            // alert(data['eventos'].length);
+                            
+                             if (cont==7) 
+                                 {
+                                     j=data['eventos'].length;
+                                 };                                  
+                        }// for j
+                                    
+                        
+            }, // success
+            error: function( error ){
+                    // Log any error.
+                    console.log("Error al cargar los eventos");
+                        
+            }
+
+        }); // ajax
+  
+    };
+
+    </script>
+    <style type="text/css">
+        body{
+                background-image: url(img/header.jpg);
+                 height:100px;
+           }
+           .personDataTable {
+                margin:0px;
+                padding:0px;
+                width:100%;
+                box-shadow: 10px 10px 5px #888888;
+                border:1px solid #007f00;
+                
+                -moz-border-radius-bottomleft:0px;
+                -webkit-border-bottom-left-radius:0px;
+                border-bottom-left-radius:0px;
+                
+                -moz-border-radius-bottomright:0px;
+                -webkit-border-bottom-right-radius:0px;
+                border-bottom-right-radius:0px;
+                
+                -moz-border-radius-topright:0px;
+                -webkit-border-top-right-radius:0px;
+                border-top-right-radius:0px;
+                
+                -moz-border-radius-topleft:0px;
+                -webkit-border-top-left-radius:0px;
+                border-top-left-radius:0px;
+            }.personDataTable table{
+                border-collapse: collapse;
+                    border-spacing: 0;
+                width:100%;
+                height:100%;
+                margin:0px;padding:0px;
+            }.personDataTable tr:last-child td:last-child {
+                -moz-border-radius-bottomright:0px;
+                -webkit-border-bottom-right-radius:0px;
+                border-bottom-right-radius:0px;
+            }
+            .personDataTable table tr:first-child td:first-child {
+                -moz-border-radius-topleft:0px;
+                -webkit-border-top-left-radius:0px;
+                border-top-left-radius:0px;
+            }
+            .personDataTable table tr:first-child td:last-child {
+                -moz-border-radius-topright:0px;
+                -webkit-border-top-right-radius:0px;
+                border-top-right-radius:0px;
+            }.personDataTable tr:last-child td:first-child{
+                -moz-border-radius-bottomleft:0px;
+                -webkit-border-bottom-left-radius:0px;
+                border-bottom-left-radius:0px;
+            }.personDataTable tr:hover td{
+                
+            }
+            .personDataTable tr:nth-child(odd){ background-color:#ffffff; }
+            .personDataTable tr:nth-child(even)    { background-color:#ffffff; }.personDataTable td{
+                vertical-align:middle;
+                
+                
+                border:1px solid #007f00;
+                border-width:0px 1px 1px 0px;
+                text-align:center;
+                padding:7px;
+                font-size:12px;
+                font-family:Comic Sans MS;
+                font-weight:normal;
+                color:#000000;
+            }.personDataTable tr:last-child td{
+                border-width:0px 1px 0px 0px;
+            }.personDataTable tr td:last-child{
+                border-width:0px 0px 1px 0px;
+            }.personDataTable tr:last-child td:last-child{
+                border-width:0px 0px 0px 0px;
+            }
+            .personDataTable tr:first-child td{
+                    background:-o-linear-gradient(bottom, #3f7f00 5%, #00bf00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3f7f00), color-stop(1, #00bf00) );
+                background:-moz-linear-gradient( center top, #3f7f00 5%, #00bf00 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#3f7f00", endColorstr="#00bf00");  background: -o-linear-gradient(top,#3f7f00,00bf00);
+
+                background-color:#3f7f00;
+                border:0px solid #007f00;
+                text-align:center;
+                border-width:0px 0px 1px 1px;
+                font-size:18px;
+                font-family:Comic Sans MS;
+                font-weight:bold;
+                color:#ffffff;
+            }
+            .personDataTable tr:first-child:hover td{
+                background:-o-linear-gradient(bottom, #3f7f00 5%, #00bf00 100%);    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3f7f00), color-stop(1, #00bf00) );
+                background:-moz-linear-gradient( center top, #3f7f00 5%, #00bf00 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#3f7f00", endColorstr="#00bf00");  background: -o-linear-gradient(top,#3f7f00,00bf00);
+
+                background-color:#3f7f00;
+            }
+            .personDataTable tr:first-child td:first-child{
+                border-width:0px 0px 1px 0px;
+            }
+            .personDataTable tr:first-child td:last-child{
+                border-width:0px 0px 1px 1px;
+            }
+    </style>
+</head>
+<body>
+   <table style="width:100%;" class="personDataTable" id="personDataTable">
+            <tr>
+                        <td>
+                            Fecha de Evento
+                        </td>
+                        <td >
+                            Titulo
+                       </td>
+                        <td>
+                            Lugar
+                        </td>
+                        <td>
+                            Costo de Entrada
+                        </td>
+
+            </tr>
+</table>
+    </body>
+</html>
