@@ -141,32 +141,34 @@
 						<label style="display:block;" value="Porcentaje de aprobacion"/>
 						<textbox value="@bind(vm.ayudaSelected.aprobacion)" readonly="true" maxlength="20"  width="200px"  style="display:block;"/>
 						<label style="display:block;" value="Fecha de la cita"/>
-						<datebox  format="dd/MM/yyyy"></datebox>
+						<datebox value="@bind(vm.citaselected.fechaCita)" format="dd/MM/yyyy"></datebox>
 						<label style="display:block;" value="Fecha de Entrega de comprobante"/>
-						<datebox  format="dd/MM/yyyy"></datebox>
+						<datebox value="@bind(vm.citaselected.fechaEntregaComprobante)" format="dd/MM/yyyy"></datebox>
 						<label style="display:block;" value="Hora"/>
 						<timebox></timebox>
-						<bandbox id="bd1" mold="rounded" autodrop="true">  
+						<bandbox id="bd1" mold="rounded" autodrop="true" >  
 						        <bandpopup>
-						            <listbox height="250px" width="450px" mold="paging" autopaging="true"
-							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.ayudaSelected.listaEstudioClinicas)">
+						            <listbox  height="auto" width="450px" mold="paging" autopaging="true"
+							                onSelect="bd1.value=self.selectedItem.label; bd1.close();" model="@load(vm.ayudaSelected.listaEstudioClinicas)" selectedItem="@bind(vm.estudioClinicaSeleccionados)">
 						                <listhead>
-						                    <listheader label="PATOLOGIAS" />
-						                    <listheader label="PATOLOGIAS" />
+						                    <listheader label="Estudio" />
+						                    <listheader label="Clinica" />
+						                    <listheader label="Monto" />
 						                </listhead>
 						                 <template name="model">
 						                <listitem>
-						                  <listcell  label="@load(each.clinica.nombre)" />
-						                  <listcell  label="@load(each.estudio.nombre)" />
+					                		<listcell  label="@load(each.estudio.nombre)" />
+						                  	<listcell  label="@load(each.clinica.nombre)" />
+						                  	<listcell  label="@load(each.id)" />
 						              </listitem>
 						              </template>
 						            </listbox>
 						        </bandpopup>
 						    </bandbox>
 						<separator height="23px"/>
-						<button label="Guardar" style="margin-left: 4em;margin-top: 4.5em;" sclass="btn-success" onClick="@command('asignarCitaPaciente', cmp=modalAsignarCita)">
+						<button label="Guardar" style="margin-left: 4em;margin-top: 3.5em;" sclass="btn-success" onClick="@command('asignarCitaMedicaPaciente', cmp=modalAsignarCita)">
 							<attribute name="onClick">						
-							    modalAsignarCita.setVisible(false);						  	
+							    modalAsignarCitaMedica.setVisible(false);						  	
 							</attribute>	
 						</button>
 						<button style="margin-left: 11em;margin-top: -4em;" label="Salir" sclass="btn-success">

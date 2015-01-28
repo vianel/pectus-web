@@ -22,7 +22,7 @@
 						    dialogoasociarvoluntarios.doModal();						  	
 			</attribute>
 			Gestionar Voluntarios</button>
-  			<button id="" sclass="btn-success"  tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad" > 
+  			<button id="" sclass="btn-success"  disabled="@load(vm.actividadSelected eq null?'true':'false')" tooltiptext="No podra Asignar o Suprimir Mas voluntarios a La actividad" > 
   			 		    <attribute name="onClick">						
 						    modaldialog.doModal();						  	
 			</attribute>

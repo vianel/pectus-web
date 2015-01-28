@@ -22,9 +22,9 @@
 						     modalregistrarresulactividad.doModal();						  	
 							</attribute>
 							Resultados Obtenidos</button>
-			   <button   disabled="@load(vm.actividadSelected eq null?'true':'false')"    sclass="btn-success" onClick ="@command('terminarResultado')">
+<!-- 			   <button   disabled="@load(vm.actividadSelected eq null?'true':'false')"    sclass="btn-success" onClick ="@command('terminarResultado')"> -->
 	
-							Terminar</button>
+<!-- 							Terminar</button> -->
 				<listbox    mold="paging" pageSize="5"  model="@load(vm.listaActividadesV)" selectedItem="@bind(vm.actividadSelected)"  >
 	
         			<listhead >
@@ -176,7 +176,11 @@
 					    <attribute name="onClick">						
 						    modalregistrarresulactividad.setVisible(false);						  	
 						</attribute>Guardar</button>
-							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+								<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+										  
+					</button>
+							<button  width="75px" height="50px" label="Salir" sclass="btn-success">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
 						    modalregistrarresulactividad.setVisible(false);						  	

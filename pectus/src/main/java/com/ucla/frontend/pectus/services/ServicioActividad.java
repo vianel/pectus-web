@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +18,11 @@ import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
 
 import com.ucla.frontend.pectus.models.Actividad;
+import com.ucla.frontend.pectus.models.ActividadRechazada;
 import com.ucla.frontend.pectus.models.Ciudad;
 import com.ucla.frontend.pectus.models.Estado;
 import com.ucla.frontend.pectus.models.Lugar;
+import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.Seguro;
 import com.ucla.frontend.pectus.models.SolicitudActividad;
@@ -281,7 +284,7 @@ public class ServicioActividad {
 		                  actividad.setFecha(convertirFecha(obj.getString("fecsolicitud")));
 		                  actividad.setNomsolicitante(obj.getString("nombsolicitante"));
 		                  actividad.setDescripcion(obj.getString("descripcion".toString()));
-		                //  actividad.setEstatus(obj.getString("estatus".toString()).charAt(0));
+		                  actividad.setEstatus(obj.getString("estatus".toString()).charAt(0));
 		              //    actividad.setTlfsolicitante(obj.getString("telfsolicitante"));
 		                  actividad.setIdTipoActividad(obtenertipoactividad(obj.get("tipoactividad").toString()));
 		                  listasolactividad.add(actividad);
@@ -357,6 +360,30 @@ return true;
 
 		
 	}
+	
+	
+	public static boolean rechazarActividad(ActividadRechazada act) {
+		String ok = null;
+		Resty resty = new Resty();
+		
+	    JSONResource jsResource = null;
+	 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/solicitud-actividad/rechazar?idsolicitudactividad=" + act.getSolicitudActividad().getId() + "&idmotivorechazo=" + act.getMotivoRechazo().getId() 
+					+ "&observacion=" + act.getObservacion().replaceAll(" ", "%20"));
+			
+return true;
+		}
+			
+			catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+	}
 
 	@SuppressWarnings("null")
 	public static List<Voluntario> buscarvoluntariosactividad(Actividad act)
@@ -383,6 +410,7 @@ return true;
 		                  voluntario.setNombre(obj.getString("nombre"));
 		                  voluntario.setApellido(obj.getString("apellido"));
 		                  voluntario.setDireccion(obj.getString("direccion"));
+		                  voluntario.setDireccion(obj.getString("correo"));
 		                  
 		                  voluntarios.add(voluntario);
 
@@ -485,5 +513,39 @@ return true;
 		return ok;
 	}
 
+	public static List<MotivoRechazo> buscarMotivoRechazoTodos(){
+		
+			List<MotivoRechazo> motivos = new ArrayList<MotivoRechazo>();
+	
+	Resty resty = new Resty();
+	JSONResource jsResource = null;
+	
+	
+		try {
+			jsResource = resty.json("http://localhost:5000/motivo-rechazo/todos");
+			{
+				String str = jsResource.get("motivosrechazos").toString();
+				JSONArray serMotivo = new JSONArray(str);
+				 for(int i=0; i < serMotivo.length(); i++)
+				 {
+					 MotivoRechazo motivoRechazo = new MotivoRechazo();
+	                  JSONObject obj = serMotivo.getJSONObject(i);
+	                  
+	                  motivoRechazo.setId(obj.getInt("id"));
+	                  motivoRechazo.setNombre(obj.getString("nombre"));
+	                  motivoRechazo.setTipo(obj.getString("tipo"));
+	                
+	                  
+	                  motivos.add(motivoRechazo);
+
+				 }
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return motivos;
+		
+	}
 	
 }

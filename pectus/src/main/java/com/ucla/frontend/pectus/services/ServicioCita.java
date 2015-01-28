@@ -130,25 +130,25 @@ public class ServicioCita {
    
    public static String ResultadoCita(int idCita,ResultadoAyuda resultadoAyuda )
 	{
-//		Resty resty = new Resty();
-//		JSONResource jsResource = null;
-//		String ok = null;
-//		try {
-//			jsResource = resty.json("http://localhost:5000/solicitud-ayuda/rechazar?idmotivorechazo="+ motivoRechazo.getId()+  
-//					"&idsolicitudayuda="+ ayuda.getId() + "&descripcion="+solicitudRechazada+  
-//					"&estatus=R" );
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		 try {
-//			ok = jsResource.get("ok").toString();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		try {
+			jsResource = resty.json("http://localhost:5000/cita/resultado/agregar?idcita="+ idCita+  
+					"&resultado="+ resultadoAyuda.getResultado() + "&gradopatologia="+ resultadoAyuda.getGradoPatologia() +"&observacion="+ resultadoAyuda.getObservacion()  
+					 );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	   
-	   String ok = "true";
+	 
 		return ok;
 	}
    
