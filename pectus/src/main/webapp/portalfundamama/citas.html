@@ -19,7 +19,8 @@
 		<!-- Esto es para validar-->
 		<script src="js/lib/jquery.js"></script>
 		<script src="js/dist/jquery.validate.js"></script>
-	
+
+
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/screen.css">
@@ -55,74 +56,79 @@ border:solid 1px red;
 		}
 	});
 		// validate the comment form when it is submitted
-	$("#formPostular").validate({
-	rules: {
-	cedula: {
-	required: true,
-	maxlength: 11,
-	number: true
-	},
-	txtnombre: "required",
-	txtapellido: "required",
-	Fnacimiento: "required",
-	tlffijo: {
-	required: true,
-	maxlength: 11
-	},
-	txtemail: {
-	required: true,
-	minlength: 2,
-	email:true
-	},
-	txtcelular: {
-	required: true,
-	minlength: 3
-
-	},
-	txtprofesion:{
-	required: true,
-	maxlength: 30
-	},
-	txtdireccion:{
-	required: true
-
-	},
-	},
-	messages: {
-	cedula: {
-	required: "Por favor introdusca su Cedula",
-	maxlength: "El numero debe poseer menos de 11 caracteres",
-	number: "Lo digitos deben numericos",
-	style:'color:red'	
-
-	},
-	txtnombre: "Por favor introdusca un nombre",
-	txtapellido: "Por favor introdusca un apellido",
-
-	tlffijo: {
-	required: "Por favor introdusca un telefono fijo",
-	maxlength: "El numero debe poseer menos de 11 caracteres"
-	},
-	txtprofesion: {
-	required: "Por favor introdusca una profesion",
-	maxlength: "El numero debe poseer menos de 11 caracteres"
-	},
-
-	Fnacimiento: {
-	required: "Por favor introdusca una Fecha de Nacimiento"
-	},
-	txtcelular: {
-	required: "Por favor introdusca un telefono celular",
-	maxlength: "El numero debe poseer menos de 11 caracteres"
-
-	},
-	txtemail: {
-	required: "Por favor introdusca su E-mail",
-	minlength: "El E-mail debe poseer al menos 3 caracteres",
-	email: "Debe ser un E-mail"
-	}
-	}
-	});
+		$("#formPostular").validate({
+		rules: {
+				cedula: 
+				{
+					required: true,
+					maxlength: 11,
+					number: true
+				},
+				txtnombre: "required",
+				txtapellido: "required",
+				Fnacimiento: "required",
+				tlffijo: 
+				{
+					required: true,
+					maxlength: 11
+				},
+				txtemail: 
+				{
+					required: true,
+					minlength: 2,
+					email:true
+				},
+				txtcelular: 
+				{
+					required: true,
+					minlength: 3
+				
+				},
+				txtprofesion:
+				{
+					required: true,
+					maxlength: 30
+				},
+				txtdireccion:{
+				required: true
+				
+				},
+				},
+				messages: {
+				cedula: {
+				required: "Por favor introdusca su Cedula",
+				maxlength: "El numero debe poseer menos de 11 caracteres",
+				number: "Lo digitos deben numericos",
+				style:'color:red'	
+				
+				},
+				txtnombre: "Por favor introdusca un nombre",
+				txtapellido: "Por favor introdusca un apellido",
+				
+				tlffijo: {
+				required: "Por favor introdusca un telefono fijo",
+				maxlength: "El numero debe poseer menos de 11 caracteres"
+				},
+				txtprofesion: {
+				required: "Por favor introdusca una profesion",
+				maxlength: "El numero debe poseer menos de 11 caracteres"
+				},
+				
+				Fnacimiento: {
+				required: "Por favor introdusca una Fecha de Nacimiento"
+				},
+				txtcelular: {
+				required: "Por favor introdusca un telefono celular",
+				maxlength: "El numero debe poseer menos de 11 caracteres"
+				
+				},
+				txtemail: {
+				required: "Por favor introdusca su E-mail",
+				minlength: "El E-mail debe poseer al menos 3 caracteres",
+				email: "Debe ser un E-mail"
+				}
+				}
+		});
 	
 			// al cargar la pagina cargamos los estados
 		cargarEstados();

@@ -7,10 +7,12 @@
 
 <head>
 <title>Fundamama</title>
+
+	
 <!--DEVELOPER BY ZKS-->
 <meta name = "keywords" content = "" />
 <meta name = "description" content = "" />
-<meta name="viewport" content="w">
+
 
 <link href="css/demo_formularios.css" rel="stylesheet" type="text/css">
 <link href="css/style5.css" rel="stylesheet" type="text/css">
@@ -19,6 +21,13 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 
 <script	src="js/jquery.smint.js" type="text/javascript" ></script>
+
+
+<link href="myjs/jquery.alerts.css" rel="StyleSheet" type="text/css" />
+	
+	<script src="myjs/jquery.ui.draggable.js" type="text/javascript"></script>
+	<script src="myjs/jquery.alerts.mod.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 
@@ -33,18 +42,26 @@ $(document).ready( function() {
 		
   
 function consultarPaciente(){
-   
-var	cedPacient=(document).getElementById("cedPaciente");
+var	cedPacient=document.getElementById("cedPaciente").value.trim();
 	
 		$.ajax({
         	url: 'http://127.0.0.1:5000/persona/buscar',
             dataType: 'json',
-				data: { 
-        //    		type: 'paciente',
-            		cedula: cedPacient
-            	 } ,
-            success: function(data){
-            alert("lo hace");
+            data: { cedula: cedPacient, type: 'paciente' } ,
+			 success: function(data){
+					for(var key in data) {
+
+                	if (key.localeCompare('personas' ==0)){
+                    	jAlert('No se encontro registro de Paciente','Informacion de Solicitud');
+                    }}
+
+            		if(data['personas'][0].estatus=='S')
+	            		
+   					jAlert('Su solicitud esta pendiente por revisar','Informacion de Solicitud')
+	            	else if(data['personas'][0].estatus=='A')
+	            		{
+	            			subConsultaVisita();
+	            		}
     		},
     			error: function( error ){
 					// Log any error.
@@ -58,6 +75,66 @@ var	cedPacient=(document).getElementById("cedPaciente");
 	
 	};
 
+
+function consultarVoluntario(){
+   
+var	cedVolunt=document.getElementById("cedVoluntario").value.trim();
+	
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/persona/buscar',
+            dataType: 'json',
+            data: { cedula: cedVolunt, type: 'voluntario' } ,
+			 success: function(data){
+
+			 		for(var key in data) {
+
+                	if (key.localeCompare('personas' ==0)){
+                    	jAlert('No se encontro registro de Voluntario','Informacion de Solicitud');
+                    }}
+
+
+            		if(data['personas'][0].estatus=='S')
+	            		jAlert('Su solicitud esta pendiente por revisar','Informacion de Solicitud')
+	            	else if(data['personas'][0].estatus=='A')
+	            		{
+	            			subConsultaVisita();
+	            		}
+    		},
+    			error: function( error ){
+					// Log any error.
+					alert("si hay error");
+						
+			}
+			
+    	});
+
+
+	
+	};
+  
+function subConsultaVisita(){
+   
+var	cedPacient=document.getElementById("cedPaciente").value.trim();
+	
+		$.ajax({
+        	url: 'http://127.0.0.1:5000/visita/buscar',
+            dataType: 'json',
+            data: { cedulapersona: cedPacient} ,
+			 success: function(data){
+            	jAlert("Su solicitud fue aprobada, Debe acudir a la sede <br/> de FundaMama en la fecha: "+data['visitas'][0].fecha,'Informacion de Solicitud')
+	            	
+    		},
+    			error: function( error ){
+					// Log any error.
+					alert("si hay error");
+						
+			}
+			
+    	});
+
+
+	
+	};
 
 
 </script>
@@ -162,10 +239,10 @@ var	cedPacient=(document).getElementById("cedPaciente");
 					    <h3>Solicitud de Paciente</h3>
 
 					    <fieldset>
-				      <form id="consultar-pectus"  method="post">
+				      <form id="consultar-pectus" onsubmit="return consultarPaciente()" method="post">
 								<input type="text" name="Cedula" id="cedPaciente" placeholder="Cedula:" /> 
 
-						        <input onclick="consultarVoluntario()" type="button" value="Consultar">
+						        <input type="button" onclick="consultarPaciente();" value="Consultar">
 						        <footer class="clearfix">
 
 						          <p>Consultar estatus de Solicitud</p>
