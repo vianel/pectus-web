@@ -289,6 +289,7 @@ public class ServicioSolicitudAyuda {
                 	  clinica.setNombre((String)serEstudios.getJSONObject(l).getJSONObject("clinica").get("nombre"));
                 	  
                 	  EstudioClinica estudioClinica = new EstudioClinica();
+                	  estudioClinica.setId(Integer.valueOf(serEstudios.getJSONObject(l).get("id").toString()));
                 	  estudioClinica.setMonto(Double.parseDouble(serEstudios.getJSONObject(l).get("monto").toString()));
                 	  estudioClinica.setClinica(clinica);
                 	  estudioClinica.setEstudio(tipoEstudio);
@@ -617,28 +618,29 @@ public class ServicioSolicitudAyuda {
 	
 	
 	public static String asignarCitaMedica(EstudioClinica estudioClinica, Cita cita)
-	{
-		Resty resty = new Resty();
-		JSONResource jsResource = null;
-		String ok = null;
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		String fecha = df.format(cita.getFechaAsignacion());
-		try {
-			jsResource = resty.json("http://localhost:5000/cita/agregar?idestudioxsolicitudayuda=" + estudioClinica.getId() + 
-					"&fechaasignacion="+fecha+ 
-					"&estatus="+"E");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 try {
-			ok = jsResource.get("ok").toString();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ok;
-	}
+	 {
+	  Resty resty = new Resty();
+	  JSONResource jsResource = null;
+	  String ok = null;
+	  DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
+	   
+	  try {
+	   jsResource = resty.json("http://localhost:5000/cita/agregar?idestudioxsolicitudayuda=" + estudioClinica.getId() + 
+	     "&fechaasignacion="+ df.format(new Date()) + "&fechacita=" +df.format(cita.getFechaCita()) + "&fechaentregacomprobante=" +df.format(cita.getFechaEntregaComprobante()) +
+	     "&estatus="+"E");
+	  } catch (IOException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  }
+	   try {
+	   ok = jsResource.get("ok").toString();
+	  } catch (Exception e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	  }
+	  return ok;
+	 }
 	
 	
 	

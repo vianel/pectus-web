@@ -64,12 +64,14 @@
 				<navitem visible="@bind(vm.registraractividad)"  label="Registrar Actividad" href="../gestionactividades/index_gestionactividades.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem visible="@bind(vm.asignarvoluntarioactividad)"  label="Asignar voluntarios" href="../gestionactividades/index_asignarvoluntarios.zul" iconSclass="z-icon-angle-double-right" />
 				<navitem visible="@bind(vm.resulactividad)"  label="Resultados Obtenidos" href="../gestionactividades/index_registroresultados.zul" iconSclass="z-icon-angle-double-right"/>
+				<navitem visible="true"  label="Fichas de Actividades" href="../gestionactividades/index_actividadFicha.zul" iconSclass="z-icon-angle-double-right"/>
 			</nav>
 			<nav visible="@bind(vm.gestionevento)" label="Gestion de Eventos" iconSclass="z-icon-angle-double-right" sclass="grey">
 				<navitem visible="@bind(vm.registrarevento)"  label="Registrar Evento" href="../gestioneventos/index_listaEventos.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem visible="@bind(vm.asignarvoluntarioevento)"  label="Asignar voluntarios" href="../gestioneventos/index_asociarVoluntarios.zul" iconSclass="z-icon-angle-double-right"/>
 				<navitem visible="@bind(vm.registrarcolaboevento)"  label="Registrar Colaboraciones" iconSclass="z-icon-angle-double-right" href="../gestionColaboracion/index_gestionColaboracion.zul"/>
-				<navitem visible="@bind(vm.resulevento)"  label="Resultados Obtenidos"  iconSclass="z-icon-angle-double-right"/>
+				<navitem visible="@bind(vm.resulevento)"  label="Resultados Obtenidos"  iconSclass="z-icon-angle-double-right" href="../gestioneventos/index_resultadoEvento.zul"/>
+				<navitem visible="true"  label="Fichas de Eventos"  iconSclass="z-icon-angle-double-right" href="../gestioneventos/index_listaEventoFicha.zul"/>
 			</nav>
 		</nav>
 		

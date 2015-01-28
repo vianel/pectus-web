@@ -56,16 +56,20 @@ public class CitaView {
 	List<Cita> currentCita = ServicioCita.buscarCita(); //servicio cita
 	private List<CitaStatus> citaStatus = generateStatusList(currentCita);
 	private boolean displayEdit = true;
+	List<Cita> currentCitaMedicaAsignada = ServicioCita.buscarCitaMedicaAsignada(); //servicio cita
 	
 	@Init
 	public void init(){
 //		selected = citas.get(0);
 		getmodelCita();
-		
+		getmodelCitaMedicaAsignada();
 	}
 	
 	public ListModel<Cita> getmodelCita() {
         return new ListModelList<Cita>(currentCita);
+    }
+	public ListModel<Cita> getmodelCitaMedicaAsignada() {
+        return new ListModelList<Cita>(currentCitaMedicaAsignada);
     }
 	// Los filtros de las citas
 	
