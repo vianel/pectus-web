@@ -11,7 +11,7 @@ public class Cita {
 	private Date fechaEntregaComprobante;
 	private Date hora;	
 	private boolean estatus;
-	
+	private String status;
 
 	
 	public Cita(){
@@ -30,6 +30,16 @@ public class Cita {
 		this.fechaEntregaComprobante = fechaEntregaComprobante;
 		this.hora = hora;
 		this.estatus = estatus;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 

@@ -15,6 +15,7 @@ import java.util.Set;
 
 
 
+
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -41,6 +42,7 @@ import com.ucla.frontend.pectus.services.ServicioCita;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPatologia;
+import com.ucla.frontend.pectus.services.ServicioPersona;
 import com.ucla.frontend.pectus.services.ServicioSolicitudAyuda;
 
 public class AyudaView {
@@ -54,7 +56,7 @@ public class AyudaView {
 	private Ayuda ayudaSelected;
 	private MotivoRechazo motivoRechazoSelected;
 	private SolicitudRechazada solicitudRechazadaSelected =  new SolicitudRechazada();
-	private Cita citaselected;
+	private Cita citaselected = new Cita();
 private Causa causaSelected;
 	List<Cita> currentCita = ServicioCita.buscarCita(); //servicio cita
 	private Set <EstudioClinica> estudioclinicaSelected;
@@ -464,7 +466,24 @@ private Causa causaSelected;
 		
 
 	}
-	
+	@Command
+	@NotifyChange("modelAyudaAceptada")
+	public void asignarCitaMedicaPaciente(){
+		
+		String resp = ServicioSolicitudAyuda.asignarCitaMedica(estudioClinicaSeleccionados,citaselected);
+		
+		
+		if (resp.equalsIgnoreCase("true") )
+	      {
+	  		Clients.showNotification("Se le ha asignado una cita Exitosamente", true);
+	  		
+	      }else
+	      {
+	  		Clients.showNotification("Error al modificar", true);
+	      }
+		currentAyudaAceptada = ServicioSolicitudAyuda.buscarAyudasAceptadas();
+		getmodelAyudaAceptada();
+	}
 		
 }
 

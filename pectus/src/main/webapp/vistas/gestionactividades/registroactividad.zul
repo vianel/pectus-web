@@ -13,12 +13,12 @@
 		<tabpanel>
 				Actividades Solicitadas
 				<separator height="15px"/>	
-					<button id="btnRegistrarActividad" sclass="btn-success">
+					<button id="btnRegistrarActividad" sclass="btn-success"  disabled="@load(vm.solactividadSelected eq null?'true':'false')" >
 					        <attribute name="onClick">						
 						     modalregistraractividad.doModal();						  	
 							</attribute>
 							Aprobar</button>
-					<button sclass="btn-success">   <attribute name="onClick">						
+					<button sclass="btn-success"  disabled="@load(vm.solactividadSelected eq null?'true':'false')" >   <attribute name="onClick">						
 						     modalrechazaractividad.doModal();						  	
 							</attribute>Rechazar</button>
 
@@ -71,7 +71,7 @@
 				
 
 				<button sclass="btn-success">Eliminar</button>
-				<listbox    mold="paging" pageSize="5"  model="@load(vm.modelactividad)" selectedItem="@bind(vm.actividadSelected)"  >
+				<listbox    mold="paging" pageSize="5"  model="@load(vm.listaActividadesC)" selectedItem="@bind(vm.actividadSelected)"  >
 	
         			<listhead >
         			    <listheader hflex="1" label="Titulo" ></listheader>
@@ -175,7 +175,7 @@
 						    modalregistraractividad.setVisible(false);						  	
 						</attribute>Guardar</button>
 						
-							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success" onClick="@command('cancelarRegistro')">
 					
 								  
 					</button>
@@ -225,14 +225,20 @@
       	
 			<separator height="15px"/>
 		<hlayout>
-			 <grid  width="650px"  onCreate="@command('inicializarAtributos')">
+			 <grid  width="900px"  onCreate="@command('inicializarAtributos')">
 				<columns>
-					<column label="" width="130px"/>
+					<column width="200px"/>
 					<column label=""/>
 
 				</columns>
 				<rows>
-					<row> <label value="Motivo de Rechazo" /><textbox value="@bind(vm.actividadSelected.descripcion)" rows="6"/> </row>
+					<row>	<combobox readonly="true" value="Seleccione Motivo" model="@load(vm.listaMotivos)" selectedItem="@bind(vm.actividadReSelected.motivoRechazo)"  style="display:block;">
+							
+							<template name="model">
+								<comboitem label="@load(each.nombre)" />
+							</template>
+						</combobox> </row>
+					<row> <label value="Observacion" /><textbox value="@bind(vm.actividadReSelected.observacion)" rows="6"/> </row>
 					
 					
 
@@ -244,12 +250,21 @@
 		<separator height="35px"/>
 
     		<div align="center">
-		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividad')">
+		<button width="75px" height="50px" sclass="btn-success" onClick="@command('registroActividadRechazar')">
 							    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
 						    modalrechazaractividad.setVisible(false);						  	
 						</attribute>Guardar</button>
-							<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+						
+						<button  width="75px" height="50px" label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modalrechazaractividad.setVisible(false);						  	
+						</attribute>					  
+					</button>
+						
+						
+							<button  width="75px" height="50px" label="Salir" sclass="btn-success">
 					    <!-- Ocultamos la ventana -->
 					    <attribute name="onClick">						
 						    modalrechazaractividad.setVisible(false);						  	

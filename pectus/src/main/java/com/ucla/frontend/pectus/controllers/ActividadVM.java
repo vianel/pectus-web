@@ -1,5 +1,6 @@
 package com.ucla.frontend.pectus.controllers;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +26,9 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import com.ucla.frontend.pectus.models.Actividad;
+import com.ucla.frontend.pectus.models.ActividadRechazada;
 import com.ucla.frontend.pectus.models.Lugar;
+import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.SolicitudActividad;
 import com.ucla.frontend.pectus.models.TipoActividad;
 import com.ucla.frontend.pectus.models.TipoEstudio;
@@ -37,8 +40,9 @@ import com.ucla.frontend.pectus.services.ServicioEvento;
 import com.ucla.frontend.pectus.services.ServicioSolicitudAyuda;
 import com.ucla.frontend.pectus.services.ServicioTipoEstudio;
 import com.ucla.frontend.pectus.services.ServicioVoluntario;
+import com.ucla.frontend.pectus.utils.Email;
 public class ActividadVM {
-	
+	private ActividadRechazada actividadReSelected;
 	private List<Lugar> listalugar;
 	private Lugar lugarSelected;
 	private Actividad actividadSelected;
@@ -59,6 +63,7 @@ public class ActividadVM {
 	private ListModelList<Actividad> listaActividadesT = new ListModelList<Actividad>();
     private ListModelList<Actividad> listaActividadesC = new ListModelList<Actividad>();
 	private int asistentesesperadosSelected;
+	private Email email;
 	private Date fechainicioSelected;
 	private String montoesperadoSelected;
 	private int duracionSelected;
@@ -74,23 +79,33 @@ public class ActividadVM {
 	private String nroasistentesSelected;
 	private String observacionesSelected;
 	private ListModelList<SolicitudActividad> listaSolicitudes = new ListModelList<SolicitudActividad>();
-	
+	List<MotivoRechazo> listaMotivos = ServicioActividad.buscarMotivoRechazoTodos();
 	
 	
 	@Init
 	public void init(){
+		try{
+		email = new Email();
+		}catch(Exception e){
+			
+		}
 		this.currentActividad = ServicioActividad.buscaractividades();
-		
-
-		
+		actividadReSelected = new ActividadRechazada();
+List<MotivoRechazo> listaAux = new ArrayList<MotivoRechazo>();
+for(MotivoRechazo mot : listaMotivos){
+	if(mot.getTipo().compareToIgnoreCase("A") == 0){
+		listaAux.add(mot);
+	}
+}
+	listaMotivos = listaAux;	
 		
 		this.currentSolActividad = ServicioActividad.buscarsolicitudactividades();
 		
 		
 		for(SolicitudActividad solicitudActividad : currentSolActividad){
-		//	if(solicitudActividad.getEstatus().compareTo('S') == 0){
+			if(solicitudActividad.getEstatus().compareTo('S') == 0){
 				this.listaSolicitudes.add(solicitudActividad);
-	//		}
+			}
 		
 		}
 		
@@ -188,6 +203,7 @@ public class ActividadVM {
 		
 	}
 	@Command
+	@NotifyChange("listaActividadesC")
 	public void asociarVoluntariosGuardar()
 	{
 		
@@ -197,8 +213,14 @@ public class ActividadVM {
 		  	Clients.showNotification("Voluntarios Asignados", null, null, null, 2000);	
 		
 			buscarvoluntariosasignados();
-			
-			
+			listaActividadesC.clear();
+			if(currentActividad != null){
+				for(Actividad actividad : currentActividad){
+					if(actividad.getEstatus().compareTo('C') == 0){
+						listaActividadesC.add(actividad);
+					}
+				}
+				}
 
 		}else{
 			Clients.showNotification("Error", true);
@@ -259,7 +281,21 @@ public class ActividadVM {
     	
     }
     @Command
-    @NotifyChange({"modelactividad", "modelsolactividad"})
+    @NotifyChange({"asistentesesperadosSelected", "montoesperadoSelected", "duracionSelected", "fechainicioSelected", "fechafinSelected", "lugarSelected", "tituloSelected"})
+    public void cancelarRegistro(){
+    	  asistentesesperadosSelected = 0;
+		   montoesperadoSelected= null;
+		   duracionSelected = 0;
+		   fechainicioSelected = null; 
+		   fechafinSelected= null;
+		   lugarSelected = null; 
+		   tituloSelected = null;
+    }
+    
+    
+    
+    @Command
+    @NotifyChange({"solactividadSelected", "modelactividad", "modelsolactividad", "asistentesesperadosSelected", "montoesperadoSelected", "duracionSelected", "fechainicioSelected", "fechafinSelected", "lugarSelected", "tituloSelected"})
     public void registroActividad()
     {
     	
@@ -276,16 +312,33 @@ public class ActividadVM {
     	 act.setMontoesperado(Integer.parseInt(montoesperadoSelected));
     	 act.setNroasistentesesperados(asistentesesperadosSelected);
     	 act.setEstatus('C');
-    	// solactividadSelected.setEstatus('A');
-  //  	 ServicioActividad.cambiarEstatusSolicitud(solicitudactividadSelected);
+    	 solactividadSelected.setEstatus('A');
+    	 ServicioActividad.cambiarEstatusSolicitud(solactividadSelected);
     	 
 
  				if (ServicioActividad.agregaractividad(act)){ 
  			
 
  		   	Clients.showNotification("Actividad Aprobada", null, null, null, 2000);	
- 			currentActividad.add(act);
- 			currentSolActividad.remove(solactividadSelected);
+ 		   	
+ 		   asistentesesperadosSelected = 0;
+ 		   montoesperadoSelected= null;
+ 		   duracionSelected = 0;
+ 		   fechainicioSelected = null; 
+ 		   fechafinSelected= null;
+ 		   lugarSelected = null; 
+ 		   tituloSelected = null;
+ 		   	
+ 		  solactividadSelected = null;
+ 		   	
+ 		  listaSolicitudes.clear();
+ 		  for(SolicitudActividad solicitudActividad : currentSolActividad){
+ 					if(solicitudActividad.getEstatus().compareTo('S') == 0){
+ 						this.listaSolicitudes.add(solicitudActividad);
+ 					}
+ 				
+ 				}
+ 			//currentSolActividad.remove(solactividadSelected);
  
  			
 
@@ -296,6 +349,55 @@ public class ActividadVM {
    	 
     	
     }
+    
+    
+    
+    @Command
+    @NotifyChange({"modelactividad", "modelsolactividad", "listaSolicitudes", "solactividadSelected"})
+    public void registroActividadRechazar()
+    {
+    	
+   
+    	
+    	 actividadReSelected.setSolicitudActividad(solactividadSelected);
+    	 
+    	// act.setHora(horaSelected.toString());
+    	
+
+    	 solactividadSelected.setEstatus('R');
+    	 ServicioActividad.cambiarEstatusSolicitud(solactividadSelected);
+    	 
+
+ 				if (ServicioActividad.rechazarActividad(actividadReSelected)){ 
+ 			
+
+ 		   	Clients.showNotification("Actividad Rechazada", null, null, null, 2000);
+ 		   listaSolicitudes.clear();
+ 		   for(SolicitudActividad solicitudActividad : currentSolActividad){
+ 					if(solicitudActividad.getEstatus().compareTo('S') == 0){
+ 						this.listaSolicitudes.add(solicitudActividad);
+ 					}
+ 		   }
+ 
+ 			
+ 			
+ 		  solactividadSelected = null;
+ 		//	currentSolActividad.remove(solactividadSelected);
+ 
+ 			
+
+ 		}else{
+ 			Clients.showNotification("Error", true);
+ 		}
+    	 
+   	 
+    	
+    }
+    
+    
+    
+    
+    
     @SuppressWarnings("unchecked")
 	@Command
     @NotifyChange({"modelactividad", "modelvoluntario"})
@@ -323,7 +425,7 @@ public class ActividadVM {
 
 
     @Command
-    @NotifyChange("modelactividad")
+    @NotifyChange("listaActividadesV")
     public void registroresultadoActividad()
     {
     	
@@ -338,7 +440,7 @@ public class ActividadVM {
  		{
  			Clients.showNotification("Resultados Registrados", null, null, null, 2000);
  			
- 			
+ 			terminarResultado();
 
  		}else{
  			Clients.showNotification("Error al guardar", null, null, null, 2000);
@@ -356,7 +458,16 @@ public class ActividadVM {
     	
     }
     @Command
-    @NotifyChange({"solicitudActividad", "actividadSelected"})
+    @NotifyChange({"solicitudActividad", "tipoactividadSelected", "descripcionSelected", "nombresolicitanteSelected", "tlfsolicitanteSelected"})
+    public void cancelarSolicitud(){
+    	tipoactividadSelected = null;
+		descripcionSelected = null;
+		nombresolicitanteSelected = null;
+		tlfsolicitanteSelected = null;
+    }
+    
+    @Command
+    @NotifyChange({"solicitudActividad", "tipoactividadSelected", "descripcionSelected", "nombresolicitanteSelected", "tlfsolicitanteSelected"})
     public void registroSolicitudActividad()
     {
     
@@ -369,7 +480,11 @@ public class ActividadVM {
 		{
  			Clients.showNotification("Solicitud Guardada Guardado", null, null, null, 2000);
 	
-			currentSolActividad.add(SOL);
+			
+ 			
+ 			
+ 			
+ 			
 			
 
 		}else{
@@ -377,7 +492,11 @@ public class ActividadVM {
 		
 		}
 	
-    	actividadSelected = null;
+		tipoactividadSelected = null;
+		descripcionSelected = null;
+		nombresolicitanteSelected = null;
+		tlfsolicitanteSelected = null;
+	
     }
 
     @Command
@@ -728,16 +847,64 @@ public class ActividadVM {
 	}
 	
 	@Command
+	@NotifyChange({"modelvoluntario", "modelvoluntarios", "listaActividadesC"})
 	public void terminar(){
 		actividadSelected.setEstatus('V');
 		ServicioActividad.cambiarEstatusActividad(actividadSelected);
+		
+		
+		
+		for(Voluntario voluntario : currentVoluntario){
+		email.llenarCabecera(voluntario.getCorreo(), "Eventos Pectus", "Estos son los datos del evento en la cual usted participara: Evento: "
+				+ actividadSelected.getTitulo() + " " + actividadSelected.getDescripcion() + " " + actividadSelected.getLugar().getNombre() + " " + actividadSelected.getLugar().getDireccion()
+				);
+		
+		if(email.sendMail()){
+			
+		}
+		Clients.showNotification("No puede asociar mas voluntarios", null, null, null, 2000);
+		}
+		
+		
+		
+		listaActividadesC.clear();
+		if(currentActividad != null){
+			for(Actividad actividad : currentActividad){
+				if(actividad.getEstatus().compareTo('C') == 0){
+					listaActividadesC.add(actividad);
+				}
+			}
+			}
 	}
 	
 	@Command
+	@NotifyChange({"listaActividadesV", "actividadReSelected"})
 	public void terminarResultado(){
 		actividadSelected.setEstatus('R');
 		ServicioActividad.cambiarEstatusActividad(actividadSelected);
+		listaActividadesV.clear();
+		if(currentActividad != null){
+			for(Actividad actividad : currentActividad){
+				if(actividad.getEstatus().compareTo('V') == 0){
+					listaActividadesV.add(actividad);
+				}
+			}
+			}
+		actividadReSelected = null;
 	}
+	public ActividadRechazada getActividadReSelected() {
+		return actividadReSelected;
+	}
+	public void setActividadReSelected(ActividadRechazada actividadReSelected) {
+		this.actividadReSelected = actividadReSelected;
+	}
+	public List<MotivoRechazo> getListaMotivos() {
+		return listaMotivos;
+	}
+	public void setListaMotivos(List<MotivoRechazo> listaMotivos) {
+		this.listaMotivos = listaMotivos;
+	}
+
 	
 
 }

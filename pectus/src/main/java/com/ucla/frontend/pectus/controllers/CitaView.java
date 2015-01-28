@@ -34,7 +34,7 @@ import com.ucla.frontend.pectus.controllers.CitaStatus;
 public class CitaView {
 	
 	private Cita citaselected;
-	private ResultadoAyuda resultadoSelected;
+	private ResultadoAyuda resultadoSelected = new ResultadoAyuda();
 	private Integer idselected;
 	private Date fechaselected;
 	private Date horaselected;

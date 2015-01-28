@@ -19,6 +19,7 @@ import us.monoid.web.Resty;
 
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Causa;
+import com.ucla.frontend.pectus.models.Cita;
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Diagnostico;
 import com.ucla.frontend.pectus.models.Estado;
@@ -588,7 +589,7 @@ public class ServicioSolicitudAyuda {
                 	  estudioClinica.setMonto(Double.parseDouble(serEstudios.getJSONObject(l).get("monto").toString()));
                 	  estudioClinica.setClinica(clinica);
                 	  estudioClinica.setEstudio(tipoEstudio);
-                	  
+                	  estudioClinica.setId(l);
                 	  lista.add(estudioClinica);
                 	  
                 	  
@@ -615,7 +616,29 @@ public class ServicioSolicitudAyuda {
 	
 	
 	
-	
+	public static String asignarCitaMedica(EstudioClinica estudioClinica, Cita cita)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		String fecha = df.format(cita.getFechaAsignacion());
+		try {
+			jsResource = resty.json("http://localhost:5000/cita/agregar?idestudioxsolicitudayuda=" + estudioClinica.getId() + 
+					"&fechaasignacion="+fecha+ 
+					"&estatus="+"E");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
 	
 	
 	
