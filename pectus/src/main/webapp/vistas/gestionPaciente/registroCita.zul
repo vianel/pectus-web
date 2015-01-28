@@ -159,7 +159,7 @@
 						                <listitem>
 					                		<listcell  label="@load(each.estudio.nombre)" />
 						                  	<listcell  label="@load(each.clinica.nombre)" />
-						                  	<listcell  label="@load(each.id)" />
+						                  	<listcell  label="@load(each.monto)" />
 						              </listitem>
 						              </template>
 						            </listbox>

@@ -127,6 +127,41 @@ public class ServicioCita {
 	    	return listaCita;
 	        
 	    }
+   public static List<Cita> buscarCitaMedicaAsignada(){
+	   	ListModelList<Cita> listaCita = new ListModelList<Cita>();
+	   	Resty resty = new Resty();
+	   	JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/cita/buscar?estatus=E");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			String strPa = jsResource.get("cita").toString();
+			JSONArray serCita = new JSONArray(strPa);
+			  for(int i=0; i < serCita.length(); i++){
+				  Cita cita = new Cita();
+                 JSONObject obj = serCita.getJSONObject(i);
+                 cita.setEstudioSolicitud(obtenerEstudioSolicitud(obj.get("estudioxsolicitudayuda").toString()));
+                 cita.setId(Integer.parseInt(obj.get("id").toString()));
+                 cita.setFechaAsignacion(convertirFecha(obj.get("fechaasignacion").toString()));
+                 cita.setFechaCita(convertirFecha(obj.get("fechacita").toString()));
+                 cita.setFechaEntregaComprobante(convertirFecha(obj.get("fechaentregacomprobante").toString()));
+                 listaCita.add(cita);
+			  }
+			
+			} 
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    	return listaCita;
+	        
+	    }
    
    public static String ResultadoCita(int idCita,ResultadoAyuda resultadoAyuda )
 	{
