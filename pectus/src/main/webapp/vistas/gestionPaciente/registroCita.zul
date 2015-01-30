@@ -1,10 +1,10 @@
 <zk xmlns:n="native">
- <a label="Citas" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+
  <div apply="org.zkoss.bind.BindComposer"
 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
   <tabbox >
     <tabs>
-   		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Asginar Citas"/>
+   		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Asignar Cita medica"/>
       	<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="Citas asignadas"/>	
     </tabs>
     <tabpanels>
@@ -25,17 +25,17 @@
 	         					<textbox instant="true" width="75px" />  
 		   					</listheader>
 		   					<listheader hflex="1" label="Causa" width="100px" >
-	         					<textbox instant="true" width="75px" />  
+	         				
 		   					</listheader>
 		   					<listheader hflex="1" label="Fecha de Solicitud" width="100px" >
-	         					<textbox instant="true" width="75px" />  
+	         				 
+		   					</listheader> 
+		   					<listheader hflex="1" label="Fecha de Aceptacion" width="100px" >
+	         				
 		   					</listheader> 
 		   					<listheader hflex="1" label="Porcentaje de Aprobacion" width="100px" >
-	         					<textbox instant="true" width="75px" />  
-		   					</listheader>
-		   					<listheader hflex="1" label="Fecha de Aceptacion" width="100px" >
-	         					<textbox instant="true" width="75px" />  
-		   					</listheader>  
+	         				 
+		   					</listheader> 
 				  </listhead>         
      				<template name="model">
 			           <listitem>
@@ -43,8 +43,8 @@
 		                <listcell label="@load(each.diagnostico.nombre)" />
 		                <listcell label="@load(each.causa.nombre)"/>
 		                <listcell label="@load(each.fechaSolicitud) @converter('formatedDate',format='dd/MM/yy')"/>
-		                <listcell label="@load(each.aprobacion)"/>
 		                <listcell label="@load(each.fechaAprobacion) @converter('formatedDate',format='dd/MM/yy')"/>
+		                <listcell label="@load(each.aprobacion)"/>
                		</listitem>
            			</template>
 				</listbox>
@@ -87,7 +87,10 @@
 		    <button id="" sclass="btn-success" onClick="@command('abrirDialogoRegistrarCita')">EDITAR</button>
             <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelCita)"  selectedItem="@bind(vm.citaselected)">
 		  			<listhead sizable="true"> 
-	         				<listheader hflex="1" label="Paciente"  width="100px">
+	         				<listheader hflex="1" label="Cedula Paciente"  width="100px">
+	         					<textbox instant="true" width="75px"  />
+	          				</listheader> 
+	          				<listheader hflex="1" label="Cedula Paciente"  width="100px">
 	         					<textbox instant="true" width="75px"  />
 	          				</listheader>       
 	         				<listheader hflex="1" label="Patologia" width="100px" >
@@ -100,17 +103,18 @@
 	         					<textbox instant="true" width="75px" />  
 		   					</listheader> 
 		   					<listheader hflex="1" label="Fecha de Asignacion" width="100px" >
-	         					<textbox instant="true" width="75px" />  
+	         					 
 		   					</listheader>
 		   					<listheader hflex="1" label="Fecha de la Cita" width="100px" >
-	         					<textbox instant="true" width="75px" />  
+	         					
 		   					</listheader>
 		   					<listheader hflex="1" label="Fecha de Culminacion" width="100px" >
-	         					<textbox instant="true" width="75px" />  
+	         					
 		   					</listheader>  
 				  </listhead>         
      				<template name="model">
 			           <listitem>
+			            <listcell label="@load(each.estudioSolicitud.ayuda.paciente.cedula)" />
 			            <listcell label="@load(each.estudioSolicitud.ayuda.paciente.nombre)" />
 		                <listcell label="@load(each.estudioSolicitud.ayuda.diagnostico.nombre)"/>
 		            	<listcell label="@load(each.estudioSolicitud.estudioClinica.estudio.nombre)"/>

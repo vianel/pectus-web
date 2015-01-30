@@ -20,7 +20,7 @@
 			<include src="/barras/breadcrumbs.zul"/>
 			<include src="../home/page.zul"/>
 	
-     
+     <image style="width: 110em;height: 29em;" id="chooseAllBtn" src="../../assets/banner.png"  />
     
 		</vlayout>
 	</hlayout>
