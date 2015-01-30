@@ -2885,6 +2885,10 @@ background: #6fd7bb;
 .z-tab-selected .z-tab-text{
 	background: #f7aff3;
 	color: #fff;
+	text-transform: uppercase;
+}
+.z-tab-text{
+	text-transform: uppercase;
 }
 .z-listitem.z-listitem-selected .z-listcell-content {
 color: #636363;
@@ -2924,7 +2928,20 @@ left: 3em;
 	margin-left: 10em;
 	border: 22px double #F5F5F5;
 }
-
+.z-notification-content {
+font-family: Arial,Sans-serif;
+font-size: 20px;
+font-weight: normal;
+width: 250px;
+min-height: 130px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+padding: 15px 18px 15px 45px;
+position: relative;
+overflow: hidden;
+-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+}
 
 
 
