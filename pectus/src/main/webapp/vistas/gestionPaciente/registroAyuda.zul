@@ -97,14 +97,6 @@
 				    </row>
 				    <row>
 				    <label value="Causa"/>
-				    
-				    
-				    
-				    
-				    
-				    
-				    
-				
 						<bandbox id="bd123" mold="rounded" autodrop="true">  
 					        <bandpopup >
 					            <listbox selectedItem="@bind(vm.causaSelected)" height="250px" width="450px" mold="paging" autopaging="true"
@@ -121,28 +113,13 @@
 					            </listbox>
 					        </bandpopup>
 					    </bandbox>
-						
-						
-						
-						
-						
-						
-						
 				    </row>
 					<row>
 						<label value="Observaciones" />
 						<textbox value="@bind(vm.motivoSelected)" rows="4"/></row>
 					</rows>
 			</grid>
-			
-			
-			
-			
-			
-			
-	
-				<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="false" model="@load(vm.estudiosClinica)" 
-				>
+				<listbox height="200px" width="750px" mold="paging"  autopaging="true" id="box" multiple="true" checkmark="false" model="@load(vm.estudiosClinica)">
 			        <listhead>
 			            <listheader label="Clinica" />
 			            <listheader label="Estudio" />
@@ -195,7 +172,7 @@
 		<separator height="35px"/>
 		
 		<div align="center" >
-			<button  label="Guardar" sclass="btn-success"  onClick="@command('guardarAyuda')">
+			<button style="margin-left: 73em;"  label="Guardar" sclass="btn-success"  onClick="@command('guardarAyuda')">
 			    <attribute name="onClick">						
 				    modalRegistrarAyuda.setVisible(false);						  	
 				</attribute>					  

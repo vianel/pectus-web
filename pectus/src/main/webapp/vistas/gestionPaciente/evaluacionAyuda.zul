@@ -1,13 +1,16 @@
 
 <zk xmlns:n="native">
 <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+
+
+			
 <tabbox>
     <tabs>
       <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="ayudas solicitadas"/>
     </tabs>
     <tabpanels>
 	<tabpanel>
-			<button label="evaluacion" onClick="@command('probar')" disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" sclass="btn-success" >
+			<button label="evaluación" onClick="@command('probar')" disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" sclass="btn-success" >
  		    	<attribute name="onClick">						
 			    	modalEvaluarSolicitud.doModal();						  	
 				</attribute>
@@ -15,7 +18,7 @@
 <!-- 			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">RECHAZAR</button> -->
         <listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelAyudaSolicitada)"  selectedItem="@bind(vm.ayudaSelected)">
 		  			<listhead sizable="true"> 
-	         				<listheader hflex="1" label="Cedula del Paciente"  width="100px">
+	         				<listheader hflex="1" label="Cédula del Paciente"  width="100px">
 	         					<textbox instant="true" width="75px"  />
 	          				</listheader>
 	         				<listheader hflex="1" label="Nombre del Paciente"  width="100px">
@@ -24,7 +27,7 @@
 	          				<listheader hflex="1" label="Apellido del Paciente"  width="100px">
 	         					<textbox instant="true" width="75px"  />
 	          				</listheader>         
-	         				<listheader hflex="1" label="Patologia" width="100px" >
+	         				<listheader hflex="1" label="Patología" width="100px" >
 	         					<textbox instant="true" width="75px" />  
 		   					</listheader>
 		   					<listheader hflex="1" label="Causa" width="100px" >
@@ -55,38 +58,48 @@
     <window visible="false" title="EVALUAR SOLICITUD" border="normal" width="45em" height="46em" position="center,center" closable="false"
     	action="show: slideDown;hide: slideUp" id="modalEvaluarSolicitud">
 	    <vlayout>
+	    <button style="z-index: 77777777777;margin-top: 38em;position: absolute;margin-left: 37em;" label="Salir" sclass="btn-success">
+				    <attribute name="onClick">						
+					    modalEvaluarSolicitud.setVisible(false);
+					    layoutAprobar.setVisible(false);
+						layoutRechazar.setVisible(false);
+						guardarSolicitud.setVisible(false);
+						guardarRechazo.setVisible(false);
+					    						  	
+					</attribute>					  
+				</button>
        <tabbox id="tb" width="42.5em" height="630px">
 	    <tabs id="tabs">
 	        
-	        <tab id="A" label="Datos Basicos"/>
+	        <tab id="A" label="Datos Básicos"/>
 	        <tab id="c" label="Estudios Solicitados"/>
-	        <tab id="b" label="Evaluacion"/>
+	        <tab id="b" label="Evaluación"/>
 	    </tabs>
 	    <tabpanels>
-	    	<tabpanel>
+	    	<tabpanel height="31em !important;">
 	    		<label style="display: block;margin-top: 1em;margin-left: 3em;font-size: 15px;" value="Datos del paciente"/>
 	        	<label style="display:block" value="Nombre"/>
 				<textbox value="@bind(vm.ayudaSelected.paciente.nombre)" readonly="true" maxlength="20"   width="200px"/>
 				<label style="display:block; margin-top: 1em" value="Apellido"/>
 				<textbox value="@bind(vm.ayudaSelected.paciente.apellido)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
-				<label style="display:block; margin-top: 1em" value="Cedula"/>
+				<label style="display:block; margin-top: 1em" value="Cédula"/>
 				<textbox value="@bind(vm.ayudaSelected.paciente.cedula)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
-				<label style="display:block; margin-top: 1em" value="Profesion"/>
+				<label style="display:block; margin-top: 1em" value="Profesión"/>
 				<textbox value="@bind(vm.ayudaSelected.paciente.profesion)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
 				<vlayout style="position: absolute;margin-top: -18em;margin-left: 23em;">
-					<label style="display:block;font-size: 15px;margin-left: 1em;" value="Informacion del conyugue"/>
+					<label style="display:block;font-size: 15px;margin-left: 1em;" value="Información del cónyugue"/>
 					<label style="display:block" value="Nombre"/>
 					<textbox value="@bind(vm.ayudaSelected.paciente.nombreConyugue)" readonly="true" maxlength="20"   width="200px"/>
 					<label style="display:block;" value="Apellido"/>
 					<textbox value="@bind(vm.ayudaSelected.paciente.apellidoConyugue)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
-					<label style="display:block; " value="Cedula"/>
+					<label style="display:block; " value="Cédula"/>
 					<textbox value="@bind(vm.ayudaSelected.paciente.cedulaConyugue)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
-					<label style="display:block; " value="Profesion"/>
+					<label style="display:block; " value="Profesión"/>
 					<textbox value="@bind(vm.ayudaSelected.paciente.ocupacionConyugue)" readonly="true" maxlength="60"  width="200px"  style="display:block;"/>
 				</vlayout>
 				
 				<vlayout style="position: absolute;margin-top: -2em;margin-left: 5em;">
-					<label style="display: block;font-size: 15px;margin-left: 6em;margin-top: 2em;" value="Informacion Socioeconomica"/>
+					<label style="display: block;font-size: 15px;margin-left: 6em;margin-top: 2em;" value="Información Socioeconómica"/>
 					<label style="display:block" value="Lugar del Trabajo"/>
 					<textbox value="@bind(vm.ayudaSelected.paciente.lugarTrabajo)" readonly="true" maxlength="20"   width="200px"/>
 					<label style="display:block;" value="Telefono del Trabajo"/>
@@ -99,7 +112,7 @@
 	        </tabpanel>
 	        
 	        
-	        <tabpanel>
+	        <tabpanel height="31em !important;">
 	        	<listbox  model="@load(vm.listaNueva)" id="candidasdateLb2" hflex="1" vflex="true" multiple="true" rows="8" width="370px" >
 			     	<listhead>       
 			            <listheader label="Estudio" width="150px"></listheader>
@@ -121,9 +134,9 @@
 	        
 	        
 	        
-	        <tabpanel>
+	        <tabpanel height="29em !important;">
 	        <vlayout style="margin-left:2em">
-				<label style="display:block;" value="Patologia"/>
+				<label style="display:block;" value="Patología"/>
 				<textbox value="@bind(vm.ayudaSelected.diagnostico.nombre)" maxlength="60"  width="200px" readonly="true" style="display:block;"/>	
 				<label style="display:block; margin-top: 1em" value="Causa"/>
 				<textbox value="@bind(vm.ayudaSelected.causa.nombre)" maxlength="60"  width="200px" readonly="true" style="display:block;"/>
@@ -137,7 +150,7 @@
 				<separator height="40px"/>
 			</vlayout>
 			<vlayout style="margin-top: 8em;">
-				<button label="APROBAR" style=" margin-left: 5em;" sclass="btn-success">
+				<button label="APROBAR" style=" margin-left: 11.4em;" sclass="btn-success">
 					<attribute name="onClick">						
 							layoutAprobar.setVisible(true);
 							layoutRechazar.setVisible(false);
@@ -146,7 +159,7 @@
 							
 					</attribute>	
 				</button>
-				<button style="margin-left: 12em;margin-top: -4em;" label="Rechazar" sclass="btn-success">
+				<button style="margin-left:  18.5em;margin-top: -4em;" label="Rechazar" sclass="btn-success">
 				    <attribute name="onClick">						
 							layoutAprobar.setVisible(false);
 							layoutRechazar.setVisible(true);
@@ -155,22 +168,13 @@
 					</attribute>
 										  
 				</button>
-				<button style="margin-left: 20em;margin-top: -7.6em;" label="Salir" sclass="btn-success">
-				    <attribute name="onClick">						
-					    modalEvaluarSolicitud.setVisible(false);
-					    layoutAprobar.setVisible(false);
-						layoutRechazar.setVisible(false);
-						guardarSolicitud.setVisible(false);
-						guardarRechazo.setVisible(false);
-					    						  	
-					</attribute>					  
-				</button>
-				<button id="guardarSolicitud" onClick="@command('aprobarAyuda')"  style="margin-left: 26em;margin-top: -11.2em;" visible="false" label="Guardar" sclass="btn-success">
+				
+				<button id="guardarSolicitud" onClick="@command('aprobarAyuda')"  style="margin-left: 26em;margin-top: -7.5em;" visible="false" label="Guardar" sclass="btn-success">
 				    <attribute name="onClick">						
 					    modalEvaluarSolicitud.setVisible(false);					  	
 					</attribute>					  
 				</button>
-				<button id="guardarRechazo" onClick="@command('rechazarAyuda')" style="margin-left: 26em;margin-top: -11.2em;" visible="false" label="Guardar" sclass="btn-success">
+				<button id="guardarRechazo" onClick="@command('rechazarAyuda')" style="margin-left: 26em;margin-top: -7.5em;" visible="false" label="Guardar" sclass="btn-success">
 				    <attribute name="onClick">						
 					    modalEvaluarSolicitud.setVisible(false);					  	
 					</attribute>					  
@@ -215,89 +219,7 @@
     
     
     
-    
-    
-    <window visible="false" title="ACEPTAR SOLICITUD" border="normal" width="320px" height="16em" position="center,center" closable="false"
-    	action="show: slideDown;hide: slideUp" id="modalAceptarSolicitud">
-	    <vlayout>
-	     <tabbox id="tb" height="630px">
-		   	<tabs id="tabs">
-		        <tab id="A" label="Asignar monto de Aprobacion"/>
-		    </tabs>
-		    <tabpanels>
-		        <tabpanel>
-		        	<label value="Porcentaje de Aprobacion" style="display:block;"/>
-		        	<combobox style="display:block;" id="cmbPorcentaje">
-						<comboitem label="100" />
-						<comboitem label="50" />
-					</combobox>
-					<button style="margin-top: 2em;" label="Atras" sclass="btn-success">
-					    <attribute name="onClick">						
-						    modalAceptarSolicitud.setVisible(false);
-						    modalEvaluarSolicitud.doModal();						  	
-						</attribute>					  
-					</button>
-					<button style="margin-top: 2em;" label="guardar" sclass="btn-success">
-					    <attribute name="onClick">						
-						    modalAceptarSolicitud.setVisible(false);					  	
-						</attribute>					  
-					</button>
-					<button style="margin-top: 2em;" label="Salir" sclass="btn-success">
-					    <attribute name="onClick">						
-						    modalAceptarSolicitud.setVisible(false);	
-						    				  	
-						</attribute>					  
-					</button>
-								
-		        </tabpanel>
-		    </tabpanels>
-		</tabbox>
-		
-	       <separator height="35px"/>
-	    </vlayout>
-	</window>
-	
-	<window visible="false" title="RECHAZAR SOLICITUD" border="normal" width="320px" height="30em" position="center,center" closable="false"
-    	action="show: slideDown;hide: slideUp" id="modalRechazarSolicitud">
-	    <vlayout>
-	     <tabbox id="tb" height="630px">
-		   	<tabs id="tabs">
-		        <tab id="A" label="Rechazar solicitud"/>
-		    </tabs>
-		    <tabpanels>
-		        <tabpanel>
-		        <button  label="Atras" sclass="btn-success">
-				    <attribute name="onClick">						
-					    modalRechazarSolicitud.setVisible(false);
-					    modalEvaluarSolicitud.doModal();						  	
-					</attribute>					  
-				</button>
-				<button  label="Salir" sclass="btn-success">
-				    <attribute name="onClick">						
-					    modalRechazarSolicitud.setVisible(false);						  	
-					</attribute>					  
-				</button>
-				</tabpanel>
-		    </tabpanels>
-		    
-		</tabbox>
-		 
-	       <separator height="35px"/>
-	    </vlayout>
-	</window>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
+
     </div>
 </zk>
