@@ -38,7 +38,8 @@ public class CitaView {
 	private Integer idselected;
 	private Date fechaselected;
 	private Date horaselected;
-	
+	ListModelList<String> listaResultados = new ListModelList<String>();
+	ListModelList<String> listaGrados = new ListModelList<String>();
 
 	private Paciente pacienteselected;
 	private Clinica clinicaselected;
@@ -63,8 +64,33 @@ public class CitaView {
 //		selected = citas.get(0);
 		getmodelCita();
 		getmodelCitaMedicaAsignada();
+
+		listaResultados.add("Muy Satisfactorio");
+		listaResultados.add("Satisfactorio");
+		listaResultados.add("Regular");
+		listaResultados.add("Poco Satisfactorio");
+		
+		listaGrados.add("Alto");
+		listaGrados.add("Medio");
+		listaGrados.add("Bajo");
 	}
 	
+	public ListModelList<String> getListaResultados() {
+		return listaResultados;
+	}
+
+	public void setListaResultados(ListModelList<String> listaResultados) {
+		this.listaResultados = listaResultados;
+	}
+
+	public ListModelList<String> getListaGrados() {
+		return listaGrados;
+	}
+
+	public void setListaGrados(ListModelList<String> listaGrados) {
+		this.listaGrados = listaGrados;
+	}
+
 	public ListModel<Cita> getmodelCita() {
         return new ListModelList<Cita>(currentCita);
     }
