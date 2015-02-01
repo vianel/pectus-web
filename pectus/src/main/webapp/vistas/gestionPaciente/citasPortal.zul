@@ -19,7 +19,7 @@
                	</div>
 				<listbox emptyMessage="NO hay solicitudes de cita"  height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelPersona)"  selectedItem="@bind(vm.personaselected)">
 		  			<listhead sizable="true">
-		  					<listheader hflex="1" label="Cedula" sort="auto(nombre)" width="100px">
+		  					<listheader hflex="1" label="Cédula" sort="auto(nombre)" width="100px">
 	         					<textbox instant="true" width="75px"  />
 	          				</listheader> 
 	         				<listheader hflex="1" label="Nombre" sort="auto(nombre)" width="100px">
@@ -34,10 +34,10 @@
 		   					<listheader hflex="1" label="Ciudad" width="100px" >
 	         					
 		   					</listheader> 
-		   					<listheader hflex="1" label="Direccion" width="100px" >
+		   					<listheader hflex="1" label="Dirección" width="100px" >
 	         					
 		   					</listheader>
-		   					<listheader hflex="1" label="Profesion" width="100px" >
+		   					<listheader hflex="1" label="Profesión" width="100px" >
 	         					
 		   					</listheader> 
 		   					<listheader hflex="1" label="Correo" width="100px" >
