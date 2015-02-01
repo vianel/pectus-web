@@ -1,52 +1,47 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window  id="modalDialog" title="Clinica" border="normal" width="660px" height="30em"
-    apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorClinica')"
-    position="center,center" closable="true"
+<window id="modelclinica" title="CLINICA" border="normal" width="350px" height="35em" position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
-    
+ <panel apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ClinicaVM')"> 
+<panelchildren>
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Clinicas"/>
+      
 
-<!--  apply="org.zkoss.bind.BindComposer" -->
-<!-- 			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')" -->
-<!-- 			 id="modalDialogpaciente" title="PACIENTE" border="normal" width="660px" height="29em" -->
-  
-<!--     position="center,center" closable="true" -->
-<!--     action="show: slideDown;hide: slideUp" -->
-       
-      	<separator height="15px"/>
-			<separator height="15px"/>
-		<hlayout>
-			 <grid  width="500px">
-				<columns>
-					<column label="" width="130px"/>
-					<column label=""/>
-				</columns>
-				<rows>
-				    <row><label value="Rif" /><textbox value="@bind(vm.rifSelected)" rows="1"/> </row>
-					<row><label value="Nombre"/><textbox value="@bind(vm.nombreSelected)" rows="3"/> </row>
-					<row><label value="Dirección" /><textbox value="@bind(vm.direccionSelected)" rows="4"/> </row>
-					<row><label value="Telefono" /><textbox value="@bind(vm.telefonoSelected)" rows="1"/> </row>
-					</rows>
-			</grid>
-		
-		</hlayout>	
-	
-		<separator height="35px"/>
-
-
+    </tabs>
+    <tabpanels>
+        <tabpanel>
         
-         	<separator height="15px"/>
-    		<div align="center">
-		 <button width="75px" height="50px" sclass="btn-success" onClick="@command('guardarClinica')">Guardar</button> 
-		 
-		<!--  <button style="margin-top: 4em" sclass="btn-success" onClick="@command('guardarClinica', cmp=modalDialogclinica)" >Guardar</button>-->
+                <label style="display:block" value="Rif"/><textbox value="@bind(vm.rifSelected)"  maxlength="20"   width="200px"/>
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.nombreSelected)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em" value="Direccion"/><textbox value="@bind(vm.direccionSelected)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>
+				<label style="display:block" value="Telefono"/><textbox value="@bind(vm.telefonoSelected)"  maxlength="20"   width="200px"/>
+			
+				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarClinica')">
+					<attribute name="onClick">						
+						    modelclinica.setVisible(false);						  	
+						</attribute>
+				Guardar</button>
+				
+				
+		</tabpanel>
+        <tabpanel>
+            <label style="display:block" value="Rif" /><intbox />
+        	<label style="display:block" value="Nombre" /><intbox />
+			<label style="display:block" value="Direccion" /><textbox />
+			<label style="display:block" value="Telefono" /><intbox />
+        </tabpanel>
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
 		
-		<button width="75px" height="50px" sclass="btn-success">Eliminar</button>
-		</div>
-    
-    
-    
-    
-    
+    </vlayout>
+   </panelchildren>
+   </panel>
 </window>
 </zk>

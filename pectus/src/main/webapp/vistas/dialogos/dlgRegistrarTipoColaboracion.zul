@@ -1,0 +1,44 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modeltipocolaboracion" title="TIPO DE COLABORACION" border="normal" width="320px" height="20em" position="center,center" closable="true"
+    action="show: slideDown;hide: slideUp">
+ <panel apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoColaboracionVM')"> 
+<panelchildren>
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Tipos de Colaboracion"/>
+      
+
+    </tabs>
+    <tabpanels>
+        <tabpanel>
+        
+        
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.nombreSelected)"  maxlength="20"   width="200px"/>
+				
+			
+				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarTipoColaboracion')">
+					<attribute name="onClick">						
+						    modeltipocolaboracion.setVisible(false);						  	
+						</attribute>
+				Guardar</button>
+				
+				
+		</tabpanel>
+        <tabpanel>
+        	<label style="display:block" value="Nombre" /><intbox />
+						
+        </tabpanel>
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+   </panelchildren>
+   </panel>
+</window>
+</zk>

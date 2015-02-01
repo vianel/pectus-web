@@ -11,7 +11,7 @@ public class Clinica {
 	private String telefono;
 	
 	public Clinica(){
-		
+		// TODO Auto-generated constructor stub
 	}
 	
 	public Clinica(String nombre, String rif, String direccion,

@@ -1,24 +1,25 @@
 
 
+
 <zk xmlns:n="native">
   <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
-
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoLugarView')">
   <tabbox >
     <tabs>
 
-      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoLugar"/>
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoEstudio"/>
     
     </tabs>
     <tabpanels>
 		<tabpanel >
-		 <div  apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoLugarView')">
+
 			
 
-		<button id="btnNuevoTipoLugar" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoLugar')" >NUEVO</button>
+		<button id="btnNuevoTipoLugar" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoLugar')">NUEVO</button>
 
 	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
-          sclass="mylist" 	model="@load(vm.modeltipolugar)"  selectedItem="@bind(vm.selectedItem)">
+          sclass="mylist" 	model="@load(vm.modeltipolugar)"  selectedItem="@bind(vm.tipolugarselected)">
 			
 			
 		  <listhead sizable="true"> 
@@ -35,15 +36,19 @@
 				   </listheader> 
 				  </listhead>         
                
-           <template name="model" var="item">
+           <template name="model">
            <listitem>
-                  <listcell label="@load(item.tipoLugar.nombre) @save(each.tipolugar.nombre, before='modificarTipoLugar')" />
-                  <listcell label="@load(item.tipoLugar.descripcion)  @save(each.tipolugar.descripcion, before='modificarTipoLugar')" />
+                  <listcell label="@load(each.nombre)" />
+                  <listcell label="@load(each.descripcion) " />
                 
                   <listcell>
                   <div class="btn-group btn-group-sm">
                         <hbox spacing="20px">
-          		 <button id="" sclass="btn-success"  onClick="@command('abrirDialogoEditarTipoLugar'">Editar</button>
+          		 <button id="" sclass="btn-success" >
+          		 		    <attribute name="onClick">						
+						    modaltipolugar.doModal();						  	
+			</attribute>
+			Editar</button>
 					
                      </hbox></div>
                    </listcell>
@@ -52,12 +57,60 @@
 </listbox>
 	
 		
-</div>
+
 		
 		</tabpanel>
 		
     </tabpanels>
      </tabbox>
- 
 
+<window visible="false" title="TIPO LUGAR" border="normal" width="320px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" id="modaltipolugar">
+
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Lugares"/>
+      
+
+    </tabs>
+    <tabpanels>
+        <tabpanel>
+        
+        
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.tipolugarselected.nombre)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em" value="Descripcion"/><textbox value="@bind(vm.tipolugarselected.descripcion)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>	
+				<label value="@bind(vm.resp)" />
+				<separator height="40px"/>
+				<button style=" margin-left: 5em;" sclass="btn-success" onClick="@command('editarTipoLugar', cmp=modaltipolugar)">
+						<attribute name="onClick">						
+						    modaltipolugar.setVisible(false);						  	
+						</attribute>	
+				Guardar</button>
+					<button  label="Cancelar" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modaltipolugar.setVisible(false);						  	
+						</attribute>					  
+					</button>
+				
+		</tabpanel>
+        <tabpanel>
+        	<label style="display:block" value="Nombre" /><intbox />
+			<label style="display:block" value="Descripcion" /><textbox />
+			
+        </tabpanel>
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+
+</window>
+</div>
 </zk>
+
+
+
