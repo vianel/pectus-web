@@ -6,9 +6,16 @@ public class TipoColaboracion {
 	private String nombre;
 	
 	public TipoColaboracion(){
-		
+		// TODO Auto-generated constructor stub
 	}
 
+	public TipoColaboracion(int id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		
+	}
+	
 	public int getId() {
 		return id;
 	}

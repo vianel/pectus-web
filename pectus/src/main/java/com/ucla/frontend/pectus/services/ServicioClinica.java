@@ -1,6 +1,7 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.zkoss.zul.ListModelList;
 
 import com.ucla.frontend.pectus.models.Clinica;
 import com.ucla.frontend.pectus.models.Paciente;
+import com.ucla.frontend.pectus.models.TipoEstudio;
 
 import us.monoid.web.JSONResource;
 import us.monoid.web.Resty;
@@ -87,6 +89,31 @@ public class ServicioClinica {
         return listaClinica;
         
     }
+    
+    public static String modificarClinica(Clinica clinica)
+	{
+		Resty resty = new Resty();
+		JSONResource jsResource = null;
+		String ok = null;
+		
+		try {
+		
+			jsResource = resty.json("http://127.0.0.1:5000/clinica/editar?rif=" + clinica.getRif().toString()
+					+ "&nombre=" + clinica.getNombre().toString() + 
+					"&direccion=" + URLEncoder.encode(clinica.getDireccion()));
+					
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 try {
+			ok = jsResource.get("ok").toString();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+	}
     
     public static String agregarClinica(Clinica clinica)
 	{

@@ -1,45 +1,46 @@
+
 package com.ucla.frontend.pectus.controllers;
 
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.annotation.BindingParam;
+
+import java.util.List;
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
-import com.ucla.frontend.pectus.models.TipoEstudio;
 import com.ucla.frontend.pectus.models.TipoLugar;
-import com.ucla.frontend.pectus.controllers.TipoEstudioFilter;
-import com.ucla.frontend.pectus.services.ServicioTipoEstudio;
+import com.ucla.frontend.pectus.controllers.TipoLugarFilter;
 import com.ucla.frontend.pectus.services.ServicioTipoLugar;
 
 
-public class TipoLugarView {
+public class TipoLugarView{
 	
-	private TipoLugar tipolugarselected;
+	private  TipoLugar tipolugarselected;
 	private Integer idSelected;
 	private String nombreSelected;
 	private String descripcionSelected;
-	
-	
-	
-	private ListModelList<TipoLugar> tipol = new ListModelList<TipoLugar>();
-	private TipoLugar selectedItem;
+	private Window ventanaregistronuevotipolugar;
+	private ListModelList< TipoLugar> tipol = new ListModelList< TipoLugar>();
 
-	 
+	private String resp;
+	private static final String footerMensaje = "Esto son todos los Lugares";
+	private TipoLugarFilter tipolugarFilter = new  TipoLugarFilter();
+	private List< TipoLugar> currentTipoLugar;
+
 	   
-	   
-	   public ListModelList<TipoLugar>getTipoLugars(){
+	@Init
+	public void init(){
+		this.currentTipoLugar = ServicioTipoLugar.buscarTipoLugar();
+	}
+	
+	   public ListModelList<TipoLugar>getTipoLugar(){
 			return tipol;
 		}
-	   
-	   
 
 		@NotifyChange("tipolugar")
 		public void setTipoLugar(ListModelList<TipoLugar> tipol) {
@@ -47,129 +48,49 @@ public class TipoLugarView {
 		}
 
 
-		public TipoLugar getSelectedItem() {
-			return selectedItem;
-		}
-
-		@NotifyChange("selectedItem")
-		public void setSelectedItem(TipoLugar selectedItem) {
-			this.selectedItem = selectedItem;
-		}
-
-		
-	   
-
-	private Window ventanaregistronuevotipolugar;
-	
-	private static final String footerMensaje = "Esto son todos los lugares";
-	private TipoLugarFilter tipolugarFilter = new TipoLugarFilter();
-	List<TipoLugar> currentTipoLugar = ServicioTipoLugar.buscarTipoLugar();
-	private List<TipoLugarStatus> tipolugarstatues = generateStatusList(currentTipoLugar);
-	private boolean displayEdit = true;
-
-
-	    public boolean isDisplayEdit() {
-	        return displayEdit;
-	    }
-	    
-	    
-	
-	 
-	public TipoLugarFilter getTipoLugarFilter() {
-		return tipolugarFilter;
-	}
-
-	public void setTipoLugarFilter(TipoLugarFilter tipolugarFilter) {
-		this.tipolugarFilter = tipolugarFilter;
-	}
-
 	@Command
-	@NotifyChange({"modeltipolugar", "footer"})
-	public void abrirDialogoRegistrarTipoLugar(){
-
-	   
+	public void abrirDialogoRegistrarTipoLugar(){	
+		
 		ventanaregistronuevotipolugar = (Window)Executions.createComponents("/vistas/dialogos/dlgRegistrarTipoLugar.zul", null, null);
-		
 		ventanaregistronuevotipolugar.doModal();
+			
 	}
 	
-	
-	
-	@Command
-	@NotifyChange({"modeltipolugar", "footer"})
-	public void abrirDialogoEditarTipoLugar(){
-
-	   
-		ventanaregistronuevotipolugar = (Window)Executions.createComponents("/vistas/dialogos/dlgEditarTipoLugar.zul", null, null);
-		
-		ventanaregistronuevotipolugar.doModal();
-	}
-	
-	
-	@Command
-	@NotifyChange({"modelptipolugar", "footer"})
-	public void modificarTipoLugar(@BindingParam("tipolugarStatus") TipoLugarStatus tipol)
-	{
-	
-		
-		String response = null;
-		response = ServicioTipoLugar.modificarTipoLugar(tipol.getTipoLugar());
-		if (response.equalsIgnoreCase("true"))
-		{
-			cambiarestatusedicion(tipol);
-			Clients.showNotification("lugar con Nombre " + tipol.getTipoLugar().getNombre() + " Modificado Exitosamente", null, true);
-
-		}else
-		{
-			Clients.showNotification("Error al modificar", true);
-		} 
-		List<TipoLugar> tipolugar = ServicioTipoLugar.buscarTipoLugar();
-	}
-	
-	 @Command
-	 
-	 public void cambiarestatusedicion(@BindingParam("tipolugarStatus") TipoLugarStatus tipol) {
-	        tipol.setEditingStatus(!tipol.getEditingStatus());
-	        refreshRowTemplate(tipol);
-	    }
-	public void refreshRowTemplate(TipoLugarStatus lcs) {
-	        /*
-	         * This code is special and notifies ZK that the bean's value
-	         * has changed as it is used in the template mechanism.
-	         * This stops the entire Grid's data from being refreshed
-	         */
-	        BindUtils.postNotifyChange(null, null, lcs, "editingStatus");
-	      
-	    }
-    public List<TipoLugarStatus> getmodeltipolugar() {
-       // return new ListModelList<Paciente>(currentPaciente);
-    	return tipolugarstatues;
+    public List<TipoLugar> getmodeltipolugar() {
+      return currentTipoLugar;
     }
     
     public String getFooter() {
-        return String.format(footerMensaje, tipolugarstatues.size());
+        return String.format(footerMensaje, currentTipoLugar.size());
     }
     
     @Command
     @NotifyChange({"modeltipolugar", "footer"})
     public void changeFilter() {
         currentTipoLugar = TipoLugarFilter.getFilterTipoLugar(tipolugarFilter);
-        tipolugarstatues = generateStatusList(currentTipoLugar);
     }
+ 
+    @Command
+    public void editarTipoLugar()
+    {
+       resp = ServicioTipoLugar.modificarTipoLugar(tipolugarselected);
+      
+      if (resp.equalsIgnoreCase("true"))
+      {
+  		Clients.showNotification("El tipo lugar ha sido moficado Exitosamente", true);
+      }else
+      {
+  		Clients.showNotification("Error al modificar", true);
+      }
 
-
+    }
 	@Command
 	@NotifyChange({ "modeltipolugar", "footer" })
 	public void guardarTipoLugar() throws Exception{
 		String response = null;
-		if (nombreSelected!= null) {
+		if (nombreSelected!= null && descripcionSelected != null) {
 	
-			tipolugarselected = new TipoLugar();
-			
-			tipolugarselected.setId(idSelected);
-			tipolugarselected.setNombre(nombreSelected);
-			tipolugarselected.setDescripcion(descripcionSelected);
-			
+			tipolugarselected = new TipoLugar(idSelected,nombreSelected,descripcionSelected);
 			
 
 			response = ServicioTipoLugar.agregarTipoLugar(tipolugarselected);
@@ -177,10 +98,9 @@ public class TipoLugarView {
 			{
 				
 				currentTipoLugar = ServicioTipoLugar.buscarTipoLugar();
-				tipolugarstatues = generateStatusList(currentTipoLugar);
-				
+				getmodeltipolugar();
 				Clients.showNotification("Lugar Guardado", null, true);
-				//x.detach();
+				
 
 			}else
 			{
@@ -190,22 +110,7 @@ public class TipoLugarView {
 			
 			Clients.showNotification("Porfavor ingrese todos los datos validos");
 		}
-		List<TipoLugar> tipolugar = ServicioTipoLugar.buscarTipoLugar();
-		
 
-
-	}
-    
-	public static  List<TipoLugarStatus> generateStatusList(List<TipoLugar> tipol)
-	{
-        List<TipoLugarStatus> tipolugar = new ArrayList<TipoLugarStatus>();
-        for(TipoLugar tl : tipol) {
-            tipolugar.add(new TipoLugarStatus(tl, false));
-        }
-		return tipolugar;
-	}
-	public TipoLugar getTipoLugarselected() {
-		return tipolugarselected;
 	}
 
 
@@ -213,8 +118,6 @@ public class TipoLugarView {
 	public void setTipoLugarselected(TipoLugar tipolugarselected) {
 		this.tipolugarselected = tipolugarselected;
 	}
-
-	
 
 
 	public Integer getIdSelected() {
@@ -252,23 +155,48 @@ public class TipoLugarView {
 
 
 	
+	public TipoLugar getTipolugarselected() {
+		return tipolugarselected;
+	}
+
+
+
+	public void setTipolugarselected(TipoLugar tipolugarselected) {
+		this.tipolugarselected = tipolugarselected;
+	}
+	 
+	public TipoLugarFilter getTipoLugarFilter() {
+		return tipolugarFilter;
+	}
+
+	public void setTipoLugarFilter(TipoLugarFilter tipolugarFilter) {
+		this.tipolugarFilter = tipolugarFilter;
+	}
+
+
 	public Window getVentanaregistronuevotipolugar() {
 		return ventanaregistronuevotipolugar;
 	}
 	
-	public void setVentanaregistronuevotipoestudio(Window ventanaregistronuevotipolugar) {
+	public void setVentanaregistronuevotipolugar(Window ventanaregistronuevotipolugar) {
 		this.ventanaregistronuevotipolugar = ventanaregistronuevotipolugar;
 	}
 
-	public List<TipoLugarStatus> getTipoLugarstatues() {
-		return tipolugarstatues;
+
+
+	public String getResp() {
+		return resp;
 	}
 
-	public void setTipoLugarstatues(List<TipoLugarStatus> tipolugarstatues) {
-		this.tipolugarstatues = tipolugarstatues;
+
+
+	public void setResp(String resp) {
+		this.resp = resp;
 	}
 
-	
+
 
 }
+
+
 

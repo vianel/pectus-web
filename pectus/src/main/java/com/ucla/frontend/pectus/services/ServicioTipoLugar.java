@@ -1,14 +1,9 @@
 package com.ucla.frontend.pectus.services;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
@@ -34,15 +29,11 @@ public class ServicioTipoLugar {
     private ListModelList<TipoLugar> listaModelTipoLugar;
 
 
-	public ServicioTipoLugar (){
-    
-
-    }
     
 	@Init
     public void init(){
 
-    	this.setListaModelTipoLugar(new ListModelList<TipoLugar>(this.buscarTipoLugar()));
+    	this.setListaModelTipoLugar(new ListModelList<TipoLugar>(ServicioTipoLugar.buscarTipoLugar()));
     	
     }
 	
@@ -133,30 +124,31 @@ public class ServicioTipoLugar {
     
     
     
-	public static String modificarTipoLugar(TipoLugar tip)
-	{
-		Resty resty = new Resty();
-		JSONResource jsResource = null;
-		String ok = null;
-		
-		try {
-			jsResource = resty.json("http://127.0.0.1:5000/tipo-lugar/editar?id=" +tip.getId()
-					+ "&nombre=" + tip.getNombre() + 
-					"&descricpion=" + tip.getDescripcion());
-					
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 try {
-			ok = jsResource.get("ok").toString();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ok;
-	}
- 
+    
+  	public static String modificarTipoLugar(TipoLugar tip)
+  	{
+  		Resty resty = new Resty();
+  		JSONResource jsResource = null;
+  		String ok = null;
+  		
+  		try {
+  		
+  			jsResource = resty.json("http://127.0.0.1:5000/tipo-lugar/editar?id=" + tip.getId().toString()
+  					+ "&nombre=" + tip.getNombre().toString().replaceAll(" ", "%20") + 
+  					"&descricpion=" + tip.getDescripcion().toString().replaceAll(" ", "%20"));
+  					
+  		} catch (IOException e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  		 try {
+  			ok = jsResource.get("ok").toString();
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  		return ok;
+  	}
 
 	public ListModelList<TipoLugar> getListaModelTipoLugar() {
 		return listaModelTipoLugar;
