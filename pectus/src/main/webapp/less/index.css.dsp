@@ -2942,6 +2942,13 @@ overflow: hidden;
 -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
 }
-
-
+.z-notification-info .z-notification-content {
+background: #6fd7bb;
+font-weight: bold;
+border: 7px double #fff;
+}
+.z-listitem.z-listitem-selected > .z-listcell, .z-listitem.z-listitem-selected:hover > .z-listcell {
+background-color: #6fd7bb;
+background-image: none;
+}
 
