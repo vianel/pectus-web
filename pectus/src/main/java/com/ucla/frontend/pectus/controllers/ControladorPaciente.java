@@ -733,13 +733,20 @@ public class ControladorPaciente implements Serializable{
 	@Command
 	@NotifyChange("modelPersonaAceptada")
 	public void aceptarPaciente(){
+		
+		
 		pacienteselected.setCedula(personaselected.getCedula());
-		String n = pacienteselected.getNombre();
+		
+		if (pacienteselected.getNroHijos() == null || pacienteselected.getEstadoCivil() == ' ' || pacienteselected.getTipoVivienda() == ' ' || pacienteselected.getTendenciaVivienda() == ' ' || pacienteselected.getNroHabitantes() == null || pacienteselected.getAlquiler() == null || pacienteselected.getLugarTrabajo() == null || pacienteselected.getDireccionTrabajo() == null || pacienteselected.getTelefonoTrabajo() == null) {
+			Clients.showNotification("Debe llenar todos los Campos" , null,null,null,2000);
+		}
+		else{
+	
 		resp = ServicioPaciente.aceptarPaciente(pacienteselected);
 		
 		if (resp.equalsIgnoreCase("true"))
 	      {
-	  		Clients.showNotification("La persona"+ n , null,null,null,2000);
+	  		Clients.showNotification("La persona" , null,null,null,2000);
 	      }else
 	      {
 	  		Clients.showNotification("Error al modificar", true);
@@ -748,7 +755,7 @@ public class ControladorPaciente implements Serializable{
 		getmodelPersonaAceptada();
 		currentPacientes = ServicioPaciente.buscarPacientes();
 		getmodelPacientesNuevo();
-		
+		}
 	}
 
 	

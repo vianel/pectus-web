@@ -121,6 +121,7 @@ public class ServicioPersona {
                   persona.setDireccion(obj.get("direccion").toString());
                   persona.setProfesion(obj.get("profesion").toString());
                   persona.setCorreo(obj.get("correo").toString());
+                  persona.setEstadoCivil(obj.get("edocivil").toString().charAt(0));
                   listaPersonas.add(persona);
 			  
 			  } //fin For

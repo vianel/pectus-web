@@ -1,5 +1,5 @@
 <zk xmlns:n="native">
-	<div  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.ControladorPaciente')">
+	<div  apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.CitasPortalView')">
   	<tabbox>
     	<tabs>
       		<tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="SOLICITUDES HECHAS DESDE EL PORTAL WEB"/> 
@@ -86,7 +86,7 @@
 						<separator height="23px"/>
 						<button label="Guardar" style=" margin-left: 9em;margin-top: 2em;" sclass="btn-success" onClick="@command('asignarCitaPaciente', cmp=modalAsignarCita)">
 							<attribute name="onClick">						
-							    modalAsignarCita.setVisible(false);						  	
+<!-- 							    modalAsignarCita.setVisible();						  	 -->
 							</attribute>	
 						</button>
 						<button  label="Salir" style="margin-top: 2em;" sclass="btn-success">
