@@ -357,6 +357,10 @@ public class CitaView {
 	
 	@Command
 	public void resultadoCita() throws Exception{
+		
+		if (resultadoSelected.getGradoPatologia() == ' ' || resultadoSelected.getResultado() == ' ' || resultadoSelected.getObservacion() == null) {
+			Clients.showNotification("Debe llenar todos los campos", null,null,null,2000);
+		}else{
 		int idCita = citaselected.getId();
 		String resp = ServicioCita.ResultadoCita(idCita, resultadoSelected);		
 		if (resp.equalsIgnoreCase("true"))
@@ -368,6 +372,7 @@ public class CitaView {
 	      }
 
 	}
+		}
 	
 	
 }

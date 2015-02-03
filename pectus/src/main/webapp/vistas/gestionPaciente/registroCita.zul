@@ -148,7 +148,7 @@
 						<separator height="23px"/>
 						<button label="Guardar" style="margin-left: 24em;margin-top: 3.5em;" sclass="btn-success" onClick="@command('asignarCitaMedicaPaciente', cmp=modalAsignarCita)">
 							<attribute name="onClick">						
-							    modalAsignarCitaMedica.setVisible(false);						  	
+<!-- 							    modalAsignarCitaMedica.setVisible(false);						  	 -->
 							</attribute>	
 						</button>
 						<button style="margin-left: 31em;margin-top: -4em;" label="Salir" sclass="btn-success">

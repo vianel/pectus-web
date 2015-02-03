@@ -174,7 +174,7 @@
 		<div align="center" >
 			<button style="margin-left: 73em;"  label="Guardar" sclass="btn-success"  onClick="@command('guardarAyuda')">
 			    <attribute name="onClick">						
-				    modalRegistrarAyuda.setVisible(false);						  	
+<!-- 				    modalRegistrarAyuda.setVisible(false);						  	 -->
 				</attribute>					  
 			</button>
 			<button  label="Salir" sclass="btn-success">
@@ -199,7 +199,7 @@
 		
 		
 			<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="btnEditarPaciente" sclass="btn-success" onClick="@command('abrirDialogoRegistrarAyuda')" >EDITAR</button>
-		   	<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button>
+<!-- 		   	<button disabled="@load(vm.ayudaSelected eq null?'true':'false')" id="" onClick="@command('abrirDialogoRegistrarAyuda')" sclass="btn-success">EVALUAR</button> -->
 			<listbox height="450px" sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7"  sclass="mylist" 	model="@load(vm.modelayuda)"  selectedItem="@bind(vm.ayudaSelected)">
 		  			<listhead sizable="true"> 
 	         				<listheader hflex="1" label="Cedula Paciente"  width="100px">

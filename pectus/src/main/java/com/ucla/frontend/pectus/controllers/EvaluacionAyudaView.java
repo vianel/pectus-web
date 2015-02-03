@@ -5,29 +5,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-
-
-
-
-
-
-
-
-
-
-
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
-import com.ucla.frontend.pectus.controllers.ControladorEvento.ChooseEvent;
 import com.ucla.frontend.pectus.models.Ayuda;
 import com.ucla.frontend.pectus.models.Causa;
 import com.ucla.frontend.pectus.models.Cita;
@@ -37,18 +24,14 @@ import com.ucla.frontend.pectus.models.EstudioSolicitud;
 import com.ucla.frontend.pectus.models.MotivoRechazo;
 import com.ucla.frontend.pectus.models.Paciente;
 import com.ucla.frontend.pectus.models.SolicitudRechazada;
-import com.ucla.frontend.pectus.models.Voluntario;
 import com.ucla.frontend.pectus.services.ServicioCita;
 import com.ucla.frontend.pectus.services.ServicioEstudioClinicaMonto;
 import com.ucla.frontend.pectus.services.ServicioPaciente;
 import com.ucla.frontend.pectus.services.ServicioPatologia;
-import com.ucla.frontend.pectus.services.ServicioPersona;
 import com.ucla.frontend.pectus.services.ServicioSolicitudAyuda;
 
-public class AyudaView {
+public class EvaluacionAyudaView {
 
-	
-	
 	private List<EstudioClinica> listaNueva = new ArrayList<EstudioClinica>();
 	private Diagnostico diagnosticoSelected;
 	private Paciente pacienteSelected;
@@ -310,7 +293,7 @@ private Causa causaSelected;
 	@Command
 	public void aprobarAyuda() throws Exception{
 
-		if(ayudaSelected.getAprobacion() > 100){
+		if(ayudaSelected.getAprobacion() > 100 || ayudaSelected.getAprobacion() < 0){
 			Clients.showNotification("Seleccione un valor valido", null, true);
 		}else{
 			String resp = ServicioSolicitudAyuda.aprobarAyuda(ayudaSelected);
@@ -327,6 +310,11 @@ private Causa causaSelected;
 	}
 	@Command
 	public void rechazarAyuda() throws Exception{
+		
+		
+		if (solicitudRechazadaSelected.getDescripcion() == null || motivoRechazoSelected == null) {
+			Clients.showNotification("Debe llenar todos los cambios", null, null,null,2000);
+		}else{
 		String resp = ServicioSolicitudAyuda.RechazarAyuda(ayudaSelected, motivoRechazoSelected, solicitudRechazadaSelected.getDescripcion());
 		if (resp.equalsIgnoreCase("true"))
 	      {
@@ -335,6 +323,7 @@ private Causa causaSelected;
 	      {
 	  		Clients.showNotification("Error al evaluar", true);
 	      }
+		}
 	}
 
 	public Set<EstudioClinica> getestudioclinicaSelected() {
@@ -445,10 +434,6 @@ private Causa causaSelected;
 	@NotifyChange("modelAyudaAceptada")
 	public void asignarCitaMedicaPaciente(){
 		
-		if (citaselected.getFechaAsignacion() == null || citaselected.getFechaCita() == null || citaselected.getFechaEntregaComprobante() == null || estudioClinicaSeleccionados == null) {
-			Clients.showNotification("Debe llenar todos los campos", null,null,null,2000);
-		}else{
-		
 		String resp = ServicioSolicitudAyuda.asignarCitaMedica(estudioClinicaSeleccionados,citaselected);
 		
 		
@@ -463,6 +448,4 @@ private Causa causaSelected;
 		currentAyudaAceptada = ServicioSolicitudAyuda.buscarAyudasAceptadas();
 		getmodelAyudaAceptada();
 	}
-	}
 }
-

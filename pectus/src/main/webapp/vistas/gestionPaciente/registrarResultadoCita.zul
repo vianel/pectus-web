@@ -95,7 +95,7 @@
 						<separator height="23px"/>
 						<button label="Guardar" style=" margin-left: 21em;" sclass="btn-success" onClick="@command('resultadoCita', cmp=modalResultadoCita)">
 							<attribute name="onClick">						
-							    modalResultadoCita.setVisible(false);						  	
+<!-- 							    modalResultadoCita.setVisible(false);						  	 -->
 							</attribute>	
 						</button>
 						<button  label="Salir" sclass="btn-success">

@@ -34,6 +34,9 @@ import com.ucla.frontend.pectus.utils.Email;
 
 
 public class ControladorPaciente implements Serializable{
+	private String valorEdoCivil;
+	private String valorSeguroSocial;
+	
 	private String resp;
 	private String resp2;
 	private Visita visita = new Visita();
@@ -76,6 +79,7 @@ public class ControladorPaciente implements Serializable{
 	private Window ventanaregistronuevopaciente;
 	private static final String footerMensaje = "Esto son todos los pacientes";
 	private PacienteFilter pacienteFilter = new PacienteFilter();
+	private List<Seguro> currentSeguro = ServicioPaciente.buscarSeguros();
 	List<Paciente> currentPaciente = ServicioPaciente.buscarPacientes();
 	private List<Paciente> currentPacientes;
 	List<Persona> currentPersona = ServicioPersona.buscarPersonas();
@@ -107,6 +111,7 @@ public class ControladorPaciente implements Serializable{
 	 	listaedocivil.add("Viud@");
 	 	
 //		getmodelPacientesNuevo();
+	 	
 	}
 	
 //	NUEVOS METODOS
@@ -133,6 +138,17 @@ public class ControladorPaciente implements Serializable{
 	public ListModel<Persona> getmodelPersona() {
         return new ListModelList<Persona>(currentPersona);
     }
+	public ListModel<Seguro> getmodelSeguro() {
+        return new ListModelList<Seguro>(currentSeguro);
+    }
+	public List<Seguro> getCurrentSeguro() {
+		return currentSeguro;
+	}
+
+	public void setCurrentSeguro(List<Seguro> currentSeguro) {
+		this.currentSeguro = currentSeguro;
+	}
+
 	public ListModel<Persona> getmodelPersonaAceptada() {
         return new ListModelList<Persona>(currentPersonaAceptada);
     }
@@ -737,16 +753,31 @@ public class ControladorPaciente implements Serializable{
 		
 		pacienteselected.setCedula(personaselected.getCedula());
 		
-		if (pacienteselected.getNroHijos() == null || pacienteselected.getEstadoCivil() == ' ' || pacienteselected.getTipoVivienda() == ' ' || pacienteselected.getTendenciaVivienda() == ' ' || pacienteselected.getNroHabitantes() == null || pacienteselected.getAlquiler() == null || pacienteselected.getLugarTrabajo() == null || pacienteselected.getDireccionTrabajo() == null || pacienteselected.getTelefonoTrabajo() == null) {
+		if (pacienteselected.getNroHijos() == null || pacienteselected.getEstadoCivil() == ' ' || pacienteselected.getTipoVivienda() == ' ' || pacienteselected.getTendenciaVivienda() == ' ' || pacienteselected.getNroHabitantes() == null || pacienteselected.getAlquiler() == null || pacienteselected.getLugarTrabajo() == null || pacienteselected.getDireccionTrabajo() == null || pacienteselected.getTelefonoTrabajo() == null || pacienteselected.getSeguro() == null) {
 			Clients.showNotification("Debe llenar todos los Campos" , null,null,null,2000);
 		}
-		else{
+		else if(personaselected.getEstadoCivil() == 'S' || personaselected.getEstadoCivil() == 'V'){
+			resp = ServicioPaciente.aceptarPacienteSinConyugue(pacienteselected);
+			
+			if (resp.equalsIgnoreCase("true"))
+		      {
+		  		Clients.showNotification("Paciente Registrado" , null,null,null,2000);
+		      }else
+		      {
+		  		Clients.showNotification("Error al modificar", true);
+		      }
+			currentPersonaAceptada = ServicioPersona.buscarPersonasAceptadas();
+			getmodelPersonaAceptada();
+			currentPacientes = ServicioPaciente.buscarPacientes();
+			getmodelPacientesNuevo();
+			
+		}else{
 	
 		resp = ServicioPaciente.aceptarPaciente(pacienteselected);
 		
 		if (resp.equalsIgnoreCase("true"))
 	      {
-	  		Clients.showNotification("La persona" , null,null,null,2000);
+	  		Clients.showNotification("Paciente Registrado" , null,null,null,2000);
 	      }else
 	      {
 	  		Clients.showNotification("Error al modificar", true);
@@ -804,7 +835,55 @@ public class ControladorPaciente implements Serializable{
 		this.valorEstadoCivil = valorEstadoCivil;
 	}
 	
+	
+	
+	public String getValorEdoCivil() {
+		return valorEdoCivil;
+	}
 
+	public void setValorEdoCivil(String valorEdoCivil) {
+		this.valorEdoCivil = valorEdoCivil;
+	}
+	
+
+	public String getValorSeguroSocial() {
+		return valorSeguroSocial;
+	}
+
+	public void setValorSeguroSocial(String valorSeguroSocial) {
+		this.valorSeguroSocial = valorSeguroSocial;
+	}
+
+	@NotifyChange("valorEdoCivil")
+	@Command
+	public void convertirChar(){
+		switch (personaselected.getEstadoCivil()) {
+		case 'S':
+			valorEdoCivil = "Solter@";
+			break;
+		case 'C':
+			valorEdoCivil = "Casad@";
+			break;
+		case 'V':
+			valorEdoCivil = "Viud@";
+			break;
+		default:
+			valorEdoCivil = "Otro";
+			
+		}
+		
+		switch (pacienteselected.getSeguroSocial()) {
+		case 'S':
+			valorSeguroSocial = "SI";
+			break;
+		case 'N':
+			valorSeguroSocial = "NO";
+			break;
+
+		default:
+			valorSeguroSocial = " sad";
+		}
+	}
 
 
 

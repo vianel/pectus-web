@@ -26,6 +26,7 @@ public class Paciente extends Persona{
 	private float ingresos;
 	private float egresos;
 	private boolean estatus;
+	private char seguroSocial;
 	// agregados
 	private Date fechaNacConyugue;
 	private String login;
@@ -37,6 +38,21 @@ public class Paciente extends Persona{
 	}
 
 		
+	
+	
+	public char getSeguroSocial() {
+		return seguroSocial;
+	}
+
+
+
+
+	public void setSeguroSocial(char seguroSocial) {
+		this.seguroSocial = seguroSocial;
+	}
+
+
+
 
 	public Estado getEstado() {
 		return estado;

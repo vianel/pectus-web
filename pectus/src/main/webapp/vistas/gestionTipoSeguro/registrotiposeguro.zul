@@ -1,0 +1,105 @@
+
+
+<zk xmlns:n="native">
+  <a label="" iconSclass="z-icon-group" style="color:#6FD7BB;"/>
+		 <div  apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.TipoSeguroVM')">
+  <tabbox >
+    <tabs>
+
+      <tab style="border: 2px solid #f7aff3;border-bottom: 0;" label="TipoSeguro"/>
+    
+    </tabs>
+    <tabpanels>
+		<tabpanel >
+
+			
+
+		<button id="btnNuevoTipoSeguro" sclass="btn-success" onClick="@command('abrirDialogoRegistrarTipoSeguro')">NUEVO</button>
+		         <button id="btnEditarTipoSeguro" sclass="btn-success" disabled="@load(vm.tiposeguroselected eq null?'true':'false')"  >
+		         <attribute name="onClick">						
+			   modaltiposeguro.doModal();						  	
+			</attribute>
+			EDITAR</button>
+			
+			
+    
+	<listbox  height="450px"  sizedByContent="true" pagingPosition="bottom" mold="paging" pageSize="7" 
+          sclass="mylist" 	model="@load(vm.modeltiposeguro)"  selectedItem="@bind(vm.tiposeguroselected)">
+			
+			
+		  <listhead sizable="true"> 
+          <listheader hflex="1" label="Nombre"  width="100px">
+          <textbox instant="true" width="100px" value="@bind(vm.tipoSeguroFilter.nombre)"  onChange="@command('changeFilter')" />
+           </listheader>       
+          
+          <listheader hflex="1" label="Descripcion" width="50%" sort="auto(descripcion)">
+          <textbox instant="true" width="100px" value="@bind(vm.tipoSeguroFilter.descripcion)" onChange="@command('changeFilter')" />  
+		   </listheader> 	
+		
+	
+				  </listhead>         
+               
+           <template name="model">
+	           <listitem>
+	                  <listcell label="@load(each.nombre)" />
+	                  <listcell label="@load(each.descripcion) " />
+	           </listitem>
+           </template>
+</listbox>
+	
+		
+
+		
+		</tabpanel>
+		
+    </tabpanels>
+     </tabbox>
+
+<window visible="false" title="TIPO ESTUDIO" border="normal" width="320px" height="26em" position="center,center" closable="false"
+    action="show: slideDown;hide: slideUp" id="modaltiposeguro">
+
+    <vlayout>
+       <tabbox id="tb" height="630px">
+    <tabs id="tabs">
+        <tab id="A" label="Seguros"/>
+      
+
+    </tabs>
+    <tabpanels>
+        <tabpanel>
+        
+        
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.tiposeguroselected.nombre)"  maxlength="20"   width="200px"/>
+				<label style="display:block; margin-top: 1em" value="Descripcion"/><textbox value="@bind(vm.tiposeguroselected.descripcion)" rows="4" maxlength="50"  width="200px"  style="display:block;"/>	
+				<label value="@bind(vm.resp)" />
+				<separator height="40px"/>
+				<button style=" margin-left: 5em;" sclass="btn-success" onClick="@command('editarTipoSeguro', cmp=modaltiposeguro)">
+						<attribute name="onClick">						
+						    modaltiposeguro.setVisible(false);						  	
+						</attribute>	
+				Guardar</button>
+					<button  label="Salir" sclass="btn-success">
+					    <!-- Ocultamos la ventana -->
+					    <attribute name="onClick">						
+						    modaltiposeguro.setVisible(false);						  	
+						</attribute>					  
+					</button>
+				
+		</tabpanel>
+        <tabpanel>
+        	<label style="display:block" value="Nombre" /><intbox />
+			<label style="display:block" value="Descripcion" /><textbox />
+			
+        </tabpanel>
+       
+
+    </tabpanels>
+</tabbox>
+       <separator height="35px"/>
+		
+    </vlayout>
+
+</window>
+</div>
+</zk>
