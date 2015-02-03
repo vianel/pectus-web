@@ -1,13 +1,12 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window apply="org.zkoss.bind.BindComposer"
-			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.PatologiaVM')"
-			 id="modalDialog" title="PATOLOGIA" border="normal" width="320px" height="26em"
-    
-    position="center,center" closable="true"
+<window id="modalpatologiar" title="PATOLOGIA" border="normal" width="350px" height="28em" position="center,center" closable="true"
     action="show: slideDown;hide: slideUp">
+ <panel apply="org.zkoss.bind.BindComposer"
+			viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.PatologiaVM')"> 
+<panelchildren>
     <vlayout>
-       <tabbox id="tb" height="630px">
+       <tabbox id="tb" height="300px">
     <tabs id="tabs">
         <tab id="A" label="Patologia"/>
       
@@ -16,18 +15,31 @@
     <tabpanels>
         <tabpanel>
         
-        
-				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.nombreSelected)"  maxlength="50"   width="200px"/>
-				<label style="display:block; margin-top: 1em" value="Observacion"/><textbox value="@bind(vm.observacionSelected)" rows="4" maxlength="60"  width="200px"  style="display:block;"/>
+        		
+				<label style="display:block" value="Nombre"/><textbox value="@bind(vm.nombreSelected)"  maxlength="20"   width="200px"/>
+				<label style="display:block" value="Observacion"/><textbox value="@bind(vm.observacionSelected)" rows="4" maxlength="200"  width="200px"  style="display:block;"/>
+				
 				
 			
-				<button style="margin-top: 3em; margin-left: 8em;" sclass="btn-success" onClick="@command('guardarPatologia')">Guardar</button>
+				<button style="margin-top: 1em; margin-left: 5em;" sclass="btn-success" onClick="@command('guardarPatologia')">
+					<attribute name="onClick">						
+						    modalpatologiar.setVisible(false);						  	
+						</attribute>
+				Guardar</button>
+				<button style="margin-top: 1em; margin-left: 1em;" sclass="btn-success" onClick="">
+					<attribute name="onClick">						
+							modalpatologiar.setVisible(false);				  	
+						</attribute>
+				Salir</button>
 				
 				
 		</tabpanel>
         <tabpanel>
-        	<label style="display:block" value="Nombre" /><intbox />
+        	
+			<label style="display:block" value="Nombre" /><textbox />
 			<label style="display:block" value="Observacion" /><textbox />
+			
+			
 			
         </tabpanel>
        
@@ -37,5 +49,7 @@
        <separator height="35px"/>
 		
     </vlayout>
+   </panelchildren>
+   </panel>
 </window>
 </zk>

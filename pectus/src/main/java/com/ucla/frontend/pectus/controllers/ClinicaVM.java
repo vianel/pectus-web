@@ -71,24 +71,7 @@ private Clinica clinicaselected;
 			this.clinica = clinica;
 		}
 	    
-	 /*   public void cambiarestatusedicion(@BindingParam("clinicaStatus") ClinicaStatus pctes) {
-	        pctes.setEditingStatus(!pctes.getEditingStatus());
-	        refreshRowTemplate(pctes);
-	    }
-/*	public void refreshRowTemplate(ClinicaStatus lcs) {
-	        /*
-	         * This code is special and notifies ZK that the bean's value
-	         * has changed as it is used in the template mechanism.
-	         * This stops the entire Grid's data from being refreshed
-	         */
-	    /*    BindUtils.postNotifyChange(null, null, lcs, "editingStatus");
-	      
-	    }*/
-   /* public List<ClinicaStatus> getmodelclinica() {
-       // return new ListModelList<Paciente>(currentPaciente);
-    	return clinicastatues;
-    }*/
-    
+
 	    public List<Clinica> getmodelclinica() {
 	        return currentClinica;
 	      }

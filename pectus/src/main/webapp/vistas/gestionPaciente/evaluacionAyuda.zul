@@ -1,6 +1,6 @@
 
 <zk xmlns:n="native">
-<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.AyudaView')">
+<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.ucla.frontend.pectus.controllers.EvaluacionAyudaView')">
 
 
 			
@@ -171,12 +171,12 @@
 				
 				<button id="guardarSolicitud" onClick="@command('aprobarAyuda')"  style="margin-left: 26em;margin-top: -7.5em;" visible="false" label="Guardar" sclass="btn-success">
 				    <attribute name="onClick">						
-					    modalEvaluarSolicitud.setVisible(false);					  	
+<!-- 					    modalEvaluarSolicitud.setVisible(false);					  	 -->
 					</attribute>					  
 				</button>
 				<button id="guardarRechazo" onClick="@command('rechazarAyuda')" style="margin-left: 26em;margin-top: -7.5em;" visible="false" label="Guardar" sclass="btn-success">
 				    <attribute name="onClick">						
-					    modalEvaluarSolicitud.setVisible(false);					  	
+<!-- 					    modalEvaluarSolicitud.setVisible(false);					  	 -->
 					</attribute>					  
 				</button>
 			</vlayout>
@@ -201,7 +201,6 @@
 							                 <template name="model" var="motivoRechazo">
 							                <listitem>
 							                  <listcell  label="@load(motivoRechazo.nombre)" />
-							                  <listcell  label="@load(motivoRechazo.id)" />
 							              </listitem>
 							              </template>
 							            </listbox>

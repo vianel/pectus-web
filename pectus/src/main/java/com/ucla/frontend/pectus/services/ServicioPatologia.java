@@ -1,6 +1,7 @@
 package com.ucla.frontend.pectus.services;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -178,8 +179,8 @@ private ListModelList<Diagnostico> listaModelDiagnosticos;
 		
 		try {
 			jsResource = resty.json("http://127.0.0.1:5000/patologia/editar?id=" +patolo.getId()
-					+ "&nombre=" + patolo.getNombre() + 
-					"&observacion=" + patolo.getObservacion());
+					+ "&nombre=" + patolo.getNombre().replaceAll(" ", "%20") + 
+					"&observacion=" + URLEncoder.encode(patolo.getObservacion()));
 					
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

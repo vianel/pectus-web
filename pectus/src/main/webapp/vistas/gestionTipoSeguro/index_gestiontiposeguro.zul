@@ -1,0 +1,29 @@
+<?page title="Pectus"?>
+<!-- Load Bootstrap  -->
+<?link href="../../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"?>
+
+<!-- Google Open Sans font -->
+<!-- Load fonts from local -->
+<?link href="../../css/fonts.css" rel="stylesheet" type="text/css"?>
+
+<!-- Unmark if we want to use fonts from google server
+<?link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'?>
+-->
+
+<?link href="../../less/index.css.dsp" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:n="native">
+	<include src="../../barras/navbar.zul"/>             
+	<hlayout id="main" spacing="0">
+		<include src="../../barras/sidebar.zul"/>    
+		<vlayout spacing="0" hflex="1">
+			<include src="../../barras/breadcrumbs.zul"/>
+			<include src="gestiontiposeguro.zul"/> 
+			   
+		</vlayout>
+	</hlayout>
+	
+
+
+
+</zk>

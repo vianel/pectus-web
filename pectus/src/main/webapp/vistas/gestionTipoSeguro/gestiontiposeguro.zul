@@ -3,11 +3,11 @@
 <vlayout sclass="page-content" xmlns:n="native" spacing="0">
   <div sclass="page-header">
     <label value="DATOS BASICOS"/>
-    <a label="REGISTRO DE PATOLOGIA" iconSclass="z-icon-angle-double-right" sclass="subtitle"/>
+    <a label="REGISTRO DE TIPO DE SEGURO" iconSclass="z-icon-angle-double-right" sclass="subtitle"/>
   </div>
  
  	<hlayout spacing="24px">
-	     <include src="/vistas/gestionpatologia/registropatologia.zul" hflex="7" style="position: relative;"/>
+	     <include src="/vistas/gestiontiposeguro/registrotiposeguro.zul" hflex="7" style="position: relative;"/>
 	 	 
  	 </hlayout>
  	 <separator height="24px"/>

@@ -266,7 +266,34 @@ public class ServicioPaciente {
 			
 			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nrohijos=" + paciente.getNroHijos() + "&edocivil=" + paciente.getEstadoCivil() +
 					"&nombconyugue=" + paciente.getNombreConyugue() +"&apeconyugue=" + paciente.getApellidoConyugue() +"&cedconyugue=" + paciente.getCedulaConyugue() +"&ocupconyugue=" + paciente.getOcupacionConyugue() +"&fecnacconyugue=" + fecha.format(paciente.getFechaNacConyugue()) +
-					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() + "&tenvivienda=" + paciente.getTendenciaVivienda() +"&tipovivienda=" + paciente.getTipoVivienda() +  
+					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() + "&tenvivienda=" + paciente.getTendenciaVivienda() +"&tipovivienda=" + paciente.getTipoVivienda() +"&segurosocial=S"  + "&idtiposeguro=" + paciente.getSeguro().getId() +  
+					
+					"&estatus=I" );
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			 ok = jsResource.get("ok").toString();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ok;
+		
+	}
+	public static String aceptarPacienteSinConyugue(Paciente paciente){
+		Resty resty = new Resty();
+	    JSONResource jsResource = null;
+	    String ok = null;
+	    DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			
+			jsResource = resty.json("http://localhost:5000/paciente/editar?cedula=" + paciente.getCedula() + "&nrohijos=" + paciente.getNroHijos() + "&edocivil=" + paciente.getEstadoCivil() +
+					
+					"&nrohabitantes=" + paciente.getNroHabitantes() +"&precalquiler=" + paciente.getAlquiler() + "&lugtrabajo=" + paciente.getLugarTrabajo() + "&dirtrabajo=" + paciente.getDireccionTrabajo() +"&tlftrabajo=" + paciente.getTelefonoTrabajo() + "&ingfamiliares=" + paciente.getIngresos() +"&egrfamiliares=" + paciente.getEgresos() + "&tenvivienda=" + paciente.getTendenciaVivienda() +"&tipovivienda=" + paciente.getTipoVivienda() +"&segurosocial=S"  + "&idtiposeguro=" + paciente.getSeguro().getId() +  
 					
 					"&estatus=I" );
 			
@@ -285,7 +312,7 @@ public class ServicioPaciente {
 		
 	}
 	
-//	public static ListModelList<Paciente> buscarPacienteCandidato(){
+//	public static ListModelList<Paciente> buscarPacienteCandidato(){ 
 //		ListModelList<Paciente> listaPacientesCandidatos = new  ListModelList<Paciente>();
 //		Resty resty = new Resty();
 //		JSONResource jsResource = null;
@@ -373,7 +400,45 @@ public class ServicioPaciente {
 	}
 	
 	
-	
+	public static ListModelList<Seguro> buscarSeguros()
+    {	
+    	ListModelList<Seguro> listaSeguros = new ListModelList<Seguro>();        
+        Resty resty = new Resty();
+        JSONResource jsResource = null;
+		try {
+			jsResource = resty.json("http://127.0.0.1:5000/tipo-seguro/todos");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			String ok = jsResource.get("ok").toString();
+			if (ok.equalsIgnoreCase("true")) {
+			
+			String strPa = jsResource.get("tiposeguros").toString();
+			JSONArray serPaciente = new JSONArray(strPa);
+			  for(int i=0; i < serPaciente.length(); i++){
+				 
+                  Seguro seguro = new Seguro();
+                  JSONObject obj = serPaciente.getJSONObject(i);
+                  seguro.setId(Integer.parseInt(obj.get("id").toString()) );
+                  seguro.setNombre(obj.get("nombre").toString());
+                  seguro.setDescripcion(obj.get("descripcion").toString());
+                  
+                  
+                  listaSeguros.add(seguro);
+			  
+			  } //fin For
+			
+			} //fin IF
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return listaSeguros;
+        
+    }
 	
 	
 
